@@ -5,7 +5,6 @@ mod:SetRevision(("$Revision$"):sub(12, -3))
 mod:SetCreatureID(56541)
 mod:SetEncounterID(1304)
 mod:SetZone()
-mod:SetMinSyncRevision(7888)
 mod:SetReCombatTime(60)
 
 -- pre-bosswave. Novice -> Black Sash (Fragrant Lotus, Flying Snow). this runs automaticially.

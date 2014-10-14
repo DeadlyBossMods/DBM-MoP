@@ -5,7 +5,6 @@ mod:SetRevision(("$Revision$"):sub(12, -3))
 mod:SetCreatureID(60399, 60400)--60396 (Rage), 60397 (Strength), 60398 (Courage), 60480 (Titan Spark), 60399 (Qin-xi), 60400 (Jan-xi)
 mod:SetEncounterID(1407)
 mod:SetZone()
---mod:SetMinSyncRevision(7708)
 
 mod:RegisterCombat("emote", L.Pull)
 mod:SetMinCombatTime(25)
