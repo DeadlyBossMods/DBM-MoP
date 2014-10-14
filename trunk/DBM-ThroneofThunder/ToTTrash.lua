@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod("ToTTrash", "DBM-ThroneofThunder")
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 10977 $"):sub(12, -3))
+mod:SetRevision(("$Revision$"):sub(12, -3))
 mod:SetModelID(47785)
 mod:SetZone()
 
