@@ -606,7 +606,7 @@ function mod:SPELL_CAST_START(args)
 			if UnitExists(bossUnitID) and UnitGUID(bossUnitID) == args.sourceGUID and UnitDetailedThreatSituation("player", bossUnitID) then
 				local elapsed, total = timerMutateCD:GetTime(self.vb.mutateCount+1)
 				local remaining = total - elapsed
-				if self:IsMythic() and (remaining < 20) and (self.vb.parasitesActive < 3) and not UnitDebuff("player", GetSpellInfo(143339)) then--NEED to know Mythic number of parasites
+				if self:IsMythic() and (remaining < 20) and (self.vb.parasitesActive < 2) and not UnitDebuff("player", GetSpellInfo(143339)) then--NEED to know Mythic number of parasites
 					specWarnMoreParasites:Show()
 				else--We want to block attack and not spawn anything
 					specWarnInjection:Show()
@@ -778,7 +778,7 @@ function mod:SPELL_AURA_REMOVED(args)
 		end
 	elseif spellId == 143339 then
 		if self:IsMythic() then
-			self.vb.parasitesActive = self.vb.parasitesActive + 6--Assumed, probably 5-7. All other modes will now be variable which means this warning is now mythic only
+			self.vb.parasitesActive = self.vb.parasitesActive + 4--Assumed, probably 5-7. All other modes will now be variable which means this warning is now mythic only
 		end
 	elseif spellId == 142671 and self.Options.SetIconOnMesmerize then
 		self:SetIcon(args.destName, 0)
