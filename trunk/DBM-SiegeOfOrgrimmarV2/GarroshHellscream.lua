@@ -14,7 +14,7 @@ mod:RegisterEvents(
 )
 
 mod:RegisterEventsInCombat(
-	"SPELL_CAST_START 144583 144584 144969 144985 145037 147120 147011 145599",
+	"SPELL_CAST_START 144583 144584 144969 144985 145037 147120 147011 145599 144821",
 	"SPELL_CAST_SUCCESS 144748 144749 145065 145171",
 	"SPELL_AURA_APPLIED 144945 145065 145171 145183 145195 144585 147209 147665 147235",
 	"SPELL_AURA_APPLIED_DOSE 145183 145195 147235",
@@ -26,7 +26,7 @@ mod:RegisterEventsInCombat(
 
 --Stage 1: The True Horde
 local warnDesecrate					= mod:NewTargetAnnounce(144748, 3)
-local warnHellscreamsWarsong		= mod:NewSpellAnnounce(144821, 3)
+local warnHellscreamsWarsong		= mod:NewCastAnnounce(144821, 3)
 local warnExplodingIronStar			= mod:NewSpellAnnounce(144798, 3)
 local warnFarseerWolfRider			= mod:NewSpellAnnounce("ej8294", 3, 144585)
 local warnSiegeEngineer				= mod:NewSpellAnnounce("ej8298", 4, 144616)
@@ -85,6 +85,7 @@ local specWarnISFixate				= mod:NewSpecialWarningYou(147665)
 local specWarnIronStarSpawn			= mod:NewSpecialWarningSpell(147047, false)
 local specWarnManifestRage			= mod:NewSpecialWarningInterrupt(147011, nil, nil, nil, 3)
 local specWarnMaliciousBlast		= mod:NewSpecialWarningStack(147235, nil, 1)
+local specWarnNapalm				= mod:NewSpecialWarningMove(147136)
 
 local timerRoleplay					= mod:NewTimer(120.5, "timerRoleplay", "Interface\\Icons\\Spell_Holy_BorrowedTime")--Wonder if this is somewhat variable?
 --Stage 1: A Cry in the Darkness
@@ -226,6 +227,7 @@ function mod:OnCombatEnd()
 		DBM.Arrow:Hide()
 	end
 	hideInfoFrame()
+	self:UnregisterShortTermEvents()
 end
 
 --[[
@@ -281,8 +283,11 @@ function mod:SPELL_CAST_START(args)
 		if UnitDebuff("player", GetSpellInfo(147665)) then--Kiting an Unstable Iron Star
 			specWarnManifestRage:Show()
 		end
-	elseif spellId == 145599 and self:AntiSpam(1.5) then
+	elseif spellId == 145599 and self:AntiSpam(1.5, 1) then
 		specWarnTouchInterrupt:Show(args.sourceName)
+	elseif spellId == 144821 then--Warsong. Does not show in combat log
+		warnHellscreamsWarsong:Show()
+		timerHellscreamsWarsongCD:Start()
 	end
 end
 
@@ -392,6 +397,13 @@ function mod:SPELL_AURA_REMOVED(args)
 	end
 end
 
+function mod:SPELL_PERIODIC_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
+	if spellId == 147136 and destGUID == UnitGUID("player") and self:AntiSpam(2, 2) then
+		specWarnNapalm:Show()
+	end
+end
+mod.SPELL_PERIODIC_MISSED = mod.SPELL_PERIODIC_DAMAGE
+
 function mod:UNIT_DIED(args)
 	local cid = self:GetCIDFromGUID(args.destGUID)
 	if cid == 71984 then--Siege Engineer
@@ -409,9 +421,7 @@ end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
 	if spellId == 144821 then--Warsong. Does not show in combat log
-		warnHellscreamsWarsong:Show()
-		specWarnHellscreamsWarsong:Show()
-		timerHellscreamsWarsongCD:Start()
+		specWarnHellscreamsWarsong:Show()--Want this warning when adds get buff
 	elseif spellId == 145235 then--Throw Axe At Heart
 		timerSiegeEngineerCD:Cancel()
 		timerFarseerWolfRiderCD:Cancel()
@@ -483,6 +493,10 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
 		warnPhase4:Show()
 		timerMaliceCD:Start()
 		timerBombardmentCD:Start(70)
+		self:RegisterShortTermEvents(
+			"SPELL_PERIODIC_DAMAGE",
+			"SPELL_PERIODIC_MISSED"
+		)
 	elseif spellId == 147187 and not self.vb.phase4Correction then--Phase 4 timer fixer (Call Gunship) (needed in case anyone in raid watched cinematic)
 		self.vb.phase4Correction = true
 		timerMaliceCD:Update(18.5, 29.5)
