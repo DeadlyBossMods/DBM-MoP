@@ -98,7 +98,7 @@ local berserkTimer					= mod:NewBerserkTimer(600)
 local soundBloodFrenzy				= mod:NewSound(144067)
 local soundFixate					= mod:NewSound(143445)
 
-mod:AddBoolOption("RangeFrame")
+--mod:AddBoolOption("RangeFrame")
 mod:AddSetIconOption("FixateIcon", 143445)
 
 --Upvales, don't need variables
@@ -137,18 +137,18 @@ function mod:OnCombatStart(delay)
 	end
 	berserkTimer:Start(-delay)
 	if self.Options.RangeFrame then
-		if self:IsMythic() then
-			DBM.RangeCheck:Show(10, nil, nil, 11)--All difficulties are dynamic with no data. Will only be able to fix mythic really.
-		else
+--		if self:IsMythic() then
+--			DBM.RangeCheck:Show(10, nil, nil, 11)--All difficulties are dynamic with no data. Will only be able to fix mythic really.
+--		else
 			DBM:AddMsg(DBM_CORE_DYNAMIC_DIFFICULTY_CLUMP)
 		end
 	end
 end
 
 function mod:OnCombatEnd()
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Hide()
-	end
+--	if self.Options.RangeFrame then
+--		DBM.RangeCheck:Hide()
+--	end
 end
 
 function mod:SPELL_CAST_SUCCESS(args)
@@ -307,9 +307,9 @@ function mod:SPELL_AURA_REMOVED(args)
 			timerDeafeningScreechCD:Start(nil, 1)
 			specWarnDeafeningScreech:Schedule(11.5)
 		end
-		if self.Options.RangeFrame and self:IsMythic() then
-			DBM.RangeCheck:Show(10, nil, nil, 11)--Need to find out number
-		end
+--		if self.Options.RangeFrame and self:IsMythic() then
+--			DBM.RangeCheck:Show(10, nil, nil, 11)--Need to find out number
+--		end
 	elseif spellId == 143445 then
 		timerFixate:Cancel(args.destName)
 		if self.Options.FixateIcon then
@@ -355,9 +355,9 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
 		timerTailLashCD:Cancel()
 		specWarnBloodFrenzy:Show()
 		soundBloodFrenzy:Play()
-		if self.Options.RangeFrame and not self:IsDifficulty("lfr25") then
-			DBM.RangeCheck:Hide()
-		end
+--		if self.Options.RangeFrame and not self:IsDifficulty("lfr25") then
+--			DBM.RangeCheck:Hide()
+--		end
 	--He retains/casts "blood" abilities through Blood frenzy, and only stops them when he changes to different Pustles
 	--This is why we cancel Blood cds above
 	elseif spellId == 143971 then
