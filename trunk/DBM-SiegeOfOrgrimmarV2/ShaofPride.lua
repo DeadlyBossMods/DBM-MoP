@@ -206,7 +206,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 		warnSelfReflection:Show()
 		specWarnSelfReflection:Show()
 	elseif spellId == 146823 and self.Options.SetIconOnFragment then--Banishment cast. Not want to use applied for add mark scheduling
-		self:ScanForMobs(72569, 0, 8, 3, 0.2, 10)
+		self:ScanForMobs(72569, 0, 8, 2, 0.2, 10)
 	end
 end
 

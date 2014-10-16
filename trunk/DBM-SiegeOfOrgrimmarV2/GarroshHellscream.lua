@@ -149,6 +149,7 @@ mod.vb.desecrateCount = 0
 mod.vb.mindControlCount = 0
 mod.vb.bombardCount = 0
 mod.vb.firstIronStar = false
+mod.vb.phase4Correction = false
 
 local function updateInfoFrame()
 	table.wipe(lines)
@@ -203,6 +204,7 @@ function mod:OnCombatStart(delay)
 	self.vb.mindControlCount = 0
 	self.vb.bombardCount = 0
 	self.vb.firstIronStar = false
+	self.vb.phase4Correction = false
 	timerDesecrateCD:Start(10.5-delay, 1)
 	countdownDesecrate:Start(10.5-delay)
 	specWarnSiegeEngineer:Schedule(16-delay)
@@ -481,7 +483,8 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
 		warnPhase4:Show()
 		timerMaliceCD:Start()
 		timerBombardmentCD:Start(70)
-	elseif spellId == 147187 then--Phase 4 timer fixer (Call Gunship) (needed in case anyone in raid watched cinematic)
+	elseif spellId == 147187 and not self.vb.phase4Correction then--Phase 4 timer fixer (Call Gunship) (needed in case anyone in raid watched cinematic)
+		self.vb.phase4Correction = true
 		timerMaliceCD:Update(18.5, 29.5)
 		countdownMalice:Start(11)
 		timerBombardmentCD:Update(20, 70)
