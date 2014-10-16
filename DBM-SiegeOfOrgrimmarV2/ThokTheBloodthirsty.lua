@@ -141,7 +141,7 @@ function mod:OnCombatStart(delay)
 --			DBM.RangeCheck:Show(10, nil, nil, 11)--All difficulties are dynamic with no data. Will only be able to fix mythic really.
 --		else
 			DBM:AddMsg(DBM_CORE_DYNAMIC_DIFFICULTY_CLUMP)
-		end
+--		end
 	end
 end
 
