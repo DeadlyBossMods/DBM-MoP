@@ -587,9 +587,15 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
 			end
 		end
 		if (not self.vb.westDestroyed and not self:IsDifficulty("lfr25")) or self:IsHeroic() then--Doesn't get cast in first wave in LFR, only second
-			warnBouncingBolt:Schedule(14)
-			specWarnBouncingBolt:Schedule(14)
-			timerBouncingBoltCD:Start(14)
+			if self:IsDifficulty("normal10") then--TODO, verify 25 man again.
+				warnBouncingBolt:Schedule(9)
+				specWarnBouncingBolt:Schedule(9)
+				timerBouncingBoltCD:Start(9)
+			else
+				warnBouncingBolt:Schedule(14)
+				specWarnBouncingBolt:Schedule(14)
+				timerBouncingBoltCD:Start(14)
+			end
 		end
 		if not self.vb.northDestroyed or self:IsHeroic() then
 			if self:IsDifficulty("lfr25") then
