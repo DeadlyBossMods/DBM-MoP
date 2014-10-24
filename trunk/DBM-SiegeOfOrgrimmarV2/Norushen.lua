@@ -7,6 +7,7 @@ mod:SetCreatureID(72276)
 mod:SetZone()
 
 mod:RegisterCombat("combat")
+mod:SetMinSyncTime(1)
 
 mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 145216 144482 144654 144628 144649 144657 146707",
@@ -100,6 +101,7 @@ local residue = {}
 --Not important, don't need to recover
 local playerInside = false
 local previousPower = nil
+local warnedAdd = {}
 --Important, needs recover
 mod.vb.unleashedAngerCast = 0
 mod.vb.manifestationCount = 0
@@ -113,12 +115,15 @@ local function addsDelay()
 	specWarnManifestation:Show(mod.vb.manifestationCount)
 end
 
-local function addSync()
-	specWarnManifestationSoon:Show()
-	if mod:IsDifficulty("lfr25") then
-		mod:Schedule(15, addsDelay, GetTime())
-	else
-		mod:Schedule(5, addsDelay, GetTime())
+local function addSync(guid)
+	if not warnedAdd[guid] then
+		warnedAdd[guid] = true
+		specWarnManifestationSoon:Show()
+		if mod:IsDifficulty("lfr25") then
+			mod:Schedule(15, addsDelay, GetTime())
+		else
+			mod:Schedule(5, addsDelay, GetTime())
+		end
 	end
 end
 
@@ -132,6 +137,7 @@ end
 function mod:OnCombatStart(delay)
 	playerInside = false
 	previousPower = nil
+	table.wipe(warnedAdd)
 	mod.vb.unleashedAngerCast = 0
 	mod.vb.manifestationCount = 0
 	table.wipe(residue)
@@ -198,7 +204,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerLingeringCorruptionCD:Start()
 		countdownLingeringCorruption:Start()
 	elseif spellId == 145226 then
-		self:SendSync("BlindHatred")
+		self:SendSync("BlindHatredStarted")
 	elseif args:IsSpellID(144849, 144850, 144851) and args:IsPlayer() then--Look Within
 		playerInside = true
 		timerLookWithin:Start()
@@ -249,7 +255,7 @@ function mod:UNIT_DIED(args)
 	local cid = self:GetCIDFromGUID(args.destGUID)
 	if cid == 71977 then--Manifestation of Corruption (Dps Test)
 		timerTearRealityCD:Cancel()
-		self:SendSync("ManifestationDied")
+		self:SendSync("ManifestationDied", args.destGUID)
 	elseif cid == 72001 then--Greater Corruption (Healer Test)
 		timerLingeringCorruptionCD:Cancel()
 		countdownLingeringCorruption:Cancel()
@@ -286,30 +292,28 @@ function mod:OnSync(msg, guid)
 	if msg == "prepull" then
 		if self.lastWipeTime and GetTime() - self.lastWipeTime < 20 then return end
 		timerCombatStarts:Start()
+	elseif msg == "ManifestationDied" and guid then
+		addSync(guid)
+	elseif msg == "BlindHatredEnded" and self:AntiSpam(5, 4) then
+		timerBlindHatredCD:Start()
+		self.vb.unleashedAngerCast = 0
+	elseif msg == "BlindHatredStarted" self:AntiSpam(5, 3) then
+		warnBlindHatred:Show()
+		if not playerInside then
+			specWarnBlindHatred:Show()
+		end
+		timerBlindHatred:Start()
 	end
 end
 
 function mod:CHAT_MSG_ADDON(prefix, message, channel, sender)
 	--Because core already registers BigWigs prefix with server, shouldn't need it here
-	if prefix == "D4" and message then
+	if prefix == "BigWigs" and message then
 		sender = Ambiguate(sender, "none")
-		if message:find("ManifestationDied") and not playerInside and self:AntiSpam(1, 1) then
-			addSync()
-		elseif message:find("BlindHatredEnded") and self:AntiSpam(5, 4) then
-			timerBlindHatredCD:Start()
-			self.vb.unleashedAngerCast = 0
-		elseif message:find("BlindHatred") and not message:find("BlindHatredEnded") and self:AntiSpam(5, 3) then
-			warnBlindHatred:Show()
-			if not playerInside then
-				specWarnBlindHatred:Show()
-			end
-			timerBlindHatred:Start()
-		end
-	elseif prefix == "BigWigs" and message then
-		sender = Ambiguate(sender, "none")
-		local bwPrefix, bwMsg = message:match("^(%u-):(.+)")
-		if bwMsg == "InsideBigAddDeath" and not playerInside and self:AntiSpam(1, 1) then
-			addSync()
+		local _, bwMsg = message:match("^(%u-):(.+)")
+		local _, rest = message:match("(%S+)%s*(.*)$")--Not tested, may not work. I have a hard time understanding BW sync code.
+		if bwMsg == "InsideBigAddDeath" and not playerInside and rest then
+			addSync(rest)
 		end
 	end
 end
