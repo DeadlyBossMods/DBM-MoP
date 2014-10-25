@@ -297,7 +297,7 @@ function mod:OnSync(msg, guid)
 	elseif msg == "BlindHatredEnded" and self:AntiSpam(5, 4) then
 		timerBlindHatredCD:Start()
 		self.vb.unleashedAngerCast = 0
-	elseif msg == "BlindHatredStarted" self:AntiSpam(5, 3) then
+	elseif msg == "BlindHatredStarted" and self:AntiSpam(5, 3) then
 		warnBlindHatred:Show()
 		if not playerInside then
 			specWarnBlindHatred:Show()
