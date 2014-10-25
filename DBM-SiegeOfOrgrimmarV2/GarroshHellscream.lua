@@ -133,7 +133,7 @@ mod:AddBoolOption("InfoFrame", mod:IsHealer())
 --mod:AddBoolOption("RangeFrame")
 
 --Upvales, don't need variables
-local UnitExists, UnitDebuff = UnitExists, UnitDebuff
+local UnitExists, UnitDebuff, UnitIsDeadOrGhost = UnitExists, UnitDebuff, UnitIsDeadOrGhost
 local bombardCD = {55, 40, 40, 25, 25}
 local spellName1 = GetSpellInfo(149004)
 local spellName2 = GetSpellInfo(148983)
