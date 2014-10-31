@@ -91,8 +91,6 @@ local countdownLookWithin				= mod:NewCountdownFades(59, "ej8220")
 local countdownLingeringCorruption		= mod:NewCountdown("Alt15.5", 144514)
 local countdownHurlCorruption			= mod:NewCountdown("Alt20", 144649)
 
-mod:AddInfoFrameOption("ej8252", false)--May still be buggy but it's needed for heroic.
-
 --Upvales, don't need variables
 local corruptionLevel = EJ_GetSectionInfo(8252)
 local Ambiguate = Ambiguate
@@ -147,18 +145,11 @@ function mod:OnCombatStart(delay)
 	else
 		berserkTimer:Start(-delay)
 	end
-	if self.Options.InfoFrame then
-		DBM.InfoFrame:SetHeader(corruptionLevel)
-		DBM.InfoFrame:Show(5, "playerpower", 5, ALTERNATE_POWER_INDEX)
-	end
 	self:Schedule(1, delayPowerSync)
 end
 
 function mod:OnCombatEnd()
 	self:UnregisterShortTermEvents()
-	if self.Options.InfoFrame then
-		DBM.InfoFrame:Hide()
-	end
 end
 
 function mod:SPELL_CAST_START(args)
