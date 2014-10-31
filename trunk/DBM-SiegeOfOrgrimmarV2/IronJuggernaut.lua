@@ -178,7 +178,7 @@ function mod:SPELL_AURA_REMOVED(args)
 end
 
 function mod:SPELL_PERIODIC_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
-	if spellId == 144218 and destGUID == UnitGUID("player") and self:AntiSpam() then
+	if spellId == 144218 and destGUID == UnitGUID("player") and self:AntiSpam(1.5) then
 		specWarnBorerDrillMove:Show()
 	end
 end
