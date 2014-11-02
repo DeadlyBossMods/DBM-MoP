@@ -8,8 +8,7 @@ mod:RegisterCombat("scenario", 1104)
 
 mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED",
-	"SPELL_AURA_REMOVED",
-	"UNIT_DIED"
+	"SPELL_AURA_REMOVED"
 )
 mod.onlyNormal = true
 
@@ -41,12 +40,5 @@ end
 function mod:SPELL_AURA_REMOVED(args)
 	if args.spellId == 134974 then
 		timerBloodRage:Cancel(args.destname)
-	end
-end
-
-function mod:UNIT_DIED(args)
-	local cid = self:GetCIDFromGUID(args.destGUID)
-	if cid == 68474 then--Commander Scargash
-
 	end
 end

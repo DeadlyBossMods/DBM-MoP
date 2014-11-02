@@ -10,8 +10,7 @@ mod:RegisterEventsInCombat(
 	"CHAT_MSG_MONSTER_YELL",
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_REMOVED",
-	"SPELL_CAST_START",
-	"UNIT_DIED"
+	"SPELL_CAST_START"
 )
 mod.onlyNormal = true
 

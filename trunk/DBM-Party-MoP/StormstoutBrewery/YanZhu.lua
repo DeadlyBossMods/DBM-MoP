@@ -102,20 +102,3 @@ function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
 	end
 end
 mod.SPELL_MISSED = mod.SPELL_DAMAGE
-
---[[
-Notes:
-1. His phase changes don't seem detectable in chat log or combat log, yet another boss incomplete without transcriptor data.
-2. His bear wall abilities aren't detectable either. Again, transcriptor needed i guess.
-
-3a. It seems all the bosses in this instance do this ability, i'm not sure what it's related to yet
-3b. none of EJ's covery this ability. But I do have logs of Yan and Hop both using this
-5/2 14:00:52.255  SPELL_CAST_SUCCESS,0x01000000000126AF,"Shiramune",0x512,0x0,0xF150E85700006763,"Yan-Zhu the Uncasked",0x10a48,0x0,56222,"Dark Command",0x1
-5/2 14:01:42.061  SPELL_SUMMON,0xF130E86600007FED,"Yeasty Brew Alemental",0xa48,0x0,0xF130E85600008220,"Void Tendril",0xa28,0x0,114403,"Void Tendrils",0x20
-5/2 14:01:42.061  SPELL_SUMMON,0xF150E85700006763,"Yan-Zhu the Uncasked",0xa48,0x0,0xF130E85600008221,"Void Tendril",0xa28,0x0,114403,"Void Tendrils",0x20
-5/2 14:02:38.455  SPELL_SUMMON,0xF130E86600008336,"Yeasty Brew Alemental",0xa48,0x40,0xF130E85600008350,"Void Tendril",0xa28,0x0,114403,"Void Tendrils",0x20
-5/2 14:02:38.455  SPELL_SUMMON,0xF150E85700006763,"Yan-Zhu the Uncasked",0x10a48,0x0,0xF130E85600008351,"Void Tendril",0xa28,0x0,114403,"Void Tendrils",0x20
-5/2 14:04:32.924  SPELL_SUMMON,0xF130E8490000684A,"Brew Alemental",0xa28,0x0,0xF130E8560000891E,"Void Tendril",0xa28,0x0,114403,"Void Tendrils",0x20
-5/2 14:04:32.924  SPELL_SUMMON,0xF150E85700006763,"Yan-Zhu the Uncasked",0x10a48,0x0,0xF130E8560000891F,"Void Tendril",0xa28,0x0,114403,"Void Tendrils",0x20
-5/2 14:04:45.309  UNIT_DIED,0x0000000000000000,nil,0x80000000,0x80000000,0xF150E85700006763,"Yan-Zhu the Uncasked",0x10a48,0x0
---]]

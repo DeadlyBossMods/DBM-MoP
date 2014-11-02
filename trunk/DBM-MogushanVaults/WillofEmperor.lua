@@ -12,7 +12,6 @@ mod:SetMinCombatTime(25)
 mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED 116525 116778 116829",
 	"CHAT_MSG_MONSTER_YELL",
-	"UNIT_DIED",
 	"UNIT_SPELLCAST_SUCCEEDED boss1 boss2 target focus",--For this boss we want target/focus and boss1-2
 	"UNIT_POWER_FREQUENT boss1 boss2"
 )
