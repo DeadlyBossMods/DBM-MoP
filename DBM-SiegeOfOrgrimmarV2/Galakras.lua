@@ -276,7 +276,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 end
 
 function mod:UPDATE_WORLD_STATES()
-	local text = select(4, GetWorldStateUIInfo(4))
+	local text = select(4, GetWorldStateUIInfo(5))
 	local percent = tonumber(string.match(text or "", "%d+"))
 	if percent == 1 and (self.vb.firstTower == 0) and not self:IsMythic() then
 		self.vb.firstTower = 1

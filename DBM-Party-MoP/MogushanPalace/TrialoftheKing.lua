@@ -15,7 +15,6 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_REMOVED",
 	"SPELL_CAST_START",
---	"CHAT_MSG_RAID_BOSS_EMOTE",
 	"CHAT_MSG_MONSTER_YELL",
 	"UNIT_DIED"
 )
@@ -25,13 +24,11 @@ local warnShockwave			= mod:NewSpellAnnounce(119922, 4)--Kuai's Attack
 local warnWhirlingDervish	= mod:NewSpellAnnounce(119981, 3)--Ming's Attack
 local warnTraumaticBlow		= mod:NewTargetAnnounce(123655, 3)--Haiyan's Attack
 local warnConflag			= mod:NewTargetAnnounce(120201, 3)--Haiyan's Attack
---local warnMeteor			= mod:NewTargetAnnounce(120195, 4)--Haiyan's Attack
 
 local specWarnRavage		= mod:NewSpecialWarningTarget(119946, mod:IsHealer())
 local specWarnShockwave		= mod:NewSpecialWarningMove(119922, mod:IsTank())--Not sure if he always faced it toward tank, or did it blackhorn style, if it's blackhorn style this needs to be changed to a targetscan if possible
 local specWarnLightningBolt	= mod:NewSpecialWarningInterrupt(123654, false)
 local specWarnConflag		= mod:NewSpecialWarningTarget(120201, mod:IsHealer())
---local specWarnMeteor		= mod:NewSpecialWarningTarget(120195, nil, nil, nil, true)
 
 local timerRavage			= mod:NewTargetTimer(11, 119946)
 local timerRavageCD			= mod:NewCDTimer(20, 119946)
@@ -91,16 +88,6 @@ function mod:SPELL_CAST_START(args)
 	end
 end
 
---[[
-function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
-	if msg == L.Meteor or msg:find(L.Meteor) then
-		local target = DBM:GetUnitFullName(target)
-		warnMeteor:Show(target)
-		specWarnMeteor:Show(target)
-		timerMeteorCD:Start()
-	end
-end--]]
-
 function mod:CHAT_MSG_MONSTER_YELL(msg)
 	if msg == L.Kuai or msg:find(L.Kuai) then
 		shockwaveCD = 15
@@ -145,13 +132,3 @@ function mod:UNIT_DIED(args)
 		shockwaveCD = 10--Need more data to confirm this but appears to be case.
 	end
 end
-
---[[
-Notes
-1. Not sure this is worth adding, to be honest i don't even remember it happening, maybe it matters more on heroic
-5/2 14:14:41.034  Kuai the Brute yells: We will never surrender our right to rule the destiny of our people!
-5/2 14:14:56.295  Ming the Cunning yells: Clan Harthak will show all why they are the truest of Mogu!
-5/2 14:15:55.997  SPELL_CAST_START,0xF130F004000049E0,"Ming the Cunning",0x10a48,0x0,0x0000000000000000,nil,0x80000000,0x80000000,120100,"Magnetic Field",0x0
-5/2 14:15:57.932  SPELL_AURA_APPLIED,0xF130F004000049E0,"Ming the Cunning",0x10a48,0x0,0xF130F004000049E0,"Ming the Cunning",0x10a48,0x0,120100,"Magnetic Field",0x0,BUFF
-5/2 14:16:01.987  SPELL_AURA_REMOVED,0xF130F004000049E0,"Ming the Cunning",0x10a48,0x0,0xF130F004000049E0,"Ming the Cunning",0x10a48,0x0,120100,"Magnetic Field",0x0,BUFF
---]]
