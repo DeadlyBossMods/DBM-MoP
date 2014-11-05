@@ -8,6 +8,10 @@ mod:SetZone()
 
 mod:RegisterCombat("combat")
 
+mod:RegisterEvents(
+	"CHAT_MSG_MONSTER_YELL"
+)
+
 mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_APPLIED_DOSE",
@@ -22,6 +26,7 @@ local warnBoneSpike		= mod:NewTargetAnnounce(113999, 3)
 local specWarnGetBoned	= mod:NewSpecialWarning("SpecWarnGetBoned")
 local specWarnSoulFlame	= mod:NewSpecialWarningMove(114009)--Not really sure what the point of this is yet. It's stupid easy to avoid and seems to serve no fight purpose yet, besides maybe cover some of the bone's you need for buff.
 local specWarnRusting	= mod:NewSpecialWarningStack(113765, mod:IsTank(), 5)
+local SpecWarnDoctor	= mod:NewSpecialWarning("SpecWarnDoctor")
 
 local timerBoneSpikeCD	= mod:NewCDTimer(8, 113999)
 local timerRusting		= mod:NewBuffActiveTimer(15, 113765, nil, mod:IsTank())
@@ -81,5 +86,11 @@ end
 function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
 	if spellId == 114009 and destGUID == UnitGUID("player") and self:AntiSpam(2, 2) then
 		specWarnSoulFlame:Show()
+	end
+end
+
+function mod:CHAT_MSG_MONSTER_YELL(msg, npc)
+	if not UnitIsFriend(npc) and (msg == L.TheolenSpawn or msg:find(L.TheolenSpawn)) then
+		SpecWarnDoctor:Show()
 	end
 end
