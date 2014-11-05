@@ -23,7 +23,7 @@ local specWarnGetBoned	= mod:NewSpecialWarning("SpecWarnGetBoned")
 local specWarnSoulFlame	= mod:NewSpecialWarningMove(114009)--Not really sure what the point of this is yet. It's stupid easy to avoid and seems to serve no fight purpose yet, besides maybe cover some of the bone's you need for buff.
 local specWarnRusting	= mod:NewSpecialWarningStack(113765, mod:IsTank(), 5)
 
-local timerBoneSpikeCD	= mod:NewNextTimer(8, 113999)
+local timerBoneSpikeCD	= mod:NewCDTimer(8, 113999)
 local timerRusting		= mod:NewBuffActiveTimer(15, 113765, nil, mod:IsTank())
 
 mod:AddBoolOption("InfoFrame")
