@@ -142,6 +142,7 @@ local spellName3 = GetSpellInfo(148994)
 local lines = {}
 --Not important, don't need to recover
 local engineerDied = 0
+local numberOfPlayers = 1
 --Important, needs recover
 mod.vb.shamanAlive = 0
 mod.vb.phase = 1
@@ -206,6 +207,7 @@ function mod:OnCombatStart(delay)
 	self.vb.bombardCount = 0
 	self.vb.firstIronStar = false
 	self.vb.phase4Correction = false
+	numberOfPlayers = DBM:GetNumRealGroupMembers()
 	timerDesecrateCD:Start(10.5-delay, 1)
 	countdownDesecrate:Start(10.5-delay)
 	specWarnSiegeEngineer:Schedule(16-delay)
@@ -309,6 +311,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 	elseif args:IsSpellID(145065, 145171) then
 		self.vb.mindControlCount = self.vb.mindControlCount + 1
 		specWarnTouchOfYShaarj:Show()
+		if numberOfPlayers < 2 then return end--Solo raid, no mind controls, so no timers/countdowns
 		if self.vb.phase == 3 then
 			if self.vb.mindControlCount == 1 then--First one in phase is shorter than rest (well that or rest are delayed because of whirling)
 				timerTouchOfYShaarjCD:Start(35, self.vb.mindControlCount+1)
@@ -456,8 +459,10 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
 			hideInfoFrame()
 			timerDesecrateCD:Start(10, 1)
 			countdownDesecrate:Start(10)
-			timerTouchOfYShaarjCD:Start(15, 1)
-			countdownTouchOfYShaarj:Start(15)
+			if numberOfPlayers > 1 then
+				timerTouchOfYShaarjCD:Start(15, 1)
+				countdownTouchOfYShaarj:Start(15)
+			end
 			timerWhirlingCorruptionCD:Start(30, 1)
 			countdownWhirlingCorruption:Start(30)
 			timerEnterRealm:Start()
@@ -478,8 +483,10 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
 		countdownWhirlingCorruption:Cancel()
 		timerDesecrateCD:Start(21, 1)
 		countdownDesecrate:Start(21)
-		timerTouchOfYShaarjCD:Start(30, 1)
-		countdownTouchOfYShaarj:Start(30)
+		if numberOfPlayers > 1 then
+			timerTouchOfYShaarjCD:Start(30, 1)
+			countdownTouchOfYShaarj:Start(30)
+		end
 		timerWhirlingCorruptionCD:Start(44.5, 1)
 		countdownWhirlingCorruption:Start(44.5)
 	elseif spellId == 146984 then--Phase 4 trigger
