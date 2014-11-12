@@ -241,7 +241,9 @@ function mod:SPELL_AURA_APPLIED(args)
 			if args:IsPlayer() then
 				specWarnFroststormStrike:Show(amount)
 			else
-				specWarnFroststormStrikeOther:Show(args.destName)
+				if not (UnitDebuff("player", GetSpellInfo(144215)) or UnitDebuff("player", GetSpellInfo(144215))) and not UnitIsDeadOrGhost("player") then
+					specWarnFroststormStrikeOther:Show(args.destName)
+				end
 			end
 		end
 	end
