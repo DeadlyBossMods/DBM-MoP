@@ -344,16 +344,16 @@ function mod:SPELL_AURA_APPLIED(args)
 		if spellId == 145183 then
 			warnGrippingDespair:Show(args.destName, amount)
 		else
-			if not (UnitDebuff("player", GetSpellInfo(145183)) or UnitDebuff("player", GetSpellInfo(145195))) and not UnitIsDeadOrGhost("player") then
-				warnEmpGrippingDespair:Show(args.destName, amount)
-			end
+			warnEmpGrippingDespair:Show(args.destName, amount)
 		end
 		timerGrippingDespair:Start(args.destName)
 		if amount >= 4 then
 			if args:IsPlayer() then
 				specWarnGrippingDespair:Show(amount)
 			else
-				specWarnGrippingDespairOther:Show(args.destName)
+				if not (UnitDebuff("player", GetSpellInfo(145183)) or UnitDebuff("player", GetSpellInfo(145195))) and not UnitIsDeadOrGhost("player") then
+					specWarnGrippingDespairOther:Show(args.destName)
+				end
 			end
 		end
 	elseif spellId == 144585 then
