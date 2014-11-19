@@ -209,16 +209,19 @@ L= DBM:GetModLocalization(663)
 L= DBM:GetModLocalization(665)
 
 L:SetWarningLocalization({
-	SpecWarnGetBoned	= "뼈 무더기 클릭!"
+	SpecWarnGetBoned	= "뼈 무더기 클릭!",
+	SpecWarnDoctor		= "의사 테올렌 크라스티노브 등장!"
 })
 
 L:SetOptionLocalization({
 	SpecWarnGetBoned	= "$spell:113996 효과가 없을 경우 특수 경고 보기",
+	SpecWarnDoctor		= "의사 테올렌 크라스티노브 등장시 특수 경고 보기",
 	InfoFrame			= "$spell:113996 없는 대상을 정보 창으로 보기"
 })
 
 L:SetMiscLocalization({
-	PlayerDebuffs	= "뼈 갑옷 없음"
+	PlayerDebuffs	= "뼈 갑옷 없음",
+	TheolenSpawn	= "심장 수술할 시간이다!"
 })
 
 -----------------------
