@@ -65,7 +65,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			specWarnRusting:Show(args.amount)
 		end
 	end
-end		
+end
 mod.SPELL_AURA_APPLIED_DOSE = mod.SPELL_AURA_APPLIED
 
 function mod:SPELL_AURA_REMOVED(args)
@@ -90,7 +90,7 @@ function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(msg, npc)
-	if not UnitIsFriend(npc) and (msg == L.TheolenSpawn or msg:find(L.TheolenSpawn)) then
+	if npc and not UnitIsFriend("player", npc) and (msg == L.TheolenSpawn or msg:find(L.TheolenSpawn)) then
 		SpecWarnDoctor:Show()
 	end
 end
