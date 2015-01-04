@@ -30,7 +30,7 @@ local warnShellConcussion			= mod:NewTargetAnnounce(136431, 1)
 local specWarnCallofTortos			= mod:NewSpecialWarningSpell(136294)
 local specWarnQuakeStomp			= mod:NewSpecialWarningCount(134920, nil, nil, nil, 2)
 local specWarnRockfall				= mod:NewSpecialWarningSpell(134476, false, nil, nil, 2)
-local specWarnStoneBreath			= mod:NewSpecialWarningInterrupt(133939, not mod:IsTank())
+local specWarnStoneBreath			= mod:NewSpecialWarningInterrupt("OptionVersion2", 133939, nil, nil, nil, 3)
 local specWarnCrystalShell			= mod:NewSpecialWarning("specWarnCrystalShell", false)
 local specWarnSummonBats			= mod:NewSpecialWarningSwitch("ej7140", mod:IsTank())--Dps can turn it on too, but not on by default for dps cause quite frankly dps should NOT switch right away, tank needs to get aggro first and where they spawn is semi random.
 
@@ -43,8 +43,8 @@ local timerSummonBatsCD				= mod:NewCDTimer(45, "ej7140", nil, nil, nil, 136685)
 local timerStompActive				= mod:NewBuffActiveTimer(10.8, 134920)--Duration of the rapid caveins
 local timerShellConcussion			= mod:NewBuffFadesTimer(20, 136431)
 
-local countdownStomp				= mod:NewCountdown(47, 134920, mod:IsHealer())
-local countdownBreath				= mod:NewCountdown("Alt46", 133939, false) -- Coundown for the kicker. mod:IsRanged() and mod:IsDps()
+local countdownStomp				= mod:NewCountdown("OptionVersion2", 47, 134920)
+local countdownBreath				= mod:NewCountdown("OptionVersion2", "Alt46", 133939) -- Coundown for the kicker.
 
 local berserkTimer					= mod:NewBerserkTimer(780)
 
