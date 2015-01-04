@@ -31,7 +31,7 @@ local specWarnUnseenStrikeOther			= mod:NewSpecialWarningMoveTo(122949)--Everyon
 local yellUnseenStrike					= mod:NewYell(122949)
 local specWarnOverwhelmingAssault		= mod:NewSpecialWarningStack(123474, nil, 2)
 local specWarnOverwhelmingAssaultOther	= mod:NewSpecialWarningTaunt(123474)
-local specWarnBladeTempest				= mod:NewSpecialWarningRun(125310, true)
+local specWarnBladeTempest				= mod:NewSpecialWarningRun("OptionVersion2", 125310, nil, nil, nil, 4)
 local specWarnStormUnleashed			= mod:NewSpecialWarningSpell(123814, nil, nil, nil, true)
 
 local timerTempestSlashCD				= mod:NewNextTimer(15.5, 125692)
@@ -46,8 +46,6 @@ local timerBladeTempestCD				= mod:NewNextTimer(60, 125310)--Always cast after i
 
 local countdownTempest					= mod:NewCountdown(60, 125310)
 local berserkTimer						= mod:NewBerserkTimer(490)
-
-local soundBladeTempest					= mod:NewSound(125310)
 
 mod:AddBoolOption("RangeFrame", mod:IsRanged())--For Wind Step
 mod:AddBoolOption("UnseenStrikeArrow")
@@ -121,7 +119,6 @@ function mod:SPELL_CAST_START(args)
 	if spellId == 125310 then
 		warnBladeTempest:Show()
 		specWarnBladeTempest:Show()
-		soundBladeTempest:Play()
 		timerBladeTempest:Start()
 		timerBladeTempestCD:Start()
 		countdownTempest:Start()

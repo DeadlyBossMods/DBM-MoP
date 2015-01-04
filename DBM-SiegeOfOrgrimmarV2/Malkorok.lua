@@ -58,8 +58,6 @@ local countdownImplodingEnergy			= mod:NewCountdown(10, 142986, nil, nil, 5)
 
 local countdownBreathofYShaarj			= mod:NewCountdown(10, 142842, nil, nil, 5, nil, true)
 
-local soundDisplacedEnergy				= mod:NewSound(142913)
-
 mod:AddRangeFrameOption("8/5")--Various things
 mod:AddSetIconOption("SetIconOnDisplacedEnergy", 142913, false)
 mod:AddSetIconOption("SetIconOnAdds", "ej7952", false, true)
@@ -186,7 +184,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		playerDebuffs = playerDebuffs + 1
 		if args:IsPlayer() then
 			specWarnDisplacedEnergy:Show()
-			soundDisplacedEnergy:Play()
 			yellDisplacedEnergy:Yell()
 		end
 		if not self.vb.displacedCast then--Only cast twice, so we only start cd bar once here

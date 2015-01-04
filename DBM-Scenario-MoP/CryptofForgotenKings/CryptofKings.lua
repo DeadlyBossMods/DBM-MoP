@@ -33,7 +33,7 @@ local specWarnEnrage		= mod:NewSpecialWarningDispel(127823, mod:CanRemoveEnrage(
 local specWarnFear			= mod:NewSpecialWarningInterrupt(142884)
 local specWarnGuardianStrike= mod:NewSpecialWarningRun(119843, mod:IsMelee())
 --Abomination of Anger
-local specWarnDarkforce		= mod:NewSpecialWarningRun(120215)
+local specWarnDarkforce		= mod:NewSpecialWarningRun(120215, nil, nil, nil, 4)
 
 --Jin Ironfist
 local timerRelentless		= mod:NewTargetTimer(10, 120817)
@@ -44,8 +44,6 @@ local timerBreathCD			= mod:NewCDTimer(21.5, 120929)--Limited sample size, may b
 local timerCloudofAngerCD	= mod:NewCDTimer(17, 120824)--Limited sample size, may be shorter
 local timerDarkforce		= mod:NewCastTimer(5, 120215)
 local timerDarkforceCD		= mod:NewCDTimer(32, 120215)
-
-local soundDarkforce		= mod:NewSound(120215)
 
 mod:RemoveOption("HealthFrame")
 
@@ -80,7 +78,6 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif args.spellId == 120215 then
 		warnDarkforce:Show()
 		specWarnDarkforce:Show()
-		soundDarkforce:Play()
 		timerDarkforce:Start(self:IsDifficulty("heroic5") and 3.5 or 5)
 		timerDarkforceCD:Start()
 	end

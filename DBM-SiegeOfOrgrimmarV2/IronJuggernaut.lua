@@ -45,7 +45,7 @@ local specWarnRicochet			= mod:NewSpecialWarningSpell(144356, false, nil, nil, 3
 --Siege Mode
 local specWarnSeismicActivity	= mod:NewSpecialWarningSpell(144483, nil, nil, nil, 2)
 local specWarnShockPulse		= mod:NewSpecialWarningCount(144485, nil, nil, nil, 2)
-local specWarnCutterLaser		= mod:NewSpecialWarningRun(146325)
+local specWarnCutterLaser		= mod:NewSpecialWarningRun("OptionVersion2", 146325, nil, nil, nil, 4)
 local specWarnExplosiveTar		= mod:NewSpecialWarningMove(144498)
 local yellCutterLaser			= mod:NewYell(146325)
 local specWarnMortarBarrage		= mod:NewSpecialWarningSpell(144555, nil, nil, nil, 2)
@@ -65,8 +65,6 @@ local timerCutterLaser			= mod:NewBuffFadesTimer(10, 146325)--Spell tooltip says
 local timerShockPulseCD			= mod:NewNextCountTimer(16.5, 144485)
 local timerExplosiveTarCD		= mod:NewNextTimer(30, 144492)
 local timerMortarBarrageCD		= mod:NewNextTimer(30, 144555)
-
-local soundCuttingLaser			= mod:NewSound(146325)
 
 local berserkTimer				= mod:NewBerserkTimer(600)
 
@@ -248,7 +246,6 @@ function mod:OnSync(msg, guid)
 			timerCutterLaser:Start()
 			specWarnCutterLaser:Show()
 			yellCutterLaser:Yell()
-			soundCuttingLaser:Play()
 		end
 	elseif msg == "LaserTargetRemoved" and guid then
 		timerCutterLaser:Cancel(DBM:GetFullPlayerNameByGUID(guid))

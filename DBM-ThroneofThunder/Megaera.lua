@@ -48,10 +48,10 @@ local specWarnArcticFreeze		= mod:NewSpecialWarningStack(139843, nil, 2)
 local specWarnIgniteFlesh		= mod:NewSpecialWarningStack(137731, nil, 2)
 local specWarnRotArmor			= mod:NewSpecialWarningStack(139840, nil, 2)
 local specWarnArcaneDiffusion	= mod:NewSpecialWarningStack(139993, nil, 2)
-local specWarnCinders			= mod:NewSpecialWarningYou(139822)
+local specWarnCinders			= mod:NewSpecialWarningYou("OptionVersion2", 139822, nil, nil, nil, 4)
 local specWarnCindersMove		= mod:NewSpecialWarningMove(139836)--Fire left on ground after the fact
 local yellCinders				= mod:NewYell(139822)
-local specWarnTorrentofIceYou	= mod:NewSpecialWarningRun(139857)
+local specWarnTorrentofIceYou	= mod:NewSpecialWarningRun("OptionVersion2", 139857, nil, nil, nil, 4)
 local yellTorrentofIce			= mod:NewYell(139857)
 local specWarnTorrentofIceNear	= mod:NewSpecialWarningClose(139889)
 local specWarnTorrentofIce		= mod:NewSpecialWarningMove(139909)--Ice left on ground by the beam
@@ -69,9 +69,6 @@ local timerBreathsCD			= mod:NewTimer(16, "timerBreathsCD", 137731, nil, false)-
 local timerTorrentofIce			= mod:NewBuffFadesTimer(11, 139866)
 --local timerTorrentofIceCD		= mod:NewCDTimer(25, 139866, nil, not mod:IsTank())--Same as bove, either 25 or 28
 --local timerNetherTearCD			= mod:NewCDTimer(25, 140138)--Heroic. Also either 25 or 28. On by default since these require more pre planning than fire and ice.
-
-local soundCinders				= mod:NewSound(139822)
-local soundTorrentofIce			= mod:NewSound(139889)
 
 mod:AddBoolOption("SetIconOnCinders", true)
 mod:AddBoolOption("SetIconOnTorrentofIce", true)
@@ -213,7 +210,6 @@ function mod:RAID_BOSS_WHISPER(msg)
 	if msg:find("spell:139866") and self:AntiSpam(5, 1) then
 		specWarnTorrentofIceYou:Show()
 		yellTorrentofIce:Yell()
-		soundTorrentofIce:Play()
 	end
 end
 
@@ -290,7 +286,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		if args:IsPlayer() then
 			specWarnCinders:Show()
 			yellCinders:Yell()
-			soundCinders:Play()
 		end
 		if self.Options.SetIconOnCinders then
 			self:SetIcon(args.destName, cinderIcon)

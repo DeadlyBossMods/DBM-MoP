@@ -24,8 +24,6 @@ local timerFurlwindCD		= mod:NewNextTimer(25, 112992)--True CD, 43 seconds, but 
 local timerBreath			= mod:NewBuffActiveTimer(18, 112944)
 local timerBreathCD			= mod:NewNextTimer(18, 112944)--true CD, 43 seconds, same as Furlwind, which is what makes their interaction with eachother predictable.
 
-local soundFurlwind			= mod:NewSound(112992, mod:IsMelee())
-
 --Notes:
 --5/2 13:55:03.578  SPELL_CAST_SUCCESS,0xF130DD8D0000748B,"Hoptallus",0xa48,0x0,0x0000000000000000,nil,0x80000000,0x80000000,114366,"Hoptallus Keg Scene",0x1
 --Not sure if ENGAGE fires on above event, or when he's attackable.
@@ -41,7 +39,6 @@ function mod:SPELL_CAST_START(args)
 	if args.spellId == 112992 then
 		warnFurlwind:Show()
 		specWarnFurlwind:Show()
-		soundFurlwind:Play()
 		timerFurlwind:Start()
 		timerBreathCD:Start()--Always 18 seconds after Furlwind
 	elseif args.spellId == 112944 then

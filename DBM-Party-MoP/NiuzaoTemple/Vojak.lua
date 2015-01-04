@@ -24,7 +24,7 @@ local warnBombard				= mod:NewSpellAnnounce(120200, 3)
 local warnDashingStrike			= mod:NewSpellAnnounce(120789, 3)
 local warnThousandBlades		= mod:NewSpellAnnounce(120759, 4)
 
-local specWarnThousandBlades	= mod:NewSpecialWarningRun(120759, mod:IsMelee())
+local specWarnThousandBlades	= mod:NewSpecialWarningRun("OptionVersion2", 120759, mod:IsMelee(), nil, nil, 4)
 
 --local timerWaveCD				= mod:NewTimer(12, "TimerWave", 69076)--Not wave timers in traditional sense. They are non stop, this is for when he activates certain mob types.
 local timerBombard				= mod:NewBuffActiveTimer(15, 120200)
@@ -32,8 +32,6 @@ local timerBombardCD			= mod:NewCDTimer(42, 120200)
 local timerDashingStrikeCD		= mod:NewCDTimer(13.5, 120789)--14-16 second variation
 local timerThousandBladesCD		= mod:NewNextTimer(15, 120759)
 local timerThousandBlades		= mod:NewBuffActiveTimer(4, 120759)
-
-local soundThousandBlades		= mod:NewSound(120759, mod:IsMelee())
 
 --local Swarmers 		= EJ_GetSectionInfo(6280)
 --local Demolishers 	= EJ_GetSectionInfo(6282)
@@ -44,7 +42,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		warnThousandBlades:Show()
 		specWarnThousandBlades:Show()
 		timerThousandBlades:Start()
-		soundThousandBlades:Play()
 	end
 end
 

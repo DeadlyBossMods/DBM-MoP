@@ -17,12 +17,10 @@ mod.onlyNormal = true
 local warnBloodRage			= mod:NewTargetAnnounce(134974, 3)--15 second target fixate
 
 --Commander Scargash
-local specWarnBloodrage		= mod:NewSpecialWarningRun(134974)
+local specWarnBloodrage		= mod:NewSpecialWarningRun(134974, nil, nil, nil, 4)
 
 --Commander Scargash
 local timerBloodRage		= mod:NewTargetTimer(15, 134974)
-
-local soundBloodRage		= mod:NewSound(134974)
 
 mod:RemoveOption("HealthFrame")
 
@@ -32,7 +30,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerBloodRage:Start(args.destName)
 		if args:IsPlayer() then
 			specWarnBloodrage:Show()
-			soundBloodRage:Play()
 		end
 	end
 end

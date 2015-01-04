@@ -54,7 +54,7 @@ local specWarnOverchargedNear			= mod:NewSpecialWarningClose(136295)
 local specWarnBouncingBoltSoon			= mod:NewSpecialWarningPreWarn(136361, nil, 4)
 local specWarnBouncingBolt				= mod:NewSpecialWarningSpell(136361)
 --Phase 1
-local specWarnDecapitate				= mod:NewSpecialWarningRun(134912, nil, nil, nil, 3)
+local specWarnDecapitate				= mod:NewSpecialWarningRun("OptionVersion2", 134912, nil, nil, nil, 4)
 local specWarnDecapitateOther			= mod:NewSpecialWarningTaunt(134912)
 local specWarnThunderstruck				= mod:NewSpecialWarningCount(135095, nil, nil, nil, 2)
 local specWarnCrashingThunder			= mod:NewSpecialWarningMove(135150)
@@ -103,8 +103,6 @@ local countdownThunderstruck			= mod:NewCountdown(46, 135095)
 local countdownBouncingBolt				= mod:NewCountdown(40, 136361, nil, nil, nil, nil, true)--Pretty big deal on heroic, it's the one perminent ability you see in all strats. Should now play nice with thunderstruck with alternate voice code in ;)
 local countdownDiffusionChain			= mod:NewCountdown(40, 135991, nil, nil, nil, nil, true)
 local countdownStaticShockFades			= mod:NewCountdownFades(7, 135695, false)--May confuse with thundershock option default so off as default.
-
-local soundDecapitate					= mod:NewSound(134912)
 
 mod:AddBoolOption("RangeFrame")
 mod:AddBoolOption("OverchargeArrow")--On by default because the overcharge target is always pinned and unable to run away. You must always run to them, so everyone will want this arrow on
@@ -235,7 +233,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		if self:IsDifficulty("lfr25") then return end
 		if args:IsPlayer() then
 			specWarnDecapitate:Show()
-			soundDecapitate:Play()
 		else
 			specWarnDecapitateOther:Show(args.destName)
 		end
