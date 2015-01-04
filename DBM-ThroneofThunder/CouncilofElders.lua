@@ -54,7 +54,7 @@ local warnRecklessCharge			= mod:NewCastAnnounce(137122, 3, 2, nil, false)
 local warnDischarge					= mod:NewCountAnnounce(137166, 3)
 
 --All
-local specWarnPossessed				= mod:NewSpecialWarning("specWarnPossessed", mod:IsDps())
+local specWarnPossessed				= mod:NewSpecialWarning("OptionVersion2", "specWarnPossessed")
 local specWarnDarkPower				= mod:NewSpecialWarningSpell(136507, nil, nil, nil, 2)
 local specWarnSoulFragment			= mod:NewSpecialWarningYou(137641)
 --Sul the Sandcrawler
