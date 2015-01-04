@@ -61,7 +61,7 @@ local specWarnHex				= mod:NewSpecialWarningYou(136512)
 local specWarnJalak				= mod:NewSpecialWarningSwitch("ej7087", mod:IsTank())--To pick him up (and maybe dps to switch, depending on strat)
 local specWarnRampage			= mod:NewSpecialWarningTarget(136821, mod:IsTank() or mod:IsHealer())--Dog is pissed master died, need more heals and cooldowns. Maybe warn dps too? his double swipes and charges will be 100% worse too.
 local specWarnDireCall			= mod:NewSpecialWarningCount(137458, nil, nil, nil, 2)--Heroic
-local specWarnDireFixate		= mod:NewSpecialWarningRun(140946)--Heroic
+local specWarnDireFixate		= mod:NewSpecialWarningRun(140946, nil, nil, nil, 4)--Heroic
 
 local timerDoor					= mod:NewTimer(113.5, "timerDoor", 2457)--They seem to be timed off last door start, not last door end. They MAY come earlier if you kill off all first doors adds though not sure yet. If they do, we'll just start new timer anyways
 local timerAdds					= mod:NewTimer(18.91, "timerAdds", 43712)
@@ -76,8 +76,6 @@ local timerBestialCryCD			= mod:NewNextCountTimer(10, 136817)
 local timerDireCallCD			= mod:NewCDCountTimer(62, 137458)--Heroic (every 62-70 seconds)
 
 local berserkTimer				= mod:NewBerserkTimer(720)
-
-local soundDireFixate			= mod:NewSound(140946)
 
 mod:AddBoolOption("RangeFrame")
 mod:AddBoolOption("SetIconOnCharge")
@@ -215,7 +213,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		warnDireFixate:CombinedShow(1.0, args.destName)
 		if args:IsPlayer() then
 			specWarnDireFixate:Show()
-			soundDireFixate:Play()
 		end
 	elseif spellId == 136512 and args:IsPlayer() then
 		specWarnHex:Show()

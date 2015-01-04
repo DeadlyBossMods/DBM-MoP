@@ -51,8 +51,8 @@ local specWarnFearsomeRoar			= mod:NewSpecialWarningStack(143766, nil, 2)
 local specWarnFearsomeRoarOther		= mod:NewSpecialWarningTaunt(143766)
 local specWarnDeafeningScreech		= mod:NewSpecialWarningCast(143343, mod:IsSpellCaster(), nil, nil, 2)
 --Stage 2: Frenzy for Blood!
-local specWarnBloodFrenzy			= mod:NewSpecialWarningSpell(143440, nil, nil, nil, 2)
-local specWarnFixate				= mod:NewSpecialWarningRun(143445, nil, nil, nil, 3)
+local specWarnBloodFrenzy			= mod:NewSpecialWarningSpell("OptionVersion2", 143440, nil, nil, nil, 4)
+local specWarnFixate				= mod:NewSpecialWarningRun("OptionVersion2", 143445, nil, nil, nil, 4)
 local yellFixate					= mod:NewYell(143445)
 local specWarnEnrage				= mod:NewSpecialWarningTarget(145974, mod:IsTank() or mod:CanRemoveEnrage())
 local specWarnBloodFrenzyOver		= mod:NewSpecialWarningEnd(143440)
@@ -94,9 +94,6 @@ local timerScorchingBreathCD		= mod:NewCDTimer(11, 143767, nil, mod:IsTank())--O
 local timerBurningBloodCD			= mod:NewCDTimer(3.5, 143783, nil, false)--cast often, but someone might want to show it
 
 local berserkTimer					= mod:NewBerserkTimer(600)
-
-local soundBloodFrenzy				= mod:NewSound(144067)
-local soundFixate					= mod:NewSound(143445)
 
 --mod:AddBoolOption("RangeFrame")
 mod:AddSetIconOption("FixateIcon", 143445)
@@ -255,7 +252,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		if args:IsPlayer() then
 			specWarnFixate:Show()
 			yellFixate:Yell()
-			soundFixate:Play()
 		end
 		if self.Options.FixateIcon then
 			self:SetIcon(args.destName, 8)
@@ -354,7 +350,6 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
 		specWarnDeafeningScreech:Cancel()
 		timerTailLashCD:Cancel()
 		specWarnBloodFrenzy:Show()
-		soundBloodFrenzy:Play()
 --		if self.Options.RangeFrame and not self:IsDifficulty("lfr25") then
 --			DBM.RangeCheck:Hide()
 --		end

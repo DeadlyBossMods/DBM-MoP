@@ -70,8 +70,6 @@ local timerHeartOfFear			= mod:NewBuffFadesTimer(6, 125638)
 
 local berserkTimer				= mod:NewBerserkTimer(900)
 
-local soundFixate				= mod:NewSound(125390)
-
 mod:AddBoolOption("InfoFrame")--On by default because these do more then just melee, they interrupt spellcasting (bad for healers)
 mod:AddBoolOption("RangeFrame", mod:IsRanged())
 mod:AddBoolOption("StickyResinIcons", true)
@@ -152,7 +150,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		warnFixate:Show(args.destName)
 		if args:IsPlayer() and not self:IsDifficulty("lfr25") then--in LFR, they are not dangerous, you stack mobs up, don't want to run mobs out of clump
 			specwarnFixate:Show()
-			soundFixate:Play()
 		end
 	elseif spellId == 124862 then
 		visonsTargets[#visonsTargets + 1] = args.destName

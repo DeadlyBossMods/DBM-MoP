@@ -102,9 +102,6 @@ local timerReversalLightningFists	= mod:NewBuffFadesTimer(20, 118302)
 local timerNullBarrier				= mod:NewBuffFadesTimer(6, 115817)
 local timerNullBarrierCD			= mod:NewCDTimer(55, 115817)
 
-local soundEpicenter				= mod:NewSound(116018, false)
-local soundWildSpark				= mod:NewSound(116784)
-
 mod:AddBoolOption("SetIconOnWS", true)
 mod:AddBoolOption("SetIconOnAR", true)
 mod:AddBoolOption("RangeFrame", mod:IsRanged())
@@ -172,7 +169,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 		if args:IsPlayer() then
 			specWarnWildSpark:Show()
-			soundWildSpark:Play()
 			yellWildSpark:Yell()
 		end
 	elseif spellId == 116711 then
@@ -297,7 +293,6 @@ function mod:SPELL_CAST_START(args)
 		specialCount = specialCount + 1
 		warnEpicenter:Show(specialCount)
 		specWarnEpicenter:Show()
-		soundEpicenter:Play()
 		timerEpicenter:Start()
 		timerEpicenterCD:Start(nil, specialCount + 1)
 		if UnitBuff(GetSpellInfo(115811), "player") and self:IsDifficulty("lfr25") then

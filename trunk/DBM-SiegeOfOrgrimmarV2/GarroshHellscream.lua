@@ -112,7 +112,6 @@ local timerClumpCheck				= mod:NewNextTimer(3, 147126)
 local timerMaliciousBlast			= mod:NewBuffFadesTimer(3, 147235, nil, false)
 local timerFixate					= mod:NewTargetTimer(12, 147665)
 
-local soundWhirlingCorrpution		= mod:NewSound(144985, false)--Depends on strat. common one on 25 man is to never run away from it
 local countdownPowerIronStar		= mod:NewCountdown(16.5, 144616)
 local countdownWhirlingCorruption	= mod:NewCountdown(49.5, 144985)
 local countdownDesecrate			= mod:NewCountdown("Alt35", 144748)
@@ -268,7 +267,6 @@ function mod:SPELL_CAST_START(args)
 		timerWhirlingCorruption:Start()
 		timerWhirlingCorruptionCD:Start(nil, self.vb.whirlCount+1)
 		countdownWhirlingCorruption:Start()
-		soundWhirlingCorrpution:Play()
 	elseif spellId == 147120 then
 		self.vb.bombardCount = self.vb.bombardCount + 1
 		local count = self.vb.bombardCount

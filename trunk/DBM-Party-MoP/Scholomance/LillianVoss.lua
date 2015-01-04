@@ -18,9 +18,6 @@ mod:RegisterEventsInCombat(
 	"SPELL_MISSED"
 )
 
-
---honestly, another one that cannot be done right without mods enabled to use transcriptor and record it.
---again, piss poor detection in combat log of certain events, so a lot of these timers won't cancel when phases change. I cannot promise accuracy on phase transitions completely, especially depending on how you deal with spirit/body (ie killing which first)
 --TODO, perfect phase transitions and how they effect ability timers. Find out what happens if you kill BODY first in phase 3, does it get rezzed again?
 local warnShadowShiv		= mod:NewSpellAnnounce(111775, 2)
 local warnDeathsGrasp		= mod:NewSpellAnnounce(111570, 3)
@@ -28,17 +25,15 @@ local warnUnleashedAnguish	= mod:NewSpellAnnounce(111649, 2)
 local warnFixateAnger		= mod:NewTargetAnnounce(115350, 4)
 local warnReanimateCorpse	= mod:NewSpellAnnounce(114262, 3)
 
-local specWarnDeathsGrasp	= mod:NewSpecialWarningSpell(111570, nil, nil, nil, true)
+local specWarnDeathsGrasp	= mod:NewSpecialWarningSpell(111570, nil, nil, nil, 2)
 local specWarnDarkBlaze		= mod:NewSpecialWarningMove(111585)
-local specWarnFixateAnger	= mod:NewSpecialWarningRun(115350)
+local specWarnFixateAnger	= mod:NewSpecialWarningRun("OptionVersion2", 115350, nil, nil, nil, 4)
 
 local timerShadowShivCD		= mod:NewCDTimer(12.5, 111775)--every 12.5-15.5 sec
 local timerDeathsGraspCD	= mod:NewCDTimer(34, 111570)
 local timerFixateAngerCD	= mod:NewCDTimer(12, 115350)
 local timerFixateAnger		= mod:NewTargetTimer(10, 115350)
 local timerDarkBlaze		= mod:NewBuffActiveTimer(8, 111585)
-
-local soundFixateAnger		= mod:NewSound(115350)
 
 function mod:OnCombatStart(delay)
 	timerShadowShivCD:Start(12-delay)
@@ -59,7 +54,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerFixateAngerCD:Start()
 		if args:IsPlayer() then
 			specWarnFixateAnger:Show()
-			soundFixateAnger:Play()
 		end
 	end
 end

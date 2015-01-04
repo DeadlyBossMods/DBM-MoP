@@ -31,7 +31,7 @@ local warnAnimaFont					= mod:NewTargetAnnounce(138691, 3)
 local warnInterruptingJolt			= mod:NewCountAnnounce(138763, 4)
 local warnEmpowerGolem				= mod:NewTargetAnnounce(138780, 3)
 
-local specWarnCrimsonWakeYou		= mod:NewSpecialWarningRun(138480)--Kiter
+local specWarnCrimsonWakeYou		= mod:NewSpecialWarningRun(138480, nil, nil, nil, 4)--Kiter
 local specWarnCrimsonWake			= mod:NewSpecialWarningMove(138485)--Standing in stuff left behind by kiter
 local yellCrimsonWake				= mod:NewYell(138480)
 local specWarnMatterSwap			= mod:NewSpecialWarningYou(138609)
@@ -60,8 +60,6 @@ local berserkTimer					= mod:NewBerserkTimer(600)
 local countdownActivation			= mod:NewCountdown(60, 139537)
 local countdownInterruptingJolt		= mod:NewCountdown(21.5, 138763)
 local countdownAnimaRing			= mod:NewCountdown(24.2, 136954, mod:IsTank(), nil, nil, nil, true)
-
-local soundCrimsonWake				= mod:NewSound(138480)
 
 local crimsonWake = GetSpellInfo(138485)--Debuff ID I believe, not cast one. Same spell name though
 local siphon = 0
@@ -207,7 +205,6 @@ function mod:RAID_BOSS_WHISPER(msg, npc)
 		if not self:IsDifficulty("lfr25") then
 			yellCrimsonWake:Yell()
 		end
-		soundCrimsonWake:Play()
 		self:SendSync("WakeTarget", UnitGUID("player"))
 	end
 end

@@ -22,7 +22,7 @@ local warnThrow						= mod:NewTargetAnnounce(137175, 2)
 local warnStorm						= mod:NewSpellAnnounce(137313, 3)
 local warnIonization				= mod:NewSpellAnnounce(138732, 4)
 
-local specWarnFocusedLightning		= mod:NewSpecialWarningRun(137422)
+local specWarnFocusedLightning		= mod:NewSpecialWarningRun("OptionVersion2", 137422, nil, nil, nil, 4)
 local yellFocusedLightning			= mod:NewYell(137422)
 local specWarnStaticBurst			= mod:NewSpecialWarningYou(137162)
 local specWarnStaticBurstOther		= mod:NewSpecialWarningTaunt(137162)
@@ -42,8 +42,6 @@ local timerIonization				= mod:NewBuffFadesTimer(24, 138732)
 local timerIonizationCD				= mod:NewNextTimer(61.5, 138732)
 
 local berserkTimer					= mod:NewBerserkTimer(540)
-
-local soundFocusedLightning			= mod:NewSound(137422)
 
 local countdownIonization			= mod:NewCountdown(61.5, 138732)
 
@@ -72,7 +70,6 @@ function mod:FocusedLightningTarget(targetname, uId)
 		if targetname == UnitName("player") then
 			specWarnFocusedLightning:Show()
 			yellFocusedLightning:Yell()
-			soundFocusedLightning:Play()
 			if self.Options.RangeFrame and not self:IsDifficulty("lfr25") then
 				DBM.RangeCheck:Show(8)
 			end

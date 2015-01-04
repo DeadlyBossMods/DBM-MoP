@@ -56,11 +56,11 @@ local specWarnCrawlerMine				= mod:NewSpecialWarningSwitch("ej8212", not mod:IsH
 local specWarnAssemblyLine				= mod:NewSpecialWarningCount("ej8202", false)--Not all in raid need, just those assigned
 local specWarnShockwaveMissile			= mod:NewSpecialWarningSpell(143641, nil, nil, nil, 2)
 local specWarnReadyToGo					= mod:NewSpecialWarningTarget(145580)
-local specWarnLaserFixate				= mod:NewSpecialWarningRun(143828)
+local specWarnLaserFixate				= mod:NewSpecialWarningRun("OptionVersion2", 143828, nil, nil, nil, 4)
 local yellLaserFixate					= mod:NewYell(143828)
 local specWarnSuperheated				= mod:NewSpecialWarningMove(143856)--From lasers. Hard to see, this warning will help a ton
 local specWarnMagneticCrush				= mod:NewSpecialWarningSpell(144466, nil, nil, nil, 2)
-local specWarnCrawlerMineFixate			= mod:NewSpecialWarningRun("ej8212")
+local specWarnCrawlerMineFixate			= mod:NewSpecialWarningRun("OptionVersion2", "ej8212", mod:IsMelee(), nil, nil, 4)
 local yellCrawlerMineFixate				= mod:NewYell("ej8212", nil, false)
 
 --Siegecrafter Blackfuse
@@ -85,9 +85,6 @@ local timerMagneticCrush				= mod:NewBuffActiveTimer(30, 144466)
 local countdownAssemblyLine				= mod:NewCountdown(40, "ej8202", false)
 local countdownShredder					= mod:NewCountdown(60, "ej8199", mod:IsTank())
 local countdownElectroStatic			= mod:NewCountdown("Alt17", 143385, mod:IsTank())
-
-local soundMineFixate					= mod:NewSound("ej8212", mod:IsMelee())--No strat involves ranged moving for these, they should die before reaching ranged. But melee must run out.
-local soundLaserFixate					= mod:NewSound(143828, false)
 
 mod:AddInfoFrameOption("ej8202")
 mod:AddSetIconOption("SetIconOnMines", "ej8212", false, true)
@@ -318,12 +315,10 @@ function mod:RAID_BOSS_WHISPER(msg)
 	elseif msg:find("Ability_Siege_Engineer_Detonate") then--Doesn't show in combat log at all (what else is new)
 		specWarnCrawlerMineFixate:Show()
 		yellCrawlerMineFixate:Yell()
-		soundMineFixate:Play()
 	elseif msg:find("Ability_Siege_Engineer_Superheated") then
 		specWarnLaserFixate:Show()
 		yellLaserFixate:Yell()
 		timerLaserFixate:Start()
-		soundLaserFixate:Play()
 		self:SendSync("LockedOnTarget", UnitGUID("player"))
 	end
 end
