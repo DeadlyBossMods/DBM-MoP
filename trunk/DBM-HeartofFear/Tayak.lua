@@ -151,7 +151,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 		else
 			specWarnUnseenStrikeOther:Show(target)
 			if self.Options.UnseenStrikeArrow then
-				DBM.Arrow:ShowRunTo(target, 3, 3, 5)
+				DBM.Arrow:ShowRunTo(target, 3, 5)
 			end
 		end
 	end

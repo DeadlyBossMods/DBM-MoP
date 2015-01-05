@@ -41,7 +41,7 @@ local function findUnseen()
 			else
 				specWarnUnseenStrikeOther:Show(name)
 				if mod.Options.UnseenStrikeArrow then
-					DBM.Arrow:ShowRunTo(uId, 3, 3, 5)
+					DBM.Arrow:ShowRunTo(uId, 3, 5)
 				end
 			end
 			return

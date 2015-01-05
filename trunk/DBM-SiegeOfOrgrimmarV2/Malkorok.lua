@@ -138,7 +138,7 @@ function mod:SPELL_CAST_START(args)
 					local tanking, status = UnitDetailedThreatSituation(uId, "boss1")
 					if status == 3 then
 						if UnitIsUnit("player", uId) then return end
-						DBM.Arrow:ShowRunTo(uId, 3, 3, 5)
+						DBM.Arrow:ShowRunTo(uId, 3, 5)
 						break
 					end
 				end

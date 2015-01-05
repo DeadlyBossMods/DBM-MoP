@@ -750,7 +750,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			self:SetIcon(args.destName, 3)
 		end
 		if self.Options.AimArrow then
-			DBM.Arrow:ShowRunTo(args.destName, 3, 3, 5)
+			DBM.Arrow:ShowRunTo(args.destName, 3, 5)
 		end
 	end
 end
