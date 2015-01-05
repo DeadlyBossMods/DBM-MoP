@@ -267,7 +267,7 @@ function mod:SPELL_AURA_APPLIED(args)
 				if inRange and inRange < 31 then
 					specWarnStaticShockNear:Show(args.destName)
 					if self.Options.StaticShockArrow then
-						DBM.Arrow:ShowRunTo(uId, 3, 3, 8)
+						DBM.Arrow:ShowRunTo(uId, 3, 8)
 					end
 				end
 			end
@@ -295,7 +295,7 @@ function mod:SPELL_AURA_APPLIED(args)
 				if inRange and inRange < 31 then
 					specWarnOverchargedNear:Show(args.destName)
 					if self.Options.OverchargeArrow then
-						DBM.Arrow:ShowRunTo(uId, 3, 3, 6)
+						DBM.Arrow:ShowRunTo(uId, 3, 6)
 					end
 				end
 			end
