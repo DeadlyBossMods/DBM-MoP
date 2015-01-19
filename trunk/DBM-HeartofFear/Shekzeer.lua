@@ -20,7 +20,7 @@ mod:RegisterEventsInCombat(
 )
 
 local warnScreech				= mod:NewSpellAnnounce(123735, 3, nil, false)--Not useful.
-local warnCryOfTerror			= mod:NewTargetAnnounce(123788, 3, nil, "Range")
+local warnCryOfTerror			= mod:NewTargetAnnounce(123788, 3, nil, "Ranged")
 local warnEyes					= mod:NewStackAnnounce(123707, 2, nil, "Tank|Healer")
 local warnDissonanceField		= mod:NewCountAnnounce(123255, 3)
 local warnSonicDischarge		= mod:NewSoonAnnounce(123504, 4)--Iffy reliability but better then nothing i suppose.
@@ -53,7 +53,7 @@ local yellHeartOfFear			= mod:NewYell(125638)
 
 local timerScreechCD			= mod:NewNextTimer(7, 123735, nil, false)
 local timerCryOfTerror			= mod:NewTargetTimer(20, 123788, nil, "Healer")
-local timerCryOfTerrorCD		= mod:NewCDTimer(25, 123788, nil, "Range")
+local timerCryOfTerrorCD		= mod:NewCDTimer(25, 123788, nil, "Ranged")
 local timerEyes					= mod:NewTargetTimer(30, 123707, nil, "Tank")
 local timerEyesCD				= mod:NewNextTimer(11, 123707, nil, "Tank")
 local timerDissonanceFieldCD	= mod:NewNextCountTimer(65, 123255)
@@ -69,7 +69,7 @@ local timerHeartOfFear			= mod:NewBuffFadesTimer(6, 125638)
 local berserkTimer				= mod:NewBerserkTimer(900)
 
 mod:AddBoolOption("InfoFrame")--On by default because these do more then just melee, they interrupt spellcasting (bad for healers)
-mod:AddBoolOption("RangeFrame", "Range")
+mod:AddBoolOption("RangeFrame", "Ranged")
 mod:AddBoolOption("StickyResinIcons", true)
 mod:AddBoolOption("HeartOfFearIcon", true)
 

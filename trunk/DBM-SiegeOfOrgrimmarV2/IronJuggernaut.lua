@@ -64,7 +64,7 @@ local timerMortarBarrageCD		= mod:NewNextTimer(30, 144555)
 
 local berserkTimer				= mod:NewBerserkTimer(600)
 
-mod:AddRangeFrameOption(6, 144154, "Range")
+mod:AddRangeFrameOption(6, 144154, "Ranged")
 
 --Important, needs recover
 mod.vb.shockCount = 0

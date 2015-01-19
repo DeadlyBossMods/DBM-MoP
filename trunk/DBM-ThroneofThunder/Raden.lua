@@ -37,7 +37,7 @@ local warnCallEssence			= mod:NewSpellAnnounce(139040, 4, 139071)
 
 --Anima
 local specWarnMurderousStrike	= mod:NewSpecialWarningSpell(138333, "Tank", nil, nil, 3)
-local specWarnSanguineHorror	= mod:NewSpecialWarningSwitch(138338, "Range|Tank")
+local specWarnSanguineHorror	= mod:NewSpecialWarningSwitch(138338, "Ranged|Tank")
 local specWarnAninaSensitive	= mod:NewSpecialWarningYou(139318)
 local specWarnUnstableAnima		= mod:NewSpecialWarningYou(138288, nil, nil, nil, 3)
 local yellUnstableAnima			= mod:NewYell(138288, nil, false)

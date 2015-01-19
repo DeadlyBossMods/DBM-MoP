@@ -45,7 +45,7 @@ local timerBladeTempestCD				= mod:NewNextTimer(60, 125310)--Always cast after i
 local countdownTempest					= mod:NewCountdown(60, 125310)
 local berserkTimer						= mod:NewBerserkTimer(490)
 
-mod:AddBoolOption("RangeFrame", "Range")--For Wind Step
+mod:AddBoolOption("RangeFrame", "Ranged")--For Wind Step
 mod:AddBoolOption("UnseenStrikeArrow")
 
 local intensifyCD = 60
