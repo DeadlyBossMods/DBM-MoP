@@ -100,7 +100,7 @@ local timerNullBarrierCD			= mod:NewCDTimer(55, 115817)
 
 mod:AddBoolOption("SetIconOnWS", true)
 mod:AddBoolOption("SetIconOnAR", true)
-mod:AddBoolOption("RangeFrame", "Range")
+mod:AddBoolOption("RangeFrame", "Ranged")
 
 local phase = 0
 local arIcon = 8
