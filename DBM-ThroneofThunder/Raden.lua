@@ -43,7 +43,7 @@ local specWarnUnstableAnima		= mod:NewSpecialWarningYou(138288, nil, nil, nil, 3
 local yellUnstableAnima			= mod:NewYell(138288, nil, false)
 --Vita
 local specWarnFatalStrike		= mod:NewSpecialWarningSpell(138334, "Tank", nil, nil, 3)
-local specWarnCracklingStalker	= mod:NewSpecialWarningSwitch(138339, "Range|Tank")
+local specWarnCracklingStalker	= mod:NewSpecialWarningSwitch(138339, "Ranged|Tank")
 local specWarnVitaSensitive		= mod:NewSpecialWarningYou(138372)
 local specWarnUnstablVita		= mod:NewSpecialWarningYou(138297, nil, nil, nil, 3)
 local specWarnUnstablVitaJump	= mod:NewSpecialWarning("specWarnUnstablVitaJump", nil, nil, nil, 1)
