@@ -23,7 +23,7 @@ local warnIntensity			= mod:NewStackAnnounce(113315, 3)
 local warnUltimatePower		= mod:NewTargetAnnounce(113309, 4)
 
 local specWarnIntensity		= mod:NewSpecialWarning("SpecWarnIntensity")
-local specWarnUltimatePower	= mod:NewSpecialWarningTarget(113309, nil, nil, nil, true)
+local specWarnUltimatePower	= mod:NewSpecialWarningTarget(113309, nil, nil, nil, 2)
 
 local timerUltimatePower	= mod:NewTargetTimer(15, 113309)
 

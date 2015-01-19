@@ -17,10 +17,10 @@ local warnBlazingFists		= mod:NewSpellAnnounce(114807, 3)
 --local warnScorchedEarth		= mod:NewCountAnnounce(114460, 3)--only aoe warn will be enough.
 
 --local yellFlyingKick		= mod:NewYell(114487)
-local specWarnFlyingKick	= mod:NewSpecialWarningSpell(113764, nil, nil, nil, true)
+local specWarnFlyingKick	= mod:NewSpecialWarningSpell(113764, nil, nil, nil, 2)
 --local specWarnFlyingKickNear= mod:NewSpecialWarningClose(114487)
 local specWarnScorchedEarth	= mod:NewSpecialWarningMove(114460)
-local specWarnBlazingFists	= mod:NewSpecialWarningMove(114807, mod:IsTank()) -- Everything is dangerous in challenge mode, entry level heriocs will also be dangerous when they aren't overtuning your gear with an ilvl buff.if its avoidable, you should avoid it, in good practice, to create good habit for challenge modes.
+local specWarnBlazingFists	= mod:NewSpecialWarningMove(114807, "Tank") -- Everything is dangerous in challenge mode, entry level heriocs will also be dangerous when they aren't overtuning your gear with an ilvl buff.if its avoidable, you should avoid it, in good practice, to create good habit for challenge modes.
 
 local timerFlyingKickCD		= mod:NewCDTimer(25, 113764)--25-30 second variation
 local timerFirestormKick	= mod:NewBuffActiveTimer(6, 113764)

@@ -22,7 +22,7 @@ local warnJadeStatue			= mod:NewSpellAnnounce(119364, 4)
 local warnSummonSeedlings		= mod:NewSpellAnnounce(117664, 2)
 
 --Cursed Brew
-local specWarnBrewBubble		= mod:NewSpecialWarningSwitch(131143, mod:IsDps())
+local specWarnBrewBubble		= mod:NewSpecialWarningSwitch(131143, "Dps")
 --Beast of Jade
 local specWarnJadeStatue		= mod:NewSpecialWarningInterrupt(119364)
 

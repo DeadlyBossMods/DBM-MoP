@@ -21,7 +21,7 @@ local warnRisingHate		= mod:NewCastAnnounce(107356, 4, 5)
 
 local specWarnGrippingHatred= mod:NewSpecialWarningSwitch("ej5817")
 local specWarnHazeofHate	= mod:NewSpecialWarningYou(107087)
-local specWarnRisingHate	= mod:NewSpecialWarningInterrupt(107356, not mod:IsHealer())
+local specWarnRisingHate	= mod:NewSpecialWarningInterrupt(107356, "-Healer")
 
 local timerRingofMalice		= mod:NewBuffActiveTimer(15, 131521)
 local timerGrippingHartedCD	= mod:NewNextTimer(45.5, 115002)

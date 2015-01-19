@@ -13,12 +13,10 @@ mod:RegisterEventsInCombat(
 )
 
 local warnCannonBarrage			= mod:NewSpellAnnounce(121600, 3)
-local warnStomp					= mod:NewCastAnnounce(121787, 3, 3)
-local warnWarmonger				= mod:NewSpellAnnounce("ej6200", 2, 121747)
 
-local specWarnCannonBarrage		= mod:NewSpecialWarningSpell(121600, mod:IsTank())
+local specWarnCannonBarrage		= mod:NewSpecialWarningSpell(121600, "Tank")
 local specWarnStomp				= mod:NewSpecialWarningSpell(121787, nil, nil, nil, 2)
-local specWarnWarmonger			= mod:NewSpecialWarningSwitch("ej6200", not mod:IsHealer())
+local specWarnWarmonger			= mod:NewSpecialWarningSwitch("ej6200", "-Healer")
 
 local timerCannonBarrageCD		= mod:NewNextTimer(60, 121600)
 local timerStompCD				= mod:NewNextTimer(60, 121787)
@@ -43,9 +41,7 @@ function mod:RAID_BOSS_EMOTE(msg)
 		specWarnCannonBarrage:Show()
 		timerCannonBarrageCD:Start()
 	elseif msg:find("spell:121787") then
-		warnStomp:Show()
 		specWarnStomp:Show()
-		warnWarmonger:Schedule(10)
 		specWarnWarmonger:Schedule(10)
 		timerStomp:Start()
 		timerWarmongerCD:Start()

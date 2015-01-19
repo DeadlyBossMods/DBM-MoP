@@ -34,10 +34,10 @@ mod:RegisterEventsInCombat(
 
 local warnRampage				= mod:NewCountAnnounce(139458, 3)
 local warnRampageFaded			= mod:NewFadesAnnounce(139458, 2)
-local warnArcticFreeze			= mod:NewStackAnnounce(139843, 3, nil, mod:IsTank() or mod:IsHealer())
-local warnIgniteFlesh			= mod:NewStackAnnounce(137731, 3, nil, mod:IsTank() or mod:IsHealer())
-local warnRotArmor				= mod:NewStackAnnounce(139840, 3, nil, mod:IsTank() or mod:IsHealer())
-local warnArcaneDiffusion		= mod:NewStackAnnounce(139993, 3, nil, mod:IsTank() or mod:IsHealer())--Heroic
+local warnArcticFreeze			= mod:NewStackAnnounce(139843, 3, nil, "Tank|Healer")
+local warnIgniteFlesh			= mod:NewStackAnnounce(137731, 3, nil, "Tank|Healer")
+local warnRotArmor				= mod:NewStackAnnounce(139840, 3, nil, "Tank|Healer")
+local warnArcaneDiffusion		= mod:NewStackAnnounce(139993, 3, nil, "Tank|Healer")--Heroic
 local warnCinders				= mod:NewTargetAnnounce(139822, 4)
 local warnTorrentofIce			= mod:NewTargetAnnounce(139889, 4)
 local warnNetherTear			= mod:NewSpellAnnounce(140138, 3)--Heroic
@@ -55,10 +55,10 @@ local specWarnTorrentofIceYou	= mod:NewSpecialWarningRun("OptionVersion2", 13985
 local yellTorrentofIce			= mod:NewYell(139857)
 local specWarnTorrentofIceNear	= mod:NewSpecialWarningClose(139889)
 local specWarnTorrentofIce		= mod:NewSpecialWarningMove(139909)--Ice left on ground by the beam
-local specWarnNetherTear		= mod:NewSpecialWarningSwitch("ej7816", mod:IsDps())
+local specWarnNetherTear		= mod:NewSpecialWarningSwitch("ej7816", "Dps")
 
 local timerRampage				= mod:NewBuffActiveTimer(21, 139458)
-mod:AddBoolOption("timerBreaths", mod:IsTank() or mod:IsHealer(), "timer")--Better to have one option for breaths than 4
+mod:AddBoolOption("timerBreaths", "Tank|Healer", "timer")--Better to have one option for breaths than 4
 local timerArcticFreezeCD		= mod:NewCDTimer(16, 139843, nil, nil, false)--We keep timers for artic and freeze for engage, since the breaths might be out of sync until after first rampage
 local timerRotArmorCD			= mod:NewCDTimer(16, 139840, nil, nil, false)--^
 local timerBreathsCD			= mod:NewTimer(16, "timerBreathsCD", 137731, nil, false)--Rest of breaths after first rampage consolidated into one timer instead of 2

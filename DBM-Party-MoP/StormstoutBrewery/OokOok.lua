@@ -18,7 +18,7 @@ mod:RegisterEventsInCombat(
 local warnGroundPound		= mod:NewSpellAnnounce(106807, 3)
 local warnBananas			= mod:NewStackAnnounce(106651, 2)
 
-local specWarnGroundPound	= mod:NewSpecialWarningMove(106807, mod:IsTank())
+local specWarnGroundPound	= mod:NewSpecialWarningMove(106807, "Tank")
 
 local timerGroundPoundCD	= mod:NewCDTimer(10.5, 106807)
 

@@ -18,7 +18,7 @@ mod:RegisterEventsInCombat(
 )
 
 local warnImpalingStrike	= mod:NewTargetAnnounce(107047, 3)
-local warnPreyTime			= mod:NewTargetAnnounce(106933, 3, nil, mod:IsHealer())
+local warnPreyTime			= mod:NewTargetAnnounce(106933, 3, nil, "Healer")
 local warnStrafingRun		= mod:NewSpellAnnounce("ej5660", 4)
 
 local specWarnStafingRun	= mod:NewSpecialWarningSpell("ej5660", nil, nil, nil, true)
@@ -26,7 +26,7 @@ local specWarnStafingRunAoe	= mod:NewSpecialWarningMove(116297)
 local specWarnAcidBomb		= mod:NewSpecialWarningMove(115458)
 
 local timerImpalingStrikeCD	= mod:NewNextTimer(30, 107047)
-local timerPreyTime			= mod:NewTargetTimer(5, 106933, nil, mod:IsHealer())
+local timerPreyTime			= mod:NewTargetTimer(5, 106933, nil, "Healer")
 local timerPreyTimeCD		= mod:NewNextTimer(14.5, 106933)
 
 function mod:OnCombatStart(delay)

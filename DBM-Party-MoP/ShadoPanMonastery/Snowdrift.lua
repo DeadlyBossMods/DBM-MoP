@@ -27,7 +27,7 @@ local warnChaseDown			= mod:NewTargetAnnounce(118961, 3)--Targeting spell for To
 -- phase3 ability not found yet.
 local warnPhase3			= mod:NewPhaseAnnounce(3)
 
-local specWarnFists			= mod:NewSpecialWarningMove(106853, mod:IsTank())
+local specWarnFists			= mod:NewSpecialWarningMove(106853, "Tank")
 local specWarnChaseDown		= mod:NewSpecialWarningYou(118961)
 
 local timerFistsOfFuryCD	= mod:NewCDTimer(23, 106853)--Not enough data to really verify this

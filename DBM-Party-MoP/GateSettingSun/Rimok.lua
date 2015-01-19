@@ -17,7 +17,7 @@ mod:RegisterEventsInCombat(
 --This mod needs more stuff involving adds later.
 local warnFrenziedAssault		= mod:NewSpellAnnounce(107120, 3)
 
-local specWarnFrenziedAssault	= mod:NewSpecialWarningSpell(107120, mod:IsTank())
+local specWarnFrenziedAssault	= mod:NewSpecialWarningSpell(107120, "Tank")
 local specWarnViscousFluid		= mod:NewSpecialWarningMove(107122)
 
 local timerFrenziedAssault		= mod:NewBuffActiveTimer(6, 107120)
