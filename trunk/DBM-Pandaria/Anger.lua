@@ -16,7 +16,6 @@ mod:RegisterEventsInCombat(
 	"UNIT_AURA player"
 )
 
-local warnUnleashedWrath		= mod:NewSpellAnnounce(119488, 3)--Big aoe damage aura when at 100 rage
 local warnGrowingAnger			= mod:NewTargetAnnounce(119622, 4)--Mind control trigger
 local warnAggressiveBehavior	= mod:NewTargetAnnounce(119626, 4)--Actual mind control targets
 
@@ -26,7 +25,7 @@ local specWarnBitterThoughts	= mod:NewSpecialWarningMove(119610)
 
 local timerGrowingAngerCD		= mod:NewCDTimer(32, 119622)--Min 32.6~ Max 67.8
 local timerUnleashedWrathCD		= mod:NewCDTimer(53, 119488)--Based on rage, but timing is consistent enough to use a CD bar, might require some perfecting later, similar to xariona's special, if rage doesn't reset after wipes, etc.
-local timerUnleashedWrath		= mod:NewBuffActiveTimer(24, 119488, nil, mod:IsTank() or mod:IsHealer())
+local timerUnleashedWrath		= mod:NewBuffActiveTimer(24, 119488, nil, "Tank|Healer")
 
 mod:AddBoolOption("RangeFrame", true)--For Mind control spreading.
 mod:AddBoolOption("SetIconOnMC", true)
@@ -66,7 +65,6 @@ end
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
 	if spellId == 119488 then
-		warnUnleashedWrath:Show()
 		specWarnUnleashedWrath:Show()
 		timerUnleashedWrath:Start()
 	elseif spellId == 119622 then

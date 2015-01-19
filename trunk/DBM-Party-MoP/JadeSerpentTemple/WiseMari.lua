@@ -22,7 +22,7 @@ mod:RegisterEventsInCombat(
 local warnBubbleBurst			= mod:NewCastAnnounce(106612, 3, nil)
 local warnAddsLeft				= mod:NewAddsLeftAnnounce("ej5616", 2, 106526)
 
-local specWarnLivingWater		= mod:NewSpecialWarningSwitch("ej5616", not mod:IsHealer())
+local specWarnLivingWater		= mod:NewSpecialWarningSwitch("ej5616", "-Healer")
 local specWarnCorruptingWaters	= mod:NewSpecialWarningMove(115167)
 local specWarnShaResidue		= mod:NewSpecialWarningMove(106653)
 

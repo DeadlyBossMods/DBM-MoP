@@ -19,7 +19,7 @@ local warnWitherWill			= mod:NewSpellAnnounce(106736, 3)
 local warnTouchofNothingness	= mod:NewTargetAnnounce(106113, 4)
 local warnBoundsOfReality		= mod:NewSpellAnnounce(117665, 3)
 
-local specWarnTouchOfNothingness= mod:NewSpecialWarningDispel(106113, mod:IsHealer())
+local specWarnTouchOfNothingness= mod:NewSpecialWarningDispel(106113, "Healer")
 local specWarnShadowsOfDoubt	= mod:NewSpecialWarningMove(110099)--Actually used by his trash, but in a speed run, you tend to pull it all together
 
 local timerWitherWillCD			= mod:NewCDTimer(6, 106736)--6-10 second variations.

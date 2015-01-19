@@ -17,14 +17,11 @@ mod:RegisterEventsInCombat(
 	"UNIT_SPELLCAST_SUCCEEDED target focus"
 )
 
-local warnJadefireBreath		= mod:NewSpellAnnounce(144530, 2, nil, mod:IsTank())
-local warnJadefireWall			= mod:NewSpellAnnounce(144533, 4)
-
-local specWarnJadefireBreath	= mod:NewSpecialWarningSpell(144530, mod:IsTank())
+local specWarnJadefireBreath	= mod:NewSpecialWarningSpell(144530, "Tank")
 local specWarnJadefireBlaze		= mod:NewSpecialWarningMove(144538)
 local specWarnJadefireWall		= mod:NewSpecialWarningSpell(144533, nil, nil, nil, 2)
 
-local timerJadefireBreathCD		= mod:NewCDTimer(18.5, 144530, nil, mod:IsTank())
+local timerJadefireBreathCD		= mod:NewCDTimer(18.5, 144530, nil, "Tank")
 local timerJadefireWallCD		= mod:NewNextTimer(60, 144533)
 
 mod:AddBoolOption("RangeFrame", true)--For jadefire bolt/blaze (depending how often it's cast, if it's infrequent i'll kill range finder)
@@ -48,7 +45,6 @@ end
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
 	if spellId == 144530 then
-		warnJadefireBreath:Show()
 		specWarnJadefireBreath:Show()
 		timerJadefireBreathCD:Start()
 	end
@@ -78,7 +74,6 @@ function mod:OnSync(msg)
 	if msg == "Victory" and self:IsInCombat() then
 		DBM:EndCombat(self)
 	elseif msg == "Wave" and self:IsInCombat() then
-		warnJadefireWall:Show()
 		specWarnJadefireWall:Show()
 		timerJadefireWallCD:Start()
 	end

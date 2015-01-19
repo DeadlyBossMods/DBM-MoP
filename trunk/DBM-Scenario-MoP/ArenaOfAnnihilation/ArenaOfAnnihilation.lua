@@ -14,7 +14,7 @@ mod.onlyNormal = true
 
 local warnFlameWall				= mod:NewSpellAnnounce(123966, 4)
 
-local specWarnFlameWall			= mod:NewSpecialWarningSpell(123966, nil, nil, nil, true)
+local specWarnFlameWall			= mod:NewSpecialWarningSpell(123966, nil, nil, nil, 2)
 
 mod:RemoveOption("HealthFrame")
 

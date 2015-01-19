@@ -21,8 +21,8 @@ local warnRaiseCrusade			= mod:NewSpellAnnounce(115139, 3)
 local warnSummonSpirits			= mod:NewSpellAnnounce(115147, 4)
 local warnEmpowerZombie			= mod:NewSpellAnnounce(115250, 4)
 
-local specWarnFallenCrusader	= mod:NewSpecialWarningSwitch("ej5863", not mod:IsHealer())--Need more data, nots sure if they are meaningful enough to kill or ignore.
-local specWarnEmpoweredSpirit	= mod:NewSpecialWarningSwitch("ej5869", not mod:IsHealer())--These need to die before they become zombies. Cannot see a way in combat log to detect target, i'll have to watch for target scanning next time to warn that player to run away from dead crusaders.
+local specWarnFallenCrusader	= mod:NewSpecialWarningSwitch("ej5863", "-Healer")--Need more data, nots sure if they are meaningful enough to kill or ignore.
+local specWarnEmpoweredSpirit	= mod:NewSpecialWarningSwitch("ej5869", "-Healer")--These need to die before they become zombies. Cannot see a way in combat log to detect target, i'll have to watch for target scanning next time to warn that player to run away from dead crusaders.
 
 local timerEvictSoul			= mod:NewTargetTimer(6, 115297)
 local timerEvictSoulCD			= mod:NewCDTimer(41, 115297)

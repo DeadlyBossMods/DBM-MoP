@@ -21,7 +21,7 @@ local warnFixate				= mod:NewTargetAnnounce(111723, 4)
 local warnStomp					= mod:NewCountAnnounce(111728, 3)
 
 local specWarnScreechingSwarm	= mod:NewSpecialWarningDispel(111600, false)--Can be spam if adds not die.
-local specWarnBrokenCarapace	= mod:NewSpecialWarningSpell(107146, mod:IsDps())
+local specWarnBrokenCarapace	= mod:NewSpecialWarningSpell(107146, "Dps")
 
 local timerHeadbuttCD			= mod:NewNextTimer(33, 111668)
 local timerScreechingSwarm		= mod:NewTargetTimer(10, 111600)

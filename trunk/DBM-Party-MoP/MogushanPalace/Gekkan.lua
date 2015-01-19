@@ -21,7 +21,7 @@ local warnIronProtector			= mod:NewTargetAnnounce(118958, 2)
 local warnShank					= mod:NewCastAnnounce(118963, 4)--Interruptable
 local warnCleansingFlame		= mod:NewCastAnnounce(118940, 3)
 local warnHexCast				= mod:NewCastAnnounce(118903, 3)--Interruptable
-local warnHex					= mod:NewTargetAnnounce(118903, 4, nil, mod:IsHealer())--Dispelable
+local warnHex					= mod:NewTargetAnnounce(118903, 4, nil, "Healer")--Dispelable
 
 local specWarnShank				= mod:NewSpecialWarningInterrupt(118963, false)--specWarns can be spam. Default value is off. Use this manually.
 local specWarnCleansingFlame	= mod:NewSpecialWarningInterrupt(118940, false)
@@ -31,7 +31,7 @@ local specWarnHexDispel			= mod:NewSpecialWarningDispel(118903, false)
 local timerInspiriation			= mod:NewTargetTimer(20, 118988)
 local timerIronProtector		= mod:NewTargetTimer(15, 118958)
 local timerHexCD				= mod:NewCDTimer(9, 118903)
-local timerHex					= mod:NewTargetTimer(20, 118903, nil, mod:IsHealer())
+local timerHex					= mod:NewTargetTimer(20, 118903, nil, "Healer")
 
 function mod:OnCombatStart(delay)
 end

@@ -16,7 +16,7 @@ mod:RegisterEventsInCombat(
 local warnGustingWinds		= mod:NewSpellAnnounce(121282, 4)
 local warnResin				= mod:NewTargetAnnounce(121447, 4)
 
-local specWarnGustingWinds	= mod:NewSpecialWarningSpell(121282, nil, nil, nil, true)
+local specWarnGustingWinds	= mod:NewSpecialWarningSpell(121282, nil, nil, nil, 2)
 local specWarnResin			= mod:NewSpecialWarningYou(121447)
 local specWarnCausticPitch	= mod:NewSpecialWarningMove(121443)
 

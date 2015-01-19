@@ -12,7 +12,7 @@ mod:RegisterEventsInCombat(
 )
 mod.onlyNormal = true
 
-local warnDivineStorm		= mod:NewSpellAnnounce(135404, 4, nil, mod:IsMelee())
+local warnDivineStorm		= mod:NewSpellAnnounce(135404, 4, nil, "Melee")
 local warnDivineLight		= mod:NewSpellAnnounce(135403, 4)
 
 local warnAchFiveAlive		= mod:NewAnnounce("WarnAchFiveAlive", 3, nil, false)
