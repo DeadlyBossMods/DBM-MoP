@@ -172,15 +172,16 @@ function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
 	if spellId == 136767 then
 		local amount = args.amount or 1
+		local threatamount = self:IsTrivial(100) and 21 or 9
 		warnPuncture:Show(args.destName, amount)
 		timerPuncture:Start(args.destName)
 		timerPunctureCD:Start()
 		if args:IsPlayer() then
-			if amount >= 9 then
+			if threatamount >= 9 then
 				specWarnPuncture:Show(amount)
 			end
 		else
-			if amount >= 9 and not UnitDebuff("player", GetSpellInfo(136767)) and not UnitIsDeadOrGhost("player") then--Other tank has at least one stack and you have none
+			if threatamount >= 9 and not UnitDebuff("player", GetSpellInfo(136767)) and not UnitIsDeadOrGhost("player") then--Other tank has at least one stack and you have none
 				specWarnPunctureOther:Show(args.destName)--So nudge you to taunt it off other tank already.
 			end
 		end
