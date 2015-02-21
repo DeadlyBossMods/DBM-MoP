@@ -63,13 +63,13 @@ local specWarnRampage			= mod:NewSpecialWarningTarget(136821, "Tank|Healer")--Do
 local specWarnDireCall			= mod:NewSpecialWarningCount(137458, nil, nil, nil, 2)--Heroic
 local specWarnDireFixate		= mod:NewSpecialWarningRun(140946, nil, nil, nil, 4)--Heroic
 
-local timerDoor					= mod:NewTimer(113.5, "timerDoor", 2457)--They seem to be timed off last door start, not last door end. They MAY come earlier if you kill off all first doors adds though not sure yet. If they do, we'll just start new timer anyways
+local timerDoor					= mod:NewTimer(113.5, "timerDoor", 2457)
 local timerAdds					= mod:NewTimer(18.91, "timerAdds", 43712)
-local timerDinoCD				= mod:NewNextTimer(56.75, "ej7086", nil, nil, nil, 137237)--It's between 55 and 60 seconds, I will need a more thorough log to verify by yelling when they spawn
+local timerDinoCD				= mod:NewNextTimer(18.9, "ej7086", nil, nil, nil, 137237)
 local timerCharge				= mod:NewCastTimer(3.4, 136769)
 local timerChargeCD				= mod:NewCDTimer(50, 136769)--50-60 second depending on i he's casting other stuff or stunned
 local timerDoubleSwipeCD		= mod:NewCDTimer(17, 136741)--17 second cd unless delayed by a charge triggered double swipe, then it's extended by failsafe code
-local timerPuncture				= mod:NewTargetTimer(90, 136767, nil, "Tank|Healer")
+local timerPuncture				= mod:NewTargetTimer("OptionVersion2", 90, 136767, nil, false)
 local timerPunctureCD			= mod:NewCDTimer(11, 136767, nil, "Tank|Healer")
 local timerJalakCD				= mod:NewNextTimer(10, "ej7087", nil, nil, nil, 2457)--Maybe it's time for a better worded spawn timer than "Next mobname". Maybe NewSpawnTimer with "mobname activates" or something.
 local timerBestialCryCD			= mod:NewNextCountTimer(10, 136817)
@@ -302,7 +302,7 @@ function mod:OnSync(msg, targetname)
 	--Then, before the dinomancer, lesser adds spawn twice splitting that timer into 3rds
 	--So it goes, door, 18.91 seconds later, 1 add jumps down. 18.91 seconds later, next 2 drop down. 18.91 seconds later, dinomancer drops down, then 56.75 seconds later, next door starts.
 		doorNumber = doorNumber + 1
-		timerDinoCD:Start()
+		timerDinoCD:Schedule(37.8)
 		warnDino:Schedule(56.75)
 		specWarnDino:Schedule(56.75)
 		if self.Options.SetIconOnAdds then
