@@ -2,7 +2,8 @@ local mod	= DBM:NewMod(725, "DBM-Pandaria", nil, 322, 1) -- 322 = Pandaria/Outdo
 local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision$"):sub(12, -3))
-mod:SetCreatureID(62346)--Salyis not die. Only Galleon attackable and dies.
+mod:SetCreatureID(62346)
+mod:SetEncounterID(1563)
 mod:SetReCombatTime(20)
 mod:SetZone()
 
