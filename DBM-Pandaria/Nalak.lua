@@ -22,9 +22,9 @@ local yellStormcloud				= mod:NewYell(136340)
 local specWarnLightningTether		= mod:NewSpecialWarningYou(136339)--Is this important enough?
 local specWarnArcNova				= mod:NewSpecialWarningRun("OptionVersion2", 136338, "Melee", nil, nil, 4)
 
-local timerStormcloudCD				= mod:NewCDTimer(24, 136340)
-local timerLightningTetherCD		= mod:NewCDTimer(35, 136339)--Needs more data, they may have tweaked it some.
-local timerArcNovaCD				= mod:NewCDTimer(39, 136338)
+local timerStormcloudCD				= mod:NewCDTimer(21.5, 136340)
+local timerLightningTetherCD		= mod:NewCDTimer(30.5, 136339)--Needs more data, they may have tweaked it some.
+local timerArcNovaCD				= mod:NewCDTimer(35.5, 136338)
 
 mod:AddBoolOption("RangeFrame")--For Stormcloud, might tweek to not show all the time with actual better logs than me facepulling it and dying with 20 seconds
 mod:AddReadyCheckOption(32518, false)
