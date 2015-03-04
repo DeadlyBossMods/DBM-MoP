@@ -110,7 +110,9 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 		if args:IsPlayer() then
 			local _, _, _, _, _, duration, expires, _, _ = UnitDebuff("player", args.spellName)
-			timerPungency:Start(expires-GetTime())
+			if expires then
+				timerPungency:Start(expires-GetTime())
+			end
 		end
 	end
 end
