@@ -140,7 +140,9 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif spellId == 122055 and args:IsPlayer() then
 		local _, _, _, _, _, duration, expires, _, _ = UnitDebuff("player", args.spellName)
-		timerResidue:Start(expires-GetTime())
+		if expires then
+			timerResidue:Start(expires-GetTime())
+		end
 	end
 end
 mod.SPELL_AURA_REFRESH = mod.SPELL_AURA_APPLIED
