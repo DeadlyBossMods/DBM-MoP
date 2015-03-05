@@ -89,7 +89,7 @@ end
 
 function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
-	if spellId == 136340 then
+	if spellId == 136340 and self:IsInCombat() then
 		stormcloudTargets[#stormcloudTargets + 1] = args.destName
 		if args:IsPlayer() then
 			specWarnStormcloud:Show()
