@@ -70,7 +70,7 @@ local timerCharge				= mod:NewCastTimer(3.4, 136769)
 local timerChargeCD				= mod:NewCDTimer(50, 136769)--50-60 second depending on i he's casting other stuff or stunned
 local timerDoubleSwipeCD		= mod:NewCDTimer(16.5, 136741)--16.5 second cd unless delayed by a charge triggered double swipe, then it's extended by failsafe code
 local timerPuncture				= mod:NewTargetTimer("OptionVersion2", 90, 136767, nil, false)
-local timerPunctureCD			= mod:NewCDTimer(11, 136767, nil, "Tank|Healer")
+local timerPunctureCD			= mod:NewCDTimer(10.5, 136767, nil, "Tank|Healer")
 local timerJalakCD				= mod:NewNextTimer(10, "ej7087", nil, nil, nil, 2457)--Maybe it's time for a better worded spawn timer than "Next mobname". Maybe NewSpawnTimer with "mobname activates" or something.
 local timerBestialCryCD			= mod:NewNextCountTimer(10, 136817)
 local timerDireCallCD			= mod:NewCDCountTimer(62, 137458)--Heroic (every 62-70 seconds)
@@ -140,13 +140,13 @@ function mod:SPELL_CAST_START(args)
 		warnDoubleSwipe:Show()
 		specWarnDoubleSwipe:Show()
 		--The only flaw is charge is sometimes delayed by unexpected events like using an orb, we may fail to start timer once in a while when it DOES come before a charge.
-		if timerChargeCD:GetTime() < 32 then--Check if charge is less than 18 seconds away, if it is, double swipe is going tobe delayed by quite a bit and we'll trigger timer after charge
+		if timerChargeCD:GetTime() < 32 then--Check if charge is less than 18 seconds away, if it is, double swipe is going to be delayed by quite a bit and we'll trigger timer after charge
 			timerDoubleSwipeCD:Start()
 		end
 	elseif spellId == 136770 then--Double swipe that follows a charge (136769)
 		warnDoubleSwipe:Show()
 		specWarnDoubleSwipe:Show()
-		timerDoubleSwipeCD:Start(11.5)--Hard coded failsafe. 136741 version is always 11.5 seconds after 136770 version
+		timerDoubleSwipeCD:Start(11)--Hard coded failsafe. 136741 version is always 11 seconds after 136770 version
 	elseif spellId == 137458 then
 		direNumber = direNumber + 1
 		warnDireCall:Show(direNumber)
