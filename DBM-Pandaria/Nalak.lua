@@ -61,8 +61,8 @@ function mod:OnCombatStart(delay, yellTriggered)
 	table.wipe(stormcloudTargets)
 	table.wipe(tetherTargets)
 	if yellTriggered then
-		timerStormcloudCD:Start(13.3-delay)--13-17 variation noted
-		timerLightningTetherCD:Start(25-delay)
+		timerStormcloudCD:Start(13.2-delay)--13-17 variation noted
+		timerLightningTetherCD:Start(24.5-delay)
 		timerArcNovaCD:Start(36-delay)--Not a large sample size
 	end
 end
