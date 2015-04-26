@@ -22,18 +22,13 @@ mod.onlyHeroic = true
 
 --Anima
 local warnAnima					= mod:NewSpellAnnounce(138331, 2)--Switched to anima phase
-local warnMurderousStrike		= mod:NewSpellAnnounce(138333, 4, nil, "Tank|Healer")--Tank (think thrash, like sha. Gains buff, uses on next melee attack)
 local warnUnstableAnima			= mod:NewTargetAnnounce(138288)--May range frame needed. 138295 is damage id according to wowhead, 138288 is debuff cast.
 local warnSanguineHorror		= mod:NewCountAnnounce(138338, 3, nil, "-Healer")--Adds
 --Vita
 local warnVita					= mod:NewSpellAnnounce(138332, 2)--Switched to vita phase
-local warnFatalStrike			= mod:NewSpellAnnounce(138334, 4, nil, "Tank|Healer")--Tank (think thrash, like sha. Gains buff, uses on next melee attack)
 local warnUnstableVita			= mod:NewTargetAnnounce(138297, 4)
-local warnCracklingStalker		= mod:NewCountAnnounce(138339, 3, nil, "-Healer")--Adds
 --General
-local warnCreation				= mod:NewCountAnnounce(138321, 3)--aka Orbs/Balls
 local warnPhase2				= mod:NewPhaseAnnounce(2, 2)
-local warnCallEssence			= mod:NewSpellAnnounce(139040, 4, 139071)
 
 --Anima
 local specWarnMurderousStrike	= mod:NewSpecialWarningSpell(138333, "Tank", nil, nil, 3)
@@ -43,14 +38,14 @@ local specWarnUnstableAnima		= mod:NewSpecialWarningYou(138288, nil, nil, nil, 3
 local yellUnstableAnima			= mod:NewYell(138288, nil, false)
 --Vita
 local specWarnFatalStrike		= mod:NewSpecialWarningSpell(138334, "Tank", nil, nil, 3)
-local specWarnCracklingStalker	= mod:NewSpecialWarningSwitch(138339, "Ranged|Tank")
+local specWarnCracklingStalker	= mod:NewSpecialWarningSwitchCount(138339, "-Healer")
 local specWarnVitaSensitive		= mod:NewSpecialWarningYou(138372)
 local specWarnUnstablVita		= mod:NewSpecialWarningYou(138297, nil, nil, nil, 3)
 local specWarnUnstablVitaJump	= mod:NewSpecialWarning("specWarnUnstablVitaJump", nil, nil, nil, 1)
 local yellUnstableVita			= mod:NewYell(138297, nil, false)
 --General
-local specWarnCreation			= mod:NewSpecialWarningSpell(138321, "Dps")
-local specWarnCallEssence		= mod:NewSpecialWarningSpell(139040, "Dps")
+local specWarnCreation			= mod:NewSpecialWarningCount(138321, "-Healer")
+local specWarnCallEssence		= mod:NewSpecialWarningSpell(139040, "-Healer")
 
 --Anima
 local timerMurderousStrikeCD	= mod:NewCDTimer(33, 138333, nil, "Tank")--Gains 3 power per second roughly and uses special at 100 Poewr
@@ -119,13 +114,11 @@ function mod:SPELL_CAST_START(args)
 	elseif spellId == 138339 then
 		lastStalker = GetTime()
 		stalkerCount = stalkerCount + 1
-		warnCracklingStalker:Show(stalkerCount)
-		specWarnCracklingStalker:Show()
+		specWarnCracklingStalker:Show(stalkerCount)
 		timerCracklingStalkerCD:Start(nil, stalkerCount+1)
 	elseif spellId == 138321 then
 		creationCount = creationCount + 1
-		warnCreation:Show(creationCount)
-		specWarnCreation:Show()
+		specWarnCreation:Show(creationCount)
 		timerCreationCD:Start(nil, creationCount+1)
 		countdownCreation:Start()
 	end
@@ -134,10 +127,8 @@ end
 function mod:SPELL_CAST_SUCCESS(args)
 	local spellId = args.spellId
 	if spellId == 138333 then
-		warnMurderousStrike:Show()
 		timerMurderousStrikeCD:Start()
 	elseif spellId == 138334 then
-		warnFatalStrike:Show()
 		timerFatalStrikeCD:Start()
 	end
 end
@@ -230,7 +221,6 @@ end
 --"<299.9 01:54:51> [UNIT_SPELLCAST_SUCCEEDED] Ra-den [boss1:Ruin::0:139073]
 function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
 	if spellId == 139040 then--Call Essence
-		warnCallEssence:Show()
 		specWarnCallEssence:Show()
 		timerCallEssenceCD:Start()
 		countdownCreation:Start(15)

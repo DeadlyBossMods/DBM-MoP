@@ -49,7 +49,7 @@ local warnCalculated				= mod:NewTargetAnnounce(144095, 3)--Wild variation on ti
 --Ka'roz the Locust
 local warnFlash						= mod:NewTargetCountAnnounce("ej8058", 3)
 --Rik'kal the Dissector
-local warnInjection					= mod:NewStackAnnounce(143339)
+local warnInjection					= mod:NewStackAnnounce(143339, 3)
 local warnMutate					= mod:NewTargetCountAnnounce(143337, 3)
 local warnParasitesLeft				= mod:NewAddsLeftAnnounce("ej8065", 3, 143383, "Tank")
 --Hisek the Swarmkeeper

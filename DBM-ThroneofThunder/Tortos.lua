@@ -20,11 +20,7 @@ mod:RegisterEventsInCombat(
 
 local warnBite						= mod:NewSpellAnnounce(135251, 3, nil, "Tank")
 local warnRockfall					= mod:NewSpellAnnounce(134476, 2)
-local warnCallofTortos				= mod:NewSpellAnnounce(136294, 3)
-local warnQuakeStomp				= mod:NewCountAnnounce(134920, 3)
 local warnKickShell					= mod:NewAnnounce("warnKickShell", 2, 134031)
-local warnStoneBreath				= mod:NewCastAnnounce(133939, 4)
-local warnSummonBats				= mod:NewSpellAnnounce("ej7140", 3, 136685)
 local warnShellConcussion			= mod:NewTargetAnnounce(136431, 1)
 
 local specWarnCallofTortos			= mod:NewSpecialWarningSpell(136294)
@@ -123,14 +119,12 @@ end
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
 	if spellId == 133939 then
-		warnStoneBreath:Show()
 		if not self:IsDifficulty("lfr25") then
 			specWarnStoneBreath:Show(args.sourceName)
 		end
 		timerBreathCD:Start()
 		countdownBreath:Start()
 	elseif spellId == 136294 then
-		warnCallofTortos:Show()
 		specWarnCallofTortos:Show()
 		if self:AntiSpam(59, 3) then -- On below 10%, he casts Call of Tortos always. This cast ignores cooldown, so filter below 10% cast.
 			timerCallTortosCD:Start()
@@ -141,7 +135,6 @@ function mod:SPELL_CAST_START(args)
 	elseif spellId == 134920 then
 		stompActive = true
 		stompCount = stompCount + 1
-		warnQuakeStomp:Show(stompCount)
 		specWarnQuakeStomp:Show(stompCount)
 		timerStompActive:Start()
 		timerRockfallCD:Start(7.4)--When the spam of rockfalls start
@@ -232,7 +225,6 @@ end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
 	if spellId == 136685 then --Don't filter main tank, bat tank often taunts boss just before bats for vengeance, otherwise we lose threat to dps. Then main tank taunts back after bats spawn and we go get them, fully vengeanced (if you try to pick up bats without vengeance you will not hold aggro for shit)
-		warnSummonBats:Show()
 		specWarnSummonBats:Show()
 		timerSummonBatsCD:Start()
 	end
