@@ -30,7 +30,6 @@ mod:AddBoolOption("warnBeam", nil, "announce")
 local warnBeamNormal				= mod:NewAnnounce("warnBeamNormal", 4, 139204, true, false)
 local warnBeamHeroic				= mod:NewAnnounce("warnBeamHeroic", 4, 139204, true, false)
 local warnAddsLeft					= mod:NewAnnounce("warnAddsLeft", 2, 134123)
-local warnDisintegrationBeam		= mod:NewSpellAnnounce("ej6882", 4)
 local warnLifeDrain					= mod:NewTargetAnnounce(133795, 3)--Some times needs to block this even dps. So warn for everyone.
 local warnDarkParasite				= mod:NewTargetAnnounce(133597, 3, nil, "Healer")--Heroic
 local warnIceWall					= mod:NewSpellAnnounce(134587, 3, 111231)
@@ -431,7 +430,6 @@ function mod:CHAT_MSG_MONSTER_EMOTE(msg, npc, _, _, target)
 		timerLingeringGazeCD:Cancel()
 		timerLifeDrainCD:Cancel()
 		timerDarkParasiteCD:Cancel()
-		warnDisintegrationBeam:Show()
 		specWarnDisintegrationBeam:Show()
 		--Best to start next phase bars when this one ends, so artifically create a "phase end" trigger
 		timerDisintegrationBeam:Start()

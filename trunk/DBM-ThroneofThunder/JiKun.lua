@@ -20,14 +20,11 @@ mod:RegisterEventsInCombat(
 
 --TODO, log it so i can tweak timer spam some. don't start CDs unitl quills END event
 local warnCaws				= mod:NewSpellAnnounce(138923, 2)
-local warnQuills			= mod:NewCountAnnounce(134380, 4)
 local warnFlock				= mod:NewAnnounce("warnFlock", 3, 15746)--Some random egg icon
 local warnTalonRake			= mod:NewStackAnnounce(134366, 3, nil, "Tank|Healer")
-local warnDowndraft			= mod:NewSpellAnnounce(134370, 3)
-local warnFeedYoung			= mod:NewSpellAnnounce(137528, 3)--No Cd because it variable based on triggering from eggs, it's cast when one of young call out and this varies too much
 local warnPrimalNutriment	= mod:NewCountAnnounce(140741, 1)
 
-local specWarnQuills		= mod:NewSpecialWarningSpell(134380, nil, nil, nil, 2)
+local specWarnQuills		= mod:NewSpecialWarningCount(134380, nil, nil, nil, 2)
 local specWarnFlock			= mod:NewSpecialWarning("specWarnFlock", false)--For those assigned in egg/bird killing group to enable on their own (and tank on heroic)
 local specWarnTalonRake		= mod:NewSpecialWarningStack(134366, nil, 2)--Might change to 2 if blizz fixes timing issues with it
 local specWarnTalonRakeOther= mod:NewSpecialWarningTaunt(134366)
@@ -137,7 +134,6 @@ mod.SPELL_PERIODIC_MISSED = mod.SPELL_PERIODIC_DAMAGE
 
 function mod:UNIT_SPELLCAST_CHANNEL_START(uId, _, _, _, spellId)
 	if spellId == 137528 then
-		warnFeedYoung:Show()
 		specWarnFeedYoung:Show()
 		if self:IsDifficulty("normal10", "heroic10", "lfr25") then
 			timerFeedYoungCD:Start(40)
@@ -150,8 +146,7 @@ end
 function mod:UNIT_SPELLCAST_START(uId, _, _, _, spellId)
 	if spellId == 134380 then
 		quillsCount = quillsCount + 1
-		warnQuills:Show(quillsCount)
-		specWarnQuills:Show()
+		specWarnQuills:Show(quillsCount)
 		timerQuills:Start()
 		if self:IsDifficulty("normal10", "heroic10", "lfr25") then
 			timerQuillsCD:Start(81, quillsCount+1)--81 sec normal, sometimes 91s?
@@ -159,7 +154,6 @@ function mod:UNIT_SPELLCAST_START(uId, _, _, _, spellId)
 			timerQuillsCD:Start(nil, quillsCount+1)
 		end
 	elseif spellId == 134370 then
-		warnDowndraft:Show()
 		specWarnDowndraft:Show()
 		timerDowndraft:Start()
 		if self:IsHeroic() then

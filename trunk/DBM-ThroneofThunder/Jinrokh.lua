@@ -19,8 +19,6 @@ mod:RegisterEventsInCombat(
 local warnFocusedLightning			= mod:NewTargetAnnounce(137399, 4)
 local warnStaticBurst				= mod:NewTargetAnnounce(137162, 3, nil, "Tank|Healer")
 local warnThrow						= mod:NewTargetAnnounce(137175, 2)
-local warnStorm						= mod:NewSpellAnnounce(137313, 3)
-local warnIonization				= mod:NewSpellAnnounce(138732, 4)
 
 local specWarnFocusedLightning		= mod:NewSpecialWarningRun("OptionVersion2", 137422, nil, nil, nil, 4)
 local yellFocusedLightning			= mod:NewYell(137422)
@@ -104,7 +102,6 @@ function mod:SPELL_CAST_START(args)
 		self:BossTargetScanner(69465, "FocusedLightningTarget", 0.025, 12)
 		timerFocusedLightningCD:Start()
 	elseif spellId == 137313 then
-		warnStorm:Show()
 		specWarnStorm:Show()
 		timerStorm:Start()
 		timerStaticBurstCD:Start(20.5)--May need tweaking (20.1-24.2)
@@ -119,7 +116,6 @@ function mod:SPELL_CAST_START(args)
 			"SPELL_PERIODIC_MISSED 138006"
 		)
 	elseif spellId == 138732 then
-		warnIonization:Show()
 		specWarnIonization:Show()
 		if timerStaticBurstCD:GetTime() == 0 or timerStaticBurstCD:GetTime() > 5 then -- Static Burst will be delayed by Ionization
 			timerStaticBurstCD:Start(12)
