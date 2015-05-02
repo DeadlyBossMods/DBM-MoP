@@ -129,14 +129,15 @@ Delayed by Charge version
 --]]
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
-	if spellId == 136741 then--Regular double swipe
+	if spellId == 136741 and self:AntiSpam(3, 5) then--Regular double swipe
 		specWarnDoubleSwipe:Show()
 		--The only flaw is charge is sometimes delayed by unexpected events like using an orb, we may fail to start timer once in a while when it DOES come before a charge.
 		if timerChargeCD:GetTime() < 32 then--Check if charge is less than 18 seconds away, if it is, double swipe is going to be delayed by quite a bit and we'll trigger timer after charge
 			timerDoubleSwipeCD:Start()
 		end
-	elseif spellId == 136770 then--Double swipe that follows a charge (136769)
+	elseif spellId == 136770 and self:AntiSpam(3, 5) then--Double swipe that follows a charge (136769)
 		specWarnDoubleSwipe:Show()
+		timerDoubleSwipeCD:Cancel()
 		timerDoubleSwipeCD:Start(11)--Hard coded failsafe. 136741 version is always 11 seconds after 136770 version
 	elseif spellId == 137458 then
 		direNumber = direNumber + 1
