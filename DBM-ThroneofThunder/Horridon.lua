@@ -137,7 +137,6 @@ function mod:SPELL_CAST_START(args)
 		end
 	elseif spellId == 136770 and self:AntiSpam(3, 5) then--Double swipe that follows a charge (136769)
 		specWarnDoubleSwipe:Show()
-		timerDoubleSwipeCD:Cancel()
 		timerDoubleSwipeCD:Start(11)--Hard coded failsafe. 136741 version is always 11 seconds after 136770 version
 	elseif spellId == 137458 then
 		direNumber = direNumber + 1
@@ -272,6 +271,7 @@ function mod:OnSync(msg, targetname)
 	if msg == "ChargeTo" and targetname and self:AntiSpam(5, 4) then
 		local target = DBM:GetUnitFullName(targetname)
 		if target then
+			timerDoubleSwipeCD:Cancel()
 			warnCharge:Show(target)
 			timerCharge:Start()
 			timerChargeCD:Start()
