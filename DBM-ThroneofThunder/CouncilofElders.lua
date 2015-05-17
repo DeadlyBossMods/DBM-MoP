@@ -49,7 +49,7 @@ local warnFrigidAssault				= mod:NewStackAnnounce(136903, 3, nil, "Tank|Healer")
 local warnRecklessCharge			= mod:NewCastAnnounce(137122, 3, 2, nil, false)
 
 --All
-local specWarnPossessed				= mod:NewSpecialWarning("OptionVersion2", "specWarnPossessed")
+local specWarnPossessed				= mod:NewSpecialWarning("specWarnPossessed", nil, nil, 2)
 local specWarnDarkPower				= mod:NewSpecialWarningSpell(136507, nil, nil, nil, 2)
 local specWarnSoulFragment			= mod:NewSpecialWarningYou(137641)
 --Sul the Sandcrawler

@@ -26,7 +26,7 @@ local warnShellConcussion			= mod:NewTargetAnnounce(136431, 1)
 local specWarnCallofTortos			= mod:NewSpecialWarningSpell(136294)
 local specWarnQuakeStomp			= mod:NewSpecialWarningCount(134920, nil, nil, nil, 2)
 local specWarnRockfall				= mod:NewSpecialWarningSpell(134476, false, nil, nil, 2)
-local specWarnStoneBreath			= mod:NewSpecialWarningInterrupt("OptionVersion2", 133939, nil, nil, nil, 3)
+local specWarnStoneBreath			= mod:NewSpecialWarningInterrupt(133939, nil, nil, 2, 3)
 local specWarnCrystalShell			= mod:NewSpecialWarning("specWarnCrystalShell", false)
 local specWarnSummonBats			= mod:NewSpecialWarningSwitch("ej7140", "Tank")--Dps can turn it on too, but not on by default for dps cause quite frankly dps should NOT switch right away, tank needs to get aggro first and where they spawn is semi random.
 
