@@ -50,11 +50,11 @@ local specWarnCrawlerMine				= mod:NewSpecialWarningSwitch("ej8212", "-Healer")
 local specWarnAssemblyLine				= mod:NewSpecialWarningCount("ej8202", false)--Not all in raid need, just those assigned
 local specWarnShockwaveMissile			= mod:NewSpecialWarningSpell(143641, nil, nil, nil, 2)
 local specWarnReadyToGo					= mod:NewSpecialWarningTarget(145580)
-local specWarnLaserFixate				= mod:NewSpecialWarningRun("OptionVersion2", 143828, nil, nil, nil, 4)
+local specWarnLaserFixate				= mod:NewSpecialWarningRun(143828, nil, nil, 2, 4)
 local yellLaserFixate					= mod:NewYell(143828)
 local specWarnSuperheated				= mod:NewSpecialWarningMove(143856)--From lasers. Hard to see, this warning will help a ton
 local specWarnMagneticCrush				= mod:NewSpecialWarningSpell(144466, nil, nil, nil, 2)
-local specWarnCrawlerMineFixate			= mod:NewSpecialWarningRun("OptionVersion2", "ej8212", "Melee", nil, nil, 4)
+local specWarnCrawlerMineFixate			= mod:NewSpecialWarningRun("ej8212", "Melee", nil, 2, 4)
 local yellCrawlerMineFixate				= mod:NewYell("ej8212", nil, false)
 
 --Siegecrafter Blackfuse

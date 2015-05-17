@@ -20,7 +20,7 @@ local warnFocusedLightning			= mod:NewTargetAnnounce(137399, 4)
 local warnStaticBurst				= mod:NewTargetAnnounce(137162, 3, nil, "Tank|Healer")
 local warnThrow						= mod:NewTargetAnnounce(137175, 2)
 
-local specWarnFocusedLightning		= mod:NewSpecialWarningRun("OptionVersion2", 137422, nil, nil, nil, 4)
+local specWarnFocusedLightning		= mod:NewSpecialWarningRun(137422, nil, nil, 2, 4)
 local yellFocusedLightning			= mod:NewYell(137422)
 local specWarnStaticBurst			= mod:NewSpecialWarningYou(137162)
 local specWarnStaticBurstOther		= mod:NewSpecialWarningTaunt(137162)

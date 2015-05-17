@@ -50,7 +50,7 @@ local specWarnOverchargedNear			= mod:NewSpecialWarningClose(136295)
 local specWarnBouncingBoltSoon			= mod:NewSpecialWarningPreWarn(136361, nil, 4)
 local specWarnBouncingBolt				= mod:NewSpecialWarningSpell(136361)
 --Phase 1
-local specWarnDecapitate				= mod:NewSpecialWarningRun("OptionVersion2", 134912, nil, nil, nil, 4)
+local specWarnDecapitate				= mod:NewSpecialWarningRun(134912, nil, nil, 2, 4)
 local specWarnDecapitateOther			= mod:NewSpecialWarningTaunt(134912)
 local specWarnThunderstruck				= mod:NewSpecialWarningCount(135095, nil, nil, nil, 2)
 local specWarnCrashingThunder			= mod:NewSpecialWarningMove(135150)

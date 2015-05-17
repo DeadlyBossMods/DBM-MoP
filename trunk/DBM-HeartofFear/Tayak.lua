@@ -29,8 +29,8 @@ local specWarnUnseenStrikeOther			= mod:NewSpecialWarningMoveTo(122949)--Everyon
 local yellUnseenStrike					= mod:NewYell(122949)
 local specWarnOverwhelmingAssault		= mod:NewSpecialWarningStack(123474, nil, 2)
 local specWarnOverwhelmingAssaultOther	= mod:NewSpecialWarningTaunt(123474)
-local specWarnBladeTempest				= mod:NewSpecialWarningRun("OptionVersion2", 125310, nil, nil, nil, 4)
-local specWarnStormUnleashed			= mod:NewSpecialWarningSpell(123814, nil, nil, nil, true)
+local specWarnBladeTempest				= mod:NewSpecialWarningRun(125310, nil, nil, 2, 4)
+local specWarnStormUnleashed			= mod:NewSpecialWarningSpell(123814, nil, nil, nil, 2)
 
 local timerTempestSlashCD				= mod:NewNextTimer(15.5, 125692)
 local timerOverwhelmingAssault			= mod:NewTargetTimer(45, 123474, nil, "Tank")

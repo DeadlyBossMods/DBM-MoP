@@ -20,7 +20,7 @@ local warnLightningTether			= mod:NewTargetAnnounce(136339, 3)
 local specWarnStormcloud			= mod:NewSpecialWarningYou(136340)
 local yellStormcloud				= mod:NewYell(136340)
 local specWarnLightningTether		= mod:NewSpecialWarningYou(136339)--Is this important enough?
-local specWarnArcNova				= mod:NewSpecialWarningRun("OptionVersion2", 136338, "Melee", nil, nil, 4)
+local specWarnArcNova				= mod:NewSpecialWarningRun(136338, "Melee", nil, 2, 4)
 
 local timerStormcloudCD				= mod:NewCDTimer(21.5, 136340)
 local timerLightningTetherCD		= mod:NewCDTimer(30.5, 136339)--Needs more data, they may have tweaked it some.

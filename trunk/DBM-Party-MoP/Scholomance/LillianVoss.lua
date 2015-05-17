@@ -27,7 +27,7 @@ local warnReanimateCorpse	= mod:NewSpellAnnounce(114262, 3)
 
 local specWarnDeathsGrasp	= mod:NewSpecialWarningSpell(111570, nil, nil, nil, 2)
 local specWarnDarkBlaze		= mod:NewSpecialWarningMove(111585)
-local specWarnFixateAnger	= mod:NewSpecialWarningRun("OptionVersion2", 115350, nil, nil, nil, 4)
+local specWarnFixateAnger	= mod:NewSpecialWarningRun(115350, nil, nil, 2, 4)
 
 local timerShadowShivCD		= mod:NewCDTimer(12.5, 111775)--every 12.5-15.5 sec
 local timerDeathsGraspCD	= mod:NewCDTimer(34, 111570)
