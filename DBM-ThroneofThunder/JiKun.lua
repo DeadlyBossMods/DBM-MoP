@@ -53,13 +53,13 @@ mod:AddDropdownOption("ShowNestArrows", {"Never", "Northeast", "Southeast", "Sou
 --As such, the options have to be coded special so that Southwest sends 10 man to upper middle and sends 25 to actual upper southwest (option text explains this difference)
 --West and Northwest are obviously nests that 10 man/LFR never see so the options won't do anything outside of 25 man (thus the 25 man only text)
 
-local flockCount = 0
-local quillsCount = 0
+mod.vb.flockCount = 0
+mod.vb.quillsCount = 0
 local flockName = EJ_GetSectionInfo(7348)
 
 function mod:OnCombatStart(delay)
-	flockCount = 0
-	quillsCount = 0
+	self.vb.flockCount = 0
+	self.vb.quillsCount = 0
 	timerTalonRakeCD:Start(24)
 	if self:IsDifficulty("normal10", "heroic10", "lfr25") then
 		timerQuillsCD:Start(60-delay, 1)
@@ -145,13 +145,13 @@ end
 
 function mod:UNIT_SPELLCAST_START(uId, _, _, _, spellId)
 	if spellId == 134380 then
-		quillsCount = quillsCount + 1
-		specWarnQuills:Show(quillsCount)
+		self.vb.quillsCount = self.vb.quillsCount + 1
+		specWarnQuills:Show(self.vb.quillsCount)
 		timerQuills:Start()
 		if self:IsDifficulty("normal10", "heroic10", "lfr25") then
-			timerQuillsCD:Start(81, quillsCount+1)--81 sec normal, sometimes 91s?
+			timerQuillsCD:Start(81, self.vb.quillsCount+1)--81 sec normal, sometimes 91s?
 		else
-			timerQuillsCD:Start(nil, quillsCount+1)
+			timerQuillsCD:Start(nil, self.vb.quillsCount+1)
 		end
 	elseif spellId == 134370 then
 		specWarnDowndraft:Show()
@@ -266,8 +266,9 @@ end
 
 function mod:CHAT_MSG_MONSTER_EMOTE(msg, _, _, _, target)
 	if msg:find(L.eggsHatch) and self:AntiSpam(5, 2) then
-		flockCount = flockCount + 1--Now flock set number instead of nest number (for LFR it's both)
-		local flockCountText = tostring(flockCount)
+		self.vb.flockCount = self.vb.flockCount + 1--Now flock set number instead of nest number (for LFR it's both)
+		local flockCount = self.vb.flockCount
+		local flockCountText = tostring(self.vb.flockCount)
 		local currentDirection, currentLocation = GetNestPositions(flockCount)
 		local nextDirection, _ = GetNestPositions(flockCount+1)--timer code will probably always stay the same, locations in timer is too much text for a timer.
 		if self:IsDifficulty("lfr25", "normal10", "heroic10") then
