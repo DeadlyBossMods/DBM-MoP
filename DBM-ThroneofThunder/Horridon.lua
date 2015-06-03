@@ -137,7 +137,7 @@ function mod:SPELL_CAST_START(args)
 		end
 	elseif spellId == 136770 and self:AntiSpam(3, 5) then--Double swipe that follows a charge (136769)
 		specWarnDoubleSwipe:Show()
-		timerDoubleSwipeCD:Start(11)--Hard coded failsafe. 136741 version is always 11 seconds after 136770 version
+		timerDoubleSwipeCD:Start(10.6)--Hard coded failsafe. 136741 version is always 11 seconds after 136770 version
 	elseif spellId == 137458 then
 		direNumber = direNumber + 1
 		specWarnDireCall:Show(direNumber)
