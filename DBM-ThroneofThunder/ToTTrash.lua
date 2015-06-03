@@ -34,7 +34,6 @@ local timerConductiveShield		= mod:NewTargetTimer(10, 140296)
 local timerConductiveShieldCD	= mod:NewCDSourceTimer(20, 140296)--On 25 man, it always 20, But 10 man, it variables.
 
 mod:RemoveOption("HealthFrame")
-mod:RemoveOption("SpeedKillTimer")
 mod:AddBoolOption("RangeFrame")
 
 local stormEnergyTargets = {}
