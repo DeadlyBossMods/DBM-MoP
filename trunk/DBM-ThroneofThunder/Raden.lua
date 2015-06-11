@@ -12,8 +12,10 @@ mod:RegisterCombat("combat")
 mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 138338 138339 138321",
 	"SPELL_CAST_SUCCESS 138333 138334",
-	"SPELL_AURA_APPLIED 138331 138332 139318 138372 138288 138297 138308",
-	"SPELL_AURA_REMOVED 138297 138308",
+	"SPELL_AURA_APPLIED 138331 138332 139318 138372 138288 138297 138308 138295",
+	"SPELL_AURA_REMOVED 138297 138308 138288 138295",
+	"SPELL_DAMAGE 138296",
+	"SPELL_MISSED 138296",
 	"UNIT_SPELLCAST_SUCCEEDED boss1",
 	"UNIT_POWER_FREQUENT boss1",
 	"CHAT_MSG_MONSTER_YELL"
@@ -22,7 +24,7 @@ mod.onlyHeroic = true
 
 --Anima
 local warnAnima					= mod:NewSpellAnnounce(138331, 2)--Switched to anima phase
-local warnUnstableAnima			= mod:NewTargetAnnounce(138288)--May range frame needed. 138295 is damage id according to wowhead, 138288 is debuff cast.
+local warnUnstableAnima			= mod:NewTargetAnnounce(138288)--May range frame needed. 138295/138296 is damage ids, 138288 is debuff cast.
 local warnSanguineHorror		= mod:NewCountAnnounce(138338, 3, nil, "-Healer")--Adds
 --Vita
 local warnVita					= mod:NewSpellAnnounce(138332, 2)--Switched to vita phase
@@ -49,7 +51,8 @@ local specWarnCallEssence		= mod:NewSpecialWarningSpell(139040, "-Healer")
 
 --Anima
 local timerMurderousStrikeCD	= mod:NewCDTimer(33, 138333, nil, "Tank")--Gains 3 power per second roughly and uses special at 100 Poewr
---local timerSanguineHorrorCD	= mod:NewCDCountTimer(41, 138338)--CD not known. No one fights him in anima phase for more than like 1-2 seconds.
+local timerSanguineHorrorCD		= mod:NewCDCountTimer(41, 138338)--CD not known. No one fights him in anima phase for more than like 1-2 seconds.
+local timerAnimaExplosion		= mod:NewNextTimer(15, 138295)
 --Vita
 local timerFatalStrikeCD		= mod:NewCDTimer(10, 138334, nil, "Tank")--Gains 10 power per second roughly and uses special at 100 Poewr
 local timerUnstableVita			= mod:NewTargetTimer(12, 138297)
@@ -58,8 +61,11 @@ local timerCracklingStalkerCD	= mod:NewCDCountTimer(41, 138339)
 local timerCreationCD			= mod:NewCDCountTimer(32.5, 138321)--32.5-35second variation
 local timerCallEssenceCD		= mod:NewNextTimer(15.5, 139040)
 
-local countdownUnstableVita		= mod:NewCountdownFades(11, 138297)
+local countdownUnstableVita		= mod:NewCountdownFades("Alt11", 138297)
+local countdownAnimaExplosion	= mod:NewCountdownFades("Alt15", 138296)
 local countdownCreation			= mod:NewCountdown(32.5, 138321, nil, nil, nil, nil, true)
+local countdownMurderousStrike	= mod:NewCountdown("AltTwo33", 138333, "Tank")
+local countdownFatalStrike		= mod:NewCountdown("AltTwo10", 138334, "Tank")
 
 mod:AddBoolOption("SetIconsOnVita", false)--Both the vita target and furthest from vita target
 
@@ -73,6 +79,7 @@ local lastfurthestDistancePlayer = nil
 local playerName = UnitName("player")
 local vitaName = GetSpellInfo(138332)
 local animaName = GetSpellInfo(138331)
+local animaDebuff = GetSpellInfo(138288)
 
 function mod:checkVitaDistance()
 	if not playerWithVita then--Failsafe more or less. This shouldn't happen unless combat log lag fires events out of order
@@ -108,8 +115,11 @@ function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
 	if spellId == 138338 then
 		horrorCount = horrorCount + 1
-		warnSanguineHorror:Show(horrorCount)
-		specWarnSanguineHorror:Show()
+		if self.Options.SpecWarn138338switch then
+			specWarnSanguineHorror:Show()
+		else
+			warnSanguineHorror:Show(horrorCount)
+		end
 --		timerSanguineHorrorCD:Start(nil, horrorCount+1)
 	elseif spellId == 138339 then
 		lastStalker = GetTime()
@@ -128,8 +138,10 @@ function mod:SPELL_CAST_SUCCESS(args)
 	local spellId = args.spellId
 	if spellId == 138333 then
 		timerMurderousStrikeCD:Start()
+		countdownMurderousStrike:Start()
 	elseif spellId == 138334 then
 		timerFatalStrikeCD:Start()
+		countdownFatalStrike:Start()
 	end
 end
 
@@ -140,9 +152,11 @@ function mod:SPELL_AURA_APPLIED(args)
 		radenPower = radenPower / 3
 		horrorCount = 0
 		timerFatalStrikeCD:Cancel()
+		countdownFatalStrike:Cancel()
 		timerCracklingStalkerCD:Cancel()
 		timerMurderousStrikeCD:Start(33-radenPower)
-		--timerSanguineHorrorCD:Start(nil, 1)
+		countdownMurderousStrike:Start(33-radenPower)
+		timerSanguineHorrorCD:Start(8, 1)
 		warnAnima:Show()
 	elseif spellId == 138332 then--Vita Phase
 		local radenPower = UnitPower("boss1")
@@ -156,9 +170,11 @@ function mod:SPELL_AURA_APPLIED(args)
 		stalkerCount = 0
 		warnVita:Show()
 		timerMurderousStrikeCD:Cancel()
-		--timerSanguineHorrorCD:Cancel()
+		countdownMurderousStrike:Cancel()
+		timerSanguineHorrorCD:Cancel()
 		timerCracklingStalkerCD:Start(stalkerupdate, 1)
 		timerFatalStrikeCD:Start(10-radenPower)
+		countdownFatalStrike:Start(10-radenPower)
 	elseif spellId == 139318 then--Anima Sensitivity
 		if args:IsPlayer() then
 			specWarnAninaSensitive:Show()
@@ -167,11 +183,18 @@ function mod:SPELL_AURA_APPLIED(args)
 		if args:IsPlayer() then
 			specWarnVitaSensitive:Show()
 		end
-	elseif spellId == 138288 then--Unstable Anima
+	elseif spellId == 138288 or spellId == 138295 then--Unstable Anima
 		warnUnstableAnima:Show(args.destName)
 		if args:IsPlayer() then
 			specWarnUnstableAnima:Show()
 			yellUnstableAnima:Yell()
+			if spellId == 138295 then--10 seconds
+				timerAnimaExplosion:Start(10)
+				countdownAnimaExplosion:Start(10)
+			else--15
+				timerAnimaExplosion:Start(15)
+				countdownAnimaExplosion:Start(15)
+			end
 		end
 	elseif args:IsSpellID(138297, 138308) then--Unstable Vita (138297 cast, 138308 jump)
 		if self.Options.SetIconsOnVita then
@@ -202,11 +225,6 @@ function mod:SPELL_AURA_APPLIED(args)
 	end
 end
 
---[[
-"<19.8 01:50:11> [CLEU] SPELL_AURA_APPLIED#false#0xF1310F61000091B6#Ra-den#2632#0#0x0300000007B5931A#Takeaseat#1297#0#138297#Unstable Vita#8#DEBUFF", -- [2245]
-"<31.8 01:50:23> [CLEU] SPELL_AURA_REMOVED#false#0xF1310F61000091B6#Ra-den#68168#0#0x0300000007B5931A#Takeaseat#1297#0#138297#Unstable Vita#8#DEBUFF", -- [3753]--SPELL_AURA_REMOVED should fire before jump
-"<31.9 01:50:23> [CLEU] SPELL_AURA_APPLIED#false#0x0300000007B5931A#Takeaseat#1297#0#0x0300000007764949#Ryukou#1300#0#138308#Unstable Vita#8#DEBUFF", -- [3769]--Code may break if it doesn't but i've seen no indicatino this should happen
---]]
 function mod:SPELL_AURA_REMOVED(args)
 	local spellId = args.spellId
 	if args:IsSpellID(138297, 138308) and self.Options.SetIconsOnVita then--Unstable Vita
@@ -214,11 +232,20 @@ function mod:SPELL_AURA_REMOVED(args)
 		playerWithVita = nil
 		self:SetIcon(args.destName, 0)
 		SetRaidTarget(furthestDistancePlayer, 0)--Use SetRaidTarget because seticon expects targetname, no point in changing it twice for no reason
+	elseif spellId == 138288 or spellId == 138295 then
+		timerAnimaExplosion:Cancel()
+		countdownAnimaExplosion:Cancel()
 	end
 end
 
---"<299.6 01:54:51> CHAT_MSG_MONSTER_YELL#You still think victory possible? Fools!#Ra-den#####0#0##0#298#nil#0#false#false",
---"<299.9 01:54:51> [UNIT_SPELLCAST_SUCCEEDED] Ra-den [boss1:Ruin::0:139073]
+function mod:SPELL_DAMAGE(_, sourceName, _, _, destGUID, destName, _, _, spellId, spellName)
+	if spellId == 138296 and self:AntiSpam(5, 4) and sourceName == UnitName("player") then--Solo Soak
+		timerAnimaExplosion:Start(15)
+		countdownAnimaExplosion:Start(15)
+	end
+end
+mod.SPELL_MISSED = mod.SPELL_DAMAGE
+
 function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
 	if spellId == 139040 then--Call Essence
 		specWarnCallEssence:Show()
@@ -227,9 +254,11 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
 	elseif spellId == 139073 then--Phase 2 (the Ruin Trigger)
 		warnPhase2:Show()
 		timerCracklingStalkerCD:Cancel()
---		timerSanguineHorrorCD:Cancel()
+		timerSanguineHorrorCD:Cancel()
 		timerMurderousStrikeCD:Cancel()
+		countdownMurderousStrike:Cancel()
 		timerFatalStrikeCD:Cancel()
+		countdownFatalStrike:Cancel()
 		timerCreationCD:Cancel()
 		countdownCreation:Cancel()
 		timerCallEssenceCD:Start()
@@ -238,9 +267,9 @@ end
 
 function mod:UNIT_POWER_FREQUENT(uId)
 	local power = UnitPower(uId)
-	if power == 80 and UnitBuff(uId, vitaName) and self:AntiSpam(3, 1) then
+	if power >= 80 and UnitBuff(uId, vitaName) and self:AntiSpam(4, 1) then
 		specWarnFatalStrike:Show()
-	elseif power == 95 and UnitBuff(uId, animaName) and self:AntiSpam(3, 2) then
+	elseif power >= 93 and UnitBuff(uId, animaName) and self:AntiSpam(10, 2) then
 		specWarnMurderousStrike:Show()
 	end
 end
