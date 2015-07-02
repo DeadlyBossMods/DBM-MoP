@@ -58,11 +58,11 @@ local specWarnDireFixate		= mod:NewSpecialWarningRun(140946, nil, nil, nil, 4)--
 
 local timerDoor					= mod:NewTimer(113.5, "timerDoor", 2457)
 local timerAdds					= mod:NewTimer(18.91, "timerAdds", 43712)
-local timerDinoCD				= mod:NewNextTimer(18.9, "ej7086", nil, nil, nil, 137237)
+local timerDinoCD				= mod:NewNextTimer(18.9, "ej7086", nil, nil, nil, nil, 137237)
 local timerCharge				= mod:NewCastTimer(3.4, 136769)
 local timerChargeCD				= mod:NewCDTimer(50, 136769)--50-60 second depending on i he's casting other stuff or stunned
 local timerDoubleSwipeCD		= mod:NewCDTimer(16.5, 136741)--16.5 second cd unless delayed by a charge triggered double swipe, then it's extended by failsafe code
-local timerPuncture				= mod:NewTargetTimer("OptionVersion2", 90, 136767, nil, false)
+local timerPuncture				= mod:NewTargetTimer(90, 136767, nil, false, 2)
 local timerPunctureCD			= mod:NewCDTimer(10.5, 136767, nil, "Tank|Healer")
 local timerJalakCD				= mod:NewNextTimer(10, "ej7087", nil, nil, nil, 2457)--Maybe it's time for a better worded spawn timer than "Next mobname". Maybe NewSpawnTimer with "mobname activates" or something.
 local timerBestialCryCD			= mod:NewNextCountTimer(10, 136817)

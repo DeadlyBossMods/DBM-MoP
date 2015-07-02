@@ -63,12 +63,12 @@ local timerElectroStaticCharge			= mod:NewTargetTimer(60, 143385, nil, "Tank")
 local timerElectroStaticChargeCD		= mod:NewCDTimer(17, 143385, nil, "Tank")--17-22 second variation
 local timerLaunchSawbladeCD				= mod:NewCDTimer(10, 143265)--10-15sec cd
 --Automated Shredders
-local timerAutomatedShredderCD			= mod:NewNextTimer(60, "ej8199", nil, "Tank", nil, 85914)
+local timerAutomatedShredderCD			= mod:NewNextTimer(60, "ej8199", nil, "Tank", nil, nil, 85914)
 local timerOverloadCD					= mod:NewCDCountTimer(10, 145444)
 local timerDeathFromAboveDebuff			= mod:NewTargetTimer(5, 144210, nil, "-Healer")
 local timerDeathFromAboveCD				= mod:NewNextTimer(40, 144208, nil, "-Healer")
 --The Assembly Line
-local timerAssemblyLineCD				= mod:NewNextCountTimer(40, "ej8202", nil, "Dps", nil, 59193)
+local timerAssemblyLineCD				= mod:NewNextCountTimer(40, "ej8202", nil, "Dps", nil, nil, 59193)
 local timerPatternRecognition			= mod:NewBuffFadesTimer(60, 144236, nil, false)
 local timerLaserFixate					= mod:NewBuffFadesTimer(15, 143828)
 local timerBreakinPeriod				= mod:NewTargetTimer(60, 145269, nil, false)--Many mines can be up at once so timer off by default do to spam
