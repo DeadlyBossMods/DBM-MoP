@@ -21,7 +21,7 @@ local warnImpalingStrike	= mod:NewTargetAnnounce(107047, 3)
 local warnPreyTime			= mod:NewTargetAnnounce(106933, 3, nil, "Healer")
 local warnStrafingRun		= mod:NewSpellAnnounce("ej5660", 4)
 
-local specWarnStafingRun	= mod:NewSpecialWarningSpell("ej5660", nil, nil, nil, true)
+local specWarnStafingRun	= mod:NewSpecialWarningSpell("ej5660", nil, nil, nil, 2)
 local specWarnStafingRunAoe	= mod:NewSpecialWarningMove(116297)
 local specWarnAcidBomb		= mod:NewSpecialWarningMove(115458)
 

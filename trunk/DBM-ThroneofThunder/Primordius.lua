@@ -44,7 +44,7 @@ local timerPrimordialStrikeCD		= mod:NewCDTimer(24, 136037)
 local timerCausticGasCD				= mod:NewCDTimer(14, 136216)
 local timerVolatilePathogenCD		= mod:NewCDTimer(27, 136228)--Too cute blizzard, too cute. (those who get the 28 reference for pathogen get an A+)
 local timerBlackBlood				= mod:NewTargetTimer(60, 137000, nil, "Tank|Healer")
-local timerViscousHorrorCD			= mod:NewNextCountTimer(30, "ej6969", nil, nil, nil, 137000)
+local timerViscousHorrorCD			= mod:NewNextCountTimer(30, "ej6969", nil, nil, nil, nil, 137000)
 
 local berserkTimer					= mod:NewBerserkTimer(480)
 

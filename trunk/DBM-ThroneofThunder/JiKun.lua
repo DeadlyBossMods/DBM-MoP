@@ -40,11 +40,11 @@ local timerQuillsCD			= mod:NewCDCountTimer(62.5, 134380)--variable because he h
 local timerFlockCD	 		= mod:NewTimer(30, "timerFlockCD", 15746)
 local timerFeedYoungCD	 	= mod:NewCDTimer(29.8, 137528)--30-40 seconds (always 30 unless delayed by other channeled spells)
 local timerTalonRakeCD		= mod:NewCDTimer(20, 134366, nil, "Tank|Healer")--20-30 second variation
-local timerTalonRake		= mod:NewTargetTimer("OptionVersion2", 60, 134366, nil, false)
+local timerTalonRake		= mod:NewTargetTimer(60, 134366, nil, false, 2)
 local timerDowndraft		= mod:NewBuffActiveTimer(10, 134370)
 local timerDowndraftCD		= mod:NewCDTimer(97, 134370)
 local timerFlight			= mod:NewBuffFadesTimer(10, 133755)
-local timerPrimalNutriment	= mod:NewBuffFadesTimer("OptionVersion2", 30, 140741, nil, false)
+local timerPrimalNutriment	= mod:NewBuffFadesTimer(30, 140741, nil, false, 2)
 local timerLessons			= mod:NewBuffFadesTimer(60, 140571, nil, false)
 
 mod:AddBoolOption("RangeFrame", "Ranged")

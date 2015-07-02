@@ -63,8 +63,8 @@ local timerLifeDrainCD				= mod:NewCDTimer(40, 133795)
 local timerLifeDrain				= mod:NewBuffActiveTimer(18, 133795)
 local timerIceWallCD				= mod:NewNextTimer(120, 134587, nil, nil, nil, 111231)
 local timerDarkParasiteCD			= mod:NewCDTimer(60.5, 133597, nil, "Healer")--Heroic 60-62. (the timer is tricky and looks far more variable but it really isn't, it just doesn't get to utilize it's true cd timer more than twice per fight)
-local timerDarkParasite				= mod:NewTargetTimer("OptionVersion2", 30, 133597, nil, false)--Spammy bar in 25 man not useful.
-local timerDarkPlague				= mod:NewTargetTimer("OptionVersion2", 30, 133598, nil, false)--Spammy bar in 25 man not useful.
+local timerDarkParasite				= mod:NewTargetTimer(30, 133597, nil, false, 2)--Spammy bar in 25 man not useful.
+local timerDarkPlague				= mod:NewTargetTimer(30, 133598, nil, false, 2)--Spammy bar in 25 man not useful.
 local timerObliterateCD				= mod:NewNextTimer(80, 137747)--Heroic
 
 local countdownLightSpectrum		= mod:NewCountdown(60, "ej6891")
