@@ -28,7 +28,7 @@
 ## X-DBM-Mod-Name-frFR: Groupe (MoP)
 ## X-DBM-Mod-Sort: 225
 ## X-DBM-Mod-MapID: 960,961,959,962,994,1011,1007,1001,1004
-## X-DBM-Mod-MinCoreRevision: 12473
+## X-DBM-Mod-MinCoreRevision: 14002
 localization.en.lua
 localization.de.lua
 localization.es.lua
