@@ -85,7 +85,7 @@ local timerFarseerWolfRiderCD		= mod:NewNextTimer(50, "ej8294", nil, nil, nil, n
 local timerSiegeEngineerCD			= mod:NewNextTimer(40, "ej8298", nil, nil, nil, nil, 144616)
 local timerPowerIronStar			= mod:NewCastTimer(16.5, 144616)
 --Intermission: Realm of Y'Shaarj
-local timerEnterRealm				= mod:NewNextTimer(145.5, 144866, nil, nil, nil, 144945)
+local timerEnterRealm				= mod:NewNextTimer(145.5, 144866, nil, nil, nil, nil, 144945)
 local timerRealm					= mod:NewBuffActiveTimer(60.5, "ej8305", nil, nil, nil, nil, 144945)--May be too long, but intermission makes more sense than protection buff which actually fades before intermission ends if you do it right.
 --Stage Two: Power of Y'Shaarj
 local timerWhirlingCorruptionCD		= mod:NewCDCountTimer(49.5, 144985)--One bar for both, "empowered" makes timer too long
@@ -94,7 +94,7 @@ local timerTouchOfYShaarjCD			= mod:NewCDCountTimer(45, 145071)
 local timerGrippingDespair			= mod:NewTargetTimer(15, 145183, nil, "Tank")
 --Starge Three: MY WORLD
 --Starge Four: Heroic Hidden Phase
-local timerEnterGarroshRealm		= mod:NewNextTimer(20, 146984, nil, nil, nil, 144945)
+local timerEnterGarroshRealm		= mod:NewNextTimer(20, 146984, nil, nil, nil, nil, 144945)
 local timerMaliceCD					= mod:NewNextTimer(29.5, 147209)--29.5-33sec variation
 local timerBombardmentCD			= mod:NewNextTimer(55, 147120)
 local timerBombardment				= mod:NewBuffActiveTimer(13, 147120)

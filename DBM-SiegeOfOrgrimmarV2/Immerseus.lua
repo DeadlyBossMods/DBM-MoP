@@ -36,7 +36,7 @@ local timerSwirl						= mod:NewBuffActiveTimer(13, 143309)
 local timerSwirlCD						= mod:NewCDTimer(48.5, 143309)
 local timerShaResidue					= mod:NewBuffFadesTimer(10, 143459, nil, false)
 local timerPurifiedResidue				= mod:NewBuffFadesTimer(15, 143524, nil, false)
-local timerSwellingCorruptionCD			= mod:NewCDTimer(75, 143578, nil, nil, nil, 143574)
+local timerSwellingCorruptionCD			= mod:NewCDTimer(75, 143578, nil, nil, nil, nil, 143574)
 
 local berserkTimer						= mod:NewBerserkTimer(605)
 
