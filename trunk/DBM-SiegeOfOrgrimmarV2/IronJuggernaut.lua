@@ -54,7 +54,7 @@ local timerIgniteArmorCD		= mod:NewCDTimer(10, 144467, nil, "Tank")
 local timerLaserBurnCD			= mod:NewCDTimer(11.5, 144459, nil, false)--Also off by default(bar spam)
 local timerBorerDrillCD			= mod:NewCDTimer(17, 144218)
 local timerCrawlerMineCD		= mod:NewCDTimer(30, 144673)
-local timerRicochetCD			= mod:NewCDTimer(15, 144356, nil, nil, nil, 144327)
+local timerRicochetCD			= mod:NewCDTimer(15, 144356, nil, nil, nil, nil, 144327)
 --Siege Mode
 local timerSiegeModeCD			= mod:NewNextTimer(114, 84974, nil, nil, "timerSiegeModeCD")--Wish spell name was a litlte shorter but still better than localizing
 local timerCutterLaser			= mod:NewBuffFadesTimer(10, 146325)--Spell tooltip says 15 but combat log showed 10

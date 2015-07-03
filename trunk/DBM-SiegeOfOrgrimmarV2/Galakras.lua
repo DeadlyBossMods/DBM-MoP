@@ -76,7 +76,7 @@ local timerAddsCD					= mod:NewNextCountTimer(55, "ej8553", nil, nil, nil, nil, 
 local timerProtoCD					= mod:NewNextCountTimer(55, "ej8587", nil, nil, nil, nil, 59961)
 local timerTowerCD					= mod:NewTimer(99, "timerTowerCD", 88852)
 local timerTowerGruntCD				= mod:NewTimer(60, "timerTowerGruntCD", 89253)
-local timerDemolisherCD				= mod:NewNextTimer(20, "ej8562", nil, nil, nil, 116040)--EJ is just not complete yet, shouldn't need localizing
+local timerDemolisherCD				= mod:NewNextTimer(20, "ej8562", nil, nil, nil, nil, 116040)--EJ is just not complete yet, shouldn't need localizing
 ----High Enforcer Thranok (Road)
 local timerShatteringCleaveCD		= mod:NewCDTimer(7.5, 146849, nil, "Tank")
 local timerCrushersCallCD			= mod:NewCDTimer(30, 146769)

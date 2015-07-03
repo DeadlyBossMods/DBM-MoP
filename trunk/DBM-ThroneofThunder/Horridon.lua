@@ -64,7 +64,7 @@ local timerChargeCD				= mod:NewCDTimer(50, 136769)--50-60 second depending on i
 local timerDoubleSwipeCD		= mod:NewCDTimer(16.5, 136741)--16.5 second cd unless delayed by a charge triggered double swipe, then it's extended by failsafe code
 local timerPuncture				= mod:NewTargetTimer(90, 136767, nil, false, 2)
 local timerPunctureCD			= mod:NewCDTimer(10.5, 136767, nil, "Tank|Healer")
-local timerJalakCD				= mod:NewNextTimer(10, "ej7087", nil, nil, nil, 2457)--Maybe it's time for a better worded spawn timer than "Next mobname". Maybe NewSpawnTimer with "mobname activates" or something.
+local timerJalakCD				= mod:NewNextTimer(10, "ej7087", nil, nil, nil, nil, 2457)--Maybe it's time for a better worded spawn timer than "Next mobname". Maybe NewSpawnTimer with "mobname activates" or something.
 local timerBestialCryCD			= mod:NewNextCountTimer(10, 136817)
 local timerDireCallCD			= mod:NewCDCountTimer(62, 137458)--Heroic (every 62-70 seconds)
 
