@@ -56,17 +56,17 @@ local specWarnRampage			= mod:NewSpecialWarningTarget(136821, "Tank|Healer")--Do
 local specWarnDireCall			= mod:NewSpecialWarningCount(137458, nil, nil, nil, 2)--Heroic
 local specWarnDireFixate		= mod:NewSpecialWarningRun(140946, nil, nil, nil, 4)--Heroic
 
-local timerDoor					= mod:NewTimer(113.5, "timerDoor", 2457)
-local timerAdds					= mod:NewTimer(18.91, "timerAdds", 43712)
-local timerDinoCD				= mod:NewNextTimer(18.9, "ej7086", nil, nil, nil, nil, 137237)
+local timerDoor					= mod:NewTimer(113.5, "timerDoor", 2457, nil, nil, 6)
+local timerAdds					= mod:NewTimer(18.91, "timerAdds", 43712, nil, nil, 1)
+local timerDinoCD				= mod:NewNextTimer(18.9, "ej7086", nil, nil, nil, 1, 137237)
 local timerCharge				= mod:NewCastTimer(3.4, 136769)
-local timerChargeCD				= mod:NewCDTimer(50, 136769)--50-60 second depending on i he's casting other stuff or stunned
+local timerChargeCD				= mod:NewCDTimer(50, 136769, nil, nil, nil, 3)--50-60 second depending on i he's casting other stuff or stunned
 local timerDoubleSwipeCD		= mod:NewCDTimer(16.5, 136741)--16.5 second cd unless delayed by a charge triggered double swipe, then it's extended by failsafe code
 local timerPuncture				= mod:NewTargetTimer(90, 136767, nil, false, 2)
-local timerPunctureCD			= mod:NewCDTimer(10.5, 136767, nil, "Tank|Healer")
-local timerJalakCD				= mod:NewNextTimer(10, "ej7087", nil, nil, nil, nil, 2457)--Maybe it's time for a better worded spawn timer than "Next mobname". Maybe NewSpawnTimer with "mobname activates" or something.
-local timerBestialCryCD			= mod:NewNextCountTimer(10, 136817)
-local timerDireCallCD			= mod:NewCDCountTimer(62, 137458)--Heroic (every 62-70 seconds)
+local timerPunctureCD			= mod:NewCDTimer(10.5, 136767, nil, "Tank|Healer", nil, 5)
+local timerJalakCD				= mod:NewNextTimer(10, "ej7087", nil, nil, nil, 1, 2457)--Maybe it's time for a better worded spawn timer than "Next mobname". Maybe NewSpawnTimer with "mobname activates" or something.
+local timerBestialCryCD			= mod:NewNextCountTimer(10, 136817, nil, nil, nil, 2)
+local timerDireCallCD			= mod:NewCDCountTimer(62, 137458, nil, nil, nil, 2)--Heroic (every 62-70 seconds)
 
 local berserkTimer				= mod:NewBerserkTimer(720)
 

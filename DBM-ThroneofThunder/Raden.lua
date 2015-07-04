@@ -50,13 +50,13 @@ local specWarnCreation			= mod:NewSpecialWarningCount(138321, "-Healer")
 local specWarnCallEssence		= mod:NewSpecialWarningSpell(139040, "-Healer")
 
 --Anima
-local timerMurderousStrikeCD	= mod:NewCDTimer(33, 138333, nil, "Tank")--Gains 3 power per second roughly and uses special at 100 Poewr
-local timerSanguineHorrorCD		= mod:NewCDCountTimer(41, 138338)--CD not known. No one fights him in anima phase for more than like 1-2 seconds.
-local timerAnimaExplosion		= mod:NewNextTimer(15, 138295)
+local timerMurderousStrikeCD	= mod:NewCDTimer(33, 138333, nil, "Tank", nil, 5)--Gains 3 power per second roughly and uses special at 100 Poewr
+local timerSanguineHorrorCD		= mod:NewCDCountTimer(41, 138338, nil, nil, nil, 1)--CD not known. No one fights him in anima phase for more than like 1-2 seconds.
+local timerAnimaExplosion		= mod:NewNextTimer(15, 138295, nil, nil, nil, 3)
 --Vita
-local timerFatalStrikeCD		= mod:NewCDTimer(10, 138334, nil, "Tank")--Gains 10 power per second roughly and uses special at 100 Poewr
-local timerUnstableVita			= mod:NewTargetTimer(12, 138297)
-local timerCracklingStalkerCD	= mod:NewCDCountTimer(41, 138339)
+local timerFatalStrikeCD		= mod:NewCDTimer(10, 138334, nil, "Tank", nil, 5)--Gains 10 power per second roughly and uses special at 100 Poewr
+local timerUnstableVita			= mod:NewTargetTimer(12, 138297, nil, nil, nil, 3)
+local timerCracklingStalkerCD	= mod:NewCDCountTimer(41, 138339, nil, nil, nil, 1)
 --General
 local timerCreationCD			= mod:NewCDCountTimer(32.5, 138321)--32.5-35second variation
 local timerCallEssenceCD		= mod:NewNextTimer(15.5, 139040)
