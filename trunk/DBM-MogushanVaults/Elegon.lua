@@ -33,12 +33,12 @@ local specWarnDrawPower				= mod:NewSpecialWarningCount(119387)
 local specWarnDespawnFloor			= mod:NewSpecialWarning("specWarnDespawnFloor", nil, nil, nil, 3)
 local specWarnRadiatingEnergies		= mod:NewSpecialWarningSpell(118310, nil, nil, nil, 2)
 
-local timerBreathCD					= mod:NewCDTimer(18, 117960)
-local timerProtectorCD				= mod:NewCDTimer(41, 117954)
-local timerArcingEnergyCD			= mod:NewCDTimer(11.5, 117945)
+local timerBreathCD					= mod:NewCDTimer(18, 117960, nil, "Tank", 2, 5)
+local timerProtectorCD				= mod:NewCDTimer(41, 117954, nil, nil, nil, 1)
+local timerArcingEnergyCD			= mod:NewCDTimer(11.5, 117945, nil, nil, nil, 3)
 local timerTotalAnnihilation		= mod:NewCastTimer(4, 129711)
 local timerDestabilized				= mod:NewBuffFadesTimer(120, 132226)
-local timerFocusPower				= mod:NewCastTimer(16, 119358)
+local timerFocusPower				= mod:NewCastTimer(16, 119358, nil, nil, nil, 6)
 local timerDespawnFloor				= mod:NewTimer(6.5, "timerDespawnFloor", 116994)--6.5-7.5 variation. 6.5 is safed to use so you don't fall and die.
 
 local berserkTimer					= mod:NewBerserkTimer(570)
