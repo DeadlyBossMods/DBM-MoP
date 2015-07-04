@@ -98,6 +98,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif spellId == 119387 then -- do not add other spellids.
 		powerCount = powerCount + 1
 		specWarnDrawPower:Show(powerCount)
+		timerFocusPower:Cancel()
 	elseif spellId == 118310 then--Below 50% health
 		specWarnRadiatingEnergies:Show()--Give a good warning so people standing outside barrior don't die.
 	elseif spellId == 132226 and args:IsPlayer() then
