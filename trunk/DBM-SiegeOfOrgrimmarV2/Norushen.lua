@@ -7,7 +7,7 @@ mod:SetCreatureID(72276)
 mod:SetZone()
 
 mod:RegisterCombat("combat")
-mod:SetMinSyncTime(1)
+mod.syncThreshold = 1
 
 mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 145216 144482 144654 144628 144649 144657 146707",
