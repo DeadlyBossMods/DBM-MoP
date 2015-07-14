@@ -29,7 +29,7 @@ local specWarnChiBarrage			= mod:NewSpecialWarningSpell(144642, nil, nil, nil, 2
 
 local timerSpectralSwipe			= mod:NewTargetTimer(60, 144638, nil, "Tank|Healer")
 local timerSpectralSwipeCD			= mod:NewCDTimer(12, 144638)
---local timerAgilityCD				= mod:NewCDTimer(25, 144631)
+--local timerAgilityCD				= mod:NewCDTimer(25, 144631, nil, nil, nil, 5)
 local timerCracklingLightning		= mod:NewBuffActiveTimer(13, 144635)
 local timerCracklingLightningCD		= mod:NewCDTimer(47, 144635)
 local timerChiBarrageCD				= mod:NewCDTimer(20, 144642)
