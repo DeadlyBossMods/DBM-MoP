@@ -20,8 +20,9 @@ local specwarnHorrificVisage	= mod:NewSpecialWarningSpell(138040, nil, nil, nil,
 local specwarnHorrificVisageInt	= mod:NewSpecialWarningInterrupt(138040)
 local specwarnThunderCrush		= mod:NewSpecialWarningMove(138044)
 local specwarnVengefulSpirit	= mod:NewSpecialWarningRun(138043, "-Tank")--Assume a tank is just going to tank it
-local timerThunderCrushCD		= mod:NewCDTimer(7, 138044)
-local timerHorrificVisageCD		= mod:NewCDTimer(7, 138040)
+
+local timerThunderCrushCD		= mod:NewCDTimer(7, 138044, nil, nil, nil, 3)
+local timerHorrificVisageCD		= mod:NewCDTimer(7, 138040, nil, nil, nil, 4)
 
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId

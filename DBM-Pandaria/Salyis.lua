@@ -19,10 +19,10 @@ local specWarnCannonBarrage		= mod:NewSpecialWarningSpell(121600, "Tank")
 local specWarnStomp				= mod:NewSpecialWarningSpell(121787, nil, nil, nil, 2)
 local specWarnWarmonger			= mod:NewSpecialWarningSwitch("ej6200", "-Healer")
 
-local timerCannonBarrageCD		= mod:NewNextTimer(60, 121600)
-local timerStompCD				= mod:NewNextTimer(60, 121787)
+local timerCannonBarrageCD		= mod:NewNextTimer(60, 121600, nil, "Tank", 2, 5)
+local timerStompCD				= mod:NewNextTimer(60, 121787, nil, nil, nil, 2)
 local timerStomp				= mod:NewCastTimer(3, 121787)
-local timerWarmongerCD			= mod:NewNextTimer(10, "ej6200", nil, nil, nil, nil, 121747)--Comes after Stomp. (Also every 60 sec.)
+local timerWarmongerCD			= mod:NewNextTimer(10, "ej6200", nil, nil, nil, 1, 121747)--Comes after Stomp. (Also every 60 sec.)
 
 local berserkTimer				= mod:NewBerserkTimer(900)
 
