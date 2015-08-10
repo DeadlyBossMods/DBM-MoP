@@ -31,12 +31,12 @@ local specWarnSwirl						= mod:NewSpecialWarningSpell(143309, nil, nil, nil, 2)
 local specWarnSwellingCorruptionTarget	= mod:NewSpecialWarningTarget(143578, false)
 local specWarnSwellingCorruptionFades	= mod:NewSpecialWarningFades(143578, false)
 
-local timerBreathCD						= mod:NewCDTimer(35, 143436, nil, "Tank|Healer")--35-65 second variation wtf?
+local timerBreathCD						= mod:NewCDTimer(35, 143436, nil, "Tank|Healer", nil, 5)--35-65 second variation wtf?
 local timerSwirl						= mod:NewBuffActiveTimer(13, 143309)
-local timerSwirlCD						= mod:NewCDTimer(48.5, 143309)
+local timerSwirlCD						= mod:NewCDTimer(48.5, 143309, nil, nil, nil, 2)
 local timerShaResidue					= mod:NewBuffFadesTimer(10, 143459, nil, false)
 local timerPurifiedResidue				= mod:NewBuffFadesTimer(15, 143524, nil, false)
-local timerSwellingCorruptionCD			= mod:NewCDTimer(75, 143578, nil, nil, nil, nil, 143574)
+local timerSwellingCorruptionCD			= mod:NewCDTimer(75, 143578, nil, nil, nil, 1, 143574)
 
 local berserkTimer						= mod:NewBerserkTimer(605)
 
