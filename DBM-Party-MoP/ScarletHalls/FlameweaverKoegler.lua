@@ -31,7 +31,7 @@ local timerPyroblastCD			= mod:NewCDTimer(6, 113690, nil, false)
 --local timerFireballVolleyCD		= mod:NewCDTimer(30, 113691)--Seems very random, maybe affected by school lockout so kicking pyroblast prevents this?
 local timerBookBurnerCD			= mod:NewCDTimer(15.5, 113364)
 local timerDragonsBreath		= mod:NewBuffActiveTimer(10, 113641)
-local timerDragonsBreathCD		= mod:NewNextTimer(50, 113641)
+local timerDragonsBreathCD		= mod:NewNextTimer(50, 113641, nil, nil, nil, 2)
 
 function mod:OnCombatStart(delay)
 	timerPyroblastCD:Start(5-delay)

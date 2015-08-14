@@ -34,10 +34,10 @@ local yellJasperChains				= mod:NewYell(130395, nil, false)
 local specWarnAmethystPool			= mod:NewSpecialWarningMove(130774)
 local specWarnPowerDown				= mod:NewSpecialWarningSpell(116529, "-Tank")
 
-local timerPetrification			= mod:NewNextTimer(76, 125091)
+local timerPetrification			= mod:NewNextTimer(76, 125091, nil, nil, nil, 2)
 local timerCobaltMineCD				= mod:NewNextTimer(8.5, 129424)
 local timerJadeShardsCD				= mod:NewCDTimer(9, 116223, nil, false)--9~12
-local timerJasperChainsCD			= mod:NewCDTimer(12, 130395)--11-13
+local timerJasperChainsCD			= mod:NewCDTimer(12, 130395, nil, nil, nil, 3)--11-13
 local timerAmethystPoolCD			= mod:NewCDTimer(6, 130774, nil, false)
 
 local berserkTimer					= mod:NewBerserkTimer(420)

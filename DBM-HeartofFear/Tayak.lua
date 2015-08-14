@@ -32,15 +32,15 @@ local specWarnOverwhelmingAssaultOther	= mod:NewSpecialWarningTaunt(123474)
 local specWarnBladeTempest				= mod:NewSpecialWarningRun(125310, nil, nil, 2, 4)
 local specWarnStormUnleashed			= mod:NewSpecialWarningSpell(123814, nil, nil, nil, 2)
 
-local timerTempestSlashCD				= mod:NewNextTimer(15.5, 125692)
+local timerTempestSlashCD				= mod:NewNextTimer(15.5, 125692, nil, nil, nil, 3)
 local timerOverwhelmingAssault			= mod:NewTargetTimer(45, 123474, nil, "Tank")
-local timerOverwhelmingAssaultCD		= mod:NewCDTimer(20.5, 123474, nil, "Tank|Healer")--Only ability with a variation in 2 pulls so far. He will use every 20.5 seconds unless he's casting something else, then it can be delayed as much as an extra 15-20 seconds. TODO: See if there is a way to detect when variation is going to occur and call update timer.
-local timerWindStepCD					= mod:NewCDTimer(25, 123175)
+local timerOverwhelmingAssaultCD		= mod:NewCDTimer(20.5, 123474, nil, "Tank|Healer", nil, 5)--Only ability with a variation in 2 pulls so far. He will use every 20.5 seconds unless he's casting something else, then it can be delayed as much as an extra 15-20 seconds. TODO: See if there is a way to detect when variation is going to occur and call update timer.
+local timerWindStepCD					= mod:NewCDTimer(25, 123175, nil, nil, nil, 3)
 local timerUnseenStrike					= mod:NewCastTimer(4.8, 123017)
-local timerUnseenStrikeCD				= mod:NewCDTimer(53, 123017) -- 53~61 cd.
+local timerUnseenStrikeCD				= mod:NewCDTimer(53, 123017, nil, nil, nil, 3) -- 53~61 cd.
 local timerIntensifyCD					= mod:NewNextTimer(60, 123471)
 local timerBladeTempest					= mod:NewBuffActiveTimer(9, 125310)
-local timerBladeTempestCD				= mod:NewNextTimer(60, 125310)--Always cast after immediately intensify since they essencially have same CD
+local timerBladeTempestCD				= mod:NewNextTimer(60, 125310, nil, nil, nil, 2)--Always cast after immediately intensify since they essencially have same CD
 
 local countdownTempest					= mod:NewCountdown(60, 125310)
 local berserkTimer						= mod:NewBerserkTimer(490)

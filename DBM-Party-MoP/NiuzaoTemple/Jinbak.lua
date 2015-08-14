@@ -22,7 +22,7 @@ local specWarnSapResidue	= mod:NewSpecialWarningStack(119941, true, 6)
 local specWarnDetonate		= mod:NewSpecialWarningSpell(120001, "Healer", nil, nil, 2)
 local specWarnGlob			= mod:NewSpecialWarningSwitch("ej6494", "-Healer")
 
-local timerDetonateCD		= mod:NewNextTimer(45.5, 120001)
+local timerDetonateCD		= mod:NewNextTimer(45.5, 120001, nil, nil, nil, 2)
 local timerDetonate			= mod:NewCastTimer(5, 120001)
 local timerSapResidue		= mod:NewBuffFadesTimer(10, 119941)
 --local timerGlobCD			= mod:NewNextTimer(45.5, 119990)--Need more logs

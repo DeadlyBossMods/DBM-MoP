@@ -24,9 +24,9 @@ local warnCrossbowTrap		= mod:NewSpellAnnounce("ej5974", 4)
 
 local specWarnSmash			= mod:NewSpecialWarningMove(119684, "Healer")
 
-local timerSmashCD			= mod:NewCDTimer(28, 119684)
-local timerStaffCD			= mod:NewCDTimer(23, "ej5973")--23~25 sec.
-local timerWhirlwindingAxe	= mod:NewNextTimer(15, 119374)
+local timerSmashCD			= mod:NewCDTimer(28, 119684, nil, nil, nil, 3)
+local timerStaffCD			= mod:NewCDTimer(23, "ej5973", nil, nil, nil, 3)--23~25 sec.
+local timerWhirlwindingAxe	= mod:NewNextTimer(15, 119374, nil, nil, nil, 3)
 --local timerRoarCD			= mod:NewCDTimer(48, 122959)--Need to confirm, i crashed during log and only got 2 casts, so only one CD, not enough confirmation for me.
 
 function mod:OnCombatStart(delay)

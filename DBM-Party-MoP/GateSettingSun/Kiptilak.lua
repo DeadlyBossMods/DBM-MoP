@@ -23,7 +23,7 @@ local specWarnSabotage			= mod:NewSpecialWarningYou(107268)
 local specWarnSabotageNear		= mod:NewSpecialWarningClose(107268)
 
 local timerSabotage				= mod:NewTargetTimer(5, 107268)
-local timerSabotageCD			= mod:NewNextTimer(12, 107268)
+local timerSabotageCD			= mod:NewNextTimer(12, 107268, nil, nil, nil, 3)
 --local timerThrowExplosiveCD	= mod:NewNextTimer(22, 102569)
 
 mod:AddBoolOption("IconOnSabotage", true)

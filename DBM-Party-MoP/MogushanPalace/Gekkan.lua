@@ -30,7 +30,7 @@ local specWarnHexDispel			= mod:NewSpecialWarningDispel(118903, false)
 
 local timerInspiriation			= mod:NewTargetTimer(20, 118988)
 local timerIronProtector		= mod:NewTargetTimer(15, 118958)
-local timerHexCD				= mod:NewCDTimer(9, 118903)
+local timerHexCD				= mod:NewCDTimer(9, 118903, nil, nil, nil, 3)
 local timerHex					= mod:NewTargetTimer(20, 118903, nil, "Healer")
 
 function mod:OnCombatStart(delay)

@@ -27,7 +27,7 @@ local specWarnAcidBomb		= mod:NewSpecialWarningMove(115458)
 
 local timerImpalingStrikeCD	= mod:NewNextTimer(30, 107047)
 local timerPreyTime			= mod:NewTargetTimer(5, 106933, nil, "Healer")
-local timerPreyTimeCD		= mod:NewNextTimer(14.5, 106933)
+local timerPreyTimeCD		= mod:NewNextTimer(14.5, 106933, nil, nil, nil, 3)
 
 function mod:OnCombatStart(delay)
 --	timerImpalingStrikeCD:Start(-delay)--Bad pull, no pull timers.

@@ -16,8 +16,8 @@ mod:RegisterEventsInCombat(
 local warnLesson		= mod:NewTargetAnnounce(113395, 2)--Needs to be changed to target when transcriptor works, at present CLEU doesn't show anything.
 local warnRise			= mod:NewSpellAnnounce(113143, 3)
 
-local timerLessonCD		= mod:NewNextTimer(30, 113395)
-local timerRiseCD		= mod:NewNextTimer(62.5, 113143)--Assuming this is even CD based, it could be boss health based, in which case timer is worthless
+local timerLessonCD		= mod:NewNextTimer(30, 113395, nil, nil, nil, 3)
+local timerRiseCD		= mod:NewNextTimer(62.5, 113143, nil, nil, nil, 1)--Assuming this is even CD based, it could be boss health based, in which case timer is worthless
 
 function mod:OnCombatStart(delay)
 	timerLessonCD:Start(17-delay)

@@ -31,14 +31,14 @@ local specWarnLightningBolt	= mod:NewSpecialWarningInterrupt(123654, false)
 local specWarnConflag		= mod:NewSpecialWarningTarget(120201, "Healer")
 
 local timerRavage			= mod:NewTargetTimer(11, 119946)
-local timerRavageCD			= mod:NewCDTimer(20, 119946)
-local timerShockwaveCD		= mod:NewNextTimer(15, 119922)
+local timerRavageCD			= mod:NewCDTimer(20, 119946, nil, nil, nil, 3)
+local timerShockwaveCD		= mod:NewNextTimer(15, 119922, nil, nil, nil, 3)
 local timerWhirlingDervishCD= mod:NewCDTimer(22, 119981)
 local timerTraumaticBlow	= mod:NewTargetTimer(5, 123655)
 local timerTraumaticBlowCD	= mod:NewCDTimer(17, 123655)--17-21sec variation
-local timerConflag			= mod:NewTargetTimer(5, 120201)
-local timerConflagCD		= mod:NewCDTimer(22, 120201)--Limited data, may not be completely accurate
-local timerMeteorCD			= mod:NewNextTimer(55, 120195)--Assumed based on limited data
+local timerConflag			= mod:NewTargetTimer(5, 120201, nil)
+local timerConflagCD		= mod:NewCDTimer(22, 120201, nil, nil, nil, 3)--Limited data, may not be completely accurate
+local timerMeteorCD			= mod:NewNextTimer(55, 120195, nil, nil, nil, 3)--Assumed based on limited data
 
 local shockwaveCD = 15
 local kuai = EJ_GetSectionInfo(6015)
