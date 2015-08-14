@@ -24,7 +24,7 @@ local specWarnHazeofHate	= mod:NewSpecialWarningYou(107087)
 local specWarnRisingHate	= mod:NewSpecialWarningInterrupt(107356, "-Healer")
 
 local timerRingofMalice		= mod:NewBuffActiveTimer(15, 131521)
-local timerGrippingHartedCD	= mod:NewNextTimer(45.5, 115002)
+local timerGrippingHatredCD	= mod:NewNextTimer(45.5, 115002, nil, nil, nil, 1)
 
 mod:AddBoolOption("InfoFrame", true)
 
@@ -62,7 +62,7 @@ function mod:SPELL_CAST_START(args)
 	if args.spellId == 115002 and self:AntiSpam(5, 2) then
 		warnGrippingHatred:Show()
 		specWarnGrippingHatred:Show()
-		timerGrippingHartedCD:Start()
+		timerGrippingHatredCD:Start()
 	end
 end
 

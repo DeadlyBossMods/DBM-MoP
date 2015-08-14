@@ -26,8 +26,8 @@ local specWarnBrokenCarapace	= mod:NewSpecialWarningSpell(107146, "Dps")
 local timerHeadbuttCD			= mod:NewNextTimer(33, 111668)
 local timerScreechingSwarm		= mod:NewTargetTimer(10, 111600)
 local timerFixate				= mod:NewTargetTimer(15, 111723)
-local timerFixateCD				= mod:NewNextTimer(20.5, 111723)
-local timerStompCD				= mod:NewNextCountTimer(20.5, 111728)
+local timerFixateCD				= mod:NewNextTimer(20.5, 111723, nil, nil, nil, 3)
+local timerStompCD				= mod:NewNextCountTimer(20.5, 111728, nil, nil, nil, 2)
 
 local stompCount = 0
 

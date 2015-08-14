@@ -28,8 +28,8 @@ local yellStaticField			= mod:NewYell(106923)
 local specWarnMagneticShroud	= mod:NewSpecialWarningSpell(107140)
 
 local timerInvokeLightningCD	= mod:NewNextTimer(6, 106984)--Phase 1 ability
-local timerStaticFieldCD		= mod:NewNextTimer(8, 106923)--^^
-local timerLightningBreathCD	= mod:NewNextTimer(9.7, 102573)--Phase 2 ability
+local timerStaticFieldCD		= mod:NewNextTimer(8, 106923, nil, nil, nil, 3)--^^
+local timerLightningBreathCD	= mod:NewNextTimer(9.7, 102573, nil, nil, nil, 5)--Phase 2 ability
 local timerMagneticShroudCD		= mod:NewCDTimer(12.5, 107140)--^^
 
 local staticFieldText = GetSpellInfo(106923)

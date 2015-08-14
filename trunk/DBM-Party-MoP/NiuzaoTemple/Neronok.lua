@@ -20,7 +20,7 @@ local specWarnGustingWinds	= mod:NewSpecialWarningSpell(121282, nil, nil, nil, 2
 local specWarnResin			= mod:NewSpecialWarningYou(121447)
 local specWarnCausticPitch	= mod:NewSpecialWarningMove(121443)
 
-local timerResinCD			= mod:NewCDTimer(20, 121447)--20-25 sec variation
+local timerResinCD			= mod:NewCDTimer(20, 121447, nil, nil, nil, 3)--20-25 sec variation
 
 local windsActive = false
 

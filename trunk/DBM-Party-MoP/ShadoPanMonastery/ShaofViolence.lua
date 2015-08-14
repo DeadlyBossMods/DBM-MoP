@@ -22,7 +22,7 @@ local warnEnrage				= mod:NewSpellAnnounce(38166, 4)
 local specWarnShaSpike			= mod:NewSpecialWarningMove(106877)
 local specWarnShaSpikeNear		= mod:NewSpecialWarningClose(106877)
 
-local timerDisorientingSmashCD	= mod:NewCDTimer(13, 106872)--variables. not confirmed
+local timerDisorientingSmashCD	= mod:NewCDTimer(13, 106872)--variable. not confirmed
 local timerShaSpikeCD			= mod:NewNextTimer(9, 106877)
 
 function mod:ShaSpikeTarget(targetname, uId)

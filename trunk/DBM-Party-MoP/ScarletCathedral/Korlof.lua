@@ -24,7 +24,7 @@ local specWarnBlazingFists	= mod:NewSpecialWarningMove(114807, "Tank") -- Everyt
 
 local timerFlyingKickCD		= mod:NewCDTimer(25, 113764)--25-30 second variation
 local timerFirestormKick	= mod:NewBuffActiveTimer(6, 113764)
-local timerBlazingFistsCD	= mod:NewNextTimer(30, 114807)
+local timerBlazingFistsCD	= mod:NewNextTimer(30, 114807, nil, "Tank", 2, 5)
 
 mod:AddBoolOption("KickArrow", true)
 
