@@ -216,7 +216,7 @@ function mod:SPELL_AURA_REMOVED(args)
 				DBM.RangeCheck:Hide()
 			end
 		end
-	elseif spellId == 140546 and args:IsPlayer() then
+	elseif spellId == 140546 and args:IsPlayer() and self:IsInCombat() then
 		timerFullyMutated:Cancel()--Can be dispeled
 		specWarnFullyMutatedFaded:Show(args.spellName)
 	end
