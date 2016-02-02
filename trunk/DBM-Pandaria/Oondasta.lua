@@ -37,7 +37,7 @@ function mod:OnCombatStart(delay, yellTriggered)
 	if yellTriggered then--We know for sure this is an actual pull and not diving into in progress
 --		timerCrushCD:Start(-delay)--There was no tank, so he pretty much never cast this, just ran like a wild animal around area while corpse cannoned
 		timerPiercingRoarCD:Start(15-delay)
-		timerFrillBlastCD:Start(33.4-delay)
+		timerFrillBlastCD:Start(30-delay)
 	end
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Show(10)--range is guessed. spell tooltip and EJ do not save what range is right now.
