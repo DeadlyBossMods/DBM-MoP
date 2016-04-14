@@ -183,9 +183,9 @@ function mod:SPELL_CAST_SUCCESS(args)
 						specWarnBurstingPride:Show()
 						yellBurstingPride:Yell()
 						timerBurstingPride:Start()
-					elseif self:CheckNearby(6, args.destName) and not bpSpecWarnFired then
+					elseif self:CheckNearby(6, targetName) and not bpSpecWarnFired then
 						bpSpecWarnFired = true
-						specWarnBurstingPrideNear:Show(args.destName)
+						specWarnBurstingPrideNear:Show(targetName)
 					end
 				end
 			end
