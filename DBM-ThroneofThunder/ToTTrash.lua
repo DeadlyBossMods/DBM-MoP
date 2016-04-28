@@ -26,10 +26,10 @@ local specWarnSonicScreech		= mod:NewSpecialWarningInterrupt(136751)
 local specWarnConductiveShield	= mod:NewSpecialWarningTarget(140296)
 
 local timerSpiritfireCD			= mod:NewCDTimer(12, 139895, nil, nil, nil, 3)
-local timerShadowNovaCD			= mod:NewCDTimer(12, 139899, nil, nil, nil, 3)
+local timerShadowNovaCD			= mod:NewCDTimer(12, 139899, nil, nil, nil, 3, nil, DBM_CORE_DEADLY_ICON)
 local timerFixatedCD			= mod:NewNextTimer(15, 140306, nil, nil, nil, 3)
 local timerConductiveShield		= mod:NewTargetTimer(10, 140296)
-local timerConductiveShieldCD	= mod:NewCDSourceTimer(20, 140296, nil, nil, nil, 5)--On 25 man, it always 20, But 10 man, it variables.
+local timerConductiveShieldCD	= mod:NewCDSourceTimer(20, 140296, nil, nil, nil, 5, nil, DBM_CORE_DAMAGE_ICON)--On 25 man, it always 20, But 10 man, it variables.
 
 mod:RemoveOption("HealthFrame")
 mod:AddBoolOption("RangeFrame")
