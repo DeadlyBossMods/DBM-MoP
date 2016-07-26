@@ -72,8 +72,8 @@ local specWarnPulsingFlames			= mod:NewSpecialWarningCount(147042, false, nil, n
 
 --Stage 2: Bring Her Down!
 local timerCombatStarts				= mod:NewCombatTimer(34.5)
-local timerAddsCD					= mod:NewNextCountTimer(55, "ej8553", nil, nil, nil, 1, "Interface\\ICONS\\INV_Misc_Head_Orc_01.blp")
-local timerProtoCD					= mod:NewNextCountTimer(55, "ej8587", nil, nil, nil, 1, 59961)
+local timerAddsCD					= mod:NewNextCountTimer(54.7, "ej8553", nil, nil, nil, 1, "Interface\\ICONS\\INV_Misc_Head_Orc_01.blp")
+local timerProtoCD					= mod:NewNextCountTimer(54.7, "ej8587", nil, nil, nil, 1, 59961)
 local timerTowerCD					= mod:NewTimer(99, "timerTowerCD", 88852, nil, nil, 5)
 local timerTowerGruntCD				= mod:NewTimer(60, "timerTowerGruntCD", 89253, nil, nil, 1, nil, DBM_CORE_HEROIC_ICON)
 local timerDemolisherCD				= mod:NewNextTimer(20, "ej8562", nil, nil, nil, 1, 116040)--EJ is just not complete, shouldn't need localizing
@@ -266,7 +266,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 end
 
 function mod:UPDATE_WORLD_STATES()
-	local text = select(4, GetWorldStateUIInfo(4))
+	local text = select(4, GetWorldStateUIInfo(5))
 	local percent = tonumber(string.match(text or "", "%d+"))
 	if percent == 1 and (self.vb.firstTower == 0) and not self:IsMythic() then
 		self.vb.firstTower = 1
