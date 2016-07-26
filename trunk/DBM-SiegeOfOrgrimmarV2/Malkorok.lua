@@ -201,6 +201,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			warnFatalStrike:Show(args.destName, amount)
 		end
 		timerFatalStrike:Start(args.destName)
+		if self:IsTrivial(100) then return end
 		if amount % 3 == 0 and amount >= 12 then
 			if args:IsPlayer() then--At this point the other tank SHOULD be clear.
 				specWarnFatalStrike:Show(amount)
