@@ -9,12 +9,11 @@ mod:SetZone()
 mod:RegisterCombat("combat")
 
 mod:RegisterEventsInCombat(
-	"SPELL_AURA_APPLIED",
-	"SPELL_AURA_REMOVED",
-	"SPELL_CAST_SUCCESS",
-	"SPELL_SUMMON"
+	"SPELL_AURA_APPLIED 115297",
+	"SPELL_AURA_REMOVED 115297",
+	"SPELL_CAST_SUCCESS 115297 115147 115139",
+	"SPELL_SUMMON 115250"
 )
-
 
 local warnEvictSoul				= mod:NewTargetAnnounce(115297, 3)
 local warnRaiseCrusade			= mod:NewSpellAnnounce(115139, 3)

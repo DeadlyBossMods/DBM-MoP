@@ -8,10 +8,10 @@ mod:SetEncounterID(1420)
 mod:RegisterCombat("combat")
 
 mod:RegisterEventsInCombat(
-	"SPELL_CAST_START",
-	"SPELL_CAST_SUCCESS",
-	"SPELL_AURA_APPLIED",
-	"SPELL_AURA_REMOVED"
+	"SPELL_CAST_START 113690 113691 113364",
+	"SPELL_CAST_SUCCESS 113626",
+	"SPELL_AURA_APPLIED 113682 113641",
+	"SPELL_AURA_REMOVED 113641"
 )
 
 local warnPyroblast				= mod:NewSpellAnnounce(113690, 2, nil, false)

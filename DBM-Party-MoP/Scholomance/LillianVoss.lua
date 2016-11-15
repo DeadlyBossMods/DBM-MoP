@@ -11,11 +11,11 @@ mod:RegisterCombat("combat")
 mod:RegisterKill("yell", L.Kill)
 
 mod:RegisterEventsInCombat(
-	"SPELL_AURA_APPLIED",
-	"SPELL_CAST_START",
-	"SPELL_CAST_SUCCESS",
-	"SPELL_DAMAGE",
-	"SPELL_MISSED"
+	"SPELL_AURA_APPLIED 111585 111649 115350",
+	"SPELL_CAST_START 111570 111775 114262",
+	"SPELL_CAST_SUCCESS 111585",
+	"SPELL_DAMAGE 111628",
+	"SPELL_MISSED 111628"
 )
 
 --TODO, perfect phase transitions and how they effect ability timers. Find out what happens if you kill BODY first in phase 3, does it get rezzed again?

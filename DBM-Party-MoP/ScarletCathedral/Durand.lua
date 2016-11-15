@@ -8,13 +8,12 @@ mod:SetEncounterID(1425)
 mod:RegisterCombat("combat")
 
 mod:RegisterEventsInCombat(
-	"SPELL_CAST_START",
-	"SPELL_CAST_SUCCESS",
+	"SPELL_CAST_START 113134 12039 130857",
+	"SPELL_CAST_SUCCESS 9256",
 	"UNIT_SPELLCAST_SUCCEEDED boss1 boss2",
 	"UNIT_DIED"
 )
 
---local warnRes					= mod:NewCastAnnounce(111670, 4)--This spell seems to be only found in combatlog. Also, I didn't see any casting bar. (both trashes and bosses). Needs more review for this spell.
 local warnFlashofSteel			= mod:NewSpellAnnounce(115627, 3)
 local warnDashingStrike			= mod:NewSpellAnnounce(115676, 3)
 local warnDeepSleep				= mod:NewSpellAnnounce(9256, 2)
