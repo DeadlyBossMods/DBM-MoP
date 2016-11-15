@@ -9,9 +9,9 @@ mod:SetZone()
 mod:RegisterCombat("combat")
 
 mod:RegisterEventsInCombat(
-	"SPELL_AURA_APPLIED",
-	"SPELL_AURA_APPLIED_DOSE",
-	"SPELL_CAST_START"
+	"SPELL_AURA_APPLIED 106651",
+	"SPELL_AURA_APPLIED_DOSE 106651",
+	"SPELL_CAST_START 106807"
 )
 
 

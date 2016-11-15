@@ -9,8 +9,8 @@ mod:SetZone()
 mod:RegisterCombat("combat")
 
 mod:RegisterEventsInCombat(
-	"SPELL_AURA_REMOVED",
-	"SPELL_CAST_START",
+	"SPELL_AURA_REMOVED 114062",
+	"SPELL_CAST_START 114062",
 	"UNIT_SPELLCAST_SUCCEEDED boss1"
 )
 

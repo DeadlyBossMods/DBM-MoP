@@ -9,7 +9,7 @@ mod:SetZone()
 mod:RegisterCombat("combat")
 
 mod:RegisterEventsInCombat(
-	"SPELL_AURA_APPLIED",
+	"SPELL_AURA_APPLIED 113143",
 	"CHAT_MSG_RAID_BOSS_EMOTE"
 )
 
