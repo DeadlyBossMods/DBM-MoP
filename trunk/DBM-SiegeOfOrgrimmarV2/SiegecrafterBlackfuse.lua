@@ -307,7 +307,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, npc, _, _, target)
 		countdownAssemblyLine:Start()
 		if self.Options.InfoFrame then
 			DBM.InfoFrame:SetHeader(assemblyLine.."("..self.vb.weapon..")")
-			DBM.InfoFrame:Show(1, "function", showWeaponInfo, true)
+			DBM.InfoFrame:Show(1, "function", showWeaponInfo, false)
 		end
 	elseif msg == L.newShredder or msg:find(L.newShredder) then
 		self.vb.shredderCount = self.vb.shredderCount + 1
