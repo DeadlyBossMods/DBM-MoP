@@ -104,7 +104,7 @@ mod.vb.weapon = 0
 mod.vb.shredderCount = 0
 
 --VEM Idea
-local function showWeaponInfo()
+local function updateInfoFrame()
 	local lines = {}
 	if mod.vb.weapon == 1 or mod.vb.weapon == 2 or mod.vb.weapon == 4 then
 		lines[shockwaveMissile] = laserTurret.." , "..crawlerMine
@@ -307,7 +307,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, npc, _, _, target)
 		countdownAssemblyLine:Start()
 		if self.Options.InfoFrame then
 			DBM.InfoFrame:SetHeader(assemblyLine.."("..self.vb.weapon..")")
-			DBM.InfoFrame:Show(1, "function", showWeaponInfo, false)
+			DBM.InfoFrame:Show(1, "function", updateInfoFrame, false)
 		end
 	elseif msg == L.newShredder or msg:find(L.newShredder) then
 		self.vb.shredderCount = self.vb.shredderCount + 1
