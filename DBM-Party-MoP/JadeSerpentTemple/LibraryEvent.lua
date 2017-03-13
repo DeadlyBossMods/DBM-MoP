@@ -18,7 +18,6 @@ mod:RegisterEventsInCombat(
 --Stuff that might be used with more data--
 --4/6 12:57:22.825  UNIT_DISSIPATES,0x0000000000000000,nil,0x80000000,0x80000000,0xF130DEF800005B63,"Corrupted Scroll",0xa48,0x0
 -------------------------------------------
-local warnIntensity			= mod:NewStackAnnounce(113315, 3)
 local warnUltimatePower		= mod:NewTargetAnnounce(113309, 4)
 
 local specWarnIntensity		= mod:NewSpecialWarning("SpecWarnIntensity")
@@ -26,17 +25,16 @@ local specWarnUltimatePower	= mod:NewSpecialWarningTarget(113309, nil, nil, nil,
 
 local timerUltimatePower	= mod:NewTargetTimer(15, 113309)
 
-local bossesDead = 0
+mod.vb.bossesDead = 0
 
 function mod:OnCombatStart(delay)
-	bossesDead = 0
+	self.vb.bossesDead = 0
 end
 
 function mod:SPELL_AURA_APPLIED(args)
 	if args.spellId == 113315 then
 		warnIntensity:Show(args.destName, args.amount or 1)
 	elseif args.spellId == 113309 then
-		warnUltimatePower:Show(args.destName)
 		specWarnUltimatePower:Show(args.destName)
 		timerUltimatePower:Start(args.destName)
 	end
@@ -51,9 +49,10 @@ end
 function mod:SPELL_AURA_APPLIED_DOSE(args)
 	if args.spellId == 113315 then
 		if args.amount % 2 == 0 then--only warn every 2
-			warnIntensity:Show(args.destName, args.amount)
 			if args.amount >= 6 then--Start point of special warnings subject to adjustment based on live tuning.
 				specWarnIntensity:Show(args.spellName, args.destName, args.amount)
+			else
+				warnIntensity:Show(args.destName, args.amount)
 			end
 		end
 	end
@@ -61,14 +60,9 @@ end
 
 function mod:UNIT_DIED(args)
 	local cid = self:GetCIDFromGUID(args.destGUID)
-	if cid == 59051 then--These 2 both have to die for fight to end
-		bossesDead = bossesDead + 1
-		if bossesDead == 2 then
-			DBM:EndCombat(self)
-		end
-	elseif cid == 59726 then--These 2 both have to die for fight to end
-		bossesDead = bossesDead + 1
-		if bossesDead == 2 then
+	if cid == 59051 or cid == 59726 then--These 2 both have to die for fight to end
+		self.vb.bossesDead = self.vb.bossesDead + 1
+		if self.vb.bossesDead == 2 then
 			DBM:EndCombat(self)
 		end
 	elseif cid == 58826 then--This one is by himself so we don't need special rules
