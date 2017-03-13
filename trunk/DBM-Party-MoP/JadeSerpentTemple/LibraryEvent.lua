@@ -15,6 +15,10 @@ mod:RegisterEventsInCombat(
 	"UNIT_DIED"
 )
 
+mod:RegisterEvents(
+	"CHAT_MSG_MONSTER_YELL"
+)
+
 --Stuff that might be used with more data--
 --4/6 12:57:22.825  UNIT_DISSIPATES,0x0000000000000000,nil,0x80000000,0x80000000,0xF130DEF800005B63,"Corrupted Scroll",0xa48,0x0
 -------------------------------------------
@@ -23,6 +27,7 @@ local warnUltimatePower		= mod:NewTargetAnnounce(113309, 4)
 local specWarnIntensity		= mod:NewSpecialWarning("SpecWarnIntensity")
 local specWarnUltimatePower	= mod:NewSpecialWarningTarget(113309, nil, nil, nil, 2)
 
+local timerRP				= mod:NewRPTimer(10)
 local timerUltimatePower	= mod:NewTargetTimer(15, 113309)
 
 mod.vb.bossesDead = 0
@@ -69,3 +74,18 @@ function mod:UNIT_DIED(args)
 		DBM:EndCombat(self)
 	end
 end
+
+--As the tale goes, the yaungol was traveling across the Kun'lai plains when suddenly he was ambushed by two strange creatures
+--"<31.42 19:12:48> [ENCOUNTER_START] ENCOUNTER_START#1417#Lorewalker Stonestep#2#5", -- [26]
+function mod:CHAT_MSG_MONSTER_YELL(msg, npc, _, _, target)
+	if (msg == L.Event1 or msg:find(L.Event1)) then
+		self:SendSync("LibraryRP1")
+	end
+end
+
+function mod:OnSync(msg, targetname)
+	if msg == "LibraryRP1" then
+		timerRP:Start()
+	end
+end
+
