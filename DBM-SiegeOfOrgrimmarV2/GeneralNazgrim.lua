@@ -116,7 +116,7 @@ do
 	local function addLine(key, value)
 		-- sort by insertion order
 		lines[key] = value
-		sortedaddLine(#sortedLines + 1] = key
+		sortedLines[#sortedLines + 1] = key
 	end
 	updateInfoFrame = function()
 		table.wipe(lines)
