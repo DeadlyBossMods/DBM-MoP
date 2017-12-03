@@ -83,16 +83,27 @@ local function warnJasperChainsTargets()
 	table.wipe(jasperChainsTargets)
 end
 
-local function updateInfoFrame()
+local updateInfoFrame
+do
 	local lines = {}
-	for i = 1, 5 do
-		if UnitExists("boss"..i) then
-			lines[UnitName("boss"..i)] = UnitPower("boss"..i)
-		end
+	local sortedLines = {}
+	local function addLine(key, value)
+		-- sort by insertion order
+		lines[key] = value
+		sortedaddLine(#sortedLines + 1] = key
 	end
-	lines[UnitName("player")] = UnitPower("player", ALTERNATE_POWER_INDEX)
+	updateInfoFrame = function()
+		table.wipe(lines)
+		table.wipe(sortedLines)
+		for i = 1, 5 do
+			if UnitExists("boss"..i) then
+				addLine(UnitName("boss"..i), UnitPower("boss"..i))
+			end
+		end
+		addLine(UnitName("player"), UnitPower("player", ALTERNATE_POWER_INDEX))
 
-	return lines
+		return lines, sortedLines
+	end
 end
 
 function mod:ThreeBossStart(delay)
