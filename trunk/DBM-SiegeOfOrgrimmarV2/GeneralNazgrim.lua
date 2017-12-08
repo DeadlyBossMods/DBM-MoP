@@ -68,7 +68,7 @@ local yellHuntersMark				= mod:NewYell(143882, nil, false)
 local specWarnHuntersMarkOther		= mod:NewSpecialWarningTarget(143882, false)
 
 --Nazgrim Core Abilities
-local timerAddsCD					= mod:NewNextCountTimer(45, "ej7920", nil, nil, nil, 1, 2457)
+local timerAddsCD					= mod:NewNextCountTimer(45, "ej7920", nil, nil, nil, 1, "Interface\\Icons\\ability_warrior_offensivestance")
 local timerSunder					= mod:NewTargetTimer(30, 143494, nil, "Tank|Healer")
 local timerSunderCD					= mod:NewCDTimer(8, 143494, nil, "Tank", nil, 5, nil, DBM_CORE_TANK_ICON)
 local timerExecuteCD				= mod:NewCDTimer(18, 143502, nil, "Tank", nil, 5, nil, DBM_CORE_TANK_ICON)
