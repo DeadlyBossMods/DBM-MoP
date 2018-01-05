@@ -33,7 +33,7 @@ mod:AddBoolOption("SetIconOnAdds", false)
 
 mod.vb.addsRemaining = 4--Also 4 on heroic?
 mod.vb.firstAdd = false
-local addsName = EJ_GetSectionInfo(5616)
+local addsName = DBM:EJ_GetSectionInfo(5616)
 
 function mod:UNIT_TARGET_UNFILTERED()
 	if self.Options.SetIconOnAdds and not DBM.Options.DontSetIcons and UnitName("target") == addsName then

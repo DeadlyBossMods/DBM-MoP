@@ -91,10 +91,7 @@ mod.vb.thrashCount = 0
 mod.vb.submergeCount = 0
 mod.vb.specialCount = 0
 local huddleIcon = 8
-local wallLight = GetSpellInfo(117964)
-local fearless = GetSpellInfo(118977)
-local waterspout = GetSpellInfo(120519)
-local huddleinterror = GetSpellInfo(120629)
+local wallLight, fearless, waterspout, huddleinterror = DBM:GetSpellInfo(117964), DBM:GetSpellInfo(118977), DBM:GetSpellInfo(120519), DBM:GetSpellInfo(120629)
 local ominousCackleTargets = {}
 local platformGUIDs = {}
 local waterspoutTargets = {}
@@ -213,6 +210,7 @@ function mod:LeavePlatform()
 end
 
 function mod:OnCombatStart(delay)
+	wallLight, fearless, waterspout, huddleinterror = DBM:GetSpellInfo(117964), DBM:GetSpellInfo(118977), DBM:GetSpellInfo(120519), DBM:GetSpellInfo(120629)
 	if self:IsDifficulty("normal10", "heroic10", "lfr25") then
 		timerOminousCackleCD:Start(40-delay)
 	else

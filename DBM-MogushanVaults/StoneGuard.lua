@@ -46,15 +46,15 @@ mod:AddBoolOption("ArrowOnJasperChains")
 mod:AddBoolOption("InfoFrame")
 
 local expectedBosses = 3
-local Jade = EJ_GetSectionInfo(5773)
-local Jasper = EJ_GetSectionInfo(5774)
-local Cobalt = EJ_GetSectionInfo(5771)
-local Amethyst = EJ_GetSectionInfo(5691)
+local Jade = DBM:EJ_GetSectionInfo(5773)
+local Jasper = DBM:EJ_GetSectionInfo(5774)
+local Cobalt = DBM:EJ_GetSectionInfo(5771)
+local Amethyst = DBM:EJ_GetSectionInfo(5691)
 local Overload = {
-	["Cobalt"] = GetSpellInfo(115840),
-	["Jade"] = GetSpellInfo(115842),
-	["Jasper"] = GetSpellInfo(115843),
-	["Amethyst"] = GetSpellInfo(115844)
+	["Cobalt"] = DBM:GetSpellInfo(115840),
+	["Jade"] = DBM:GetSpellInfo(115842),
+	["Jasper"] = DBM:GetSpellInfo(115843),
+	["Amethyst"] = DBM:GetSpellInfo(115844)
 }
 local activePetrification = nil
 local playerHasChains = false
@@ -126,6 +126,12 @@ function mod:ThreeBossStart(delay)
 end
 
 function mod:OnCombatStart(delay)
+	Overload = {
+		["Cobalt"] = DBM:GetSpellInfo(115840),
+		["Jade"] = DBM:GetSpellInfo(115842),
+		["Jasper"] = DBM:GetSpellInfo(115843),
+		["Amethyst"] = DBM:GetSpellInfo(115844)
+	}
 	activePetrification = nil
 	playerHasChains = false
 	table.wipe(jasperChainsTargets)

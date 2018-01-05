@@ -87,7 +87,7 @@ local rampageCast = 0
 local cinderIcon = 7
 local iceIcon = 6
 local activeHeadGUIDS = {}
-local iceTorrent = GetSpellInfo(139857)
+local iceTorrent = DBM:GetSpellInfo(139857)
 local torrentExpires = {}
 local arcaneRecent = false
 
@@ -171,6 +171,7 @@ local function clearHeadGUID(GUID)
 end
 
 function mod:OnCombatStart(delay)
+	iceTorrent = DBM:GetSpellInfo(139857)
 	table.wipe(activeHeadGUIDS)
 	rampageCount = 0
 	rampageCast = 0

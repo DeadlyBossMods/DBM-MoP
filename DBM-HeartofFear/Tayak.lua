@@ -91,7 +91,7 @@ function mod:SPELL_AURA_APPLIED(args)
 				specWarnOverwhelmingAssault:Show(amount)
 			end
 		else
-			if amount >= 1 and not UnitDebuff("player", GetSpellInfo(123474)) and not UnitIsDeadOrGhost("player") then--Other tank has at least one stack and you have none
+			if amount >= 1 and not UnitDebuff("player", args.spellName) and not UnitIsDeadOrGhost("player") then--Other tank has at least one stack and you have none
 				specWarnOverwhelmingAssaultOther:Show(args.destName)--So nudge you to taunt it off other tank already.
 			end
 		end

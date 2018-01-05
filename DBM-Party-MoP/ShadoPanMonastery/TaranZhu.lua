@@ -28,7 +28,7 @@ local timerGrippingHatredCD	= mod:NewNextTimer(45.5, 115002, nil, nil, nil, 1)
 
 mod:AddBoolOption("InfoFrame", true)
 
-local Hate = EJ_GetSectionInfo(5827)
+local Hate = DBM:EJ_GetSectionInfo(5827)
 
 function mod:OnCombatStart(delay)
 	if self.Options.InfoFrame then
