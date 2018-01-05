@@ -42,9 +42,9 @@ local timerConflagCD		= mod:NewCDTimer(22, 120201, nil, nil, nil, 3)--Limited da
 local timerMeteorCD			= mod:NewNextTimer(55, 120195, nil, nil, nil, 3)--Assumed based on limited data
 
 local shockwaveCD = 15
-local kuai = EJ_GetSectionInfo(6015)
-local ming = EJ_GetSectionInfo(6019)
-local haiyan = EJ_GetSectionInfo(6023)
+local kuai = DBM:EJ_GetSectionInfo(6015)
+local ming = DBM:EJ_GetSectionInfo(6019)
+local haiyan = DBM:EJ_GetSectionInfo(6023)
 
 function mod:OnCombatStart(delay)
 	if DBM.BossHealth:IsShown() then

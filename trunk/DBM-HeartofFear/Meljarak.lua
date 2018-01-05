@@ -76,8 +76,8 @@ local countdownImpalingSpear			= mod:NewCountdown(49, 122224, nil, nil, 10) -- l
 
 mod:AddBoolOption("AmberPrisonIcons", true)
 
-local Reinforcement = EJ_GetSectionInfo(6554)
-local strikeSpell = GetSpellInfo(123963)
+local Reinforcement = DBM:EJ_GetSectionInfo(6554)
+local strikeSpell = DBM:GetSpellInfo(123963)
 local addsCount = 0
 local amberPrisonIcon = 2
 local zarthikCount = 0
@@ -91,6 +91,7 @@ local function clearWindBombTargets()
 end
 
 function mod:OnCombatStart(delay)
+	strikeSpell = DBM:GetSpellInfo(123963)
 	addsCount = 0
 	amberPrisonIcon = 2
 	zarthikCount = 0

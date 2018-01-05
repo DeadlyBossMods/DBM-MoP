@@ -78,7 +78,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			if args:IsPlayer() and amount >= 5 then
 				specWarnSpectralSwipe:Show(amount)
 			else
-				if amount >= 2 and not UnitIsDeadOrGhost("player") or not UnitDebuff("player", GetSpellInfo(144638)) then
+				if amount >= 2 and not UnitIsDeadOrGhost("player") or not UnitDebuff("player", args.spellName) then
 					specWarnSpectralSwipeOther:Show(args.destName)
 				end
 			end

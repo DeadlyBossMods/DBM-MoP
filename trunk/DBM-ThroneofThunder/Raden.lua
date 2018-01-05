@@ -77,9 +77,7 @@ local playerWithVita = nil
 local furthestDistancePlayer = nil
 local lastfurthestDistancePlayer = nil
 local playerName = UnitName("player")
-local vitaName = GetSpellInfo(138332)
-local animaName = GetSpellInfo(138331)
-local animaDebuff = GetSpellInfo(138288)
+local vitaName, animaName, animaDebuff = DBM:GetSpellInfo(138332), DBM:GetSpellInfo(138331), DBM:GetSpellInfo(138288)
 
 function mod:checkVitaDistance()
 	if not playerWithVita then--Failsafe more or less. This shouldn't happen unless combat log lag fires events out of order
@@ -104,6 +102,7 @@ function mod:checkVitaDistance()
 end
 
 function mod:OnCombatStart(delay)
+	vitaName, animaName, animaDebuff = DBM:GetSpellInfo(138332), DBM:GetSpellInfo(138331), DBM:GetSpellInfo(138288)
 	creationCount = 0
 	stalkerCount = 0
 	horrorCount = 0

@@ -49,8 +49,7 @@ mod:AddSetIconOption("SetIconOnTurtles", "ej7129", false, true)
 mod:AddBoolOption("ClearIconOnTurtles", false)--Different option, because you may want auto marking but not auto clearing. or you may want auto clearning when they "die" but not auto marking when they spawn
 mod:AddBoolOption("AnnounceCooldowns", "RaidCooldown")
 
-local shelldName = GetSpellInfo(137633)
-local shellConcussion = GetSpellInfo(136431)
+local shelldName, shellConcussion = DBM:GetSpellInfo(137633), DBM:GetSpellInfo(136431)
 local stompActive = false
 local stompCount = 0
 local firstRockfall = false--First rockfall after a stomp
@@ -83,6 +82,7 @@ local function checkCrystalShell()
 end
 
 function mod:OnCombatStart(delay)
+	shelldName, shellConcussion = DBM:GetSpellInfo(137633), DBM:GetSpellInfo(136431)
 	stompActive = false
 	stompCount = 0
 	firstRockfall = false--First rockfall after a stomp
@@ -101,7 +101,7 @@ function mod:OnCombatStart(delay)
 	if self:IsHeroic() then
 		if self.Options.InfoFrame then
 			DBM.InfoFrame:SetHeader(L.WrongDebuff:format(shelldName))
-			DBM.InfoFrame:Show(5, "playergooddebuff", 137633)
+			DBM.InfoFrame:Show(5, "playergooddebuff", shelldName)
 		end
 		checkCrystalShell()
 		berserkTimer:Start(600-delay)

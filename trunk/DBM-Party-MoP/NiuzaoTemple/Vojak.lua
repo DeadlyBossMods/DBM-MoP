@@ -33,9 +33,9 @@ local timerDashingStrikeCD		= mod:NewCDTimer(13.5, 120789)--14-16 second variati
 local timerThousandBladesCD		= mod:NewNextTimer(15, 120759)
 local timerThousandBlades		= mod:NewBuffActiveTimer(4, 120759)
 
---local Swarmers 		= EJ_GetSectionInfo(6280)
---local Demolishers 	= EJ_GetSectionInfo(6282)
---local Warriors	 	= EJ_GetSectionInfo(6283)
+--local Swarmers 		= DBM:EJ_GetSectionInfo(6280)
+--local Demolishers 	= DBM:EJ_GetSectionInfo(6282)
+--local Warriors	 	= DBM:EJ_GetSectionInfo(6283)
 
 function mod:SPELL_AURA_APPLIED(args)
 	if args.spellId == 120759 then

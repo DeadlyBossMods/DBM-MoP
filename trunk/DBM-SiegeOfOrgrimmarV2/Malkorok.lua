@@ -81,6 +81,7 @@ do
 end
 
 function mod:OnCombatStart(delay)
+	displacedEnergyDebuff = GetSpellInfo(142913)
 	playerDebuffs = 0
 	self.vb.breathCast = 0
 	self.vb.arcingSmashCount = 0
@@ -206,7 +207,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			if args:IsPlayer() then--At this point the other tank SHOULD be clear.
 				specWarnFatalStrike:Show(amount)
 			else--Taunt as soon as stacks are clear, regardless of stack count.
-				if not UnitDebuff("player", GetSpellInfo(142990)) and not UnitIsDeadOrGhost("player") then
+				if not UnitDebuff("player", args.spellName) and not UnitIsDeadOrGhost("player") then
 					specWarnFatalStrikeOther:Show(args.destName)
 				end
 			end

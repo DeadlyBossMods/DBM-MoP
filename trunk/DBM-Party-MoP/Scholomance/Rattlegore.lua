@@ -33,7 +33,7 @@ local timerRusting		= mod:NewBuffActiveTimer(15, 113765, nil, "Tank")
 
 mod:AddBoolOption("InfoFrame")
 
-local boned = GetSpellInfo(113996)
+local boned = DBM:GetSpellInfo(113996)
 
 function mod:BoneSpikeTarget()
 	local targetname = self:GetBossTarget(59153)
@@ -42,13 +42,14 @@ function mod:BoneSpikeTarget()
 end
 
 function mod:OnCombatStart(delay)
+	boned = DBM:GetSpellInfo(113996)
 	timerBoneSpikeCD:Start(6.5-delay)
 	if not UnitDebuff("player", boned) then
 		specWarnGetBoned:Show()
 	end
 	if self.Options.InfoFrame then
 		DBM.InfoFrame:SetHeader(L.PlayerDebuffs)
-		DBM.InfoFrame:Show(5, "playergooddebuff", 113996)
+		DBM.InfoFrame:Show(5, "playergooddebuff", boned)
 	end
 end
 
