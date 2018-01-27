@@ -25,8 +25,6 @@ local specWarnInfusion				= mod:NewSpecialWarningMove(147884, "Tank")
 local specWarnLockedOn				= mod:NewSpecialWarningRun(146680)
 local specWarnCrawlerMineFixate		= mod:NewSpecialWarningYou("ej8212")
 
-mod:RemoveOption("HealthFrame")
-
 local galakrasMod = DBM:GetModByName("868")--Because for first 10-20 seconds of galakras, EncounterInProcess() return false, so mod.isTrashMod = true won't filter first set of adds
 
 function mod:SPELL_AURA_APPLIED(args)

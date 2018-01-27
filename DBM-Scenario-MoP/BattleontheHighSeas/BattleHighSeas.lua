@@ -37,8 +37,6 @@ local timerThrowBombCD			= mod:NewNextTimer(6, 132995, nil, false)
 local timerVerticalSlashCD		= mod:NewCDTimer(18, 141187)--18-20 second variation
 local timerCounterShot			= mod:NewCastTimer(1.5, 136473)
 
-mod:RemoveOption("HealthFrame")
-
 function mod:SPELL_CAST_START(args)
 	if args.spellId == 141438 then
 		warnSwashbuckling:Show()

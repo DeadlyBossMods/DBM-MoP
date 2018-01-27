@@ -45,8 +45,6 @@ local timerCloudofAngerCD	= mod:NewCDTimer(17, 120824)--Limited sample size, may
 local timerDarkforce		= mod:NewCastTimer(5, 120215)
 local timerDarkforceCD		= mod:NewCDTimer(32, 120215)
 
-mod:RemoveOption("HealthFrame")
-
 function mod:SPELL_CAST_START(args)
 	if args.spellId == 142884 then
 		warnFear:Show()

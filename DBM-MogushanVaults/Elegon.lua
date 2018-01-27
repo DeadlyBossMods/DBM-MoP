@@ -14,7 +14,7 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED 124967 116994 117878 119389 118310 132226 132222",
 	"SPELL_AURA_APPLIED_DOSE 117878",
 	"SPELL_AURA_REMOVED 116994 132226 132222",
-	"SPELL_CAST_SUCCESS 116598 132265 116989",
+	"SPELL_CAST_SUCCESS 116598 132265",
 	"SPELL_CAST_START 117960 117954 117945 129711 117949 119358"
 )
 
@@ -134,9 +134,6 @@ function mod:SPELL_CAST_SUCCESS(args)
 	local spellId = args.spellId
 	if args:IsSpellID(116598, 132265) then--Cast when these are activated
 		focusActivated = focusActivated + 1
-		if DBM.BossHealth:IsShown() and not DBM.BossHealth:HasBoss(args.sourceGUID) then
-			DBM.BossHealth:AddBoss(args.sourceGUID, args.sourceName)
-		end
 		if self.Options.SetIconOnCreature then
 			self:ScanForMobs(args.sourceGUID, 0, 8, 6, 0.5, 10)
 		end
@@ -144,8 +141,6 @@ function mod:SPELL_CAST_SUCCESS(args)
 			timerDespawnFloor:Start()
 			specWarnDespawnFloor:Show()
 		end
-	elseif spellId == 116989 and DBM.BossHealth:IsShown() then--Cast when defeated (or rathor 1 HP)
-		DBM.BossHealth:RemoveBoss(args.sourceGUID)
 	end
 end
 

@@ -24,11 +24,6 @@ mod:RegisterEventsInCombat(
 local Lulin = select(2, EJ_GetCreatureInfo(1, 829))
 local Suen = select(2, EJ_GetCreatureInfo(2, 829))
 
-mod:SetBossHealthInfo(
-	68905, Lulin,
-	68904, Suen
-)
-
 --Darkness
 local warnNight							= mod:NewAnnounce("warnNight", 2, 108558)
 local warnCrashingStarSoon				= mod:NewSoonAnnounce(137129, 3)

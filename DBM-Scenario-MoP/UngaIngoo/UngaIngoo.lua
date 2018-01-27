@@ -24,8 +24,6 @@ local specWarnOrange		= mod:NewSpecialWarningSpell(121895)
 
 local timerKegRunner		= mod:NewAchievementTimer(240, 7232)
 
-mod:RemoveOption("HealthFrame")
-
 function mod:SPELL_AURA_APPLIED(args)
 	if args.spellId == 121934 and self:AntiSpam() then
 		self:SendSync("Phase3")

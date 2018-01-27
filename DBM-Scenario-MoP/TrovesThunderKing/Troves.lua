@@ -23,8 +23,6 @@ local timerStoneSmash		= mod:NewCastTimer(3, 139777, nil, false)
 
 local countdownEvent		= mod:NewCountdownFades(299, 140000, nil, nil, 10)
 
-mod:RemoveOption("HealthFrame")
-
 local timerStarted = false
 local timerDebuff = DBM:GetSpellInfo(140000)
 

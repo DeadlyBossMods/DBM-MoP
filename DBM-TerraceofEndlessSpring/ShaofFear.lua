@@ -179,11 +179,6 @@ end
 function mod:LeavePlatform()
 	if not self:IsInCombat() then return end--Because sometimes this still gets scheduled on combat end
 	if onPlatform then
-		if DBM.BossHealth:IsShown() then
-			DBM.BossHealth:RemoveBoss(61038)
-			DBM.BossHealth:RemoveBoss(61042)
-			DBM.BossHealth:RemoveBoss(61046)
-		end
 		table.wipe(platformGUIDs)
 		platformSent = false
 		onPlatform = false
@@ -412,9 +407,6 @@ function mod:SPELL_CAST_START(args)
 		platformGUIDs[args.sourceGUID] = true
 		MobID = self:GetCIDFromGUID(args.sourceGUID)
 		timerDreadSprayCD:Start(10.5, args.sourceGUID)--We can accurately start perfectly accurate spray cd bar off their first shoot cast.
-		if DBM.BossHealth:IsShown() then
-			DBM.BossHealth:AddBoss(MobID, args.sourceName)
-		end
 	elseif spellId == 119888 and MobID and MobID == args:GetSrcCreatureID() then
 		specWarnDeathBlossom:Show()
 		self:ScheduleMethod(40, "CheckPlatformLeaved")--you may leave platform soon after Death Blossom casted. failsafe for UNIT_DIED not fire, and fearless fails.
@@ -500,11 +492,6 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
 		berserkTimer:Start() -- currently, seems phase 2 berserk also 15 min.
 		if self.Options.RangeFrame then
 			DBM.RangeCheck:Hide()
-		end
-		if DBM.BossHealth:IsShown() then
-			DBM.BossHealth:RemoveBoss(61038)
-			DBM.BossHealth:RemoveBoss(61042)
-			DBM.BossHealth:RemoveBoss(61046)
 		end
 	end
 end

@@ -19,8 +19,6 @@ local warnAchFiveAlive		= mod:NewAnnounce("WarnAchFiveAlive", 3, nil, false)
 
 local specWarnDivineLight	= mod:NewSpecialWarningInterrupt(135403)
 
-mod:RemoveOption("HealthFrame")
-
 --[[ Alliance 'heroes'
 68581 Daggin Windbeard 
 68685 Admiral Taylor

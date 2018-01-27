@@ -31,8 +31,6 @@ local specWarnZandalarBanner= mod:NewSpecialWarningSwitch(142669)
 local timerIceSpikesCD		= mod:NewCDTimer(10, 132980)
 local timerFrozenSolidCD	= mod:NewCDTimer(20, 141407)
 
-mod:RemoveOption("HealthFrame")
-
 function mod:SPELL_CAST_START(args)
 	if args.spellId == 141423 then
 		warnHekimasWisdom:Show()

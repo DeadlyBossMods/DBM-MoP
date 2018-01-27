@@ -22,8 +22,6 @@ local specWarnBloodrage		= mod:NewSpecialWarningRun(134974, nil, nil, nil, 4)
 --Commander Scargash
 local timerBloodRage		= mod:NewTargetTimer(15, 134974)
 
-mod:RemoveOption("HealthFrame")
-
 function mod:SPELL_AURA_APPLIED(args)
 	if args.spellId == 134974 then
 		warnBloodRage:Show(args.destName)

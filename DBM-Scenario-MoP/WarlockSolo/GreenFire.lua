@@ -53,8 +53,6 @@ local timerDoom					= mod:NewBuffFadesTimer(419, 138558)
 
 local countdownDoom				= mod:NewCountdownFades(419, 138558, nil, nil, 10)
 
-mod:RemoveOption("HealthFrame")
-
 local kanrathadAlive = true--So we don't warn to enslave pit lord when he dies and enslave fades.
 
 function mod:SPELL_CAST_START(args)

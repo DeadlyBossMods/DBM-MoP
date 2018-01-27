@@ -10,8 +10,6 @@ mod:RegisterEventsInCombat(
 	"CHAT_MSG_MONSTER_SAY"
 )
 
-mod:RemoveOption("HealthFrame")
-
 function mod:CHAT_MSG_MONSTER_SAY(msg)
 	if msg == L.Clear or msg:find(L.Clear) then
 		DBM:EndCombat(self)

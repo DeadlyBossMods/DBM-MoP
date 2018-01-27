@@ -34,8 +34,6 @@ local timerGlacialFreezeTotemCD		= mod:NewCDTimer(25, 142320)--Only got cast twi
 local timerRuinedEarth				= mod:NewBuffActiveTimer(15, 142306)
 local timerRuinedEarthCD			= mod:NewCDTimer(19.5, 142306)--Timer started when last ended, but actual CD is 34.5ish
 
-mod:RemoveOption("HealthFrame")
-
 function mod:CHAT_MSG_MONSTER_YELL(msg)
 	if msg == L.XorenthPull or msg:find(L.XorenthPull) then
 		self:SendSync("XorenthPulled")

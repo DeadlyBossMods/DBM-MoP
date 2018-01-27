@@ -25,12 +25,6 @@ local Softfoot = DBM:EJ_GetSectionInfo(7889)
 local Stonetoe = DBM:EJ_GetSectionInfo(7885)
 local Tenderheart = DBM:EJ_GetSectionInfo(7904)
 
-mod:SetBossHealthInfo(
-	71479, Softfoot,
-	71475, Stonetoe,
-	71480, Tenderheart
-)
-
 --All
 local warnBondGoldenLotus			= mod:NewCastAnnounce(143497, 4)
 --Rook Stonetoe

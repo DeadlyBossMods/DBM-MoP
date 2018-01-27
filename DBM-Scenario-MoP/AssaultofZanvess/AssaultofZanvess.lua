@@ -22,9 +22,6 @@ local specWarnGuidedMissle	= mod:NewSpecialWarningPreWarn(135546, nil, 5)--So yo
 local timerGuidedMissle		= mod:NewCastTimer(5, 135546)--Time until impact
 local timerImpaleCD			= mod:NewNextTimer(6, 133942)
 
-
-mod:RemoveOption("HealthFrame")
-
 function mod:SPELL_CAST_SUCCESS(args)
 	if args.spellId == 135546 then
 		timerGuidedMissle:Start(args.sourceGUID)

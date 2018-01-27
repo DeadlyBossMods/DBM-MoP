@@ -16,8 +16,6 @@ local warnFlameWall				= mod:NewSpellAnnounce(123966, 4)
 
 local specWarnFlameWall			= mod:NewSpecialWarningSpell(123966, nil, nil, nil, 2)
 
-mod:RemoveOption("HealthFrame")
-
 --[[
 --Needs more data, i'm not sure if it has a CD or is just health based atm so no CD timer just yet.
 "<378.3> [CHAT_MSG_MONSTER_YELL] CHAT_MSG_MONSTER_YELL#She's here to make new friends... and then set them on fire! It's Pandaria's prettiest little playful pyromaniac, Liuyang!

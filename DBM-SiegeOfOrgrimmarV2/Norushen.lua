@@ -27,10 +27,6 @@ mod:RegisterEvents(
 
 local boss = DBM:EJ_GetSectionInfo(8216)
 
-mod:SetBossHealthInfo(
-	72276, boss
-)
-
 --Amalgam of Corruption
 local warnSelfDoubt						= mod:NewStackAnnounce(146124, 2, nil, "Tank")
 local warnResidualCorruption			= mod:NewSpellAnnounce(145073)
