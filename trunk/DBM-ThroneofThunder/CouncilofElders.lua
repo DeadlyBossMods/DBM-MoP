@@ -26,13 +26,6 @@ local Malakk = DBM:EJ_GetSectionInfo(7047)
 local Marli = DBM:EJ_GetSectionInfo(7050)
 local Kazrajin = DBM:EJ_GetSectionInfo(7048)
 
-mod:SetBossHealthInfo(
-	69078, Sul,
-	69131, Malakk,
-	69132, Marli,
-	69134, Kazrajin
-)
-
 --All
 local warnPossessed					= mod:NewStackAnnounce(136442, 2, nil, nil, "warnPossessed")
 

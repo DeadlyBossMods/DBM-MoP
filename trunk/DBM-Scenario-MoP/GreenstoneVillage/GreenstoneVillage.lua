@@ -33,8 +33,6 @@ local timerJadeStatueCD			= mod:NewCDTimer(18, 119364)--Small sample size. May b
 --Vengeful Hui
 local timerSummonSeedlingsCD	= mod:NewNextTimer(14.4, 117664)
 
-mod:RemoveOption("HealthFrame")
-
 function mod:SPELL_AURA_APPLIED(args)
 	if args.spellId == 131143 then
 		warnBrewBubble:Show(args.destName)

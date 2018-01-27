@@ -22,12 +22,6 @@ local Kaolan = DBM:EJ_GetSectionInfo(5789)
 local Regail = DBM:EJ_GetSectionInfo(5793)
 local Asani = DBM:EJ_GetSectionInfo(5794)
 
-mod:SetBossHealthInfo(
-	60583, Kaolan,
-	60585, Regail,
-	60586, Asani
-)
-
 local warnPhase2					= mod:NewPhaseAnnounce(2)
 local warnPhase3					= mod:NewPhaseAnnounce(3)
 --Elder Asani

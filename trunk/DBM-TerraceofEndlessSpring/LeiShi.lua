@@ -36,8 +36,6 @@ local timerScaryFogCD					= mod:NewNextTimer(10, 123705)
 
 local berserkTimer						= mod:NewBerserkTimer(600)
 
-mod:AddBoolOption("HealthFrame", true)
-mod:AddBoolOption("GWHealthFrame", true)
 mod:AddBoolOption("RangeFrame", true)
 mod:AddSetIconOption("SetIconOnProtector", "ej6224", false, true)
 

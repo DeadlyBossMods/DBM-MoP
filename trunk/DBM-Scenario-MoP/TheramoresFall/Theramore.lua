@@ -19,8 +19,6 @@ local specWarnStormTotem		= mod:NewSpecialWarningSpell(127010)--Just a spell typ
 local specWarnWarEnginesSights	= mod:NewSpecialWarningMove(114570)--Actually used by his trash, but in a speed run, you tend to pull it all together
 local yellWarEnginesSights		= mod:NewYell(114570)
 
-mod:RemoveOption("HealthFrame")
-
 function mod:SPELL_AURA_APPLIED(args)
 	if args.spellId == 114570 then
 		warnWarEnginesSights:Show(args.destName)

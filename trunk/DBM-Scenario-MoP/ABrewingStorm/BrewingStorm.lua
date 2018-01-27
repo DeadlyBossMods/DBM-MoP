@@ -24,8 +24,6 @@ local specWarnSwampSmash		= mod:NewSpecialWarningSpell(115013, nil, nil, nil, 2)
 local timerSwampSmashCD			= mod:NewCDTimer(8, 115013)
 local timerEarthShatteringCD	= mod:NewCDTimer(18, 122142)--Limited sample size, may be shorter
 
-mod:RemoveOption("HealthFrame")
-
 function mod:SPELL_CAST_START(args)
 	if args.spellId == 115013 then
 		warnSwampSmash:Show()

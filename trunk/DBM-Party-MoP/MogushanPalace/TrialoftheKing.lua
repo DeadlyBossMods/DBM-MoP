@@ -47,9 +47,7 @@ local ming = DBM:EJ_GetSectionInfo(6019)
 local haiyan = DBM:EJ_GetSectionInfo(6023)
 
 function mod:OnCombatStart(delay)
-	if DBM.BossHealth:IsShown() then
-		DBM.BossHealth:Clear()
-	end
+
 end
 
 function mod:SPELL_AURA_APPLIED(args)
@@ -98,10 +96,6 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerTraumaticBlowCD:Cancel()
 		timerShockwaveCD:Start(19)--Not confirmed through multiple pulls, just one
 		timerRavageCD:Start(26)
-		if DBM.BossHealth:IsShown() then
-			DBM.BossHealth:Clear()
-			DBM.BossHealth:AddBoss(61442, kuai)
-		end
 	elseif msg == L.Ming or msg:find(L.Ming) then
 		timerShockwaveCD:Cancel()
 		timerRavageCD:Cancel()
@@ -109,20 +103,12 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerMeteorCD:Cancel()
 		timerTraumaticBlowCD:Cancel()
 		timerWhirlingDervishCD:Start(22)--Not confirmed through multiple pulls, just one
-		if DBM.BossHealth:IsShown() then
-			DBM.BossHealth:Clear()
-			DBM.BossHealth:AddBoss(61444, ming)
-		end
 	elseif msg == L.Haiyan or msg:find(L.Haiyan) then
 		timerWhirlingDervishCD:Cancel()
 		timerShockwaveCD:Cancel()
 		timerRavageCD:Cancel()
 		timerConflagCD:Start()--Not confirmed through multiple pulls, just one
 		timerMeteorCD:Start(42)
-		if DBM.BossHealth:IsShown() then
-			DBM.BossHealth:Clear()
-			DBM.BossHealth:AddBoss(61445, haiyan)
-		end
 	end
 end
 

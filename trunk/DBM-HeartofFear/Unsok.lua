@@ -262,9 +262,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerFlingCD:Start(33)
 		warnAmberExplosionSoon:Schedule(50.5)
 		timerAmberExplosionAMCD:Start(55.5, amberExplosion)
-		if DBM.BossHealth:IsShown() then
-			DBM.BossHealth:AddBoss(62711, Monstrosity)
-		end
 	elseif spellId == 122395 and Phase < 3 and not playerIsConstruct then
 		warnStruggleForControl:Show(args.destName)
 		timerStruggleForControl:Start(args.destName)
@@ -336,9 +333,6 @@ function mod:SPELL_AURA_REMOVED(args)
 		timerDestabalize:Cancel(Monstrosity, amDestabalizeStack)
 		warnAmberExplosionSoon:Cancel()
 		self:ScheduleMethod(0.2, "ReshapeTimerRestart")
-		if DBM.BossHealth:IsShown() then
-			DBM.BossHealth:RemoveBoss(62711)
-		end
 		--He does NOT reset reshape live cd here, he finishes out last CD first, THEN starts using new one.
 	end
 end

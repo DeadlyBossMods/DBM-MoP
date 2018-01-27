@@ -38,9 +38,6 @@ local timerDeathNova		= mod:NewCastTimer(20, 133804)
 --Rak'gor Bloodrazor
 local timerFixateCD			= mod:NewNextTimer(20, 132984)
 
-
-mod:RemoveOption("HealthFrame")
-
 function mod:CHAT_MSG_MONSTER_SAY(msg)
 	if msg == L.LizardLord or msg:find(L.LizardLord) then
 		self:SendSync("LizardPulled")
