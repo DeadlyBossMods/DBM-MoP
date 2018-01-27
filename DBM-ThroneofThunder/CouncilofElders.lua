@@ -94,8 +94,6 @@ local timerFrigidAssaultCD			= mod:NewCDTimer(30, 136904, nil, "Tank|Healer", ni
 
 local berserkTimer					= mod:NewBerserkTimer(720)
 
-mod:AddBoolOption("HealthFrame", true)
-mod:AddBoolOption("PHealthFrame", true)
 mod:AddBoolOption("RangeFrame")--For Sand Bolt and charge and biting cold
 mod:AddBoolOption("SetIconOnBitingCold", true)
 mod:AddBoolOption("SetIconOnFrostBite", true)
@@ -216,10 +214,6 @@ function mod:SPELL_AURA_APPLIED(args)
 			dischargeCount = 0
 			kazraPossessed = true
 		end
-		if DBM.BossHealth:IsShown() and self.Options.PHealthFrame then
-			local bossHealth = math.floor(UnitHealthMax(uid or "boss4") * 0.25)
-			self:ShowDamagedHealthBar(args.destGUID, args.spellName.." : "..args.destName, bossHealth)
-		end
 	elseif spellId == 136903 then--Player Debuff version, not cast version
 		local amount = args.amount or 1
 		timerFrigidAssault:Start(args.destName)
@@ -305,9 +299,6 @@ function mod:SPELL_AURA_REMOVED(args)
 		elseif args:GetDestCreatureID() == 69134 then--Kazra'jin
 			kazraPossessed = false
 			timerRecklessChargeCD:Cancel()--Because it's not going to be 25 sec anymore. It'll go back to 6 seconds. He'll probably do it right away since more than likely it'll be off CD
-		end
-		if DBM.BossHealth:IsShown() and self.Options.PHealthFrame then
-			self:RemoveDamagedHealthBar()
 		end
 	elseif spellId == 136903 then
 		timerFrigidAssault:Cancel(args.destName)
