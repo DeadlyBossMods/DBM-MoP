@@ -30,7 +30,7 @@ local specWarnThousandBlades	= mod:NewSpecialWarningRun(120759, "Melee", nil, 2,
 local timerBombard				= mod:NewBuffActiveTimer(15, 120200)
 local timerBombardCD			= mod:NewCDTimer(42, 120200)
 local timerDashingStrikeCD		= mod:NewCDTimer(13.5, 120789)--14-16 second variation
-local timerThousandBladesCD		= mod:NewNextTimer(15, 120759)
+--local timerThousandBladesCD		= mod:NewCDTimer(15, 120759)
 local timerThousandBlades		= mod:NewBuffActiveTimer(4, 120759)
 
 --local Swarmers 		= DBM:EJ_GetSectionInfo(6280)
@@ -56,7 +56,7 @@ function mod:SPELL_AURA_REMOVED(args)
 	if args.spellId == 120402 then-- NPC only buff, player's buff is 123032
 		warnCausticTar:Show()
 	elseif args.spellId == 120759 then
-		timerThousandBladesCD:Start()
+		--timerThousandBladesCD:Start()
 	end
 end
 
