@@ -125,7 +125,9 @@ function mod:SPELL_CAST_START(args)
 		timerBreathCD:Start()
 		countdownBreath:Start()
 	elseif spellId == 136294 then
-		specWarnCallofTortos:Show()
+		if self:AntiSpam(5, 4) then
+			specWarnCallofTortos:Show()
+		end
 		if self:AntiSpam(59, 3) then -- On below 10%, he casts Call of Tortos always. This cast ignores cooldown, so filter below 10% cast.
 			timerCallTortosCD:Start()
 		end
