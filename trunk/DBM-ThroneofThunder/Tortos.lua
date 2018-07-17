@@ -71,7 +71,7 @@ local function clearStomp()
 end
 
 local function checkCrystalShell()
-	if not UnitDebuff("player", shelldName) and not UnitIsDeadOrGhost("player") then
+	if not DBM:UnitDebuff("player", shelldName) and not UnitIsDeadOrGhost("player") then
 		local percent = (UnitHealth("player") / UnitHealthMax("player")) * 100
 		if percent > 90 then
 			specWarnCrystalShell:Show(shelldName)
@@ -82,7 +82,6 @@ local function checkCrystalShell()
 end
 
 function mod:OnCombatStart(delay)
-	shelldName, shellConcussion = DBM:GetSpellInfo(137633), DBM:GetSpellInfo(136431)
 	stompActive = false
 	stompCount = 0
 	firstRockfall = false--First rockfall after a stomp
@@ -215,7 +214,7 @@ end
 
 --Does not show in combat log, so UNIT_AURA must be used instead
 function mod:UNIT_AURA(uId)
-	local _, _, _, _, _, duration, expires = UnitDebuff(uId, shellConcussion)
+	local _, _, _, _, duration, expires = DBM:UnitDebuff(uId, shellConcussion)
 	if expires and lastConcussion ~= expires then
 		lastConcussion = expires
 		timerShellConcussion:Start()
@@ -225,7 +224,7 @@ function mod:UNIT_AURA(uId)
 	end
 end
 
-function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
+function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	if spellId == 136685 then --Don't filter main tank, bat tank often taunts boss just before bats for vengeance, otherwise we lose threat to dps. Then main tank taunts back after bats spawn and we go get them, fully vengeanced (if you try to pick up bats without vengeance you will not hold aggro for shit)
 		specWarnSummonBats:Show()
 		timerSummonBatsCD:Start()

@@ -42,9 +42,8 @@ function mod:BoneSpikeTarget()
 end
 
 function mod:OnCombatStart(delay)
-	boned = DBM:GetSpellInfo(113996)
 	timerBoneSpikeCD:Start(6.5-delay)
-	if not UnitDebuff("player", boned) then
+	if not DBM:UnitDebuff("player", boned) then
 		specWarnGetBoned:Show()
 	end
 	if self.Options.InfoFrame then

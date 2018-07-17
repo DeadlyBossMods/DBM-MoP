@@ -76,7 +76,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		if args:IsPlayer() and (args.amount or 1) >= 2 then
 			specWarnCrush:Show(args.amount)
 		else
-			if (args.amount or 1) >= 2 and not UnitIsDeadOrGhost("player") or not UnitDebuff("player", args.spellName) then
+			if (args.amount or 1) >= 2 and not UnitIsDeadOrGhost("player") or not DBM:UnitDebuff("player", args.spellName) then
 				specWarnCrushOther:Show(args.destName)
 			end
 		end

@@ -126,12 +126,6 @@ function mod:ThreeBossStart(delay)
 end
 
 function mod:OnCombatStart(delay)
-	Overload = {
-		["Cobalt"] = DBM:GetSpellInfo(115840),
-		["Jade"] = DBM:GetSpellInfo(115842),
-		["Jasper"] = DBM:GetSpellInfo(115843),
-		["Amethyst"] = DBM:GetSpellInfo(115844)
-	}
 	activePetrification = nil
 	playerHasChains = false
 	table.wipe(jasperChainsTargets)
@@ -270,7 +264,7 @@ function mod:UNIT_DIED(args)
 	end
 end
 
-function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
+function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	if spellId == 115852 then
 		activePetrification = "Cobalt"
 		timerPetrification:Start()

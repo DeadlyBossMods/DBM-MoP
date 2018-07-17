@@ -26,7 +26,7 @@ mod:RegisterEventsInCombat(
 	"SPELL_PERIODIC_MISSED 147705",
 	"UNIT_DIED",
 	"UNIT_SPELLCAST_SUCCEEDED",
-	"UPDATE_WORLD_STATES",
+	"UPDATE_UI_WIDGET",
 	"CHAT_MSG_RAID_BOSS_EMOTE",
 	"CHAT_MSG_MONSTER_YELL"
 )
@@ -232,7 +232,7 @@ function mod:UNIT_DIED(args)
 	end
 end
 
-function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
+function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	if spellId == 50630 and self:AntiSpam(2, 3) then--Eject All Passengers:
 		timerAddsCD:Cancel()
 		timerProtoCD:Cancel()
@@ -265,8 +265,11 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 	end
 end
 
-function mod:UPDATE_WORLD_STATES()
-	local text = select(4, GetWorldStateUIInfo(5))
+function mod:UPDATE_UI_WIDGET(table)
+	local id = table.widgetID
+	if id ~= 751 and id ~= 752 then return end--751 south tower, 752 north tower
+	local widgetInfo = C_UIWidgetManager.GetIconAndTextWidgetVisualizationInfo(id)
+	local text = widgetInfo.text
 	local percent = tonumber(string.match(text or "", "%d+"))
 	if percent == 1 and (self.vb.firstTower == 0) and not self:IsMythic() then
 		self.vb.firstTower = 1

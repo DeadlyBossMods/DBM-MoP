@@ -229,7 +229,7 @@ function mod:UNIT_DIED(args)
 	end
 end
 
-function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
+function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	if spellId == 145769 and self:AntiSpam(1, 5) then--Unleash Corruption
 		specWarnManifestationSoon:Show()
 		self:Schedule(5, addsDelay, GetTime())

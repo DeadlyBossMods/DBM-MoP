@@ -84,7 +84,7 @@ local notARaid = false
 local DebuffFilter
 do
 	DebuffFilter = function(uId)
-		return UnitDebuff(uId, prisonDebuff)
+		return DBM:UnitDebuff(uId, prisonDebuff)
 	end
 end
 
@@ -97,7 +97,7 @@ end
 
 local function warnPrisonTargets()
 	if mod.Options.RangeFrame then
-		if UnitDebuff("player", prisonDebuff) then--You have debuff, show everyone
+		if DBM:UnitDebuff("player", prisonDebuff) then--You have debuff, show everyone
 			DBM.RangeCheck:Show(8, nil)
 		else--You do not have debuff, only show players who do
 			DBM.RangeCheck:Show(8, DebuffFilter)
@@ -128,7 +128,6 @@ local function findGroupNumber()
 end
 
 function mod:OnCombatStart(delay)
-	prisonDebuff = DBM:GetSpellInfo(111850)
 	phase = 1
 	totalTouchOfSha = 0
 	prisonCount = 0
