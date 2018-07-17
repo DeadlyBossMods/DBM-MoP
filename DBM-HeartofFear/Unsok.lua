@@ -130,7 +130,6 @@ local function warnAmberExplosionCast(spellId)
 end
 
 function mod:OnCombatStart(delay)
-	amberExplosion = DBM:GetSpellInfo(122402)
 	warnedWill = true--avoid wierd bug on pull
 	willNumber = 100
 	Phase = 1
@@ -436,7 +435,7 @@ function mod:UNIT_POWER_FREQUENT(uId)
 	end
 end
 
-function mod:UNIT_SPELLCAST_STOP(uId, _, _, _, spellId)
+function mod:UNIT_SPELLCAST_STOP(uId, _, spellId)
 	if spellId == 122402 then--SPELL_INTERRUPT not always fires, so use UNIT_SPELLCAST_STOP
 		timerAmberExplosion:Cancel()
 		self:UnscheduleMethod("AmberExplosionAMWarning")

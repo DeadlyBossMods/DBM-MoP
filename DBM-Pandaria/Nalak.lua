@@ -36,7 +36,7 @@ local cloudDebuff = DBM:GetSpellInfo(136340)
 local debuffFilter
 do
 	debuffFilter = function(uId)
-		return UnitDebuff(uId, cloudDebuff)
+		return DBM:UnitDebuff(uId, cloudDebuff)
 	end
 end
 
@@ -44,7 +44,7 @@ local function warnStormcloudTargets()
 	warnStormcloud:Show(table.concat(stormcloudTargets, "<, >"))
 	table.wipe(stormcloudTargets)
 	if mod.Options.RangeFrame then
-		if UnitDebuff("player", cloudDebuff) then--You have debuff, show everyone
+		if DBM:UnitDebuff("player", cloudDebuff) then--You have debuff, show everyone
 			DBM.RangeCheck:Show(10, nil)
 		else--You do not have debuff, only show players who do
 			DBM.RangeCheck:Show(10, debuffFilter)
@@ -58,7 +58,6 @@ local function warnTetherTargets()
 end
 
 function mod:OnCombatStart(delay, yellTriggered)
-	cloudDebuff = DBM:GetSpellInfo(136340)
 	table.wipe(stormcloudTargets)
 	table.wipe(tetherTargets)
 	if yellTriggered then

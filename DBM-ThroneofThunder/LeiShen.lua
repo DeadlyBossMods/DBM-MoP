@@ -535,7 +535,7 @@ function mod:UNIT_HEALTH_FREQUENT(uId)
 	end
 end
 
-function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
+function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	if spellId == 137146 and self:AntiSpam(2, 2) then--Supercharge Conduits (comes earlier than other events so we use this one)
 		self.vb.intermissionActive = true
 		specWarnDiffusionChainSoon:Cancel()

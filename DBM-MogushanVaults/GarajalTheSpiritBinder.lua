@@ -247,7 +247,7 @@ function mod:OnSync(msg, guid)
 	end
 end
 
-function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
+function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	if (spellId == 117215 or spellId == 117218 or spellId == 117219 or spellId == 117222) then--Shadowy Attacks
 		timerShadowyAttackCD:Start()
 	elseif spellId == 116964 then--Summon Totem

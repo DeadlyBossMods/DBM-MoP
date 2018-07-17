@@ -137,7 +137,6 @@ end
 
 
 function mod:OnCombatStart(delay)
-	focusedAssault = DBM:GetSpellInfo(116525)
 	self.vb.comboMob = nil
 	self.vb.comboCount = 0
 	self.vb.titanGasCast = 0
@@ -224,7 +223,7 @@ function mod:RAID_BOSS_EMOTE(msg)
 	end
 end
 
-function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
+function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	if spellId == 116556 then
 		warnEnergizingSmash:Show()
 	end

@@ -169,7 +169,7 @@ function mod:SPELL_AURA_APPLIED(args)
 				specWarnPuncture:Show(amount)
 			end
 		else
-			if amount >= threatamount and not UnitDebuff("player", args.spellName) and not UnitIsDeadOrGhost("player") then--Other tank has at least one stack and you have none
+			if amount >= threatamount and not DBM:UnitDebuff("player", args.spellName) and not UnitIsDeadOrGhost("player") then--Other tank has at least one stack and you have none
 				specWarnPunctureOther:Show(args.destName)--So nudge you to taunt it off other tank already.
 			end
 		end

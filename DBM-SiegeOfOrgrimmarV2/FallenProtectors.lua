@@ -136,7 +136,6 @@ function mod:InfernoStrikeTarget(targetname, uId)
 end
 
 function mod:OnCombatStart(delay)
-	calamitySpellText = DBM:GetSpellInfo(143491)
 	isInfernoTarget = false
 	self.vb.calamityCount = 0
 	self.vb.warned71475 = 0
@@ -322,7 +321,7 @@ function mod:RAID_BOSS_WHISPER(msg)
 	end
 end
 
-function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
+function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	if spellId == 143019 then--Does not show in combat log on normal
 		self:BossTargetScanner(71475, "BrewTarget", 0.025)
 		timerCorruptedBrewCD:Start()
