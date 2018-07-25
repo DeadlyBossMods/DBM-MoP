@@ -170,7 +170,7 @@ function mod:SPELL_CAST_START(args)
 		self:Unschedule(warnClosedCircuitTargets)
 		self:Schedule(0.3, warnClosedCircuitTargets)
 	elseif spellId == 119358 then
-		local _, _, _, _, startTime, endTime = UnitCastingInfo("boss1")
+		local _, _, _, startTime, endTime = UnitCastingInfo("boss1")
 		local castTime
 		if startTime and endTime then
 			castTime = ((endTime or 0) - (startTime or 0)) / 1000
