@@ -316,7 +316,7 @@ end
 
 function mod:RAID_BOSS_WHISPER(msg)
 	if msg:find("spell:143330") then--Emote giving ONLY to the person tanking boss. Better than scanning boss 1-5 for this one which fails from time to time
-		specWarnGouge:Show()--So show tank warning
+		specWarnGouge:Show(Softfoot)--So show tank warning
 		specWarnGouge:Play("turnaway")
 	end
 end
