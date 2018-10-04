@@ -175,8 +175,8 @@ function mod:SPELL_AURA_APPLIED(args)
 				startIcon = 8--Always start with skull
 				alternateSet = true--And reset alternate status so we use moon next time (unless all are dead again, then re always reset to skull)
 			end
+			self:ScanForMobs(args.destGUID, 0, startIcon, 3, 0.2, 10)
 		end
-		self:ScanForMobs(args.destGUID, 0, startIcon, 3, 0.2, 10)
 		addsActivated = addsActivated + 1
 	end
 end
