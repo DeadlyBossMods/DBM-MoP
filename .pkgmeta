@@ -1,0 +1,12 @@
+package-as: DBM-MoP
+enable-nolib-creation: no
+
+move-folders:
+    DBM-MoP/DBM-HeartofFear: DBM-HeartofFear
+    DBM-MoP/DBM-MogushanVaults: DBM-MogushanVaults
+    DBM-MoP/DBM-Pandaria: DBM-Pandaria
+    DBM-MoP/DBM-Scenario-MoP: DBM-Scenario-MoP
+    DBM-MoP/DBM-SiegeOfOrgrimmatV2: DBM-SiegeOfOrgrimmatV2
+    DBM-MoP/DBM-TerraceofEndlessSpring: DBM-TerraceofEndlessSpring
+    DBM-MoP/DBM-ThroneofThunder: DBM-ThroneofThunder
+   
