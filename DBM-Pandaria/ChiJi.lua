@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(857, "DBM-Pandaria", nil, 322, 1)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(string.sub("@file-date-integer@", 1, -5))
+mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(71952)
 mod:SetReCombatTime(20)
 mod:SetZone()
