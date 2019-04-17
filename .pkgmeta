@@ -4,9 +4,9 @@ enable-nolib-creation: no
 move-folders:
     DBM-Pandaria/DBM-HeartofFear: DBM-HeartofFear
     DBM-Pandaria/DBM-MogushanVaults: DBM-MogushanVaults
-    DBM-Pandaria/DBM-Pandaria: DBM-Pandaria
     DBM-Pandaria/DBM-Scenario-MoP: DBM-Scenario-MoP
-    DBM-Pandaria/DBM-SiegeOfOrgrimmatV2: DBM-SiegeOfOrgrimmatV2
+    DBM-Pandaria/DBM-SiegeOfOrgrimmarV2: DBM-SiegeOfOrgrimmarV2
     DBM-Pandaria/DBM-TerraceofEndlessSpring: DBM-TerraceofEndlessSpring
     DBM-Pandaria/DBM-ThroneofThunder: DBM-ThroneofThunder
+    DBM-Pandaria/DBM-Pandaria: DBM-Pandaria
    
