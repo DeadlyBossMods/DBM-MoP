@@ -32,7 +32,7 @@ local berserkTimer				= mod:NewBerserkTimer(300)
 
 mod:AddBoolOption("SetIconOnBurningSoul")
 mod:AddBoolOption("RangeFrame", true)
-mod:AddReadyCheckOption(33118, false)
+mod:AddReadyCheckOption(33118, false, 90)
 
 function mod:OnCombatStart(delay, yellTriggered)
 	if yellTriggered then--We know for sure this is an actual pull and not diving into in progress

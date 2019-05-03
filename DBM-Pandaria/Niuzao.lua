@@ -26,7 +26,7 @@ local timerHeadbuttCD			= mod:NewCDTimer(47, 144610, nil, "Tank", nil, 5)
 local timerMassiveQuake			= mod:NewBuffActiveTimer(13, 144611)
 local timerMassiveQuakeCD		= mod:NewCDTimer(48, 144611, nil, nil, nil, 2)
 
-mod:AddReadyCheckOption(33117, false)
+mod:AddReadyCheckOption(33117, false, 90)
 
 function mod:OnCombatStart(delay, yellTriggered)
 	if yellTriggered then

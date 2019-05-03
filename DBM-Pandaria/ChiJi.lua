@@ -26,7 +26,7 @@ local specWarnCraneRush			= mod:NewSpecialWarningSpell(144470, nil, nil, nil, 2)
 local timerInspiringSongCD		= mod:NewCDTimer(30, 144468, nil, nil, nil, 4)--30-50sec variation?
 local timerBlazingSong			= mod:NewBuffActiveTimer(15, 144471)
 
-mod:AddReadyCheckOption(33117, false)
+mod:AddReadyCheckOption(33117, false, 90)
 
 function mod:BeaconTarget(targetname, uId)
 	if not targetname then return end
