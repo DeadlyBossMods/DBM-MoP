@@ -39,7 +39,7 @@ local specWarnTerrorize					= mod:NewSpecialWarningDispel(123012, "Healer")
 local timerNightCD						= mod:NewNextTimer(121, "ej6310", nil, nil, nil, 6, 130013)
 local timerSunbeamCD					= mod:NewCDTimer(41, 122789)
 local timerShadowBreathCD				= mod:NewCDTimer(26, 122752, nil, "Tank|Healer", nil, 5)
-local timerNightmaresCD					= mod:NewNextTimer(15.5, 122770, nil, nil, nil, 3)
+local timerNightmaresCD					= mod:NewNextTimer(15.5, 122770, nil, nil, nil, 3, nil, nil, nil, 1, 4)
 local timerDarkOfNightCD				= mod:NewCDTimer(30.5, "ej6550", nil, nil, nil, 1, 130013)
 local timerDayCD						= mod:NewNextTimer(121, "ej6315", nil, nil, nil, 6, 122789)
 local timerSummonUnstableShaCD			= mod:NewNextTimer(18, "ej6320", nil, nil, nil, 1, "627685")
@@ -77,8 +77,6 @@ end
 function mod:OnCombatStart(delay)
 	timerShadowBreathCD:Start(8.5-delay)
 	timerNightmaresCD:Start(15-delay)
-	countdownNightmares:Cancel() -- sometimes it doubles OnCombatStart, wtf?..
-	countdownNightmares:Start(15-delay)
 	timerSunbeamCD:Start(43-delay)--Sometimes he doesn't emote first cast, so we start a bar for SECOND cast on pull, if we does cast it though, we'll update bar off first cast
 	timerDayCD:Start(-delay)
 	if not self:IsDifficulty("lfr25") then
@@ -156,7 +154,6 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 		self:BossTargetScanner(62442, "ShadowsTarget")
 		if timerDayCD:GetTime() < 106 then
 			timerNightmaresCD:Start()
-			countdownNightmares:Start(15.5)
 		end
 	elseif spellId == 123252 and self:IsInCombat() then--Dread Shadows Cancel (Sun Phase)
 		lightOfDayCount = 0
@@ -165,7 +162,6 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 		timerShadowBreathCD:Cancel()
 		timerSunbeamCD:Cancel()
 		timerNightmaresCD:Cancel()
-		countdownNightmares:Cancel()
 		timerDarkOfNightCD:Cancel()
 		warnDay:Show()
 		timerSunBreathCD:Start(29, 1)
@@ -182,7 +178,6 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 		warnNight:Show()
 		timerShadowBreathCD:Start(10)
 		timerNightmaresCD:Start()
-		countdownNightmares:Start(15.5)
 		timerDayCD:Start()
 		if self:IsHeroic() then
 			timerDarkOfNightCD:Start(10)
