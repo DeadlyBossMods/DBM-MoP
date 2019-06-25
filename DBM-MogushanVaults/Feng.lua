@@ -27,7 +27,7 @@ mod:RegisterEventsInCombat(
 --on normal, it lets you choose nature or fire first but it will not allow arcane first.
 --none the less, the player can still control it on normal, just not to degree of heroic. The EJ says it's random on normal but it's not.
 
-local warnPhase						= mod:NewAnnounce("WarnPhase", 1, "Interface\\Icons\\Spell_Nature_WispSplode")
+local warnPhase						= mod:NewAnnounce("WarnPhase", 1, "136116")
 --Nature/Fist
 local warnLightningLash				= mod:NewStackAnnounce(131788, 3, nil, "Tank")
 local warnLightningFists			= mod:NewSpellAnnounce(116157, 3)
