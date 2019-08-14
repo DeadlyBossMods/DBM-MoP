@@ -179,4 +179,4 @@ L = DBM:GetModLocalization("d745")
 
 L:SetMiscLocalization({
 	Clear	= "훌륭해요!"
-}
+})

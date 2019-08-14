@@ -181,4 +181,4 @@ L = DBM:GetModLocalization("d745")
 
 L:SetMiscLocalization({
 	Clear	= "Well done!"
-}
+})
