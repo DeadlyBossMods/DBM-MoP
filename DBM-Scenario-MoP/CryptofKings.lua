@@ -76,7 +76,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif args.spellId == 120215 then
 		warnDarkforce:Show()
 		specWarnDarkforce:Show()
-		timerDarkforce:Start(self:IsDifficulty("heroic5") and 3.5 or 5)
+		timerDarkforce:Start(self:IsHeroic() and 3.5 or 5)
 		timerDarkforceCD:Start()
 	end
 end
