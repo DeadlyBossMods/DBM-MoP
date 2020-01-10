@@ -18,7 +18,6 @@ local warnStormcloud			= mod:NewTargetAnnounce(136340, 3)
 local warnLightningTether		= mod:NewTargetAnnounce(136339, 3)
 
 local specWarnStormcloud		= mod:NewSpecialWarningYou(136340)
-local yellStormcloud			= mod:NewYell(136340)
 local specWarnLightningTether	= mod:NewSpecialWarningYou(136339)--Is this important enough?
 local specWarnArcNova			= mod:NewSpecialWarningRun(136338, "Melee", nil, 2, 4)
 
@@ -93,7 +92,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		stormcloudTargets[#stormcloudTargets + 1] = args.destName
 		if args:IsPlayer() then
 			specWarnStormcloud:Show()
-			yellStormcloud:Yell()
 		end
 		self:Unschedule(warnStormcloudTargets)
 		self:Schedule(0.3, warnStormcloudTargets)

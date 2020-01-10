@@ -20,7 +20,6 @@ local warnMagmaCrush			= mod:NewSpellAnnounce(144688, 3)
 local warnBurningSoul			= mod:NewTargetAnnounce(144689, 3)
 
 local specWarnBurningSoul		= mod:NewSpecialWarningMoveAway(144689)
-local yellBurningSoul			= mod:NewYell(144689)
 local specWarnPoolOfFire		= mod:NewSpecialWarningMove(144693)
 local specWarnEternalAgony		= mod:NewSpecialWarningSpell(144696, nil, nil, nil, 3)--Fights over, this is 5 minute berserk spell.
 
@@ -72,7 +71,6 @@ function mod:SPELL_AURA_APPLIED(args)
 			specWarnBurningSoul:Schedule(2)
 			specWarnBurningSoul:Schedule(4)
 			specWarnBurningSoul:Schedule(6)
-			yellBurningSoul:Yell()
 			if self.Options.RangeFrame then
 				DBM.RangeCheck:Show(8)
 			end
