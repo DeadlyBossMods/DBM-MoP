@@ -20,7 +20,7 @@ local warnAchFiveAlive		= mod:NewAnnounce("WarnAchFiveAlive", 3, nil, false)
 local specWarnDivineLight	= mod:NewSpecialWarningInterrupt(135403)
 
 --[[ Alliance 'heroes'
-68581 Daggin Windbeard 
+68581 Daggin Windbeard
 68685 Admiral Taylor
 68871 Amber Kearnen
 68883 Sully "The Pickle" MxLeary

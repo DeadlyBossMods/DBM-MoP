@@ -181,7 +181,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 		if self:AntiSpam(5, args.destName) then
 			warnForbiddenMagic:CombinedShow(1, args.destName)
 		end
-		if (source == UnitName("target") or source == UnitName("focus")) and self:AntiSpam(3, 6) then 
+		if (source == UnitName("target") or source == UnitName("focus")) and self:AntiSpam(3, 6) then
 			specWarnForbiddenMagic:Show(source)
 		end
 	elseif spellId == 145786 then

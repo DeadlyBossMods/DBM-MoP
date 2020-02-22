@@ -184,7 +184,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		if cid == 69078 then--Sul the Sandcrawler
 			self:UnregisterShortTermEvents()
 		elseif cid == 69132 then--High Prestess Mar'li
-			--Swap timers. While possessed 
+			--Swap timers. While possessed
 			local elapsed, total = timerBlessedLoaSpiritCD:GetTime()
 			timerBlessedLoaSpiritCD:Cancel()
 			if elapsed and total then--If for some reason it was nil, like it JUST came off cd, do nothing, she should cast loa spirit right away.
@@ -196,7 +196,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			end
 			self:UnregisterShortTermEvents()
 		elseif cid == 69131 then--Frost King Malakk
-			--Swap timers. While possessed 
+			--Swap timers. While possessed
 			local elapsed, total = timerBitingColdCD:GetTime()
 			timerBitingColdCD:Cancel()
 			if elapsed and total and total ~= 0 then--If for some reason it was nil, like it JUST came off cd, do nothing, he should cast frost bite right away.

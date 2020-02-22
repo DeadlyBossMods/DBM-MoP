@@ -71,7 +71,7 @@ local timerDeafeningScreechCD		= mod:NewNextCountTimer(13, 143343, nil, nil, nil
 local timerBloodFrenzyCD			= mod:NewNextTimer(5, 143442)
 local timerBloodFrenzyEnd			= mod:NewBuffActiveTimer(13.5, 143442)
 local timerFixate					= mod:NewTargetTimer(12, 143445, nil, nil, nil, 3, nil, DBM_CORE_DEADLY_ICON)
-local timerKey						= mod:NewTargetTimer(60, 146589, nil, false) 
+local timerKey						= mod:NewTargetTimer(60, 146589, nil, false)
 --Infusion of Acid
 local timerAcidBreath				= mod:NewTargetTimer(30, 143780, nil, "Tank|Healer")
 local timerAcidBreathCD				= mod:NewCDTimer(11, 143780, nil, "Tank", nil, 5, nil, DBM_CORE_TANK_ICON)--Often 12, but sometimes 11

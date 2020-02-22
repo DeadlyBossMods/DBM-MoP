@@ -126,7 +126,7 @@ function mod:SPELL_CAST_START(args)
 	elseif spellId == 144379 then
 		local sourceGUID = args.sourceGUID
 		warnMockingBlast:Show()
-		if sourceGUID == UnitGUID("target") or sourceGUID == UnitGUID("focus") then 
+		if sourceGUID == UnitGUID("target") or sourceGUID == UnitGUID("focus") then
 			specWarnMockingBlast:Show(args.sourceName)
 		end
 	elseif spellId == 144832 then

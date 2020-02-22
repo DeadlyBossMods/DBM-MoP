@@ -78,7 +78,6 @@ local Ambiguate = Ambiguate
 local residue = {}
 --Not important, don't need to recover
 local playerInside = false
-local previousPower = nil
 local warnedAdd = {}
 --Important, needs recover
 mod.vb.unleashedAngerCast = 0
@@ -106,7 +105,6 @@ end
 
 function mod:OnCombatStart(delay)
 	playerInside = false
-	previousPower = nil
 	table.wipe(warnedAdd)
 	mod.vb.unleashedAngerCast = 0
 	mod.vb.manifestationCount = 0

@@ -133,7 +133,7 @@ function mod:SPELL_CAST_START(args)
 	elseif spellId == 146757 and (not DBM.Options.DontShowFarWarnings or UnitPower("player", 10) == 0) then
 		local source = args.sourceGUID
 		warnChainHeal:Show()
-		if source == UnitGUID("target") or source == UnitGUID("focus") then 
+		if source == UnitGUID("target") or source == UnitGUID("focus") then
 			specWarnChainheal:Show(args.sourceName)
 		end
 	end

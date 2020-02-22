@@ -173,7 +173,7 @@ function mod:SPELL_CAST_START(args)
 			zarthikCount = zarthikCount + 1
 			zarthikGUIDS[args.sourceGUID] = zarthikCount
 		end
-		local count = zarthikGUIDS[args.sourceGUID] -- This is set counter for dispel(1, 2, 3, 1, 2, 3.. repeats). Especailly for mass dispel. Very useful for PRIEST. NO SPAM. DO NOT REMOVE THIS. 
+		local count = zarthikGUIDS[args.sourceGUID] -- This is set counter for dispel(1, 2, 3, 1, 2, 3.. repeats). Especailly for mass dispel. Very useful for PRIEST. NO SPAM. DO NOT REMOVE THIS.
 		warnQuickening:Show(count, args.sourceName)
 		specWarnQuickening:Show(count)
 		timerQuickeningCD:Start(nil, args.sourceGUID)
