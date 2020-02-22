@@ -37,7 +37,6 @@ localization.de.lua
 localization.es.lua
 localization.tw.lua
 localization.cn.lua
-localization.fr.lua
 localization.ru.lua
 BrewingStorm.lua
 BattleHighSeas.lua
