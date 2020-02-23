@@ -45,7 +45,6 @@ local timerBladeTempestCD				= mod:NewNextTimer(60, 125310, nil, nil, nil, 2, ni
 local berserkTimer						= mod:NewBerserkTimer(490)
 
 mod:AddBoolOption("RangeFrame", "Ranged")--For Wind Step
-mod:AddBoolOption("UnseenStrikeArrow")
 
 local intensifyCD = 60
 local phase2 = false
@@ -72,9 +71,6 @@ end
 function mod:OnCombatEnd()
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Hide()
-	end
-	if self.Options.UnseenStrikeArrow then
-		DBM.Arrow:Hide()
 	end
 end
 
@@ -144,9 +140,6 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 			yellUnseenStrike:Yell()
 		else
 			specWarnUnseenStrikeOther:Show(target)
-			if self.Options.UnseenStrikeArrow then
-				DBM.Arrow:ShowRunTo(target, 3, 5)
-			end
 		end
 	end
 end

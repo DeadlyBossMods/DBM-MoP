@@ -123,7 +123,3 @@ L = DBM:GetModLocalization("HoFTrash")
 L:SetGeneralLocalization({
 	name	= "恐懼之心小怪"
 })
-
-L:SetOptionLocalization({
-	UnseenStrikeArrow	= "當某人中了$spell:122949顯示DBM箭頭"
-})

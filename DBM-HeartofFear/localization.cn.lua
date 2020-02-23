@@ -34,7 +34,6 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(744)
 
 L:SetOptionLocalization({
-	UnseenStrikeArrow	= "DBM箭头：当有人受到$spell:122949影响时",
 	RangeFrame			= "距离监视（10码）：$spell:123175"
 })
 

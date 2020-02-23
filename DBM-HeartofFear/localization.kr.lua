@@ -124,7 +124,3 @@ L = DBM:GetModLocalization("HoFTrash")
 L:SetGeneralLocalization({
 	name	= "공포의 심장: 일반구간"
 })
-
-L:SetOptionLocalization({
-	UnseenStrikeArrow	= "$spell:122949 대상이 정해진 경우 DBM 화살표 보기"
-})

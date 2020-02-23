@@ -124,7 +124,3 @@ L = DBM:GetModLocalization("HoFTrash")
 L:SetGeneralLocalization({
 	name	= "Trash des Herz der Angst"
 })
-
-L:SetOptionLocalization({
-	UnseenStrikeArrow	= "Zeige DBM-Pfeil, wenn jemand von $spell:122949 betroffen ist"
-})

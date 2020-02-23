@@ -125,7 +125,3 @@ L = DBM:GetModLocalization("HoFTrash")
 L:SetGeneralLocalization({
 	name	= "Трэш мобы Сердца Страха"
 })
-
-L:SetOptionLocalization({
-	UnseenStrikeArrow	= "Показывать стрелку DBM, когда на ком-то $spell:122949"
-})

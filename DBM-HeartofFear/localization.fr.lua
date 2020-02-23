@@ -36,7 +36,6 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(744)
 
 L:SetOptionLocalization({
-	UnseenStrikeArrow	= "Afficher la flêche DBM quand quelqu'un est touché par $spell:122949",
 	RangeFrame			= "Afficher le cadre de distance (10m) pour $spell:123175"
 })
 

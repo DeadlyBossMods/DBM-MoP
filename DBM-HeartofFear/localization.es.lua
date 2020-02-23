@@ -143,7 +143,3 @@ L = DBM:GetModLocalization("HoFTrash")
 L:SetGeneralLocalization({
 	name	= "Enemigos menores"
 })
-
-L:SetOptionLocalization({
-	UnseenStrikeArrow	= "Mostrar flecha cuando un jugador esté afectado por $spell:122949"
-})
