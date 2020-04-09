@@ -166,7 +166,7 @@ function mod:OnCombatStart(delay)
 	timerConduitCD:Start(11-delay)--First always 11 seconds after engage, unless not in range of a pillar within 11 seconds, then cast instantly after 11 sec mark the moment he is in range of pillar
 	berserkTimer:Start(-delay)
 	self:RegisterShortTermEvents(
-		"UNIT_HEALTH_FREQUENT boss1",
+		"UNIT_HEALTH boss1",
 		"SPELL_DAMAGE 135150 135991",
 		"SPELL_MISSED 135150 135991"
 	)-- Do not use on phase 3.
@@ -501,7 +501,7 @@ local function LoopIntermission()
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(uId)
+function mod:UNIT_HEALTH(uId)
 	local hp = UnitHealth(uId) / UnitHealthMax(uId) * 100
 	if hp > 65 and hp < 67.5 and self.vb.warnedCount == 0 then
 		self.vb.warnedCount = 1

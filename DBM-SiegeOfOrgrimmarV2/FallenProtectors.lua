@@ -18,7 +18,7 @@ mod:RegisterEventsInCombat(
 	"SPELL_MISSED 144357 144367 143009",
 	"RAID_BOSS_WHISPER",
 	"UNIT_SPELLCAST_SUCCEEDED boss1 boss2 boss3",
-	"UNIT_HEALTH_FREQUENT boss1 boss2 boss3 boss4 boss5"
+	"UNIT_HEALTH boss1 boss2 boss3 boss4 boss5"
 )
 
 local Softfoot = DBM:EJ_GetSectionInfo(7889)
@@ -328,7 +328,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(uId)
+function mod:UNIT_HEALTH(uId)
 	if self:IsTrivial(100) then return end
 	if self.vb.warned71475 == 2 and self.vb.warned71479 == 2 and self.vb.warned71480 == 2 then return end
 	local cId = self:GetUnitCreatureId(uId)
