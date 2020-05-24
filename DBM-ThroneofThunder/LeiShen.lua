@@ -78,7 +78,7 @@ local timerOverchargeCD					= mod:NewCDTimer(40, 136295, nil, nil, nil, 3)
 local timerBouncingBoltCD				= mod:NewCDTimer(40, 136361, nil, nil, nil, 5, nil, nil, nil, 3, 4)
 local timerSuperChargedConduits			= mod:NewBuffActiveTimer(47, 137045)--Actually intermission only, but it fits best with conduits
 --Phase 1
-local timerDecapitateCD					= mod:NewCDTimer(50, 134912, nil, "Tank", nil, 5, nil, DBM_CORE_TANK_ICON, nil, 2, 4)--Cooldown with some variation. 50-57ish or so.
+local timerDecapitateCD					= mod:NewCDTimer(50, 134912, nil, "Tank", nil, 5, nil, DBM_CORE_L.TANK_ICON, nil, 2, 4)--Cooldown with some variation. 50-57ish or so.
 local timerThunderstruck				= mod:NewCastTimer(4.8, 135095)--4 sec cast. + landing 0.8~1.3 sec.
 local timerThunderstruckCD				= mod:NewNextCountTimer(46, 135095, nil, nil, nil, 3, nil, nil, nil, 1, 4)--Seems like an exact bar
 --Phase 2
