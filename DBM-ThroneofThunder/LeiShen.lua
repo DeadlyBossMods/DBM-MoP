@@ -13,7 +13,7 @@ mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 135095 136850 136478",
 	"SPELL_AURA_APPLIED 135000 134912 135695 136295 135680 135681 139011 136914",
 	"SPELL_AURA_APPLIED_DOSE 136914",
-	"SPELL_CAST_SUCCESS 135991 136543 108199 114028",
+	"SPELL_CAST_SUCCESS 135991 136543 108199",
 	"SPELL_AURA_REMOVED 135680 135681 135682 135683 135695 136295",
 	"SPELL_PERIODIC_DAMAGE 135153 137176",
 	"SPELL_PERIODIC_MISSED 135153 137176",
@@ -32,7 +32,6 @@ local warnDecapitate					= mod:NewTargetAnnounce(134912, 4, nil, "Tank|Healer")
 local warnPhase2						= mod:NewPhaseAnnounce(2)
 local warnSummonBallLightning			= mod:NewCountAnnounce(136543, 3)--This seems to be VERY important to spread for. It spawns an orb for every person who takes damage. MUST range 6 this.
 local warnGorefiendsGrasp				= mod:NewCountAnnounce(108199, 1)
-local warnMassSpellReflect				= mod:NewCountAnnounce(114028, 1)
 --Phase 3
 local warnPhase3						= mod:NewPhaseAnnounce(3)
 local warnViolentGaleWinds				= mod:NewSpellAnnounce(136889, 3)
@@ -61,7 +60,6 @@ local specWarnLightningWhip				= mod:NewSpecialWarningCount(136850, nil, nil, ni
 local specWarnSummonBallLightning		= mod:NewSpecialWarningCount(136543)
 local specWarnOverloadedCircuits		= mod:NewSpecialWarningMove(137176)
 local specWarnGorefiendsGrasp			= mod:NewSpecialWarningCount(108199, false)--For heroic, gorefiends+stun timing is paramount to success
-local specWarnMassSpellReflect			= mod:NewSpecialWarningCount(114028, false)--For heroic, diffusion strat.
 --Phase 3
 local specWarnElectricalShock			= mod:NewSpecialWarningStack(136914, nil, 12)
 local specWarnElectricalShockOther		= mod:NewSpecialWarningTaunt(136914)
@@ -91,7 +89,6 @@ local timerViolentGaleWinds				= mod:NewBuffActiveTimer(18, 136889)
 local timerViolentGaleWindsCD			= mod:NewNextTimer(30.5, 136889, nil, nil, nil, 2)
 --Heroic
 local timerHelmOfCommand				= mod:NewCDTimer(14, 139011, nil, nil, nil, 3)
-local timerMassSpellReflect				= mod:NewBuffActiveTimer(5, 114028)
 
 local berserkTimer						= mod:NewBerserkTimer(900)--Confirmed in LFR, probably the same in all modes though?
 
@@ -112,7 +109,6 @@ mod.vb.ballsCount = 0
 mod.vb.whipCount = 0
 mod.vb.thunderCount = 0
 mod.vb.goreCount = 0
-mod.vb.reflectCount = 0
 mod.vb.diffusionCastTarget = nil
 local staticshockTargets = {}
 local diffusionTargets = {}
@@ -160,7 +156,6 @@ function mod:OnCombatStart(delay)
 	self.vb.whipCount = 0
 	self.vb.thunderCount = 0
 	self.vb.goreCount = 0
-	self.vb.reflectCount = 0
 	timerThunderstruckCD:Start(25-delay, 1)
 	timerDecapitateCD:Start(40-delay)--First seems to be 45, rest 50. it's a CD though, not a "next"
 	timerConduitCD:Start(11-delay)--First always 11 seconds after engage, unless not in range of a pillar within 11 seconds, then cast instantly after 11 sec mark the moment he is in range of pillar
@@ -333,12 +328,6 @@ function mod:SPELL_CAST_SUCCESS(args)
 		self.vb.goreCount = self.vb.goreCount + 1
 		warnGorefiendsGrasp:Show(self.vb.goreCount)
 		specWarnGorefiendsGrasp:Show(self.vb.goreCount)
-	elseif spellId == 114028 and self:IsInCombat() then
-		if self.vb.reflectCount == 2 then self.vb.reflectCount = 0 end
-		self.vb.reflectCount = self.vb.reflectCount + 1
-		warnMassSpellReflect:Show(self.vb.reflectCount)
-		specWarnMassSpellReflect:Show(self.vb.reflectCount)
-		timerMassSpellReflect:Start()
 	end
 end
 
@@ -397,7 +386,6 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 		self.vb.intermissionActive = false
 		self.vb.phase = self.vb.phase + 1
 		self.vb.goreCount = 0
-		self.vb.reflectCount = 0
 		if self.Options.RangeFrame then
 			DBM.RangeCheck:Hide()
 		end
