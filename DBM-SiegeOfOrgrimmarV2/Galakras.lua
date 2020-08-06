@@ -7,7 +7,6 @@ mod:SetEncounterID(1622)
 mod:DisableESCombatDetection()
 mod:SetReCombatTime(180, 15)--fix combat re-starts after killed. Same issue as tsulong. Fires TONS of IEEU for like 1-2 minutes after fight ends.
 mod:SetMainBossID(72249)
-mod:SetZone()
 mod:SetUsedIcons(8, 7, 2)
 
 mod:RegisterCombat("combat")

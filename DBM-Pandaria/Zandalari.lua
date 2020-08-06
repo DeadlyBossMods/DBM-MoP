@@ -3,7 +3,6 @@ local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(69768, 69769, 69841, 69842)
-mod:SetZone()
 mod:DisableWBEngageSync()
 
 mod:RegisterCombat("combat")

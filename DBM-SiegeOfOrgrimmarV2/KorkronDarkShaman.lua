@@ -4,7 +4,6 @@ local L		= mod:GetLocalizedStrings()
 mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(71859, 71858)--haromm, Kardris
 mod:SetEncounterID(1606)
-mod:SetZone()
 mod:SetUsedIcons(5, 4, 3, 2, 1)
 
 mod:RegisterCombat("combat")
