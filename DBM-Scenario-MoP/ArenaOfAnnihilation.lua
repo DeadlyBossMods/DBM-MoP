@@ -1,6 +1,8 @@
 local mod	= DBM:NewMod("d511", "DBM-Scenario-MoP")
 local L		= mod:GetLocalizedStrings()
 
+mod.statTypes = "normal"
+
 mod:SetRevision("@file-date-integer@")
 mod:SetZone()
 
@@ -10,7 +12,6 @@ mod:RegisterEventsInCombat(
 	"SPELL_CAST_START"
 --	"SPELL_AURA_REMOVED"
 )
-mod.onlyNormal = true
 
 local warnFlameWall		= mod:NewSpellAnnounce(123966, 4)
 

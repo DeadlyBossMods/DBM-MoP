@@ -2,6 +2,8 @@ if select(2, UnitClass("player")) ~= "WARLOCK" then return end
 local mod	= DBM:NewMod("d594", "DBM-Scenario-MoP")
 local L		= mod:GetLocalizedStrings()
 
+mod.statTypes = "normal"
+
 mod:SetRevision("@file-date-integer@")
 mod:SetZone()
 
@@ -16,7 +18,6 @@ mod:RegisterEventsInCombat(
 	"CHAT_MSG_MONSTER_YELL",
 	"UNIT_DIED"
 )
-mod.onlyNormal = true
 
 --Essence of Order
 local warnSpellFlame			= mod:NewSpellAnnounce(134234, 3)

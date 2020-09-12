@@ -16,6 +16,7 @@
 ## X-DBM-Mod: 1
 ## X-DBM-Mod-Type: SCENARIO
 ## X-DBM-Mod-Category: MOP
+## X-DBM-StatTypes: normal,heroic
 ## X-DBM-Mod-Name: Scenario (MoP)
 ## X-DBM-Mod-Name-ruRU: Сценарии (MoP)
 ## X-DBM-Mod-Name-koKR: 시나리오(판다리아의 안개)

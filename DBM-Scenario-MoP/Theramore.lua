@@ -1,6 +1,8 @@
 local mod	= DBM:NewMod("d566", "DBM-Scenario-MoP")
 local L		= mod:GetLocalizedStrings()
 
+mod.statTypes = "normal"
+
 mod:SetRevision("@file-date-integer@")
 mod:SetZone()
 
@@ -10,7 +12,6 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED",
 	"SPELL_CAST_SUCCESS"
 )
-mod.onlyNormal = true
 
 local warnStormTotem			= mod:NewSpellAnnounce(127010, 3)
 local warnWarEnginesSights		= mod:NewTargetAnnounce(114570, 4)

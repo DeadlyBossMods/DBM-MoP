@@ -1,6 +1,8 @@
 local mod	= DBM:NewMod("d616", "DBM-Scenario-MoP")
 local L		= mod:GetLocalizedStrings()
 
+mod.statTypes = "normal"
+
 mod:SetRevision("@file-date-integer@")
 mod:SetZone()
 
@@ -15,7 +17,6 @@ mod:RegisterEventsInCombat(
 	"UNIT_DIED",
 	"UNIT_SPELLCAST_SUCCEEDED target focus"
 )
-mod.onlyNormal = true
 
 --Darkhatched Lizard-Lord
 local warnWaterJets			= mod:NewCastAnnounce(133121, 2, 3)

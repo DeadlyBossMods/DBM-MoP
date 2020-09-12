@@ -1,6 +1,8 @@
 local mod	= DBM:NewMod("d539", "DBM-Scenario-MoP")
 local L		= mod:GetLocalizedStrings()
 
+mod.statTypes = "normal"
+
 mod:SetRevision("@file-date-integer@")
 mod:SetZone()
 
@@ -12,7 +14,6 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_REMOVED",
 	"SPELL_CAST_START"
 )
-mod.onlyNormal = true
 
 --Li Te
 local warnWaterShell	= mod:NewSpellAnnounce(124653, 2)

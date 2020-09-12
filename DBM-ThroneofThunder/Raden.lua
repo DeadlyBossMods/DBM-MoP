@@ -1,6 +1,8 @@
 local mod	= DBM:NewMod(831, "DBM-ThroneofThunder", nil, 362)
 local L		= mod:GetLocalizedStrings()
 
+mod.statTypes = "heroic"
+
 mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(69473)--69888
 mod:SetEncounterID(1580, 1581)
@@ -20,7 +22,6 @@ mod:RegisterEventsInCombat(
 	"UNIT_POWER_FREQUENT boss1",
 	"CHAT_MSG_MONSTER_YELL"
 )
-mod.onlyHeroic = true
 
 --Anima
 local warnAnima					= mod:NewSpellAnnounce(138331, 2)--Switched to anima phase
