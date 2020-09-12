@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(831, "DBM-ThroneofThunder", nil, 362)
 local L		= mod:GetLocalizedStrings()
 
-mod.statTypes = "heroic"
+mod.statTypes = "heroic,heroic25"
 
 mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(69473)--69888
