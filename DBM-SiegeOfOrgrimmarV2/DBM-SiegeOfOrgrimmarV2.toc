@@ -15,7 +15,7 @@
 ## X-DBM-Mod: 1
 ## X-DBM-Mod-Type: RAID
 ## X-DBM-Mod-Category: MOP
-## X-DBM-Mod-Has-Mythic : 1
+## X-DBM-StatTypes: normal,heroic,mythic,lfr
 ## X-DBM-Mod-Sort: 701
 ## X-DBM-Mod-MapID: 1136
 ## X-DBM-Mod-MinCoreRevision: 20200524142133

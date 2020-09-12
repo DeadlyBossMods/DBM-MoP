@@ -1,6 +1,8 @@
 local mod	= DBM:NewMod("d499", "DBM-Scenario-MoP")
 local L		= mod:GetLocalizedStrings()
 
+mod.statTypes = "normal"
+
 mod:SetRevision("@file-date-integer@")
 
 mod:RegisterCombat("scenario", 1048)
@@ -10,7 +12,6 @@ mod:RegisterEventsInCombat(
 	"UNIT_SPELLCAST_SUCCEEDED target focus",
 	"SCENARIO_UPDATE"
 )
-mod.onlyNormal = true
 
 --Captain Ook
 local warnOrange			= mod:NewTargetAnnounce(121895, 3)

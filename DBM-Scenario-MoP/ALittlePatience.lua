@@ -1,6 +1,8 @@
 local mod	= DBM:NewMod("d589", "DBM-Scenario-MoP")
 local L		= mod:GetLocalizedStrings()
 
+mod.statTypes = "normal"
+
 mod:SetRevision("@file-date-integer@")
 
 mod:RegisterCombat("scenario", 1104)
@@ -9,7 +11,6 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_REMOVED"
 )
-mod.onlyNormal = true
 
 --Todo, Add some more resource gathering warnings/timers? Unfortunately none of those events got recorded by transcriptor. it appears they are all UNIT_AURA only :\
 --Commander Scargash
