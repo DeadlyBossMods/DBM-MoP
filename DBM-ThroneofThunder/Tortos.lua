@@ -53,7 +53,6 @@ local shellsRemaining = 0
 local lastConcussion = 0
 local kickedShells = {}
 local addsActivated = 0
-local alternateSet = false
 
 local function clearStomp()
 	stompActive = false
@@ -83,7 +82,6 @@ function mod:OnCombatStart(delay)
 	shellsRemaining = 0
 	lastConcussion = 0
 	addsActivated = 0
-	alternateSet = false
 	table.wipe(kickedShells)
 	timerRockfallCD:Start(15-delay)
 	timerCallTortosCD:Start(21-delay)
