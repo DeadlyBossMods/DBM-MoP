@@ -53,7 +53,6 @@ local shellsRemaining = 0
 local lastConcussion = 0
 local kickedShells = {}
 local addsActivated = 0
-local startIcon = 8
 local alternateSet = false
 
 local function clearStomp()
@@ -84,7 +83,6 @@ function mod:OnCombatStart(delay)
 	shellsRemaining = 0
 	lastConcussion = 0
 	addsActivated = 0
-	startIcon = 8
 	alternateSet = false
 	table.wipe(kickedShells)
 	timerRockfallCD:Start(15-delay)
@@ -153,23 +151,11 @@ function mod:SPELL_AURA_APPLIED(args)
 				end
 			end
 		end
-	elseif spellId == 133974 and self.Options.SetIconOnTurtles then--Spinning Shell
-		if self:AntiSpam(5, 6) then
-			if addsActivated >= 1 then--1 or more add is up from last set
-				if alternateSet then--We check whether we started with skull last time or moon
-					startIcon = 5--Start with moon if we used skull last time
-					alternateSet = false
-				else
-					startIcon = 8--Start with skull if we used moon last time
-					alternateSet = true
-				end
-			else--No turtles are up at all
-				startIcon = 8--Always start with skull
-				alternateSet = true--And reset alternate status so we use moon next time (unless all are dead again, then re always reset to skull)
-			end
-			self:ScanForMobs(args.destGUID, 0, startIcon, 3, 0.2, 10)
-		end
+	elseif spellId == 133974 then--Spinning Shell
 		addsActivated = addsActivated + 1
+		if self.Options.SetIconOnTurtles and addsActivated < 9 then
+			self:ScanForMobs(args.destGUID, 2, 9-addsActivated, 1, 0.2, 10)
+		end
 	end
 end
 
