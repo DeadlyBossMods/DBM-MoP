@@ -360,7 +360,7 @@ local function delayMonsterEmote(target)
 			end
 		elseif calculatedShape == "Bomb" then
 			for _, spellname in ipairs(BombDebuffs) do
-				local _, _, _, count = UnitDebuff("player", spellname)
+				local _, _, count = DBM:UnitDebuff("player", spellname)
 				if count then--Found
 					criteriaMatched = true
 					break
