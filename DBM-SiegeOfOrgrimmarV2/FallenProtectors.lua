@@ -296,11 +296,11 @@ function mod:SPELL_AURA_REMOVED(args)
 end
 
 function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
-	if spellId == 144357 and destGUID == UnitGUID("player") and self:AntiSpam(1.5, 3) and not self:IsTrivial(100) then
+	if spellId == 144357 and destGUID == UnitGUID("player") and self:AntiSpam(1.5, 3) and not self:IsTrivial() then
 		specWarnDefiledGround:Show()
-	elseif spellId == 144367 and destGUID == UnitGUID("player") and self:AntiSpam(1.5, 4) and not self:IsTrivial(100) then
+	elseif spellId == 144367 and destGUID == UnitGUID("player") and self:AntiSpam(1.5, 4) and not self:IsTrivial() then
 		specWarnNoxiousPoison:Show()
-	elseif spellId == 143009 and destGUID == UnitGUID("player") and self:AntiSpam(1.5, 5) and not self:IsTrivial(100) then
+	elseif spellId == 143009 and destGUID == UnitGUID("player") and self:AntiSpam(1.5, 5) and not self:IsTrivial() then
 		specWarnKick:Show()
 	end
 end
@@ -328,7 +328,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 end
 
 function mod:UNIT_HEALTH(uId)
-	if self:IsTrivial(100) then return end
+	if self:IsTrivial() then return end--Totally not cpu efficient
 	if self.vb.warned71475 == 2 and self.vb.warned71479 == 2 and self.vb.warned71480 == 2 then return end
 	local cId = self:GetUnitCreatureId(uId)
 	if cId == 71475 or cId == 71479 or cId == 71480 then

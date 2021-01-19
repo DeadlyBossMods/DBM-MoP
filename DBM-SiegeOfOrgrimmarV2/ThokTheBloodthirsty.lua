@@ -124,7 +124,7 @@ function mod:OnCombatStart(delay)
 	end
 	berserkTimer:Start(-delay)
 	DBM:AddMsg(DBM_CORE_L.DYNAMIC_DIFFICULTY_CLUMP)
-	if not self:IsTrivial(100) then
+	if not self:IsTrivial() then
 		self:RegisterShortTermEvents(
 			"SPELL_PERIODIC_DAMAGE 143784",
 			"SPELL_PERIODIC_MISSED 143784"

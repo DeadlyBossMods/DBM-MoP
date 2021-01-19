@@ -159,7 +159,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
 	if spellId == 136767 then
 		local amount = args.amount or 1
-		local threatamount = self:IsTrivial(100) and 21 or 9
+		local threatamount = self:IsTrivial() and 21 or 9
 		warnPuncture:Show(args.destName, amount)
 		timerPuncture:Start(args.destName)
 		timerPunctureCD:Start()

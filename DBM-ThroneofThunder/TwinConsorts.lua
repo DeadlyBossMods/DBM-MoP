@@ -147,7 +147,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif spellId == 137408 then
 		local amount = args.amount or 1
-		local threatamount = self:IsTrivial(100) and 6 or 2
+		local threatamount = self:IsTrivial() and 6 or 2
 		timerFanOfFlames:Start(args.destName)
 		timerFanOfFlamesCD:Start()
 		if args:IsPlayer() then

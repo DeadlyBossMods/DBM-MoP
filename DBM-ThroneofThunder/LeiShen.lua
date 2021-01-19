@@ -372,9 +372,9 @@ end
 mod.SPELL_MISSED = mod.SPELL_DAMAGE
 
 function mod:SPELL_PERIODIC_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
-	if spellId == 135153 and destGUID == UnitGUID("player") and self:AntiSpam(1.5, 4) and not self:IsTrivial(110) then
+	if spellId == 135153 and destGUID == UnitGUID("player") and self:AntiSpam(1.5, 4) and not self:IsTrivial() then
 		specWarnCrashingThunder:Show()
-	elseif spellId == 137176 and destGUID == UnitGUID("player") and self:AntiSpam(3, 5) and not self:IsTrivial(110) then
+	elseif spellId == 137176 and destGUID == UnitGUID("player") and self:AntiSpam(3, 5) and not self:IsTrivial() then
 		specWarnOverloadedCircuits:Show()
 	end
 end

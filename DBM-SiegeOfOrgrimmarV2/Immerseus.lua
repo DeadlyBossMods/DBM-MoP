@@ -72,7 +72,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerShaResidue:Start()
 	elseif spellId == 143524 and args:IsPlayer() then
 		timerPurifiedResidue:Start()
-	elseif spellId == 143297 and args:IsPlayer() and self:AntiSpam(2, 1) and not self:IsTrivial(100) then
+	elseif spellId == 143297 and args:IsPlayer() and self:AntiSpam(2, 1) and not self:IsTrivial() then
 		specWarnShaSplash:Show()
 		specWarnShaSplash:Play("runaway")
 	elseif spellId == 143574 then

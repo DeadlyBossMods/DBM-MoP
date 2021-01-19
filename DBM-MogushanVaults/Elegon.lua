@@ -90,7 +90,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		warnPhase3:Show()
 	elseif spellId == 117878 and args:IsPlayer() then
 		local amount = args.amount or 1
-		local badAmount = self:IsTrivial(100) and 30 or 6
+		local badAmount = self:IsTrivial() and 30 or 6
 		if (amount >= badAmount) and amount % 3 == 0 then--Warn every 3 stacks at 30/6 and above.
 			specWarnOvercharged:Show(amount)
 		end

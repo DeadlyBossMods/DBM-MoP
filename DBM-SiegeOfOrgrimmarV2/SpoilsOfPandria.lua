@@ -115,7 +115,7 @@ function mod:OnCombatStart(delay)
 		DBM.InfoFrame:SetHeader(L.name)
 		DBM.InfoFrame:Show(2, "enemypower", 2, ALTERNATE_POWER_INDEX)
 	end
-	if not self:IsTrivial(100) then
+	if not self:IsTrivial() then
 		self:RegisterShortTermEvents(
 			"SPELL_DAMAGE 145716 145748 146257",
 			"SPELL_MISSED 145716 145748 146257"
