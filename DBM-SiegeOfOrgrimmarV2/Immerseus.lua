@@ -112,7 +112,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 		timerBreathCD:Start(14)
 		timerSwirlCD:Start(24)
 		if self:IsMythic() then
-			timerSwellingCorruptionCD:Start(17)
+			timerSwellingCorruptionCD:Start(14.4)
 		end
 	elseif msg:find("spell:143020") then--split
 		warnSplit:Show()
