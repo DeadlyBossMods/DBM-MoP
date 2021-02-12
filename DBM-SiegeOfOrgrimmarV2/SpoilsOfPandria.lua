@@ -206,8 +206,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		warnEnrage:Show(args.destName)
 		specWarnEnrage:Show(args.destName)
 		timerEnrage:Start(args.destName)
-	elseif spellId == 145998 then--This is a massive crate mogu spawning
-		timerReturnToStoneCD:Start(6)
 	end
 end
 
