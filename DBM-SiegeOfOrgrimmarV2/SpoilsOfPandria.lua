@@ -15,7 +15,7 @@ mod:RegisterKill("yell", L.Victory)
 mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 145996 145288 142934 142539 145286 146222 146180 145489 142947 146815",
 	"SPELL_CAST_SUCCESS 142947 145712 146253 145230 145786 145812",
-	"SPELL_AURA_APPLIED 145987 145692 145998",
+	"SPELL_AURA_APPLIED 145987 145692",
 	"SPELL_AURA_REMOVED 145987 145692",
 	"UNIT_DIED",
 	"RAID_BOSS_WHISPER",
@@ -206,8 +206,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		warnEnrage:Show(args.destName)
 		specWarnEnrage:Show(args.destName)
 		timerEnrage:Start(args.destName)
-	elseif spellId == 145998 then--This is a massive crate mogu spawning
-		timerReturnToStoneCD:Start(6)
 	end
 end
 
