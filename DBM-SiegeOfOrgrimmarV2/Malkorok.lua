@@ -79,6 +79,7 @@ function mod:OnCombatStart(delay)
 	self.vb.breathCast = 0
 	self.vb.arcingSmashCount = 0
 	self.vb.seismicSlamCount = 0
+	self.vb.displacedCast = false
 	self.vb.rageActive = false
 	timerSeismicSlamCD:Start(5-delay, 1)
 	timerArcingSmashCD:Start(11-delay, 1)
