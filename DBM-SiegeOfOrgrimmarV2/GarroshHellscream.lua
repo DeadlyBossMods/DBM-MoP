@@ -329,8 +329,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		self.vb.shamanCount = self.vb.shamanCount + 1
 		specWarnFarseerWolfRider:Show()
 		local timer = shamanTimers[self.vb.shamanCount+1] or 20--20 assumed, it could go lower?
-			timerFarseerWolfRiderCD:Start(timer, self.vb.shamanCount+1)
-		end
+		timerFarseerWolfRiderCD:Start(timer, self.vb.shamanCount+1)
 		if self.Options.SetIconOnShaman and self.vb.shamanAlive < 9 then--Support for marking up to 8 shaman
 			self:ScanForMobs(71983, 2, 9-self.vb.shamanAlive, 1, 0.2, 10, "SetIconOnShaman")
 		end
