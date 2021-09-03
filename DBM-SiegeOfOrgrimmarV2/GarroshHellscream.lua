@@ -328,8 +328,8 @@ function mod:SPELL_AURA_APPLIED(args)
 		self.vb.shamanAlive = self.vb.shamanAlive + 1
 		self.vb.shamanCount = self.vb.shamanCount + 1
 		specWarnFarseerWolfRider:Show()
-		local timer = shamanTimers[self.vb.shamanCount+1]
-			timerFarseerWolfRiderCD:Start(timer, self.vb.shamanCount+1) or 20--20 assumed, it could go lower?
+		local timer = shamanTimers[self.vb.shamanCount+1] or 20--20 assumed, it could go lower?
+			timerFarseerWolfRiderCD:Start(timer, self.vb.shamanCount+1)
 		end
 		if self.Options.SetIconOnShaman and self.vb.shamanAlive < 9 then--Support for marking up to 8 shaman
 			self:ScanForMobs(71983, 2, 9-self.vb.shamanAlive, 1, 0.2, 10, "SetIconOnShaman")
@@ -470,9 +470,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 		specWarnSiegeEngineer:Cancel()
 		specWarnSiegeEngineer:Schedule(41)
 		local timer = engineerTimers[self.vb.engineerCount+1] or 25--Assumed 25 is lowest it goes
-		if timer then
-			timerSiegeEngineerCD:Start(timer, self.vb.engineerCount+1)
-		end
+		timerSiegeEngineerCD:Start(timer, self.vb.engineerCount+1)
 		if self:IsMythic() then
 			timerPowerIronStar:Start(11.5)
 			specWarnExplodingIronStar:Schedule(11.5)
