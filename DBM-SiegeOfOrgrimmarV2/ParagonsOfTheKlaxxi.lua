@@ -271,7 +271,7 @@ local function CheckBosses(self)
 				--timerDFACD:Start()
 				if DBM:UnitDebuff("player", vulnerable3) then vulnerable = true end
 			elseif cid == 71157 then--Xaril the Poisoned-Mind
-				timerToxicCatalystCD:Start(19.5)--May need tweaking by about a sec or two. Need some transcriptors
+				timerToxicCatalystCD:Start(2.6)--Now used near instantly on engage
 				if DBM:UnitDebuff("player", vulnerable4) then vulnerable = true end
 			elseif cid == 71156 then--Kaz'tik the Manipulator
 --				timerMesmerizeCD:Start(20)--Need transcriptor log. Seems WILDLY variable though and probably not useful
