@@ -44,7 +44,7 @@ Durumu.lua
 Primordius.lua
 DarkAnimus.lua
 IronQon.lua
-TwinConsorts.lua
+TwinEmpyreans.lua
 LeiShen.lua
 Raden.lua
 ToTTrash.lua
