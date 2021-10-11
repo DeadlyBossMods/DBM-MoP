@@ -159,7 +159,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 			timerSeismicSlamCD:Start(nil, self.vb.seismicSlamCount+1)
 		end
 		if self.Options.SetIconOnAdds and self:IsMythic() then
-			self:ScanForMobs(71644, 0, 8, 3, 0.2, 6)
+			self:ScanForMobs(71644, 0, 8, 3, nil, 6)
 		end
 	end
 end

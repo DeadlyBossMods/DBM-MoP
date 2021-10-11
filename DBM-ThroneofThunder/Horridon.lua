@@ -291,7 +291,7 @@ function mod:OnSync(msg, targetname)
 		timerDinoCD:Schedule(37.8)
 		specWarnDino:Schedule(56.75)
 		if self.Options.SetIconOnAdds then
-			self:ScanForMobs(balcMobs, 0, 7, 6, 0.2, 64)
+			self:ScanForMobs(69221, 0, 7, 6, balcMobs, 64)
 		end
 		if doorNumber == 1 then
 			timerAdds:Start(18.9, Farraki)

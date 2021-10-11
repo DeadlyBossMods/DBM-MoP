@@ -313,7 +313,7 @@ function mod:OnSync(msg)
 			timerAddsCD:Start(nil, self.vb.addsCount + 1)
 		end
 		if self.Options.SetIconOnAdds then
-			self:ScanForMobs(72958, 0, 8, 2, 0.2, 8)
+			self:ScanForMobs(72958, 0, 8, 2, nil, 8)
 		end
 	elseif msg == "prepull" then--Alliance
 		timerCombatStarts:Start()

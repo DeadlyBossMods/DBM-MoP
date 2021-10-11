@@ -152,7 +152,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif spellId == 133974 then--Spinning Shell
 		addsActivated = addsActivated + 1
 		if self.Options.SetIconOnTurtles and addsActivated < 9 then
-			self:ScanForMobs(args.destGUID, 2, 9-addsActivated, 1, 0.2, 10)
+			self:ScanForMobs(args.destGUID, 2, 9-addsActivated, 1, nil, 10)
 		end
 	end
 end

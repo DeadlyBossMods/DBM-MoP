@@ -134,7 +134,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 	if args:IsSpellID(116598, 132265) then--Cast when these are activated
 		focusActivated = focusActivated + 1
 		if self.Options.SetIconOnCreature then
-			self:ScanForMobs(args.sourceGUID, 0, 8, 6, 0.5, 10)
+			self:ScanForMobs(args.sourceGUID, 0, 8, 6, nil, 10)
 		end
 		if focusActivated == 6 then
 			timerDespawnFloor:Start()

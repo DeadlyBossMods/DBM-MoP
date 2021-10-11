@@ -99,7 +99,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			timerSpecialCD:Cancel()
 		end)
 	elseif spellId == 123505 and self.Options.SetIconOnProtector then
-		self:ScanForMobs(args.destGUID, 0, 8, nil, 0.05, 6)
+		self:ScanForMobs(args.destGUID, 0, 8, nil, nil, 6)
 	elseif spellId == 123461 then
 		specialsCast = specialsCast + 1
 		warnGetAway:Show(specialsCast)
