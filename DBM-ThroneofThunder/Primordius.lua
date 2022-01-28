@@ -84,7 +84,7 @@ function mod:PLAYER_TARGET_CHANGED()
 			local icon = 9 - bigOozeAlive--Start with skull for big ooze then subtrack from it based on number of oozes up to choose an unused icon
 			bigOozeGUIDS[guid] = true--NOW we add this ooze to the table now that we're done counting old ones
 			self:UnregisterShortTermEvents()--Add is marked, unregister events until next ooze spawns
-			SetRaidTarget("target", icon)
+			self:SetIcon("target", icon)
 			self:SendSync("BigOozeGUID", guid)--Make sure we keep everynoes ooze guid ignore list/counts up to date.
 		end
 	end
@@ -98,7 +98,7 @@ function mod:UPDATE_MOUSEOVER_UNIT()
 			local icon = 9 - bigOozeAlive--Start with skull for big ooze then subtrack from it based on number of oozes up to choose an unused icon
 			bigOozeGUIDS[guid] = true--NOW we add this ooze to the table now that we're done counting old ones
 			self:UnregisterShortTermEvents()--Add is marked, unregister events until next ooze spawns
-			SetRaidTarget("mouseover", icon)
+			self:SetIcon("mouseover", icon)
 			self:SendSync("BigOozeGUID", guid)
 		end
 	end

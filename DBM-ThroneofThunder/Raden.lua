@@ -89,7 +89,9 @@ function mod:checkVitaDistance()
 		end
 	end
 	if furthestDistancePlayer ~= lastfurthestDistancePlayer then--Set icon throttling to avoid hitting blizzard throttle
-		SetRaidTarget(furthestDistancePlayer, 2)
+		if self.Options.SetIconsOnVita then
+			self:SetIcon(furthestDistancePlayer, 2)
+		end
 		lastfurthestDistancePlayer = furthestDistancePlayer
 	end
 	self:ScheduleMethod(1, "checkVitaDistance")
@@ -208,7 +210,7 @@ function mod:SPELL_AURA_REMOVED(args)
 		self:UnscheduleMethod("checkVitaDistance")
 		playerWithVita = nil
 		self:SetIcon(args.destName, 0)
-		SetRaidTarget(furthestDistancePlayer, 0)--Use SetRaidTarget because seticon expects targetname, no point in changing it twice for no reason
+		self:SetIcon(furthestDistancePlayer, 0)
 	elseif spellId == 138288 or spellId == 138295 then
 		timerAnimaExplosion:Cancel()
 	end

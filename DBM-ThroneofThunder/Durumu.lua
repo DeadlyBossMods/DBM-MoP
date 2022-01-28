@@ -140,7 +140,7 @@ local function findBeamJump(spellName, spellId)
 				end
 			end
 			if mod.Options.SetIconRays then
-				SetRaidTarget(uId, 6)--Square
+				mod:SetIcon(uId, 6)--Square
 			end
 			return
 		elseif spellId == 139204 and DBM:UnitDebuff(uId, spellName) and lastRed ~= name then
@@ -149,7 +149,7 @@ local function findBeamJump(spellName, spellId)
 				specWarnRedBeam:Show()
 			end
 			if mod.Options.SetIconRays then
-				SetRaidTarget(uId, 7)--Cross
+				mod:SetIcon(uId, 7)--Cross
 			end
 			return
 		end

@@ -145,7 +145,7 @@ function mod:SPELL_AURA_APPLIED(args)
 				local unitid = uId.."target"
 				local guid = UnitGUID(unitid)
 				if args.destGUID == guid then
-					SetRaidTarget(unitid, 0)
+					self:SetIcon(unitid, 0)
 				end
 			end
 		end
