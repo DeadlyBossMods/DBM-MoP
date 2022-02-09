@@ -8,10 +8,6 @@ local L
 -----------------------
 L = DBM:GetModLocalization(691)
 
-L:SetOptionLocalization({
-	RangeFrame	= "Показывать динамическое окно проверки дистанции, основанное<br/>на статусе игроков с дебаффом $spell:119622"
-})
-
 L:SetMiscLocalization({
 	Pull	= "Да… да! Дайте волю своей ярости! Попробуйте меня убить!"
 })

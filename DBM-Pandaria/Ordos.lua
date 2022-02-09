@@ -29,8 +29,8 @@ local timerBurningSoul			= mod:NewBuffFadesTimer(10, 144689)
 
 local berserkTimer				= mod:NewBerserkTimer(300)
 
-mod:AddBoolOption("SetIconOnBurningSoul")
-mod:AddBoolOption("RangeFrame", true)
+mod:AddSetIconOption("SetIconOnBurningSoul", 144689, true, false, {8, 7, 6})
+mod:AddRangeFrameOption(8, 144689)
 mod:AddReadyCheckOption(33118, false, 90)
 
 function mod:OnCombatStart(delay, yellTriggered)

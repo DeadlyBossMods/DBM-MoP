@@ -24,7 +24,7 @@ local specWarnJadefireWall		= mod:NewSpecialWarningSpell(144533, nil, nil, nil, 
 local timerJadefireBreathCD		= mod:NewCDTimer(18.5, 144530, nil, "Tank", nil, 5)
 local timerJadefireWallCD		= mod:NewNextTimer(60, 144533)
 
-mod:AddBoolOption("RangeFrame", true)--For jadefire bolt/blaze (depending how often it's cast, if it's infrequent i'll kill range finder)
+mod:AddRangeFrameOption(11, 144532)
 mod:AddReadyCheckOption(33117, false, 90)
 
 function mod:OnCombatStart(delay, yellTriggered)
