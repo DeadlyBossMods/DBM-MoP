@@ -17,6 +17,7 @@
 ## X-DBM-Mod-Type: RAID
 ## X-DBM-Mod-Category: MOP
 ## X-DBM-StatTypes: normal
+## X-DBM-Mod-Name-ruRU: Мировые боссы (Пандария)
 ## X-DBM-Mod-World-Boss: 1
 ## X-DBM-Mod-Sort: 706
 ## X-DBM-Mod-MapID: 870,1064
