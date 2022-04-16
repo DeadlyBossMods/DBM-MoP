@@ -326,7 +326,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 --		timerTorrentofIceCD:Cancel()
 --		timerNetherTearCD:Cancel()
 		timerRampage:Start()
-		if not (self.Options.AnnounceCooldowns == "Every") then
+		if self.Options.AnnounceCooldowns ~= "Every" then
 			if ((self.Options.AnnounceCooldowns == "EveryTwoExcludeDiff") or (self.Options.AnnounceCooldowns == "EveryTwo")) and rampageCast >= 2 then rampageCast = 0 end--Option is set to one of the twos and we're already at 2, reset cast count
 			if rampageCast >= 3 then rampageCast = 0 end--We already checked and know option isn't set to 2 or never, so it's definitely set to 3, no need to check option.
 		end
