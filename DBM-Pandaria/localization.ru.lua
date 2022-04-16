@@ -94,3 +94,12 @@ L = DBM:GetModLocalization(861)
 L:SetMiscLocalization({
 	Pull	= "Вы займете мое место на вечной жаровне."
 })
+
+-----------------
+--  Zandalari  --
+-----------------
+L = DBM:GetModLocalization("Zandalari")
+
+L:SetGeneralLocalization({
+	name	= "Зандалары"
+})
