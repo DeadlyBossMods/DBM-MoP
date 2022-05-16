@@ -201,7 +201,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 		--Not filter icons, in case the only person with assist/icons enabled is far away.
 		if self.Options.SetIconOnToxicMists and args:IsDestTypePlayer() then--Filter further on icons because we don't want to set icons on grounding totems
-			self:SetSortedIcon(0.5, args.destName, 1)
+			self:SetSortedIcon("roster", 0.5, args.destName, 1)
 		end
 	elseif spellId == 144330 then
 		if self:CheckTankDistance(args.sourceGUID, 50) and self:AntiSpam(2, 3) then

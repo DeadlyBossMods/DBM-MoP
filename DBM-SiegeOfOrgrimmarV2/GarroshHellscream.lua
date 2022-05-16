@@ -305,7 +305,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			warnEmpTouchOfYShaarj:CombinedShow(0.5, args.destName)
 		end
 		if self.Options.SetIconOnMC then
-			self:SetSortedIcon(1, args.destName, 1)
+			self:SetSortedIcon("roster", 1, args.destName, 1)
 		end
 	elseif args:IsSpellID(145183, 145195) then
 		local amount = args.amount or 1

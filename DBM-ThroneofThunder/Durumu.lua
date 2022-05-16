@@ -328,7 +328,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			timerDarkParasiteCD:DelayedStart(0.5)
 		end
 		if self.Options.SetIconOnParasite and args:IsDestTypePlayer() then--Filter further on icons because we don't want to set icons on grounding totems
-			self:SetSortedIcon(0.5, args.destName, 5, 3, true)
+			self:SetSortedIcon("roster", 0.5, args.destName, 5, 3, true)
 		end
 	elseif spellId == 133598 then--Dark Plague
 		local _, _, _, _, duration = DBM:UnitDebuff(args.destName, args.spellName)

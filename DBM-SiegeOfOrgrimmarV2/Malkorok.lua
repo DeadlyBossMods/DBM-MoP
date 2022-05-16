@@ -178,7 +178,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			timerDisplacedEnergyCD:DelayedStart(0.5)
 		end
 		if self.Options.SetIconOnDisplacedEnergy and args:IsDestTypePlayer() then--Filter further on icons because we don't want to set icons on grounding totems
-			self:SetSortedIcon(0.5, args.destName, 1)
+			self:SetSortedIcon("roster", 0.5, args.destName, 1)
 		end
 		if self.Options.RangeFrame then
 			if DBM:UnitDebuff("player", displacedEnergyDebuff) then--You have debuff, show everyone

@@ -233,7 +233,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		warnMark:CombinedShow(0.5, args.destName)
 		timerMarkCD:DelayedStart(0.5)
 		if self.Options.SetIconOnMark and args:IsDestTypePlayer() then--Filter further on icons because we don't want to set icons on grounding totems
-			self:SetSortedIcon(0.5, args.destName, 1)
+			self:SetSortedIcon("roster", 0.5, args.destName, 1)
 		end
 	elseif spellId == 144358 then
 		warnWoundedPride:Show(args.destName)

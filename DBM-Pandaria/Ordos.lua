@@ -76,7 +76,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			end
 		end
 		if self.Options.SetIconOnBurningSoul then--Set icons on first debuff to get an earlier spread out.
-			self:SetSortedIcon(1.2, args.destName, 8, 3, true)
+			self:SetSortedIcon("roster", 1.2, args.destName, 8, 3, true)
 		end
 	elseif spellId == 144693 and args:IsPlayer() then
 		specWarnPoolOfFire:Show()--One warning is enough, because it honestly isn't worth moving for unless blizz buffs it.

@@ -84,7 +84,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif spellId == 119626 then
 		--Maybe add in function to update icons here in case of a spread that results in more then the original 3 getting the final MC debuff.
 		if self.Options.SetIconOnMC2 then--Set icons on first debuff to get an earlier spread out.
-			self:SetSortedIcon(1.2, args.destName, 8, 3, true)
+			self:SetSortedIcon("roster", 1.2, args.destName, 8, 3, true)
 		end
 		warnAggressiveBehavior:CombinedShow(2.5, args.destName)
 		if args:IsPlayer() then
