@@ -186,7 +186,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			--Swap timers. While possessed
 			local elapsed, total = timerBlessedLoaSpiritCD:GetTime()
 			timerBlessedLoaSpiritCD:Cancel()
-			if elapsed and total then--If for some reason it was nil, like it JUST came off cd, do nothing, she should cast loa spirit right away.
+			if elapsed and total and total ~= 0 then --If for some reason it was nil, like it JUST came off cd, do nothing, she should cast loa spirit right away.
 				if self:IsHeroic() then
 					timerTwistedFateCD:Update(elapsed, total)
 				else
@@ -198,7 +198,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			--Swap timers. While possessed
 			local elapsed, total = timerBitingColdCD:GetTime()
 			timerBitingColdCD:Cancel()
-			if elapsed and total and total ~= 0 then--If for some reason it was nil, like it JUST came off cd, do nothing, he should cast frost bite right away.
+			if elapsed and total and total ~= 0 then --If for some reason it was nil, like it JUST came off cd, do nothing, he should cast frost bite right away.
 				timerFrostBiteCD:Update(elapsed, total)
 			end
 		elseif cid == 69134 then--Kazra'jin
