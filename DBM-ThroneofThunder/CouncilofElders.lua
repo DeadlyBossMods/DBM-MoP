@@ -284,7 +284,7 @@ function mod:SPELL_AURA_REMOVED(args)
 			--Swap timer back
 			local elapsed, total  = timerFrostBiteCD:GetTime()
 			timerFrostBiteCD:Cancel()
-			if elapsed and total then
+			if elapsed and total and total ~= 0 then
 				timerBitingColdCD:Update(elapsed, total)
 			end
 		elseif args:GetDestCreatureID() == 69134 then--Kazra'jin
