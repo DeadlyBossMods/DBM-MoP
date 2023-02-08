@@ -31,7 +31,7 @@ mod:RegisterEventsInCombat(
 )
 
 --Stage 2: Bring Her Down!
-local warnFracture					= mod:NewTargetAnnounce(146899, 3)
+local warnFracture					= mod:NewTargetNoFilterAnnounce(146899, 3)
 local warnChainHeal					= mod:NewCastAnnounce(146757, 4)
 local warnAdd						= mod:NewCountAnnounce("ej8553", 2, "134170")
 local warnProto						= mod:NewCountAnnounce("ej8587", 2, 59961)
@@ -50,9 +50,8 @@ local warnPulsingFlames				= mod:NewCountAnnounce(147042, 3, nil, false)
 --Stage 2: Bring Her Down!
 local specWarnAdds					= mod:NewSpecialWarningSpell("ej8553", false)
 local specWarnProto					= mod:NewSpecialWarningSpell("ej8587", false)
-local specWarnWarBanner				= mod:NewSpecialWarningSwitch(147328, "-Healer")
-local specWarnFracture				= mod:NewSpecialWarningTarget(146899, "Healer")
-local specWarnChainheal				= mod:NewSpecialWarningInterrupt(146757)
+local specWarnWarBanner				= mod:NewSpecialWarningSwitch(147328, "-Healer", nil, nil, 1, 2)
+local specWarnChainheal				= mod:NewSpecialWarningInterrupt(146757, "HasInterrupt", nil, nil, 1, 2)
 ----Master Cannoneer Dragryn (Tower)
 local specWarnMuzzleSpray			= mod:NewSpecialWarningSpell(147824, nil, nil, nil, 2)
 ----Lieutenant General Krugruk (Tower)
@@ -134,6 +133,7 @@ function mod:SPELL_CAST_START(args)
 		warnChainHeal:Show()
 		if source == UnitGUID("target") or source == UnitGUID("focus") then
 			specWarnChainheal:Show(args.sourceName)
+			specWarnChainheal:Play("kickcast")
 		end
 	end
 end
@@ -170,7 +170,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		specWarnWarBanner:Play("targetchange")
 	elseif spellId == 146899 and (not DBM.Options.DontShowFarWarnings or UnitPower("player", 10) == 0) then
 		warnFracture:Show(args.destName)
-		specWarnFracture:Show(args.destName)
 	elseif spellId == 147042 then
 		self.vb.pulseCount = self.vb.pulseCount + 1
 		warnPulsingFlames:Show(self.vb.pulseCount)
