@@ -12,6 +12,7 @@
 ## RequiredDeps: DBM-Core
 ## SavedVariables: DBMSiegeOfOrgrimmarV2_AllSavedVars
 ## SavedVariablesPerCharacter: DBMSiegeOfOrgrimmarV2_SavedStats
+## IconTexture: Interface\AddOns\DBM-Core\textures\dbm_airhorn
 ## X-DBM-Mod: 1
 ## X-DBM-Mod-Type: RAID
 ## X-DBM-Mod-Category: MOP
