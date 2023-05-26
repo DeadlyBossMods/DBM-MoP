@@ -13,7 +13,7 @@ mod:RegisterEventsInCombat(
 	"SPELL_CAST_SUCCESS 144400 144832 144800 146823",
 	"SPELL_AURA_APPLIED 144359 146594 145215 146822 146817 144843 144351 144358 144574 144636 147207 144683 144684",
 	"SPELL_AURA_REMOVED 144351 147207",
-	"UNIT_POWER_FREQUENT boss1"
+	"UNIT_POWER_UPDATE boss1"
 )
 
 --Sha of Pride
@@ -270,7 +270,7 @@ function mod:SPELL_AURA_REMOVED(args)
 	end
 end
 
-function mod:UNIT_POWER_FREQUENT(uId)
+function mod:UNIT_POWER_UPDATE(uId)
 	local power = UnitPower(uId)
 	if power > 81 and not manifestationWarned then--May not be 100% precise, but very close, it spawns around 80-85 energy
 		manifestationWarned = true

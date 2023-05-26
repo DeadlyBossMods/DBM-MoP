@@ -18,7 +18,7 @@ mod:RegisterEventsInCombat(
 	"SPELL_DAMAGE 138296",
 	"SPELL_MISSED 138296",
 	"UNIT_SPELLCAST_SUCCEEDED boss1",
-	"UNIT_POWER_FREQUENT boss1",
+	"UNIT_POWER_UPDATE boss1",
 	"CHAT_MSG_MONSTER_YELL"
 )
 
@@ -238,7 +238,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	end
 end
 
-function mod:UNIT_POWER_FREQUENT(uId)
+function mod:UNIT_POWER_UPDATE(uId)
 	local power = UnitPower(uId)
 	if power >= 80 and DBM:UnitBuff(uId, vitaName) and self:AntiSpam(4, 1) then
 		specWarnFatalStrike:Show()
