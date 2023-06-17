@@ -1,6 +1,7 @@
 ## Interface: 100100
 ## X-Min-Interface: 80000
 ## Title:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff69ccf0Raids (MoP)|r
+## Title-ruRU:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff69ccf0Рейды (Пандария)|r
 ## Author: MysticalOS
 ## LoadOnDemand: 1
 ## RequiredDeps: DBM-Core
@@ -13,6 +14,7 @@
 ## X-DBM-StatTypes: normal,normal25,heroic,heroic25,lfr
 ## X-DBM-Mod-SubCategoriesID: 1136, 1098, 996, 1009, 1008
 ## X-DBM-Mod-Name: Raids (MoP)
+## X-DBM-Mod-Name-ruRU: Рейды (Пандария)
 ## X-DBM-Mod-Sort: 701
 ## X-DBM-Mod-MapID: 1136, 1098, 996, 1009, 1008
 ## X-DBM-Mod-MinCoreRevision: 20230617000000
