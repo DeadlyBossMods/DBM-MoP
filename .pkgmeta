@@ -1,7 +1,7 @@
-package-as: DBM-Pandaria
+package-as: DBM-Raids-MoP
 enable-nolib-creation: no
 
 move-folders:
-    DBM-Pandaria/DBM-Raids-MoP: DBM-Raids-MoP
-    DBM-Pandaria/DBM-Scenario-MoP: DBM-Scenario-MoP
-    DBM-Pandaria/DBM-Pandaria: DBM-Pandaria
+    DBM-Raids-MoP/DBM-Scenario-MoP: DBM-Scenario-MoP
+    DBM-Raids-MoP/DBM-Pandaria: DBM-Pandaria
+    DBM-Raids-MoP/DBM-Raids-MoP: DBM-Raids-MoP
