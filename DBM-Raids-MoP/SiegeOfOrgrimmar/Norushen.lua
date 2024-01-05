@@ -54,7 +54,7 @@ local specWarnHurlCorruption			= mod:NewSpecialWarningInterrupt(144649, nil, nil
 local specWarnPiercingCorruption		= mod:NewSpecialWarningSpell(144657)
 
 --Amalgam of Corruption
-local timerCombatStarts					= mod:NewRPTimer(25)
+local timerCombatStarts					= mod:NewCombatTimer(25)
 local timerUnleashedAngerCD				= mod:NewCDTimer(11, 145216, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerBlindHatred					= mod:NewBuffActiveTimer(30, 145226, nil, nil, nil, 6, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerBlindHatredCD				= mod:NewNextTimer(30, 145226, nil, nil, nil, 6, nil, DBM_COMMON_L.DEADLY_ICON)

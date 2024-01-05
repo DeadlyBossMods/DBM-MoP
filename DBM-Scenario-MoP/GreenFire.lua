@@ -43,7 +43,7 @@ local timerSpellFlameCD			= mod:NewNextTimer(11, 134234)--(6 seconds after engag
 local timerHellfireCD			= mod:NewNextTimer(33, 134225)--(15 after engage)
 local timerLostSoulsCD			= mod:NewTimer(43, "timerLostSoulsCD", 51788)--43-50 second variation. (engage is same as cd, 43)
 --Kanrethad Ebonlocke
-local timerCombatStarts			= mod:NewRPTimer(33)
+local timerCombatStarts			= mod:NewCombatTimer(33)
 local timerPitLordCast			= mod:NewCastTimer(10, 138789, nil, nil, nil, 1)
 local timerSummonImpSwarmCast 	= mod:NewCastTimer(10, 138685, nil, nil, nil, 1)
 local timerSummonFelhunterCast	= mod:NewCastTimer(9, 138751, nil, nil, nil, 1)

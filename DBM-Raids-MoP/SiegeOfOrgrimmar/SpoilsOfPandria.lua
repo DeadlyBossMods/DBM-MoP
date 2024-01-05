@@ -68,7 +68,7 @@ local specWarnPathOfBlossoms	= mod:NewSpecialWarningMove(146257)
 --Crate of Pandaren Relics
 local specWarnGustingCraneKick	= mod:NewSpecialWarningSpell(146180, nil, nil, nil, 2)
 
-local timerCombatStarts			= mod:NewRPTimer(18)
+local timerCombatStarts			= mod:NewCombatTimer(18)
 --Massive Crate of Goods
 local timerReturnToStoneCD		= mod:NewNextTimer(12, 145489)
 local timerSetToBlowCD			= mod:NewNextTimer(9.6, 145996, nil, nil, nil, 3, nil, DBM_COMMON_L.DEADLY_ICON)
