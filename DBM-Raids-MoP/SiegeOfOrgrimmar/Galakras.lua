@@ -71,7 +71,7 @@ local specWarnFlamesofGalakrondOther= mod:NewSpecialWarningTarget(147029, "Tank"
 local specWarnPulsingFlames			= mod:NewSpecialWarningCount(147042, false, nil, nil, 2)
 
 --Stage 2: Bring Her Down!
-local timerCombatStarts				= mod:NewCombatTimer(34.5)
+local timerCombatStarts				= mod:NewRPTimer(34.5)
 local timerAddsCD					= mod:NewNextCountTimer(54.7, "ej8553", nil, nil, nil, 1, "134170")
 local timerProtoCD					= mod:NewNextCountTimer(54.7, "ej8587", nil, nil, nil, 1, 59961)
 local timerTowerCD					= mod:NewTimer(99, "timerTowerCD", 88852, nil, nil, 5)
