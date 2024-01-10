@@ -325,14 +325,8 @@ function mod:SPELL_AURA_APPLIED(args)
 		if args:IsPlayer() then
 			specWarnWaterspout:Show()
 			yellWaterspout:Yell()
-		else
-			local uId = DBM:GetRaidUnitId(args.destName)
-			if uId then
-				local inRange = CheckInteractDistance(uId, 2)
-				if inRange then
-					specWarnWaterspoutNear:Show(args.destName)
-				end
-			end
+		elseif self:IsClassic() and self:CheckNearby(10, args.destName) then
+			specWarnWaterspoutNear:Show(args.destName)
 		end
 		if self:AntiSpam(5, 3) then
 			if self.vb.specialCount == 3 then self.vb.specialCount = 0 end
