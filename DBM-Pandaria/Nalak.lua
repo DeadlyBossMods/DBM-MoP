@@ -101,7 +101,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		tetherTargets[#tetherTargets + 1] = args.destName
 		if args:IsPlayer() then
 			specWarnLightningTether:Show(DBM_COMMON_L.BOSS)
-			specWarnLightningTetherPlay("movetoboss")
+			specWarnLightningTether:Play("movetoboss")
 		end
 		self:Unschedule(warnTetherTargets)
 		self:Schedule(0.3, warnTetherTargets)
