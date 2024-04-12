@@ -85,7 +85,7 @@ function mod:OnCombatStart(delay)
 	self.vb.rageActive = false
 	timerSeismicSlamCD:Start(5-delay, 1)
 	timerArcingSmashCD:Start(11-delay, 1)
-	timerBreathofYShaarjCD:Start(68-delay, 1)
+	timerBreathofYShaarjCD:Start(67.3-delay, 1)
 	if self:IsDifficulty("lfr25") then
 		berserkTimer:Start(720-delay)
 	else
@@ -112,7 +112,7 @@ function mod:SPELL_CAST_START(args)
 		self.vb.rageActive = true
 		specWarnBloodRage:Show()
 		timerBloodRage:Start()
-		timerDisplacedEnergyCD:Start(3.5)
+--		timerDisplacedEnergyCD:Start(3.5)--No longer spell queued/restarted here?
 	elseif spellId == 142842 then
 		self.vb.breathCast = self.vb.breathCast + 1
 		specWarnBreathofYShaarj:Show(self.vb.breathCast)
