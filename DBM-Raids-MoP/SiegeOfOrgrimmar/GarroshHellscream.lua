@@ -118,7 +118,7 @@ mod:AddBoolOption("InfoFrame", "Healer")
 local UnitExists, UnitIsDeadOrGhost = UnitExists, UnitIsDeadOrGhost
 local bombardCD = {55, 40, 40, 25, 25}
 local engineerTimers = {20, 45, 40, 40, 35, 35, 30, 30, 25, 25, 25}
-local shamanTimers = {31.5, 50, 50, 40, 40, 40, 30, 30, 30, 20}
+local shamanTimers = {31.5, 49.6, 49.6, 39.6, 39.6, 39.6, 29.6, 29.6, 29.6, 19.6}
 local spellName1, spellName2, spellName3 = DBM:GetSpellInfo(149004), DBM:GetSpellInfo(148983), DBM:GetSpellInfo(148994)
 local starFixate, grippingDespair, empGrippingDespair = DBM:GetSpellInfo(147665), DBM:GetSpellInfo(145183), DBM:GetSpellInfo(145195)
 --Tables, can't recover
@@ -272,7 +272,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 	if args:IsSpellID(144748, 144749) then
 		self.vb.desecrateCount = self.vb.desecrateCount + 1
 		if self.vb.phase == 1 then
-			timerDesecrateCD:Start(41, self.vb.desecrateCount+1)
+			timerDesecrateCD:Start(40, self.vb.desecrateCount+1)
 		elseif self.vb.phase == 3 then
 			timerDesecrateCD:Start(25, self.vb.desecrateCount+1)
 		else--Phase 2
@@ -330,7 +330,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		self.vb.shamanAlive = self.vb.shamanAlive + 1
 		self.vb.shamanCount = self.vb.shamanCount + 1
 		specWarnFarseerWolfRider:Show()
-		local timer = shamanTimers[self.vb.shamanCount+1] or 20--20 assumed, it could go lower?
+		local timer = shamanTimers[self.vb.shamanCount+1] or 19.6--20 assumed, it could go lower?
 		timerFarseerWolfRiderCD:Start(timer, self.vb.shamanCount+1)
 		if self.Options.SetIconOnShaman and self.vb.shamanAlive < 9 then--Support for marking up to 8 shaman
 			self:ScanForMobs(71983, 2, 9-self.vb.shamanAlive, 1, nil, 10, "SetIconOnShaman")
