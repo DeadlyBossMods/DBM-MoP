@@ -76,7 +76,7 @@ local specWarnDarkMeditation		= mod:NewSpecialWarningSpell(143546)
 --Rook Stonetoe
 mod:AddTimerLine(Stonetoe)
 local timerVengefulStrikesCD		= mod:NewCDTimer(21, 144396, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
-local timerCorruptedBrewCD			= mod:NewCDTimer(11, 143019, nil, nil, nil, 3)--11-27
+local timerCorruptedBrewCD			= mod:NewCDTimer(10.1, 143019, nil, nil, nil, 3)--10.1-27
 local timerClashCD					= mod:NewCDTimer(46, 143027, nil, nil, nil, 3)--46 second next timer IF none of bosses enter a special between casts, otherwise always delayed by specials (and usually cast within 5 seconds after special ends)
 ----Rook Stonetoe's Desperate Measures
 local timerDefiledGroundCD			= mod:NewCDTimer(10.5, 143961, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
@@ -84,13 +84,13 @@ local timerInfernoStrikeCD			= mod:NewNextTimer(9.5, 143962, nil, nil, nil, 3)
 local timerInfernoStrike			= mod:NewBuffFadesTimer(7.7, 143962)
 --He Softfoot
 mod:AddTimerLine(Softfoot)
-local timerGougeCD					= mod:NewCDTimer(30, 143330, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)--30-41
+local timerGougeCD					= mod:NewCDTimer(26.7, 143330, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)--26.8-41
 local timerGarroteCD				= mod:NewCDTimer(29, 143198, nil, "Healer", nil, 5, nil, DBM_COMMON_L.HEALER_ICON)--30-46 (heroic 20-26)
 --Sun Tenderheart
 mod:AddTimerLine(Tenderheart)
 local timerBaneCD					= mod:NewCDTimer(17, 143446, nil, "Healer", nil, 5, nil, DBM_COMMON_L.HEALER_ICON)--17-25 (heroic 13-20)
 local timerCalamity					= mod:NewCastTimer(5, 143491, nil, "Healer")
-local timerCalamityCD				= mod:NewCDTimer(40, 143491, nil, "Healer", nil, 5, nil, DBM_COMMON_L.HEALER_ICON)--40-50 (when two can be cast in a row) Also affected by boss specials
+local timerCalamityCD				= mod:NewCDTimer(37.5, 143491, nil, "Healer", nil, 5, nil, DBM_COMMON_L.HEALER_ICON)--37.5-50 (when two can be cast in a row) Also affected by boss specials
 
 local berserkTimer					= mod:NewBerserkTimer(600)
 
@@ -265,7 +265,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerClashCD:Cancel()
 		timerCorruptedBrewCD:Cancel()
 		timerInfernoStrikeCD:Start(8)
-		timerDefiledGroundCD:Start(10)
+		timerDefiledGroundCD:Start(8.9)
 		self:RegisterShortTermEvents(
 			"UNIT_DIED"--We register here to make sure we wipe variables on pull
 		)
@@ -290,8 +290,8 @@ function mod:SPELL_AURA_REMOVED(args)
 		timerDefiledGroundCD:Cancel()
 		timerInfernoStrikeCD:Cancel()
 		timerInfernoStrike:Cancel()
+		timerVengefulStrikesCD:Start(7.6)
 		timerCorruptedBrewCD:Start(12)
-		timerVengefulStrikesCD:Start(18)
 		timerClashCD:Start(46)
 		self:UnregisterShortTermEvents()
 	elseif spellId == 143812 then--Mark of Anguish
