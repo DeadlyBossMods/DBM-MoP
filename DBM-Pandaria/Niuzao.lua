@@ -18,12 +18,13 @@ mod:RegisterEventsInCombat(
 
 local warnOxenFortitude		= mod:NewStackAnnounce(144606, 2, nil, false)--144607 player version, but better to just track boss and announce stacks
 
-local specWarnHeadbutt		= mod:NewSpecialWarningSpell(144610, "Tank")
-local specWarnMassiveQuake	= mod:NewSpecialWarningSpell(144611, nil, nil, nil, 2)
-local specWarnCharge		= mod:NewSpecialWarningDodge(144609, "Melee")--66 and 33%. Maybe add pre warns
+local specWarnHeadbutt		= mod:NewSpecialWarningDefensive(144610, nil, nil, nil, 1, 2)
+local specWarnHeadbuttTaunt	= mod:NewSpecialWarningTaunt(144610, nil, nil, nil, 1, 2)
+local specWarnMassiveQuake	= mod:NewSpecialWarningSpell(144611, nil, nil, nil, 2, 2)
+local specWarnCharge		= mod:NewSpecialWarningDodge(144609, "Melee", nil, nil, 2, 2)--66 and 33%. Maybe add pre warns
 
-local timerHeadbuttCD		= mod:NewCDTimer(47, 144610, nil, "Tank", nil, 5)
-local timerMassiveQuake		= mod:NewBuffActiveTimer(13, 144611)
+local timerHeadbuttCD		= mod:NewCDTimer(47, 144610, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
+local timerMassiveQuake		= mod:NewBuffActiveTimer(13, 144611, nil, nil, nil, 5, nil, DBM_COMMON_L.HEALER_ICON)
 local timerMassiveQuakeCD	= mod:NewCDTimer(48, 144611, nil, nil, nil, 2)
 
 mod:AddReadyCheckOption(33117, false, 90)
@@ -38,14 +39,27 @@ end
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
 	if spellId == 144610 then
-		specWarnHeadbutt:Show()
+		if self:IsTanking("player", nil, nil, true, args.sourceGUID) then
+			specWarnHeadbutt:Show()
+			specWarnHeadbutt:Play("carefly")
+		else
+			local bossTarget, bossTargetUID = self:GetBossTarget(71954)
+			if bossTargetUID then
+				if self:IsTanking(bossTargetUID, nil, nil, true, args.sourceGUID) then
+					specWarnHeadbuttTaunt:Show(bossTarget)
+					specWarnHeadbuttTaunt:Play("tauntboss")
+				end
+			end
+		end
 		timerHeadbuttCD:Start()
 	elseif spellId == 144611 then
 		specWarnMassiveQuake:Show()
+		specWarnMassiveQuake:Play("aesoon")
 		timerMassiveQuake:Start()
 		timerMassiveQuakeCD:Start()
 	elseif spellId == 144608 then
 		specWarnCharge:Show()
+		specWarnCharge:Play("chargemove")
 	end
 end
 

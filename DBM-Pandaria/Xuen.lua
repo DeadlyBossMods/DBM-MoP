@@ -18,21 +18,19 @@ mod:RegisterEventsInCombat(
 )
 
 local warnSpectralSwipe				= mod:NewStackAnnounce(144638, 2, nil, "Tank|Healer")
-local warnAgility					= mod:NewTargetAnnounce(144631, 3)
 local warnCracklingLightning		= mod:NewSpellAnnounce(144635, 3)--According to data, spread range is 60 yards so spreading out for this seems pointless. it's just healed through
 local warnChiBarrage				= mod:NewSpellAnnounce(144642, 4)
 
-local specWarnSpectralSwipe			= mod:NewSpecialWarningStack(144638, "Tank", 5)
-local specWarnSpectralSwipeOther	= mod:NewSpecialWarningTaunt(144638)
-local specWarnAgility				= mod:NewSpecialWarningDispel(144631, "MagicDispeller", nil, nil, 3)
-local specWarnChiBarrage			= mod:NewSpecialWarningSpell(144642, nil, nil, nil, 2)
+local specWarnSpectralSwipe			= mod:NewSpecialWarningStack(144638, nil, 5, nil, nil, 1, 6)
+local specWarnSpectralSwipeOther	= mod:NewSpecialWarningTaunt(144638, nil, nil, nil, 1, 2)
+local specWarnAgility				= mod:NewSpecialWarningDispel(144631, "MagicDispeller", nil, nil, 3, 2)
 
-local timerSpectralSwipe			= mod:NewTargetTimer(60, 144638, nil, "Tank|Healer")
-local timerSpectralSwipeCD			= mod:NewCDTimer(12, 144638)
+local timerSpectralSwipe			= mod:NewTargetTimer(60, 144638, nil, "Tank|Healer", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
+local timerSpectralSwipeCD			= mod:NewCDTimer(12, 144638, nil, "Tank|Healer", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 --local timerAgilityCD				= mod:NewCDTimer(25, 144631, nil, nil, nil, 5)
-local timerCracklingLightning		= mod:NewBuffActiveTimer(13, 144635)
-local timerCracklingLightningCD		= mod:NewCDTimer(47, 144635)
-local timerChiBarrageCD				= mod:NewCDTimer(20, 144642)
+local timerCracklingLightning		= mod:NewBuffActiveTimer(13, 144635, nil, nil, nil, 5)
+local timerCracklingLightningCD		= mod:NewCDTimer(47, 144635, nil, nil, nil, 3)
+local timerChiBarrageCD				= mod:NewCDTimer(20, 144642, nil, nil, nil, 3)
 
 mod:AddRangeFrameOption(3, 144642)
 mod:AddReadyCheckOption(33117, false, 90)
@@ -61,7 +59,6 @@ function mod:SPELL_CAST_START(args)
 		timerCracklingLightningCD:Start()
 	elseif spellId == 144642 then
 		warnChiBarrage:Show()
-		specWarnChiBarrage:Show()
 		timerChiBarrageCD:Start()
 	end
 end
@@ -77,15 +74,17 @@ function mod:SPELL_AURA_APPLIED(args)
 			timerSpectralSwipeCD:Start()
 			if args:IsPlayer() and amount >= 5 then
 				specWarnSpectralSwipe:Show(amount)
+				specWarnSpectralSwipe:Play("stackhigh")
 			else
 				if amount >= 2 and not UnitIsDeadOrGhost("player") or not DBM:UnitDebuff("player", args.spellName) then
 					specWarnSpectralSwipeOther:Show(args.destName)
+					specWarnSpectralSwipeOther:Play("tauntboss")
 				end
 			end
 		end
 	elseif spellId == 144631 and args:GetDestCreatureID() == 71953 then
-		warnAgility:Show(args.destName)
 		specWarnAgility:Show(args.destName)
+		specWarnAgility:Play("dispelboss")
 --		timerAgilityCD:Start()
 	end
 end

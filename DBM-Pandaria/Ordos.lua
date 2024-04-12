@@ -15,17 +15,18 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_REMOVED 144689"
 )
 
+--REMINDER: Chat yells are blocked outdoors now, despite how deadly and annoying Burning soul s when they don't run out, we can't chat bubble it
 local warnAncientFlame			= mod:NewSpellAnnounce(144695, 2)--probably add a move warning with right DAMAGE event
 local warnMagmaCrush			= mod:NewSpellAnnounce(144688, 3)
-local warnBurningSoul			= mod:NewTargetAnnounce(144689, 3)
+local warnBurningSoul			= mod:NewTargetNoFilterAnnounce(144689, 4)
 
-local specWarnBurningSoul		= mod:NewSpecialWarningMoveAway(144689)
-local specWarnPoolOfFire		= mod:NewSpecialWarningMove(144693)
-local specWarnEternalAgony		= mod:NewSpecialWarningSpell(144696, nil, nil, nil, 3)--Fights over, this is 5 minute berserk spell.
+local specWarnBurningSoul		= mod:NewSpecialWarningMoveAway(144689, nil, nil, nil, 1, 2)
+local specWarnGTFO				= mod:NewSpecialWarningGTFO(144693, nil, nil, nil, 1, 8)
+local specWarnEternalAgony		= mod:NewSpecialWarningSpell(144696, nil, nil, nil, 2, 2)--Fights over, this is 5 minute berserk spell.
 
 --local timerAncientFlameCD		= mod:NewCDTimer(43, 144695)--Insufficent logs
 --local timerBurningSoulCD		= mod:NewCDTimer(22, 144689)--22-30 sec variation (maybe larger, small sample size)
-local timerBurningSoul			= mod:NewBuffFadesTimer(10, 144689)
+local timerBurningSoul			= mod:NewBuffFadesTimer(10, 144689, nil, nil, nil, 5)
 
 local berserkTimer				= mod:NewBerserkTimer(300)
 
@@ -52,6 +53,7 @@ function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
 	if spellId == 144696 then
 		specWarnEternalAgony:Show()
+		specWarnEternalAgony:Play("aesoon")
 	elseif spellId == 144688 then
 		warnMagmaCrush:Show()
 	elseif spellId == 144695 then
@@ -68,9 +70,7 @@ function mod:SPELL_AURA_APPLIED(args)
 --		timerBurningSoulCD:Start()
 		if args:IsPlayer() then
 			specWarnBurningSoul:Show()
-			specWarnBurningSoul:Schedule(2)
-			specWarnBurningSoul:Schedule(4)
-			specWarnBurningSoul:Schedule(6)
+			specWarnBurningSoul:Play("runout")
 			if self.Options.RangeFrame then
 				DBM.RangeCheck:Show(8)
 			end
@@ -79,7 +79,8 @@ function mod:SPELL_AURA_APPLIED(args)
 			self:SetSortedIcon("roster", 1.2, args.destName, 8, 3, true)
 		end
 	elseif spellId == 144693 and args:IsPlayer() then
-		specWarnPoolOfFire:Show()--One warning is enough, because it honestly isn't worth moving for unless blizz buffs it.
+		specWarnGTFO:Show(args.spellName)--One warning is enough, because it honestly isn't worth moving for unless blizz buffs it.
+		specWarnGTFO:Play("watchfeet")
 	end
 end
 

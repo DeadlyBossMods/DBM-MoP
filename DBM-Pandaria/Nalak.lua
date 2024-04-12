@@ -17,9 +17,9 @@ mod:RegisterEventsInCombat(
 local warnStormcloud			= mod:NewTargetAnnounce(136340, 3)
 local warnLightningTether		= mod:NewTargetAnnounce(136339, 3)
 
-local specWarnStormcloud		= mod:NewSpecialWarningYou(136340)
-local specWarnLightningTether	= mod:NewSpecialWarningYou(136339)--Is this important enough?
-local specWarnArcNova			= mod:NewSpecialWarningRun(136338, "Melee", nil, 2, 4)
+local specWarnStormcloud		= mod:NewSpecialWarningMoveAway(136340, nil, nil, nil, 1, 2)
+local specWarnLightningTether	= mod:NewSpecialWarningMoveTo(136339, nil, nil, nil, 1, 14)
+local specWarnArcNova			= mod:NewSpecialWarningRun(136338, "Melee", nil, 2, 4, 2)
 
 local timerStormcloudCD			= mod:NewCDTimer(21.5, 136340, nil, nil, nil, 3)
 local timerLightningTetherCD	= mod:NewCDTimer(30.5, 136339, nil, nil, nil, 3)--Needs more data, they may have tweaked it some.
@@ -80,6 +80,7 @@ function mod:SPELL_CAST_START(args)
 		timerStormcloudCD:Start()
 	elseif spellId == 136338 then
 		specWarnArcNova:Show()
+		specWarnArcNova:Play("justrun")
 		timerArcNovaCD:Start()
 	elseif spellId == 136339 then
 		timerLightningTetherCD:Start()
@@ -92,13 +93,15 @@ function mod:SPELL_AURA_APPLIED(args)
 		stormcloudTargets[#stormcloudTargets + 1] = args.destName
 		if args:IsPlayer() then
 			specWarnStormcloud:Show()
+			specWarnStormcloud:Play("runout")
 		end
 		self:Unschedule(warnStormcloudTargets)
 		self:Schedule(0.3, warnStormcloudTargets)
 	elseif spellId == 136339 then
 		tetherTargets[#tetherTargets + 1] = args.destName
 		if args:IsPlayer() then
-			specWarnLightningTether:Show()
+			specWarnLightningTether:Show(DBM_COMMON_L.BOSS)
+			specWarnLightningTetherPlay("movetoboss")
 		end
 		self:Unschedule(warnTetherTargets)
 		self:Schedule(0.3, warnTetherTargets)

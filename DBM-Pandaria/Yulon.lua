@@ -17,12 +17,12 @@ mod:RegisterEventsInCombat(
 	"UNIT_SPELLCAST_SUCCEEDED target focus"
 )
 
-local specWarnJadefireBreath	= mod:NewSpecialWarningSpell(144530, "Tank")
-local specWarnJadefireBlaze		= mod:NewSpecialWarningMove(144538)
-local specWarnJadefireWall		= mod:NewSpecialWarningSpell(144533, nil, nil, nil, 2)
+local specWarnJadefireBreath	= mod:NewSpecialWarningSpell(144530, nil, nil, nil, 1, 2)
+local specWarnJadefireWall		= mod:NewSpecialWarningDodge(144533, nil, nil, nil, 2, 2)
+local specWarnGTFO				= mod:NewSpecialWarningGTFO(144538, nil, nil, nil, 1, 8)
 
 local timerJadefireBreathCD		= mod:NewCDTimer(18.5, 144530, nil, "Tank", nil, 5)
-local timerJadefireWallCD		= mod:NewNextTimer(60, 144533)
+local timerJadefireWallCD		= mod:NewNextTimer(60, 144533, nil, nil, nil, 3)
 
 mod:AddRangeFrameOption(11, 144532)
 mod:AddReadyCheckOption(33117, false, 90)
@@ -45,14 +45,18 @@ end
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
 	if spellId == 144530 then
-		specWarnJadefireBreath:Show()
+		if self:IsTanking("player", nil, nil, true, args.sourceGUID) then
+			specWarnJadefireBreath:Show()
+			specWarnJadefireBreath:Play("breathsoon")
+		end
 		timerJadefireBreathCD:Start()
 	end
 end
 
-function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
+function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId, spellName)
 	if spellId == 144538 and destGUID == UnitGUID("player") and self:AntiSpam(3, 1) then
-		specWarnJadefireBlaze:Show()
+		specWarnGTFO:Show(spellName)
+		specWarnGTFO:Play("watchfeet")
 	end
 end
 mod.SPELL_MISSED = mod.SPELL_DAMAGE
@@ -75,6 +79,7 @@ function mod:OnSync(msg)
 		DBM:EndCombat(self)
 	elseif msg == "Wave" and self:IsInCombat() then
 		specWarnJadefireWall:Show()
+		specWarnJadefireWall:Play("watchstep")
 		timerJadefireWallCD:Start()
 	end
 end

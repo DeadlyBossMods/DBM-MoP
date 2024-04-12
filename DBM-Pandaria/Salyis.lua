@@ -15,14 +15,13 @@ mod:RegisterEventsInCombat(
 
 local warnCannonBarrage		= mod:NewSpellAnnounce(121600, 3)
 
-local specWarnCannonBarrage	= mod:NewSpecialWarningSpell(121600, "Tank")
-local specWarnStomp			= mod:NewSpecialWarningSpell(121787, nil, nil, nil, 2)
-local specWarnWarmonger		= mod:NewSpecialWarningSwitch("ej6200", "-Healer")
+local specWarnStomp			= mod:NewSpecialWarningSpell(121787, nil, nil, nil, 2, 2)
+local specWarnWarmonger		= mod:NewSpecialWarningSwitch(-6200, "-Healer", nil, nil, 1, 2)
 
 local timerCannonBarrageCD	= mod:NewNextTimer(60, 121600, nil, "Tank", 2, 5)
 local timerStompCD			= mod:NewNextTimer(60, 121787, nil, nil, nil, 2)
-local timerStomp			= mod:NewCastTimer(3, 121787)
-local timerWarmongerCD		= mod:NewNextTimer(10, "ej6200", nil, nil, nil, 1, 121747)--Comes after Stomp. (Also every 60 sec.)
+local timerStomp			= mod:NewCastTimer(3, 121787, nil, nil, nil, 5)
+local timerWarmongerCD		= mod:NewNextTimer(10, -6200, nil, nil, nil, 1, 121747)--Comes after Stomp. (Also every 60 sec.)
 
 local berserkTimer			= mod:NewBerserkTimer(900)
 
@@ -39,11 +38,12 @@ end
 function mod:RAID_BOSS_EMOTE(msg)
 	if msg:find("spell:121600") then
 		warnCannonBarrage:Show()
-		specWarnCannonBarrage:Show()
 		timerCannonBarrageCD:Start()
 	elseif msg:find("spell:121787") then
 		specWarnStomp:Show()
+		specWarnStomp:Play("stunsoon")
 		specWarnWarmonger:Schedule(10)
+		specWarnWarmonger:ScheduleVoice(10, "killmob")
 		timerStomp:Start()
 		timerWarmongerCD:Start()
 		timerStompCD:Start()
