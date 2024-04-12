@@ -43,7 +43,6 @@ local warnWindStorm				= mod:NewSpellAnnounce(145286, 3)
 local warnEnrage				= mod:NewTargetAnnounce(145692, 3, nil, "Tank|RemoveEnrage")--Do not have timer for this yet, add not alive long enough.
 --Crate of Pandaren Relics
 local warnBreathofFire			= mod:NewSpellAnnounce(146222, 3)--Do not have timer for this yet, add not alive long enough.
-local warnGustingCraneKick		= mod:NewSpellAnnounce(146180, 3)
 
 local specWarnSuperNova			= mod:NewSpecialWarningSpell(146815, false, nil, nil, 2)
 --Massive Crate of Goods
@@ -70,16 +69,16 @@ local specWarnGustingCraneKick	= mod:NewSpecialWarningSpell(146180, nil, nil, ni
 
 local timerCombatStarts			= mod:NewCombatTimer(18)
 --Massive Crate of Goods
-local timerReturnToStoneCD		= mod:NewNextTimer(12, 145489)
+local timerReturnToStoneCD		= mod:NewNextTimer(11.7, 145489)
 local timerSetToBlowCD			= mod:NewNextTimer(9.6, 145996, nil, nil, nil, 3, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerSetToBlow			= mod:NewBuffFadesTimer(30, 145996, nil, nil, nil, 5, nil, DBM_COMMON_L.DEADLY_ICON, nil, 1, 4)
 --Stout Crate of Goods
 local timerMatterScramble		= mod:NewCastTimer(7, 145288, nil, "-Tank")
-local timerMatterScrambleCD		= mod:NewCDTimer(18, 145288, nil, nil, nil, 5)--18-22 sec variation. most of time it's 20 exactly, unsure what causes the +-2 variations
+local timerMatterScrambleCD		= mod:NewCDTimer(14.1, 145288, nil, nil, nil, 5)--Old note invalid, unknown newer variation with wod prepatch rework
 local timerCrimsonReconCD		= mod:NewNextTimer(15, 142947, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
-local timerMantidSwarmCD		= mod:NewCDTimer(35, 142539, nil, nil, nil, 1)
+local timerMantidSwarmCD		= mod:NewCDTimer(15.7, 142539, nil, nil, nil, 1)
 local timerResidueCD			= mod:NewCDTimer(18, 145786, nil, "MagicDispeller", nil, 5)
-local timerWindstormCD			= mod:NewCDTimer(34, 145286, nil, false)--Spammy but might be useful to some, if they aren't releasing a ton of these at once.
+local timerWindstormCD			= mod:NewCDTimer(15.7, 145286, nil, false)--Spammy but might be useful to some, if they aren't releasing a ton of these at once.
 local timerRageoftheEmpressCD	= mod:NewCDTimer(18, 145812, nil, "MagicDispeller", nil, 5)
 --Lightweight Crate of Goods
 ----Most of these timers are included simply because of how accurate they are. Predictable next timers. However, MANY of these adds up at once.
@@ -138,29 +137,28 @@ end
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
 	if spellId == 145996 then
-		timerSetToBlowCD:Start(args.sourceGUID)
+		timerSetToBlowCD:Start(nil, args.sourceGUID)
 	elseif spellId == 145288 then
 		specWarnMatterScramble:Show()
-		timerMatterScramble:Start(args.sourceGUID)
-		timerMatterScrambleCD:Start(args.sourceGUID)
+		timerMatterScramble:Start(nil, args.sourceGUID)
+		timerMatterScrambleCD:Start(nil, args.sourceGUID)
 	elseif spellId == 142934 then
 		warnTorment:Show()
 		specWarnTorment:Show()
 	elseif spellId == 142539 then
 		specWarnMantidSwarm:Show()
-		timerMantidSwarmCD:Start(args.sourceGUID)
+		timerMantidSwarmCD:Start(nil, args.sourceGUID)
 	elseif spellId == 145286 and self:AntiSpam(5, args.sourceGUID) then
 		warnWindStorm:Show()
-		timerWindstormCD:Start(args.sourceGUID)
+		timerWindstormCD:Start(nil, args.sourceGUID)
 	elseif spellId == 146222 and self:CheckTankDistance(args.sourceGUID) then--Relics can be either side, must use CheckTank Distance
 		warnBreathofFire:Show()
 	elseif spellId == 146180 and self:CheckTankDistance(args.sourceGUID) then--Also a Relic
-		warnGustingCraneKick:Show()
 		specWarnGustingCraneKick:Show()
-		timerGustingCraneKickCD:Start(args.sourceGUID)
+		timerGustingCraneKickCD:Start(nil, args.sourceGUID)
 	elseif spellId == 145489 then
 		warnReturnToStone:Show()
-		timerReturnToStoneCD:Start(args.sourceGUID)
+		timerReturnToStoneCD:Start(nil, args.sourceGUID)
 	elseif spellId == 142947 then--Pre warn more or less
 		specWarnCrimsonRecon:Show()
 	elseif spellId == 146815 and self:AntiSpam(2, 4)then--Will do more work on this later, not enough time before raid, but i have an idea for it
@@ -172,11 +170,11 @@ end
 function mod:SPELL_CAST_SUCCESS(args)
 	local spellId = args.spellId
 	if spellId == 142947 then
-		timerCrimsonReconCD:Start(args.sourceGUID)
+		timerCrimsonReconCD:Start(nil, args.sourceGUID)
 	elseif spellId == 145712 then
-		timerBlazingChargeCD:Start(args.sourceGUID)
+		timerBlazingChargeCD:Start(nil, args.sourceGUID)
 	elseif spellId == 146253 then
-		timerPathOfBlossomsCD:Start(args.sourceGUID)
+		timerPathOfBlossomsCD:Start(nil, args.sourceGUID)
 	elseif spellId == 145230 then
 		local source = args.sourceName
 		if self:AntiSpam(5, args.destName) then
@@ -186,11 +184,11 @@ function mod:SPELL_CAST_SUCCESS(args)
 			specWarnForbiddenMagic:Show(source)
 		end
 	elseif spellId == 145786 then
-		timerResidueCD:Start(args.sourceGUID)
+		timerResidueCD:Start(nil, args.sourceGUID)
 		specWarnResidue:Show()
 	elseif spellId == 145812 then
 		specWarnRageoftheEmpress:Show()
-		timerRageoftheEmpressCD:Start(args.sourceGUID)
+		timerRageoftheEmpressCD:Start(nil, args.sourceGUID)
 	end
 end
 
@@ -207,7 +205,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif spellId == 145692 then
 		warnEnrage:Show(args.destName)
 		specWarnEnrage:Show(args.destName)
-		timerEnrage:Start(args.destName)
+		timerEnrage:Start(nil, args.destName)
 	end
 end
 
