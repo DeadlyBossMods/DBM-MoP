@@ -275,29 +275,31 @@ function mod:UPDATE_UI_WIDGET(table)
 	local id = table.widgetID
 	if id ~= 746 then return end
 	local widgetInfo = C_UIWidgetManager.GetIconAndTextWidgetVisualizationInfo(id)
-	local text = widgetInfo.text
-	local time = tonumber(string.match(text or "", "%d+"))
-	if not time then return end
-	if time > worldTimer then
-		maxTimer = time
-		berserkTimer:Cancel()
-		berserkTimer:Start(time+1)
-	end
-	if time % 10 == 0 then
-		berserkTimer:Update(maxTimer-time-1, maxTimer)
-		if time == 300 and self.Options["timer_berserk"] and self:AntiSpam(2, 5) then
-			berserkWarning1:Show(5, DBM_CORE_L.MIN)
-		elseif time == 180 and self.Options["timer_berserk"] and self:AntiSpam(2, 5) then
-			berserkWarning1:Show(3, DBM_CORE_L.MIN)
-		elseif time == 60 and self.Options["timer_berserk"] and self:AntiSpam(2, 5) then
-			berserkWarning2:Show(1, DBM_CORE_L.MIN)
-		elseif time == 30 and self.Options["timer_berserk"] and self:AntiSpam(2, 5) then
-			berserkWarning2:Show(30, DBM_CORE_L.SEC)
-		elseif time == 10 and self.Options["timer_berserk"] and self:AntiSpam(2, 5) then
-			berserkWarning2:Show(10, DBM_CORE_L.SEC)
+	if widgetInfo and widgetInfo.text then
+		local text = widgetInfo.text
+		local time = tonumber(string.match(text or "", "%d+"))
+		if not time then return end
+		if time > worldTimer then
+			maxTimer = time
+			berserkTimer:Cancel()
+			berserkTimer:Start(time+1)
 		end
+		if time % 10 == 0 then
+			berserkTimer:Update(maxTimer-time-1, maxTimer)
+			if time == 300 and self.Options["timer_berserk"] and self:AntiSpam(2, 5) then
+				berserkWarning1:Show(5, DBM_CORE_L.MIN)
+			elseif time == 180 and self.Options["timer_berserk"] and self:AntiSpam(2, 5) then
+				berserkWarning1:Show(3, DBM_CORE_L.MIN)
+			elseif time == 60 and self.Options["timer_berserk"] and self:AntiSpam(2, 5) then
+				berserkWarning2:Show(1, DBM_CORE_L.MIN)
+			elseif time == 30 and self.Options["timer_berserk"] and self:AntiSpam(2, 5) then
+				berserkWarning2:Show(30, DBM_CORE_L.SEC)
+			elseif time == 10 and self.Options["timer_berserk"] and self:AntiSpam(2, 5) then
+				berserkWarning2:Show(10, DBM_CORE_L.SEC)
+			end
+		end
+		worldTimer = time
 	end
-	worldTimer = time
 end
 
 function mod:OnSync(msg)

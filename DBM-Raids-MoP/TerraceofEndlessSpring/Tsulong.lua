@@ -45,7 +45,7 @@ local timerDayCD						= mod:NewNextTimer(121, "ej6315", nil, nil, nil, 6, 122789
 local timerSummonUnstableShaCD			= mod:NewNextTimer(18, "ej6320", nil, nil, nil, 1, "627685")
 local timerSummonEmbodiedTerrorCD		= mod:NewNextCountTimer(41, "ej6316", nil, nil, nil, 1, "627685")
 local timerTerrorizeCD					= mod:NewCDTimer(13.5, 123012, nil, nil, nil, 5)--Besides being cast 14 seconds after they spawn, i don't know if they recast it if they live too long, their health was too undertuned to find out.
-local timerSunBreathCD					= mod:NewNextCountTimer(29, 122855, nil, nil, nil, 5, nil, nil, nil, mod:IsHealer() and 1, 4)--LuaLS has a problem with this for some reason but seems valid
+local timerSunBreathCD					= mod:NewNextCountTimer(29, 122855, nil, nil, nil, 5, nil, nil, nil, mod:IsHealer() and 1 or nil, 4)--LuaLS has a problem with this for some reason but seems valid
 local timerBathedinLight				= mod:NewBuffFadesTimer(6, 122858, nil, "Healer", nil, 5)
 local timerLightOfDay					= mod:NewTargetTimer(6, 123716, nil, "Healer", nil, 5)
 
