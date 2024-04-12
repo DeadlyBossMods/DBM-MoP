@@ -47,12 +47,11 @@ local specWarnExplosiveTar		= mod:NewSpecialWarningMove(144498)
 local yellCutterLaser			= mod:NewYell(146325)
 local specWarnMortarBarrage		= mod:NewSpecialWarningSpell(144555, nil, nil, nil, 2)
 
-local timerDemolisherCanonCD	= mod:NewCDTimer(8.5, 144154, nil, false)--Spammy. off by default
+local timerDemolisherCanonCD	= mod:NewCDTimer(6.1, 144154, nil, false)--Spammy. off by default
 --Assault Mode
 local timerAssaultModeCD		= mod:NewNextTimer(62, 141395, nil, nil, "timerAssaultModeCD", 6)--141395 is correct timer text but it's wrong spellid, custom option text for real timer description
 local timerIgniteArmor			= mod:NewTargetTimer(30, 144467, nil, "Tank|Healer")
-local timerIgniteArmorCD		= mod:NewCDTimer(10, 144467, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
-local timerLaserBurnCD			= mod:NewCDTimer(11.5, 144459, nil, false)--Also off by default(bar spam)
+local timerIgniteArmorCD		= mod:NewCDTimer(8.5, 144467, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerBorerDrillCD			= mod:NewCDTimer(15.7, 144218, nil, nil, nil, 3)
 local timerCrawlerMineCD		= mod:NewCDTimer(30, 144673, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerRicochetCD			= mod:NewCDTimer(15, 144356, nil, nil, nil, 3, 144327, DBM_COMMON_L.HEROIC_ICON)
@@ -77,7 +76,6 @@ function mod:OnCombatStart(delay)
 	self.vb.shockCount = 0
 	self.vb.siegeMode = false
 	timerIgniteArmorCD:Start(9-delay)
-	timerLaserBurnCD:Start(-delay)
 	timerBorerDrillCD:Start(-delay)
 	timerCrawlerMineCD:Start(-delay)
 	timerSiegeModeCD:Start(120.5-delay)--First one longer than rest
@@ -105,12 +103,11 @@ function mod:SPELL_CAST_START(args)
 		self.vb.siegeMode = true
 		self.vb.firstTar = false
 		self.vb.firstMortar = false
-		timerLaserBurnCD:Cancel()
 		timerCrawlerMineCD:Cancel()
 		timerBorerDrillCD:Cancel()
 		timerRicochetCD:Cancel()
 		specWarnSeismicActivity:Show()
-		timerExplosiveTarCD:Start(7)
+		timerExplosiveTarCD:Start(4.8)
 		timerShockPulseCD:Start(nil, 1)
 		if self:IsMythic() then
 			timerMortarBarrageCD:Start(20)
@@ -153,7 +150,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		self:SendSync("LaserTarget", args.destGUID)
 	elseif spellId == 144459 then
 		warnLaserBurn:CombinedShow(0.5, args.destName)
-		timerLaserBurnCD:DelayedStart(0.5)
 	elseif spellId == 144498 and args:IsPlayer() then
 		specWarnExplosiveTar:Show()
 	end
