@@ -262,7 +262,6 @@ function mod:SPELL_AURA_REFRESH(args)
 		local amount = args.amount or 1
 		warnElectroStaticCharge:Show(args.destName, amount)
 		timerElectroStaticCharge:Start(args.destName)
-		timerElectroStaticChargeCD:Start()
 	end
 end
 
