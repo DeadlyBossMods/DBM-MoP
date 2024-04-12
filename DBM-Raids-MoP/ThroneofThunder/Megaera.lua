@@ -55,6 +55,7 @@ local specWarnNetherTear		= mod:NewSpecialWarningSwitch("ej7816", "Dps")
 
 local timerRampage				= mod:NewBuffActiveTimer(21, 139458, nil, nil, nil, 6)
 mod:AddBoolOption("timerBreaths", "Tank|Healer", "timer")--Better to have one option for breaths than 4
+--LuaLS hates mods setting option name to false
 local timerArcticFreezeCD		= mod:NewCDTimer(16, 139843, nil, nil, false)--We keep timers for artic and freeze for engage, since the breaths might be out of sync until after first rampage
 local timerRotArmorCD			= mod:NewCDTimer(16, 139840, nil, nil, false)--^
 local timerBreathsCD			= mod:NewTimer(16, "timerBreathsCD", 137731, nil, false, 5)--Rest of breaths after first rampage consolidated into one timer instead of 2

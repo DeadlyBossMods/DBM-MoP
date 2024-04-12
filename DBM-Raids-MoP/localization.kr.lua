@@ -578,8 +578,7 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	specWarnUnstablVitaJump	= "$spell:138297 전이 대상이 당신이 된 경우 특수 경고 보기",
-	SetIconsOnVita			= "$spell:138297 대상과 그 대상에서 가장 먼 공격대원에게 전술 목표 아이콘 설정"
+	specWarnUnstablVitaJump	= "$spell:138297 전이 대상이 당신이 된 경우 특수 경고 보기"
 })
 
 L:SetMiscLocalization({

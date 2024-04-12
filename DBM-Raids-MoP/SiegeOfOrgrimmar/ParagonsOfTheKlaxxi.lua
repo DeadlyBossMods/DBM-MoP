@@ -247,7 +247,7 @@ local function CheckBosses(self)
 		local unitID = "boss"..i
 		local unitGUID = UnitGUID(unitID)
 		--Only 3 bosses activate on pull, however now the inactive or (next boss to activate) also fires IEEU. As such, we have to filter that boss by scaning for readytofight. Works well though.
-		if UnitExists(unitID) and not activeBossGUIDS[unitGUID] and not DBM:UnitBuff(unitID, readyToFight) then
+		if unitGUID and UnitExists(unitID) and not activeBossGUIDS[unitGUID] and not DBM:UnitBuff(unitID, readyToFight) then
 			activeBossGUIDS[unitGUID] = true
 			activatedTargets[#activatedTargets + 1] = UnitName(unitID)
 			--Activation Controller
@@ -624,7 +624,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif spellId == 142671 then
 		warnMesmerize:Show(args.destName)
 		timerMesmerizeCD:Start()
-		if args.IsPlayer() then
+		if args:IsPlayer() then
 			specWarnMesmerize:Show()
 			yellMesmerize:Yell()
 		else
@@ -641,7 +641,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerEncaseInAmberCD:Start()
 	elseif spellId == 143939 then
 		timerGouge:Start(args.destName)
-		if args.IsPlayer() then
+		if args:IsPlayer() then
 			specWarnGouge:Show()
 		else
 			specWarnGougeOther:Show(args.destName)
@@ -656,7 +656,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			end
 		end
 	elseif spellId == 143701 then
-		if args.IsPlayer() then
+		if args:IsPlayer() then
 			timerWhirling:Start()
 		else
 			local uId = DBM:GetRaidUnitId(args.destName)
@@ -683,11 +683,11 @@ function mod:SPELL_AURA_APPLIED(args)
 			end
 		end
 		warnMutate:CombinedShow(0.5, self.vb.mutateCount, args.destName)
-		if args.IsPlayer() then
+		if args:IsPlayer() then
 			specWarnMutate:Show()
 			timerMutate:Start()
 		end
-	elseif spellId == 143358 and args.IsPlayer() then
+	elseif spellId == 143358 and args:IsPlayer() then
 		specWarnParasiteFixate:Show()
 	elseif spellId == 142948 then
 		self.vb.aimCount = self.vb.aimCount + 1
@@ -702,7 +702,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			timerAim:Start(nil, args.destName)
 		end--]]
 		timerAimCD:Start(nil, self.vb.aimCount+1)
-		if args.IsPlayer() then
+		if args:IsPlayer() then
 			specWarnAim:Show()
 			yellAim:Yell()
 		else

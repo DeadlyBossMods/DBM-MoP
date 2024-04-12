@@ -6,7 +6,7 @@ mod.statTypes = "heroic,heroic25"
 mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(69473)--69888
 mod:SetEncounterID(1580, 1581)
-mod:SetUsedIcons(2, 1)
+mod:SetUsedIcons(1)
 
 mod:RegisterCombat("combat")
 
@@ -61,41 +61,14 @@ local timerCracklingStalkerCD	= mod:NewCDCountTimer(41, 138339, nil, nil, nil, 1
 local timerCreationCD			= mod:NewCDCountTimer(32.5, 138321, nil, nil, nil, 1, nil, nil, nil, 1, 4)--32.5-35second variation
 local timerCallEssenceCD		= mod:NewNextTimer(15.5, 139040, nil, nil, nil, 1)
 
-mod:AddBoolOption("SetIconsOnVita", false)--Both the vita target and furthest from vita target
+mod:AddSetIconOption("SetIconsOnVita", 418720, false, false, {1})
 
 local creationCount = 0
 local stalkerCount = 0
 local horrorCount = 0
 local lastStalker = 0
-local playerWithVita = nil
-local furthestDistancePlayer = nil
-local lastfurthestDistancePlayer = nil
 local playerName = UnitName("player")
 local vitaName, animaName, animaDebuff = DBM:GetSpellInfo(138332), DBM:GetSpellInfo(138331), DBM:GetSpellInfo(138288)
-
-function mod:checkVitaDistance()
-	if not playerWithVita then--Failsafe more or less. This shouldn't happen unless combat log lag fires events out of order
-		self:UnscheduleMethod("checkVitaDistance")--So terminate loop (anima phase or phase 2 probably)
-		return
-	end
-	local furthestDistance = 0
-	for uId in DBM:GetGroupMembers() do
-		if not UnitIsUnit(uId, playerWithVita) then
-			local distance = DBM.RangeCheck:GetDistance(uId, playerWithVita)
-			if distance > furthestDistance then
-				furthestDistance = distance
-				furthestDistancePlayer = uId
-			end
-		end
-	end
-	if furthestDistancePlayer ~= lastfurthestDistancePlayer then--Set icon throttling to avoid hitting blizzard throttle
-		if self.Options.SetIconsOnVita then
-			self:SetIcon(furthestDistancePlayer, 2)
-		end
-		lastfurthestDistancePlayer = furthestDistancePlayer
-	end
-	self:ScheduleMethod(1, "checkVitaDistance")
-end
 
 function mod:OnCombatStart(delay)
 	creationCount = 0
@@ -182,16 +155,13 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif args:IsSpellID(138297, 138308) then--Unstable Vita (138297 cast, 138308 jump)
 		if self.Options.SetIconsOnVita then
-			playerWithVita = DBM:GetRaidUnitId(args.destName)
 			self:SetIcon(args.destName, 1)
 		end
 		warnUnstableVita:Show(args.destName)
 		if self:IsDifficulty("heroic25") then
 			timerUnstableVita:Start(5, args.destName)
-			self:ScheduleMethod(1, "checkVitaDistance")--4 seconds before
 		else
 			timerUnstableVita:Start(args.destName)
-			self:ScheduleMethod(8, "checkVitaDistance")--4 seconds before
 		end
 		if args:IsPlayer() then
 			if spellId == 138297 then
@@ -207,10 +177,7 @@ end
 function mod:SPELL_AURA_REMOVED(args)
 	local spellId = args.spellId
 	if args:IsSpellID(138297, 138308) and self.Options.SetIconsOnVita then--Unstable Vita
-		self:UnscheduleMethod("checkVitaDistance")
-		playerWithVita = nil
 		self:SetIcon(args.destName, 0)
-		self:SetIcon(furthestDistancePlayer, 0)
 	elseif spellId == 138288 or spellId == 138295 then
 		timerAnimaExplosion:Cancel()
 	end

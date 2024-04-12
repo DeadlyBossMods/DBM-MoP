@@ -334,7 +334,7 @@ L:SetOptionLocalization({
 	warnThrash					= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(131996),
 	warnBreathOnPlatform		= "Show $spell:119414 warning when you are on platform<br/>(not recommended, for raid leader)",
 	specWarnBreathOfFearSoon	= "Show pre-special warning for $spell:119414 if you not have a $spell:117964 buff",
-	specWarnMovement			= "Show special warning to move when $spell:120047 is being fired",
+	specWarnMovement			= "Show special warning directing where to move when $spell:120047 is being cast<br/>(based on common position strategy)",
 	timerSpecialAbility			= "Show timer for when next special ability will be cast",
 	RangeFrame					= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(2, 119519),
 	SetIconOnHuddle				= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(120629)
@@ -652,8 +652,7 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	specWarnUnstablVitaJump	= "Show special warning when $spell:138297 jumps to you",
-	SetIconsOnVita			= "Set icons on $spell:138297 debuffed player and furthest player from them"
+	specWarnUnstablVitaJump	= "Show special warning when $spell:138297 jumps to you"
 })
 
 L:SetMiscLocalization({

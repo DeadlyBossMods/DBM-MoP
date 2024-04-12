@@ -8,9 +8,7 @@ mod:SetRevision("@file-date-integer@")
 mod:RegisterCombat("scenario", 1051)
 
 mod:RegisterEventsInCombat(
-	"CHAT_MSG_MONSTER_YELL",
 	"SPELL_AURA_APPLIED",
-	"SPELL_AURA_REMOVED",
 	"SPELL_CAST_START"
 )
 

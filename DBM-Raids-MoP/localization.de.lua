@@ -579,8 +579,7 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	specWarnUnstablVitaJump	= "Spezialwarnung, wenn $spell:138297 auf dich überspringt",
-	SetIconsOnVita			= "Setze Zeichen auf den Spieler mit dem Debuff $spell:138297 und den am weitesten davon entfernten Spieler"
+	specWarnUnstablVitaJump	= "Spezialwarnung, wenn $spell:138297 auf dich überspringt"
 })
 
 L:SetMiscLocalization({

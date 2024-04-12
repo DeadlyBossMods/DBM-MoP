@@ -92,7 +92,7 @@ local function notEligable(unit)
 	-- 2. check blizzard roles second
 	-- 3. check boss' highest threat target
 	-- 4. Check monks
-	if GetPartyAssignment("MAINTANK", unit, 1) then
+	if GetPartyAssignment("MAINTANK", unit, true) then
 		return true
 	end
 	if UnitGroupRolesAssigned(unit) == "TANK" then

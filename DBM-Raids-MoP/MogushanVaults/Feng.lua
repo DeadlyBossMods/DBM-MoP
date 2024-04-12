@@ -400,7 +400,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	end
 end
 
-function mod:UNIT_SPELLCAST_STOP(uId, _, _, _, spellId)
+function mod:UNIT_SPELLCAST_STOP(uId, _, spellId)
 	if spellId == 116018 then
 		timerEpicenter:Cancel()
 	end

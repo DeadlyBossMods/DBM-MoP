@@ -34,6 +34,6 @@ end
 
 function mod:SPELL_AURA_REMOVED(args)
 	if args.spellId == 134974 then
-		timerBloodRage:Cancel(args.destname)
+		timerBloodRage:Cancel(args.destName)
 	end
 end

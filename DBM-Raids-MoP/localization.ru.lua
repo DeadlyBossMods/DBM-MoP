@@ -653,8 +653,7 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	specWarnUnstablVitaJump	= "Спецпредупреждение, когда $spell:138297 перепрыгивает на Вас",
-	SetIconsOnVita			= "Устанавливать метки на игрока с дебаффом $spell:138297 и самого дальнего от него игрока"
+	specWarnUnstablVitaJump	= "Спецпредупреждение, когда $spell:138297 перепрыгивает на Вас"
 })
 
 L:SetMiscLocalization({

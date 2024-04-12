@@ -270,11 +270,13 @@ function mod:UPDATE_UI_WIDGET(table)
 	local id = table.widgetID
 	if id ~= 751 and id ~= 752 then return end--751 south tower, 752 north tower
 	local widgetInfo = C_UIWidgetManager.GetIconAndTextWidgetVisualizationInfo(id)
-	local text = widgetInfo.text
-	local percent = tonumber(string.match(text or "", "%d+"))
-	if percent == 1 and (self.vb.firstTower == 0) and not self:IsMythic() then
-		self.vb.firstTower = 1
-		timerTowerCD:Start()
+	if widgetInfo and widgetInfo.text then
+		local text = widgetInfo.text
+		local percent = tonumber(string.match(text or "", "%d+"))
+		if percent == 1 and (self.vb.firstTower == 0) and not self:IsMythic() then
+			self.vb.firstTower = 1
+			timerTowerCD:Start()
+		end
 	end
 end
 

@@ -55,7 +55,7 @@ local MCTargets = {}
 local MCIcon = 8
 local platform = 0
 local EchoAlive = false--Will be used for the very accurate phase 2 timers when an echo is left up on purpose. when convert is disabled the other 2 abilities trigger failsafes that make them predictable. it's the ONLY time phase 2 timers are possible. otherwise they are too variable to be useful
-local lastDirection = 0
+local lastDirection = "UNKNOWN"
 
 local function showMCWarning()
 	warnConvert:Show(table.concat(MCTargets, "<, >"))
@@ -65,7 +65,7 @@ local function showMCWarning()
 end
 
 function mod:OnCombatStart(delay)
-	lastDirection = 0
+	lastDirection = "UNKNOWN"
 	platform = 0
 	EchoAlive = false
 	table.wipe(MCTargets)

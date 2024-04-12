@@ -578,8 +578,7 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	specWarnUnstablVitaJump	= "當$spell:138297傳遞你身上時顯示特別警告",
-	SetIconsOnVita			= "為中了$spell:138297和離他最遠的玩家設置團隊圖示"
+	specWarnUnstablVitaJump	= "當$spell:138297傳遞你身上時顯示特別警告"
 })
 
 L:SetMiscLocalization({

@@ -144,20 +144,8 @@ function mod:OnCombatStart(delay)
 	end
 	if self.Options.InfoFrame then
 		DBM.InfoFrame:SetHeader(L.WillPower)
-		DBM.InfoFrame:SetSortingAsc(true)
+		DBM.InfoFrame:SetSortingAsc()
 		DBM.InfoFrame:Show(5, "playerpower", 1, ALTERNATE_POWER_INDEX)
-	end
-end
-
-local function delayNamePlateRestore()
-	if Totems then
-		SetCVar("nameplateShowEnemyTotems", 1)
-	end
-	if Guardians then
-		SetCVar("nameplateShowEnemyGuardians", 1)
-	end
-	if Pets then
-		SetCVar("nameplateShowEnemyPets", 1)
 	end
 end
 

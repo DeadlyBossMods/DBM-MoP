@@ -116,8 +116,7 @@ end
 
 local function findGroupNumber()
 	if UnitInRaid("player") then
-		local name, _, subgroup = GetRaidRosterInfo(UnitInRaid("player"))
-		myGroup = subgroup
+		myGroup = DBM:GetRaidSubgroup()
 	else--Probably next expansion and you're soloing or undermanning this shit not in a raid group.
 		notARaid = true
 	end

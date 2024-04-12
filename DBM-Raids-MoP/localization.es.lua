@@ -655,8 +655,7 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	specWarnUnstablVitaJump	= "Mostrar aviso especial cuando $spell:138297 salta a ti",
-	SetIconsOnVita			= "Poner iconos en jugadores afectados por el perjuicio de $spell:138297 y el jugador más alejado de ellos"
+	specWarnUnstablVitaJump	= "Mostrar aviso especial cuando $spell:138297 salta a ti"
 })
 
 L:SetMiscLocalization({

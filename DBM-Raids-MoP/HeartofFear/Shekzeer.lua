@@ -326,7 +326,7 @@ end
 function mod:UNIT_HEALTH_UNFILTERED(uId)
 	local cid = self:GetUnitCreatureId(uId)
 	local guid = UnitGUID(uId)
-	if cid == 62847 and UnitHealth(uId) / UnitHealthMax(uId) <= 0.08 and not sentLowHP[guid] then -- 0.05 seems too late.
+	if cid == 62847 and UnitHealth(uId) / UnitHealthMax(uId) <= 0.08 and guid and not sentLowHP[guid] then -- 0.05 seems too late.
 		sentLowHP[guid] = true
 		self:SendSync("lowhealth", guid)
 	end
