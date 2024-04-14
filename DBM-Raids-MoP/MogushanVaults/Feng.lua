@@ -108,9 +108,9 @@ mod.vb.specialCount = 0
 local arcaneResonanceTargets = {}
 local nullBarrier = DBM:GetSpellInfo(115811)
 
-local function warnWildfire()
+local function warnWildfire(self)
 	warnWildfireInfusion:Cancel()
-	warnWildfireInfusion:Schedule(1, L.name, wildfireCount)
+	warnWildfireInfusion:Schedule(1, L.name, self.vb.wildfireCount)
 end
 
 local function warnArcaneResonanceTargets()
@@ -179,7 +179,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif spellId == 116821 then
 		self.vb.wildfireCount = 1
-		warnWildfire()
+		warnWildfire(self)
 	elseif spellId == 116417 then
 		arcaneResonanceTargets[#arcaneResonanceTargets + 1] = args.destName
 		if self.Options.SetIconOnAR then
@@ -262,7 +262,7 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 		end
 	elseif spellId == 116821 then
 		self.vb.wildfireCount = amount
-		warnWildfire()
+		warnWildfire(self)
 	end
 end
 
@@ -317,7 +317,6 @@ function mod:SPELL_CAST_SUCCESS(args)
 		warnChainsOfShadow:Show()
 		timerChainsOfShadowCD:Start()
 	elseif spellId == 115817 then
-		warnNullBarrier:Show()
 		specWarnNullBarrier:Show()
 		specWarnNullBarrier:Play("findsheild")
 		timerNullBarrier:Start()
