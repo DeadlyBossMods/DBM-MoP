@@ -1,8 +1,11 @@
+-- Mini Dragon(projecteurs[at]gmail.nospam.com) <流浪者酒馆-Brilla@金色平原> 20240414
+
 if GetLocale() ~= "zhCN" then
 	return
 end
 local L
 
+--魔古山宝库--
 ------------
 -- The Stone Guard --
 ------------
@@ -15,7 +18,7 @@ L:SetWarningLocalization({
 
 L:SetOptionLocalization({
 	SpecWarnOverloadSoon		= "特殊警报：过载预警", -- need to change this, i can not translate this with good grammer. please help.
-	specWarnBreakJasperChains	= "特殊惊爆：可扯断$spell:130395",
+	specWarnBreakJasperChains	= "特殊警报：可扯断$spell:130395",
 	InfoFrame					= "信息框：石像能量及激活情况"
 })
 
@@ -29,12 +32,14 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(689)
 
 L:SetWarningLocalization({
-	WarnPhase	= "第%d阶段"
+	WarnPhase			= "第%d阶段",
+	specWarnBarrierNow	= "快使用废灵壁垒！"
 })
 
 L:SetOptionLocalization({
-	WarnPhase	= "警报：阶段转换",
-	RangeFrame	= "距离监视（6码）：应对奥术阶段"
+	WarnPhase			= "警报：阶段转换",
+	specWarnBarrierNow	= "特殊警报：当你需要使用$spell:115817 时(限随机团)",
+	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format("6") .. " 应对奥术阶段"
 })
 
 L:SetMiscLocalization({
@@ -69,8 +74,7 @@ L:SetTimerLocalization({
 
 L:SetOptionLocalization({
 	DarknessSoon	= "预警：$spell:117697（提前5秒倒计时）",
-	timerUSRevive	= "计时条：$spell:117506复活",
-	RangeFrame		= "距离监视（8码）"
+	timerUSRevive	= "计时条：$spell:117506复活"
 })
 
 ------------
@@ -85,8 +89,8 @@ L:SetTimerLocalization({
 })
 
 L:SetOptionLocalization({
-	specWarnDespawnFloor	= "特殊警报：平台消失预警",
-	timerDespawnFloor		= "计时条：平台消失"
+	specWarnDespawnFloor	= "特殊警报：地板消失预警",
+	timerDespawnFloor		= "计时条：地板消失"
 })
 
 ------------
@@ -108,13 +112,13 @@ L:SetMiscLocalization({
 	Boss		= "两个巨型构造体出现在大型的壁龛中！"--Emote
 })
 
+--恐惧之心--
 ------------
 -- Imperial Vizier Zor'lok --
 ------------
 L = DBM:GetModLocalization(745)
 
 L:SetWarningLocalization({
-	warnAttenuation		= "%s：%s (%s)",
 	warnEcho			= "回响出现",
 	warnEchoDown		= "回响被击败",
 	specwarnAttenuation	= "%s：%s (%s)",
@@ -129,7 +133,7 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	Platform	= "%s朝他其中一个平台飞去了！",
+	Platform	= "朝他其中一个平台飞去了！",
 	Defeat		= "我们不会向黑暗虚空的绝望屈服。如果女皇要我们去死，我们便照做。"
 })
 
@@ -137,10 +141,6 @@ L:SetMiscLocalization({
 -- Blade Lord Ta'yak --
 ------------
 L = DBM:GetModLocalization(744)
-
-L:SetOptionLocalization({
-	RangeFrame			= "距离监视（10码）：$spell:123175"
-})
 
 -------------------------------
 -- Garalon --
@@ -153,7 +153,7 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	specwarnUnder	= "特殊警报：当你在首领身体下方时",
+	specwarnUnder	= "特殊警报：当你在首领身体下方时"
 })
 
 L:SetMiscLocalization({
@@ -166,9 +166,9 @@ L:SetMiscLocalization({
 ----------------------
 L = DBM:GetModLocalization(741)
 
-L:SetMiscLocalization({
-	Reinforcements	= "风领主梅尔加拉克调遣援兵了！"
-})
+--L:SetMiscLocalization({
+--	Reinforcements	= "风领主梅尔加拉克调遣援兵了！"
+--})
 
 ------------
 -- Amber-Shaper Un'sok --
@@ -204,7 +204,8 @@ L:SetOptionLocalization({
 	specwarnAmberExplosionAM	= "特殊警报：打断琥珀畸怪的$spell:122402",
 	specwarnAmberExplosionOther	= "特殊警报：打断变异构造体的$spell:122398",
 	timerAmberExplosionAMCD		= "计时条：琥珀畸怪的下一次$spell:122402",
-	InfoFrame					= "信息框：意志值"
+	InfoFrame					= "信息框：意志值",
+	FixNameplates				= "在变为构造体时自动关闭烦人的姓名版<br/>(离开战斗时恢复)"
 })
 
 L:SetMiscLocalization({
@@ -222,8 +223,7 @@ L:SetWarningLocalization({
 
 L:SetOptionLocalization({
 	warnAmberTrap	= "警报：$spell:125826的生成，并提示进度", -- maybe bad translation.
-	InfoFrame		= "信息框：受$spell:125390效果影响的玩家",
-	RangeFrame		= "距离监视（5码）：$spell:123735"
+	InfoFrame		= "信息框：受$spell:125390效果影响的玩家"
 })
 
 L:SetMiscLocalization({
@@ -231,20 +231,30 @@ L:SetMiscLocalization({
 	YellPhase3		= "别找借口了，女皇！消灭这些傻瓜，否则我会亲手杀了你！"
 })
 
+-------------
+--  Trash  --
+-------------
+L = DBM:GetModLocalization("HoFTrash")
+
+L:SetGeneralLocalization({
+	name	= "恐惧之心小怪"
+})
+
+--永春台--
 ------------
 -- Protectors of the Endless --
 ------------
 L = DBM:GetModLocalization(683)
 
 L:SetWarningLocalization({
-	warnGroupOrder		= "循环：小队Group %s",
+	warnGroupOrder		= "循环：第%s小队",
 	specWarnYourGroup	= "轮到你的小对了！"
 })
 
 L:SetOptionLocalization({
 	warnGroupOrder		= "警报：针对$spell:118191的小队循环<br/>（当前仅支持25人模式的5/2/2/2战术）",
 	specWarnYourGroup	= "特殊警报：当轮到你的小队需要应对$spell:118191时<br/>（仅25人模式）",
-	RangeFrame			= "距离监视（8码）：$spell:111850<br/>当你受到效果影响时会显示其他所有没有受到效果影响的队友"
+	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(8, 111850) .. "（当你受到效果影响时会显示其他所有没有受到效果影响的队友）"
 })
 
 ------------
@@ -253,7 +263,7 @@ L:SetOptionLocalization({
 L = DBM:GetModLocalization(742)
 
 L:SetMiscLocalization{
-	Victory	= "谢谢你，陌生人。我自由了。"
+	Victory				= "谢谢你，陌生人。我自由了。"
 }
 
 -------------------------------
@@ -262,22 +272,22 @@ L:SetMiscLocalization{
 L = DBM:GetModLocalization(729)
 
 L:SetWarningLocalization({
-	warnHideOver	= "%s 结束"
+	warnHideOver		= "%s 结束"
 })
 
 L:SetTimerLocalization({
-	timerSpecialCD	= "特殊能力冷却（%d）"
+	timerSpecialCD		= "特殊能力冷却（%d）"
 })
 
 L:SetOptionLocalization({
 	warnHideOver		= "特殊警报：$spell:123244效果结束时",
-	timerSpecialCD		= "计时条：特殊能力冷却",
-	SetIconOnProtector	= "为$journal:6224的目标添加团队标记<br/>（当有多名团队助理时该功能不可靠）",
-	RangeFrame			= "距离监视（3码）：应对$spell:123121<br/>（隐藏阶段时显示所有人，其余时仅显示坦克位置）"
+	timerSpecialCD		= "计时条：特殊技能冷却",
+--	SetIconOnProtector	= "为$journal:6224的目标添加团队标记<br/>（当有多名团队助理时该功能不可靠）",
+	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(3, 123121) .."（隐藏阶段时显示所有人，其余时仅显示坦克位置）"
 })
 
 L:SetMiscLocalization{
-	Victory	= "我……啊……噢！我……？眼睛……好……模糊。"--wtb alternate and less crappy victory event.
+	Victory				= "我……啊……噢！我……？眼睛……好……模糊。"--wtb alternate and less crappy victory event.
 }
 
 ----------------------
@@ -286,8 +296,6 @@ L:SetMiscLocalization{
 L = DBM:GetModLocalization(709)
 
 L:SetWarningLocalization({
-	warnWaterspout				= "%s (%d)：> %s <",
-	warnHuddleInTerror			= "%s (%d)：> %s <",
 	MoveForward					= "穿过金莲之影",
 	MoveRight					= "向右移动",
 	MoveBack					= "返回原位",
@@ -295,27 +303,32 @@ L:SetWarningLocalization({
 })
 
 L:SetTimerLocalization({
-	timerSpecialAbilityCD	= "下一次特殊能力",
-	timerSpoHudCD			= "畏惧/水涌冷却",
-	timerSpoStrCD			= "水涌/打击冷却",
-	timerHudStrCD			= "畏惧/打击冷却"
+	timerSpecialAbilityCD		= "下一次特殊能力",
+	timerSpoHudCD				= "畏惧/水涌冷却",
+	timerSpoStrCD				= "水涌/打击冷却",
+	timerHudStrCD				= "畏惧/打击冷却"
 })
 
 L:SetOptionLocalization({
 	warnBreathOnPlatform		= "警报：当你在平台时的$spell:119414（不推荐，为团长准备）",
 	specWarnBreathOfFearSoon	= "特殊警报：当没有$spell:117964效果需要躲避$spell:119414时",
 	specWarnMovement			= "特殊警报：$spell:120047时的移动",
-	timerSpecialAbility			= "计时条：下一次特殊能力",
-	RangeFrame					= "距离监视（2码）：应对$spell:119519"
+	timerSpecialAbility			= "计时条：下一次特殊能力"
 })
 
+
+--雷电王座--
 --------------------------
 -- Jin'rokh the Breaker --
 --------------------------
 L = DBM:GetModLocalization(827)
 
+L:SetWarningLocalization({
+	specWarnWaterMove		= "%s 即将到来 - 离开黑水！"
+})
+
 L:SetOptionLocalization({
-	RangeFrame	= "距离监视"
+	specWarnWaterMove		= "特殊警报：当你站在 $spell:138470 时<br/>($spell:137313 即将施放时或者 $spell:138732 debuff刚消失时)"
 })
 
 --------------
@@ -324,23 +337,28 @@ L:SetOptionLocalization({
 L = DBM:GetModLocalization(819)
 
 L:SetWarningLocalization({
-	warnAdds	= "%s"
+	warnAdds				= "%s",
+	warnOrbofControl		= "支配宝珠掉落",
+	specWarnOrbofControl	= "支配宝珠掉落！"
 })
 
 L:SetTimerLocalization({
-	timerDoor	= "下一个部族大门",
-	timerAdds	= "下一次%s"
+	timerDoor				= "下一个部族大门",
+	timerAdds				= "下一次%s"
 })
 
 L:SetOptionLocalization({
-	warnAdds	= "警报：新的敌人加入战斗",
-	timerDoor	= "计时条：下一个部族大门阶段",
-	timerAdds	= "计时条：下一次小怪"
+	warnAdds				= "警报：新的敌人加入战斗",
+	warnOrbofControl		= "警报：$journal:7092 掉落",
+	specWarnOrbofControl	= "特殊警报：$journal:7092 掉落",
+	timerDoor				= "计时条：下一个部族大门阶段",
+	timerAdds				= "计时条：下一次小怪",
+	SetIconOnAdds			= "为跳下来的小怪设置标记"
 })
 
 L:SetMiscLocalization({
-	newForces		= "forces pour from the",--Farraki forces pour from the Farraki Tribal Door!
-	chargeTarget	= "stamps his tail!"--Horridon sets his eyes on Eraeshio and stamps his tail!
+	newForces				= "法拉基大军从法拉基部族之门中涌出！",--Farraki forces pour from the Farraki Tribal Door!
+	chargeTarget			= "并开始拍打他的尾巴！"--Horridon sets his eyes on Eraeshio and stamps his tail!
 })
 
 ---------------------------
@@ -348,8 +366,12 @@ L:SetMiscLocalization({
 ---------------------------
 L = DBM:GetModLocalization(816)
 
+L:SetWarningLocalization({
+	specWarnPossessed		= "%s -> %s - 改变目标"
+})
+
 L:SetOptionLocalization({
-	RangeFrame	= "距离监视"
+	AnnounceCooldowns		= "为 $spell:137166 的释放提供团队计数 (最多3个)"
 })
 
 ------------
@@ -363,12 +385,14 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	specWarnCrystalShell	= "特殊警报：当没有$spell:137633效果时",
-	InfoFrame				= "信息框：没有$spell:137633效果的团员"
+	specWarnCrystalShell	= "特殊警报：当没有$spell:137633并且你的生命值低于90%时",
+	InfoFrame				= "信息框：没有$spell:137633效果的团员",
+	ClearIconOnTurtles		= "当受到 $spell:133971 的影响时清除 $journal:7129 的团队标记",
+	AnnounceCooldowns		= "忽略 $spell:134920 造成的团队计数"
 })
 
 L:SetMiscLocalization({
-	WrongDebuff		= "没有%s"
+	WrongDebuff				= "没有%s"
 })
 
 -------------
@@ -376,8 +400,23 @@ L:SetMiscLocalization({
 -------------
 L = DBM:GetModLocalization(821)
 
+L:SetTimerLocalization({
+	timerBreathsCD			= "下一次吐息"
+})
+
+L:SetOptionLocalization({
+	timerBreaths			= "计时条：下一次吐息",
+	AnnounceCooldowns		= "为狂暴提供团队计数的方式",
+	Never					= "从不",
+	Every					= "每次 (连续)",
+	EveryTwo				= "2次狂暴循环",
+	EveryThree				= "3次狂暴循环",
+	EveryTwoExcludeDiff		= "2次狂暴循环 (排除专注的头)",
+	EveryThreeExcludeDiff	= "3次狂暴循环 (排除专注的头)"
+})
+
 L:SetMiscLocalization({
-	rampageEnds	= "Megaera's rage subsides."
+	rampageEnds	= "墨格瑞拉的怒火平息了。"
 })
 
 ------------
@@ -386,19 +425,34 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(828)
 
 L:SetWarningLocalization({
-	warnFlock		= "%s %s (%d)",
-	specWarnFlock	= "%s %s (%d)"
+	warnFlock				= "%s %s (%d)",
+	specWarnFlock			= "%s %s (%d)",
+	specWarnBigBird			= "巢穴守卫: %s",
+	specWarnBigBirdSoon		= "即将到来的巢穴守卫: %s"
+})
+
+L:SetTimerLocalization({
+	timerFlockCD			= "巢穴 (%d): %s"
 })
 
 L:SetOptionLocalization({
-	RangeFrame	= "Show range frame (10) for $spell:138923"
+	ShowNestArrows			= "为下一个激活的鸟窝显示DBM箭头",
+	Never					= "从不",
+	Northeast				= "蓝-上下层东北",
+	Southeast				= "绿-上下层东南",
+	Southwest				= "紫/红-下层西南&上层西南(25人)或上层中间(10人)",
+	West					= "红-下层西边&上层中间(25人)",
+	Northwest				= "黄-上下层东西北（25人）",
+	Guardians				= "巢穴守卫"
 })
 
 L:SetMiscLocalization({
-	eggsHatch		= "某个鸟巢中的蛋开始孵化了",
-	Upper			= "上层",
-	Lower			= "下层",
-	UpperAndLower	= "上下都有"
+	eggsHatch				= "某个鸟巢中的蛋开始孵化了",
+	Upper					= "上层",
+	Lower					= "下层",
+	UpperAndLower			= "上下都有",
+	TrippleD				= "三次 (2x下)",
+	TrippleU				= "三次 (2x上)"
 })
 
 --------------------------
@@ -407,11 +461,25 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(818)
 
 L:SetWarningLocalization({
+	warnBeamNormal				= "光线 - |cffff0000红|r ： >%s<, |cff0000ff蓝|r ： >%s<",
+	warnBeamHeroic				= "光线 - |cffff0000红|r ： >%s<, |cff0000ff蓝|r ： >%s<, |cffffff00黄|r ： >%s<",
+	warnAddsLeft				= "迷雾剩余：%d",
+	specWarnBlueBeam			= "蓝光点你 - 别动",
+	specWarnFogRevealed			= "%s 出现了！",
 	specWarnDisintegrationBeam	= "%s (%s)"
 })
 
 L:SetOptionLocalization({
-	ArrowOnBeam	= "Show DBM Arrow during $journal:6882 to indicate which direction to move"
+	warnBeam					= "警报：光线照射的目标",
+	warnAddsLeft				= "警报：剩余的迷雾",
+	specWarnFogRevealed			= "特殊警报：当迷雾被发现时",
+	ArrowOnBeam					= "DBM箭头： 为 $journal:6882 提示逃跑方向",
+	InfoFrame					= "信息框： $spell:133795 层数",
+	SetParticle					= "开战后自动设置粒子效果为低<br/>(战斗结束后还原)"
+})
+
+L:SetMiscLocalization({
+	LifeYell				= " %s 中了生命吸取 (%d)"
 })
 
 ----------------
@@ -419,8 +487,13 @@ L:SetOptionLocalization({
 ----------------
 L = DBM:GetModLocalization(820)
 
+L:SetWarningLocalization({
+	warnDebuffCount			= "进化进度： 好- %d/5 ，坏- %d"
+})
+
 L:SetOptionLocalization({
-	RangeFrame	= "距离监视其（5码/2码）"
+	warnDebuffCount			= "当你吸收了池子后显示debuff计数",
+	SetIconOnBigOoze		= "为 $journal:6969 设置标记"
 })
 
 -----------------
@@ -429,15 +502,15 @@ L:SetOptionLocalization({
 L = DBM:GetModLocalization(824)
 
 L:SetWarningLocalization({
-	warnMatterSwapped	= "%s：>%s<、>%s<交换"
+	warnMatterSwapped		= "%s：>%s<、>%s<交换"
 })
 
 L:SetOptionLocalization({
-	warnMatterSwapped	= "警报：$spell:138618交换的目标"
+	warnMatterSwapped		= "警报：$spell:138618交换的目标"
 })
 
 L:SetMiscLocalization({
-	Pull	= "The orb explodes!"
+	Pull					= "宝珠爆炸了！"
 })
 
 --------------
@@ -446,11 +519,12 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(817)
 
 L:SetWarningLocalization({
-	warnDeadZone	= "%s：%s、%s被保护"
+	warnDeadZone			= "%s：%s、%s被保护"
 })
 
 L:SetOptionLocalization({
-	RangeFrame	= "距离监视（动态，当存在多名团员过近时显示）"
+	RangeFrame				= "距离监视（动态，当存在多名团员过近时显示）",
+	InfoFrame				= "信息框：中了 $spell:136193 的玩家"
 })
 
 -------------------
@@ -458,12 +532,19 @@ L:SetOptionLocalization({
 -------------------
 L = DBM:GetModLocalization(829)
 
-L:SetOptionLocalization({
-	RangeFrame	= "距离监视（8码）"
+L:SetWarningLocalization({
+	warnNight				= "黑夜阶段",
+	warnDay					= "白天阶段",
+	warnDusk				= "黄昏阶段"
+})
+
+L:SetTimerLocalization({
+	timerDayCD				= "下一个白天阶段",
+	timerDuskCD				= "下一个黄昏阶段"
 })
 
 L:SetMiscLocalization({
-	DuskPhase	= "Lu'lin! Lend me your strength!"--Not in use, but a backup just in case, so translate in case it's switched to on moments notice on live or next PTR test
+	DuskPhase				= "露琳！将你的力量借给我！"--Not in use, but a backup just in case, so translate in case it's switched to on moments notice on live or next PTR test
 })
 
 --------------
@@ -471,8 +552,25 @@ L:SetMiscLocalization({
 --------------
 L = DBM:GetModLocalization(832)
 
+L:SetWarningLocalization({
+	specWarnIntermissionSoon	= "准备中场阶段",
+	warnDiffusionChainSpread	= "%s 传导给 >%s<"
+})
+
+L:SetTimerLocalization({
+	timerConduitCD				= "第一个导管CD"
+})
+
 L:SetOptionLocalization({
-	RangeFrame	= "距离监视"--For two different spells
+	specWarnIntermissionSoon	= "特殊警报：中场阶段",
+	warnDiffusionChainSpread	= "警报： $spell:135991 传导的目标",
+	timerConduitCD				= "计时条：第一个导管技能CD",
+	StaticShockArrow			= "DBM箭头：受 $spell:135695 影响的玩家",
+	OverchargeArrow				= "DBM箭头：受 $spell:136295 影响的玩家"
+})
+
+L:SetMiscLocalization({
+	StaticYell					= "%s 中了静电冲击 (%d)"
 })
 
 ------------
@@ -480,26 +578,36 @@ L:SetOptionLocalization({
 ------------
 L = DBM:GetModLocalization(831)
 
+L:SetWarningLocalization({
+	specWarnUnstablVitaJump		= "你中了不稳定的生命！"
+})
+
+L:SetOptionLocalization({
+	specWarnUnstablVitaJump		= "特殊警报： 当 $spell:138297 跳到你身上时"
+})
+
+L:SetMiscLocalization({
+	Defeat						= "等等！我"
+})
+
 -------------
 --  Trash  --
 -------------
 L = DBM:GetModLocalization("ToTTrash")
 
 L:SetGeneralLocalization({
-	name	= "雷电王座小怪"
+	name						= "雷电王座小怪"
 })
 
-L:SetOptionLocalization({
-	RangeFrame	= "距离监视（10码）"--For 3 different spells
-})
 
+--围攻奥格瑞玛--
 ---------------
 -- Immerseus --
 ---------------
 L = DBM:GetModLocalization(852)
 
 L:SetMiscLocalization({
-	Victory	= "啊，你成功了!水又再次纯净了。"
+	Victory					= "啊，你成功了!水又再次纯净了。"
 })
 
 ---------------------------
@@ -508,7 +616,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(849)
 
 L:SetWarningLocalization({
-	specWarnMeasures	= "绝处求生即将到来(%s)!"
+	specWarnMeasures		= "绝处求生即将到来(%s)!"
 })
 
 ---------------------------
@@ -517,7 +625,7 @@ L:SetWarningLocalization({
 L = DBM:GetModLocalization(866)
 
 L:SetMiscLocalization({
-	wasteOfTime	= "很好，我会创造一个力场隔离你们的腐化。"
+	wasteOfTime				= "很好，我会创造一个力场隔离你们的腐化。"
 })
 
 ------------------
@@ -526,7 +634,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(867)
 
 L:SetOptionLocalization({
-	SetIconOnFragment	= "为腐化的碎片设置图示"
+	SetIconOnFragment		= "为腐化的碎片设置图示"
 })
 
 --------------
@@ -535,8 +643,8 @@ L:SetOptionLocalization({
 L = DBM:GetModLocalization(868)
 
 L:SetWarningLocalization({
-	warnTowerOpen	= "炮塔门被打开了",
-	warnTowerGrunt	= "塔防蛮兵"
+	warnTowerOpen			= "炮塔门被打开了",
+	warnTowerGrunt			= "塔防蛮兵"
 })
 
 L:SetTimerLocalization({
@@ -562,6 +670,11 @@ L:SetMiscLocalization({
 	newForces4		= "下一队，前进!",
 	tower			= "的门已经遭到破坏!"
 })
+
+--------------------
+--Iron Juggernaut --
+--------------------
+L = DBM:GetModLocalization(864)
 
 --------------------------
 -- Kor'kron Dark Shaman --
@@ -661,14 +774,17 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(869)
 
 L:SetOptionLocalization({
-	RangeFrame			= "显示动态距离框架(10码)<br/>(这是智慧距离框架，当到达$spell:147126门槛时自动切换)",
+	timerRoleplay		= "计时条：NPC剧情",
+	RangeFrame			= "显示动态距离框架(10码)<br/>(这是智慧距离框架，当到达$spell:147126阈值时自动切换)",
 	InfoFrame			= "为玩家在中场阶段时没有伤害减免显示信息框架",
 	yellMaliceFading	= "当$spell:147209將要退去时大喊"
 })
 
 L:SetMiscLocalization({
-	NoReduce		= "无伤害减免",
-	MaliceFadeYell	= "%s的恶意消退中(%d)"
+	wasteOfTime		= "现在还不迟，加尔鲁什。卸下酋长的包裹吧。我们可以就此结束这场流血冲突。",
+	NoReduce		= "无减伤",
+	MaliceFadeYell	= "%s的恶意消退中(%d)",
+	phase3End		= "别以为你们已经赢了"
 })
 
 -------------
