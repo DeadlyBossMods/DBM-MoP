@@ -4,58 +4,53 @@ local L		= mod:GetLocalizedStrings()
 mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(60143)
 mod:SetEncounterID(1434)
-mod:SetUsedIcons(5, 6, 7, 8)
+mod:SetUsedIcons(1, 2, 3, 4)
 
-mod:RegisterCombat("combat")
+mod:RegisterCombat("combat_yell", L.Pull)--Yell is secondary pull trigger. (leave it for lfr combat detection bug)
 
 mod:RegisterEventsInCombat(
+	"SPELL_CAST_SUCCESS 116174 116272",
 	"SPELL_AURA_APPLIED 122151 116161 116260 116278 117543 117549 117723 117752",
 	"SPELL_AURA_REFRESH 122151 116161 116260 116278 117543 117549 117723 117752",
 	"SPELL_AURA_REMOVED 116161 116260 116278 122151 117543 115749 117723 117549",
-	"SPELL_CAST_SUCCESS 116174 116272",
 	"UNIT_SPELLCAST_SUCCEEDED boss1"
 )
 
-mod:RegisterEvents(
-	"CHAT_MSG_MONSTER_YELL"
-)
 --NOTES
 --Syncing is used for all warnings because the realms don't share combat events. You won't get warnings for other realm any other way.
 --Voodoo dolls do not have a CD, they are linked to banishment (or player deaths), when he banishes current tank, he reapplies voodoo dolls to new tank and new players. If tank dies, he just recasts voodoo on a new current threat target.
 --Latency checks are used for good reason (to prevent lagging users from sending late events and making our warnings go off again incorrectly). if you play with high latency and want to bypass latency check, do so with in game GUI option.
 local warnTotem						= mod:NewCountAnnounce(116174, 2)
-local warnVoodooDolls				= mod:NewTargetAnnounce(122151, 3)
-local warnCrossedOver				= mod:NewTargetAnnounce(116161, 3)
-local warnBanishment				= mod:NewTargetAnnounce(116272, 3)
+local warnVoodooDolls				= mod:NewTargetNoFilterAnnounce(122151, 3)
+local warnCrossedOver				= mod:NewTargetNoFilterAnnounce(116161, 3)
+local warnBanishment				= mod:NewTargetNoFilterAnnounce(116272, 3, nil, "Tank|Healer")
 local warnSuicide					= mod:NewPreWarnAnnounce(116325, 5, 4)--Pre warn 5 seconds before you die so you take whatever action you need to, to prevent. (this is effect that happens after 30 seconds of Soul Sever
 local warnFrenzy					= mod:NewSpellAnnounce(117752, 4)
 
-local specWarnTotem					= mod:NewSpecialWarningSpell(116174, false)
-local specWarnBanishment			= mod:NewSpecialWarningYou(116272)
-local specWarnBanishmentOther		= mod:NewSpecialWarningTaunt(116272)
-local specWarnVoodooDolls			= mod:NewSpecialWarningSpell(122151, false)
-local specWarnVoodooDollsYou		= mod:NewSpecialWarningYou(122151, false)
+local specWarnBanishment			= mod:NewSpecialWarningYou(116272, nil, nil, nil, 1, 5)
+local specWarnBanishmentOther		= mod:NewSpecialWarningTaunt(116272, nil, nil, nil, 1, 2)
+local specWarnVoodooDollsYou		= mod:NewSpecialWarningYou(122151, nil, nil, nil, 1, 2)
 
-local timerTotemCD					= mod:NewNextCountTimer(20, 116174)
-local timerBanishmentCD				= mod:NewCDTimer(65, 116272)
+local timerTotemCD					= mod:NewNextCountTimer(20, 11617, nil, nil, nil, 5)
+local timerBanishmentCD				= mod:NewCDCountTimer(65, 116272, nil, nil, nil, 3, nil, DBM_COMMON_L.TANK_ICON)
 local timerSoulSever				= mod:NewBuffFadesTimer(30, 116278, nil, nil, nil, 5, nil, nil, nil, 1, 4)--Tank version of spirit realm
 local timerCrossedOver				= mod:NewBuffFadesTimer(30, 116161, nil, nil, nil, 5, nil, nil, nil, 1, 4)--Dps version of spirit realm
-local timerSpiritualInnervation		= mod:NewBuffFadesTimer(30, 117549)
-local timerShadowyAttackCD			= mod:NewCDTimer(8, "ej6698", nil, "Tank", nil, nil, 117222)
-local timerFrailSoul				= mod:NewBuffFadesTimer(30, 117723)
+local timerSpiritualInnervation		= mod:NewBuffFadesTimer(30, 117549, nil, nil, nil, 5)
+local timerShadowyAttackCD			= mod:NewCDTimer(8, -6698, nil, "Tank", nil, 5, 117222, DBM_COMMON_L.TANK_ICON)
+local timerFrailSoul				= mod:NewBuffFadesTimer(30, 117723, nil, nil, nil, 5)
 
 local berserkTimer					= mod:NewBerserkTimer(360)
 
-mod:AddBoolOption("SetIconOnVoodoo", false)
+mod:AddSetIconOption("SetIconOnVoodoo", 122151, true, 0, {1, 2, 3, 4})
 
-local totemCount = 0
+mod.vb.totemCount = 0
+mod.vb.banishCount = 0
 local voodooDollTargets = {}
 local crossedOverTargets = {}
 local voodooDollTargetIcons = {}
 
 local function warnVoodooDollTargets()
 	warnVoodooDolls:Show(table.concat(voodooDollTargets, "<, >"))
-	specWarnVoodooDolls:Show()
 	table.wipe(voodooDollTargets)
 end
 
@@ -80,29 +75,30 @@ do
 	end
 	function mod:SetVoodooIcons()
 		table.sort(voodooDollTargetIcons, sort_by_group)
-		local voodooIcon = 8
+		local voodooIcon = 1
 		for i, v in ipairs(voodooDollTargetIcons) do
 			-- DBM:SetIcon() is used because of follow reasons
 			--1. It checks to make sure you're on latest dbm version, if you are not, it disables icon setting so you don't screw up icons (ie example, a newer version of mod does icons differently)
 			--2. It checks global dbm option "DontSetIcons"
 			self:SetIcon(v, voodooIcon)
-			voodooIcon = voodooIcon - 1
+			voodooIcon = voodooIcon + 1
 		end
 	end
 end
 
 function mod:OnCombatStart(delay)
-	totemCount = 0
+	self.vb.totemCount = 0
+	self.vb.banishCount = 0
 	table.wipe(voodooDollTargets)
 	table.wipe(crossedOverTargets)
 	table.wipe(voodooDollTargetIcons)
 	timerShadowyAttackCD:Start(7-delay)
 	if self:IsDifficulty("normal25", "heroic25") then
-		timerTotemCD:Start(20-delay, totemCount+1)
+		timerTotemCD:Start(20-delay, self.vb.totemCount+1)
 	elseif self:IsDifficulty("lfr25") then
-		timerTotemCD:Start(30-delay, totemCount+1)
+		timerTotemCD:Start(30-delay, self.vb.totemCount+1)
 	else
-		timerTotemCD:Start(36-delay, totemCount+1)
+		timerTotemCD:Start(36-delay, self.vb.totemCount+1)
 	end
 	timerBanishmentCD:Start(-delay)
 	if not self:IsDifficulty("lfr25") then -- lfr seems not berserks.
@@ -110,11 +106,27 @@ function mod:OnCombatStart(delay)
 	end
 end
 
+function mod:SPELL_CAST_SUCCESS(args)
+	local spellId = args.spellId
+	if spellId == 116174 and self:LatencyCheck() then
+		self:SendSync("SummonTotem")
+	elseif spellId == 116272 then
+		if args:IsPlayer() then--no latency check for personal notice you aren't syncing.
+			specWarnBanishment:Show()--Can't miss, so using success is safe (and slightly faster)
+			specWarnBanishment:Play("teleyou")
+		end
+		if self:LatencyCheck() then
+			self:SendSync("BanishmentTarget", args.destGUID)
+		end
+	end
+end
+
 function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
-	if spellId == 122151 then--We don't use spell cast success for actual debuff on >player< warnings since it has a chance to be resisted.
+	if spellId == 122151 then
 		if args:IsPlayer() then
 			specWarnVoodooDollsYou:Show()
+			specWarnVoodooDollsYou:Play("targetyou")
 		end
 		if self:LatencyCheck() then
 			self:SendSync("VoodooTargets", args.destGUID)
@@ -174,16 +186,12 @@ function mod:SPELL_AURA_REMOVED(args)
 	end
 end
 
-function mod:SPELL_CAST_SUCCESS(args)
-	local spellId = args.spellId
-	if spellId == 116174 and self:LatencyCheck() then
-		self:SendSync("SummonTotem")
-	elseif spellId == 116272 then
-		if args:IsPlayer() then--no latency check for personal notice you aren't syncing.
-			specWarnBanishment:Show()
-		end
+function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
+	if (spellId == 117215 or spellId == 117218 or spellId == 117219 or spellId == 117222) then--Shadowy Attacks
+		timerShadowyAttackCD:Start()
+	elseif spellId == 116964 then--Summon Totem
 		if self:LatencyCheck() then
-			self:SendSync("BanishmentTarget", args.destGUID)
+			self:SendSync("SummonTotem")
 		end
 	end
 end
@@ -194,15 +202,14 @@ function mod:OnSync(msg, guid)
 		targetname = DBM:GetFullPlayerNameByGUID(guid)
 	end
 	if msg == "SummonTotem" then
-		totemCount = totemCount + 1
-		warnTotem:Show(totemCount)
-		specWarnTotem:Show()
+		self.vb.totemCount = self.vb.totemCount + 1
+		warnTotem:Show(self.vb.totemCount)
 		if self:IsDifficulty("normal25", "heroic25") then
-			timerTotemCD:Start(20, totemCount+1)
+			timerTotemCD:Start(20, self.vb.totemCount+1)
 		elseif self:IsDifficulty("lfr25") then
-			timerTotemCD:Start(30, totemCount+1)
+			timerTotemCD:Start(30, self.vb.totemCount+1)
 		else
-			timerTotemCD:Start(36, totemCount+1)
+			timerTotemCD:Start(36, self.vb.totemCount+1)
 		end
 	elseif msg == "VoodooTargets" and targetname then
 		voodooDollTargets[#voodooDollTargets + 1] = targetname
@@ -232,27 +239,15 @@ function mod:OnSync(msg, guid)
 	elseif msg == "VoodooGoneTargets" and targetname and self.Options.SetIconOnVoodoo then
 		removeIcon(DBM:GetRaidUnitId(targetname))
 	elseif msg == "BanishmentTarget" and targetname then
-		warnBanishment:Show(targetname)
-		timerBanishmentCD:Start()
+		self.vb.banishCount = self.vb.banishCount + 1
+		timerBanishmentCD:Start(nil, self.vb.banishCount+1)
 		if guid ~= UnitGUID("player") then--make sure YOU aren't target before warning "other"
-			specWarnBanishmentOther:Show(targetname)
+			if self:IsTank() then
+				specWarnBanishmentOther:Show(targetname)
+				specWarnBanishmentOther:Play("tauntboss")
+			else
+				warnBanishment:Show(targetname)
+			end
 		end
-	end
-end
-
-function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
-	if (spellId == 117215 or spellId == 117218 or spellId == 117219 or spellId == 117222) then--Shadowy Attacks
-		timerShadowyAttackCD:Start()
-	elseif spellId == 116964 then--Summon Totem
-		if self:LatencyCheck() then
-			self:SendSync("SummonTotem")
-		end
-	end
-end
-
---Secondary pull trigger. (leave it for lfr combat detection bug)
-function mod:CHAT_MSG_MONSTER_YELL(msg)
-	if (msg == L.Pull or msg:find(L.Pull)) and not self:IsInCombat() then
-		DBM:StartCombat(self, 0)
 	end
 end
