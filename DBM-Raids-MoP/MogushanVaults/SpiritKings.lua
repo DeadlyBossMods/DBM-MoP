@@ -33,7 +33,7 @@ mod:AddTimerLine(Zian)
 local warnChargedShadows		= mod:NewTargetNoFilterAnnounce(117685, 2)
 local warnUndyingShadows		= mod:NewSpellAnnounce(117506, 3)--Target scanning?
 local warnFixate				= mod:NewTargetAnnounce(118303, 4)--Maybe spammy late fight, if zian is first boss you get? (adds are immortal, could be many up)
-local warnShieldOfDarknessSoon	= mod:NewAnnounce("DarknessSoon", 4, 117697, nil, nil, true)
+local warnShieldOfDarknessSoon	= mod:NewAnnounce("DarknessSoon", 4, 117697, nil, nil, true, 117697)
 
 local specWarnFixate			= mod:NewSpecialWarningRun(118303, nil, nil, nil, 4, 2)
 local yellFixate				= mod:NewYell(118303)
