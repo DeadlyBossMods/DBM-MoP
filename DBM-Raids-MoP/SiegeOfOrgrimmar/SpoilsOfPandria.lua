@@ -98,7 +98,7 @@ mod:AddRangeFrameOption(10, 145987)
 mod:AddInfoFrameOption("ej8350")--Eh, "overview" works.
 
 --Upvales, don't need variables
-local select, tonumber, UnitPosition, GetWorldStateUIInfo = select, tonumber, UnitPosition, GetWorldStateUIInfo
+local select, tonumber, UnitPosition = select, tonumber, UnitPosition
 --Not important, don't need to recover
 local worldTimer = 0
 local maxTimer = 0
