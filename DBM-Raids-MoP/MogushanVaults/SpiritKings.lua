@@ -88,7 +88,7 @@ local timerSleightOfHandCD		= mod:NewCDTimer(42, 118162, nil, nil, nil, 5, nil, 
 
 local berserkTimer				= mod:NewBerserkTimer(600)
 
-mod:AddRangeFrameOption(nil, nil, "Ranged")--For multiple abilities. the abiliies don't seem to target melee (unless a ranged is too close or a melee is too far.)
+mod:AddRangeFrameOption(8, nil, "Ranged")--For multiple abilities. the abiliies don't seem to target melee (unless a ranged is too close or a melee is too far.)
 
 mod.vb.ZianActive = false
 mod.vb.MengActive = false
