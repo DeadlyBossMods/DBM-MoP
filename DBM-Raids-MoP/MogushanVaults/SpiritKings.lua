@@ -81,7 +81,7 @@ local specWarnPillage			= mod:NewSpecialWarningYou(118047, nil, nil, nil, 1, 2)-
 local yellPillage				= mod:NewYell(118047)
 local specWarnSleightOfHand		= mod:NewSpecialWarningTarget(118162, nil, nil, nil, 1, 3, 3)--Heroic Ability
 
-local timerVolleyCD				= mod:NewNextTimer(41, 118094, nil, nil, nil, 3)
+local timerVolleyCD				= mod:NewNextTimer(39.9, 118094, nil, nil, nil, 3)
 local timerRainOfArrowsCD		= mod:NewCDTimer(50.5, 118122, nil, nil, nil, 3)--heroic 41s fixed cd. normal and lfr 50.5~60.5 variable cd.
 local timerPillageCD			= mod:NewNextTimer(41, 118047, nil, nil, nil, 3)
 local timerSleightOfHandCD		= mod:NewCDTimer(42, 118162, nil, nil, nil, 5, nil, DBM_COMMON_L.HEROIC_ICON)
@@ -136,7 +136,7 @@ function mod:SPELL_CAST_START(args)
 		timerSleightOfHandCD:Start()
 	elseif spellId == 117506 then
 		warnUndyingShadows:Show()
-		timerUndyingShadowsCD:Start()
+		timerUndyingShadowsCD:Start()--41.5
 	elseif spellId == 117628 then
 		if self:CheckInterruptFilter(args.sourceGUID, false, true) then
 			specWarnShadowBlast:Show(args.sourceName)
@@ -194,7 +194,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 	elseif spellId == 117506 then
 		warnUndyingShadows:Show()
 		if self.vb.ZianActive then
-			timerUndyingShadowsCD:Start()
+			timerUndyingShadowsCD:Start()--41.5
 		else
 			timerUndyingShadowsCD:Start(85)
 		end
@@ -202,7 +202,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 		specWarnFlankingOrders:Show()
 		specWarnFlankingOrders:Play("watchstep")
 		if self.vb.QiangActive then
-			timerFlankingOrdersCD:Start()
+			timerFlankingOrdersCD:Start()--40
 		else
 			timerFlankingOrdersCD:Start(75)
 		end
@@ -265,7 +265,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 		timerVolleyCD:Start()
 	elseif spellId == 118121 and self:AntiSpam(2, 2) then--Rain of Arrows
 		if self:IsHeroic() then
-			timerRainOfArrowsCD:Start(41)
+			timerRainOfArrowsCD:Start(39.9)
 		else
 			timerRainOfArrowsCD:Start(50.5)
 		end
@@ -278,27 +278,27 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 			timerChargingShadowsCD:Cancel()
 			timerShieldOfDarknessCD:Cancel()
 			warnShieldOfDarknessSoon:Cancel()
-			timerUndyingShadowsCD:Start(30)--This boss retains Undying Shadows
+			timerUndyingShadowsCD:Update(40.3, 41.5)--This boss retains Undying Shadows
 			if self.Options.RangeFrame and not self.vb.SubetaiActive then--Close range frame, but only if zian is also not active, otherwise we still need it
 				DBM.RangeCheck:Hide()
 			end
 		elseif cid == 60708 then
 			self.vb.MengActive = false
 			timerDeliriousCD:Cancel()
-			timerMaddeningShoutCD:Start(30)--This boss retains Maddening Shout
+			timerMaddeningShoutCD:Restart(30)--This boss retains Maddening Shout
 		elseif cid == 60709 then
 			self.vb.QiangActive = false
 			timerMassiveAttackCD:Cancel()
 			timerAnnihilateCD:Cancel()
 			timerImperviousShieldCD:Cancel()
 			warnImperviousShieldSoon:Cancel()
-			timerFlankingOrdersCD:Start(30)--This boss retains Flanking Orders
+			timerFlankingOrdersCD:Update(37.6, 40)--Used to restart to 30 remaining, but is 2.4 now? (two pull sample size)
 		elseif cid == 60710 then
 			self.vb.SubetaiActive = false
 			timerVolleyCD:Cancel()
 			timerRainOfArrowsCD:Cancel()
 			timerSleightOfHandCD:Cancel()
-			timerPillageCD:Start(30)--This boss retains Pillage
+			timerPillageCD:Restart(30)--This boss retains Pillage
 			if self.Options.RangeFrame and not self.vb.ZianActive then--Close range frame, but only if subetai is also not active, otherwise we still need it
 				DBM.RangeCheck:Hide()
 			end
@@ -361,9 +361,9 @@ function mod:CHAT_MSG_MONSTER_YELL(msg, boss)
 		warnActivated:Show(boss)
 		self.vb.SubetaiActive = true
 		timerVolleyCD:Start(5)
-		timerPillageCD:Start(25)
+		timerPillageCD:Start(18)
 		if self:IsHeroic() then
-			timerSleightOfHandCD:Start(40.7)
+			timerSleightOfHandCD:Start(15.5)
 			timerRainOfArrowsCD:Start(40)
 		else
 			timerRainOfArrowsCD:Start(15)

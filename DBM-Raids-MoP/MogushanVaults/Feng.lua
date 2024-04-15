@@ -25,7 +25,7 @@ mod:RegisterEventsInCombat(
 --Heroic a player can do ANY phase first. It even says this in encounter journal.
 --on normal, it lets you choose nature or fire first but it will not allow arcane first.
 --none the less, the player can still control it on normal, just not to degree of heroic. The EJ says it's random on normal but it's not.
-
+--NOTE: many timers probably need updating but it's hard to do solo since there is no way to do only SOME damage to boss to see all stages
 local warnPhase						= mod:NewAnnounce("WarnPhase", 1, "136116")
 --Nature/Fist
 local warnLightningLash				= mod:NewStackAnnounce(131788, 3, nil, "Tank")
@@ -70,9 +70,9 @@ local specWarnNullBarrier			= mod:NewSpecialWarningSpell(115817, nil, nil, nil, 
 
 --Nature/Fist
 local timerLightningLash			= mod:NewTargetTimer(20, 131788, nil, false, 2, 5, nil, DBM_COMMON_L.TANK_ICON)
-local timerLightningLashCD			= mod:NewCDTimer(9, 131788, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)--9-20 second variation.
+local timerLightningLashCD			= mod:NewCDTimer(7.3, 131788, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)--7.3-20 second variation.
 local timerLightningFistsCD			= mod:NewCDTimer(14, 116157, nil, nil, nil, 3, nil, DBM_COMMON_L.TANK_ICON)
-local timerEpicenterCD				= mod:NewCDCountTimer(30, 116018, nil, nil, nil, 2)
+local timerEpicenterCD				= mod:NewCDCountTimer(27.9, 116018, nil, nil, nil, 2)
 local timerEpicenter				= mod:NewBuffActiveTimer(10, 116018, nil, nil, nil, 5, nil, DBM_COMMON_L.TANK_ICON..DBM_COMMON_L.HEALER_ICON)
 --Fire/Spear
 local timerFlamingSpear				= mod:NewTargetTimer(20, 116942, nil, false, 2, 5, nil, DBM_COMMON_L.TANK_ICON)
@@ -355,9 +355,9 @@ function mod:OnSync(msg)
 	if msg == "Earth" then
 		self:SetStage(0)
 		warnPhase:Show(self.vb.phase)
+		timerEpicenterCD:Start(3.3, 1)--Seems much shorter now
 		timerLightningLashCD:Start(7)
-		timerLightningFistsCD:Start(12)
-		timerEpicenterCD:Start(18, 1)--It's either this, or this +10. Not yet sure what causes the +10
+		timerLightningFistsCD:Start(11.3)
 		if self.Options.RangeFrame then
 			DBM.RangeCheck:Hide()
 		end

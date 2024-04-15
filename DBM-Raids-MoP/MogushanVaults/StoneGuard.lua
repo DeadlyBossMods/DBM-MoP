@@ -55,7 +55,7 @@ local warnJasperOverload			= mod:NewSpellAnnounce(115843, 4)
 local warnJasperChains				= mod:NewTargetNoFilterAnnounce(130395, 4)
 
 local specWarnJasperChains			= mod:NewSpecialWarningMoveTo(130395, nil, nil, nil, 1, 2)
-local specWarnBreakJasperChains		= mod:NewSpecialWarning("specWarnBreakJasperChains", nil, nil, nil, 1, 2)
+local specWarnBreakJasperChains		= mod:NewSpecialWarning("specWarnBreakJasperChains", nil, nil, nil, 1, 2, nil, nil, 130395)
 local yellJasperChains				= mod:NewYell(130395, nil, false)
 
 local timerJasperChainsCD			= mod:NewCDTimer(12, 130395, nil, nil, nil, 3)--11-13

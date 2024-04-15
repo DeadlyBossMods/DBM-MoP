@@ -31,7 +31,7 @@ local specWarnBanishment			= mod:NewSpecialWarningYou(116272, nil, nil, nil, 1, 
 local specWarnBanishmentOther		= mod:NewSpecialWarningTaunt(116272, nil, nil, nil, 1, 2)
 local specWarnVoodooDollsYou		= mod:NewSpecialWarningYou(122151, nil, nil, nil, 1, 2)
 
-local timerTotemCD					= mod:NewNextCountTimer(20, 11617, nil, nil, nil, 5)
+local timerTotemCD					= mod:NewNextCountTimer(20, 116174, nil, nil, nil, 5)
 local timerBanishmentCD				= mod:NewCDCountTimer(65, 116272, nil, nil, nil, 3, nil, DBM_COMMON_L.TANK_ICON)
 local timerSoulSever				= mod:NewBuffFadesTimer(30, 116278, nil, nil, nil, 5, nil, nil, nil, 1, 4)--Tank version of spirit realm
 local timerCrossedOver				= mod:NewBuffFadesTimer(30, 116161, nil, nil, nil, 5, nil, nil, nil, 1, 4)--Dps version of spirit realm
@@ -94,13 +94,13 @@ function mod:OnCombatStart(delay)
 	table.wipe(voodooDollTargetIcons)
 	timerShadowyAttackCD:Start(7-delay)
 	if self:IsDifficulty("normal25", "heroic25") then
-		timerTotemCD:Start(20-delay, self.vb.totemCount+1)
+		timerTotemCD:Start(20-delay, 1)
 	elseif self:IsDifficulty("lfr25") then
-		timerTotemCD:Start(30-delay, self.vb.totemCount+1)
+		timerTotemCD:Start(30-delay, 1)
 	else
-		timerTotemCD:Start(36-delay, self.vb.totemCount+1)
+		timerTotemCD:Start(36-delay, 1)
 	end
-	timerBanishmentCD:Start(-delay)
+	timerBanishmentCD:Start(-delay, 1)
 	if not self:IsDifficulty("lfr25") then -- lfr seems not berserks.
 		berserkTimer:Start(-delay)
 	end
