@@ -18,33 +18,33 @@ mod:RegisterEventsInCombat(
 	"UNIT_SPELLCAST_SUCCEEDED boss1"
 )
 
-local warnProtect						= mod:NewSpellAnnounce(123250, 2)
-local warnHideOver						= mod:NewAnnounce("warnHideOver", 2, 123244)--Because we can. with creativeness, the boss returning is detectable a full 1-2 seconds before even visible. A good signal to stop aoe and get ready to return norm DPS
-local warnGetAway						= mod:NewCountAnnounce(123461, 3)
+local warnProtect						= mod:NewTargetNoFilterAnnounce(123250, 2)
+local warnHideOver						= mod:NewAnnounce("warnHideOver", 2, 123244, nil, nil, nil, 123244)--Because we can. with creativeness, the boss returning is detectable a full 1-2 seconds before even visible. A good signal to stop aoe and get ready to return norm DPS
 local warnSpray							= mod:NewStackAnnounce(123121, 3, nil, "Tank|Healer")
 
-local specWarnAnimatedProtector			= mod:NewSpecialWarningSwitch("ej6224", "-Healer")
-local specWarnHide						= mod:NewSpecialWarningCount(123244, nil, nil, nil, 2)
-local specWarnGetAway					= mod:NewSpecialWarningSpell(123461, nil, nil, nil, 2)
-local specWarnSpray						= mod:NewSpecialWarningStack(123121, "Tank", 6)
-local specWarnSprayOther				= mod:NewSpecialWarningTaunt(123121)
+local specWarnAnimatedProtector			= mod:NewSpecialWarningSwitch(-6224, "-Healer", nil, nil, 1, 2)
+local specWarnHide						= mod:NewSpecialWarningCount(123244, nil, nil, nil, 2, 2)
+local specWarnGetAway					= mod:NewSpecialWarningCount(123461, nil, nil, nil, 2, 2)
+local specWarnSpray						= mod:NewSpecialWarningStack(123121, "Tank", 6, nil, nil, 1, 6)
+local specWarnSprayOther				= mod:NewSpecialWarningTaunt(123121, nil, nil, nil, 1, 2)
 
 local timerSpecialCD					= mod:NewTimer(50, "timerSpecialCD", 123250, nil, nil, 6)--Variable, 49.5-55 seconds
 local timerSpray						= mod:NewTargetTimer(10, 123121, nil, "Tank|Healer", nil, 5)
 local timerGetAway						= mod:NewBuffActiveTimer(30, 123461, nil, nil, nil, 6)
-local timerScaryFogCD					= mod:NewNextTimer(10, 123705)
+local timerScaryFogCD					= mod:NewNextTimer(10, 123705, nil, nil, nil, 2)
 
 local berserkTimer						= mod:NewBerserkTimer(600)
 
-mod:AddBoolOption("RangeFrame", true)
-mod:AddSetIconOption("SetIconOnProtector", "ej6224", false, true)
+mod:AddRangeFrameOption(3, nil, true)
+mod:AddSetIconOption("SetIconOnProtector", -6224, false, 5, {3, 4, 5, 6, 7, 8})
 
-local specialsCast = 0
-local hideActive = false
-local lastProtect = 0
-local specialRemaining = 0
+mod.vb.specialCast = 0
+mod.vb.hideActive = false
+mod.vb.specialRemaining = 0
+mod.vb.addsIcon = 8
 local lostHealth = 0
 local prevlostHealth = 0
+local lastProtect = 0--No sense making syncable varaible, it's GetTime which differs PC to PC
 local hideName = DBM:GetSpellInfo(123244)
 
 local bossTank
@@ -66,10 +66,11 @@ function mod:OnCombatStart(delay)
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Show(3, bossTank)
 	end
-	specialsCast = 0
-	hideActive = false
+	self.vb.specialCast = 0
+	self.vb.hideActive = false
+	self.vb.specialRemaining = 0
+	self.vb.addsIcon = 8
 	lastProtect = 0
-	specialRemaining = 0
 	lostHealth = 0
 	prevlostHealth = 0
 	timerSpecialCD:Start(30.5-delay, 1)--Variable, 30.5-37 (or aborted if 80% protect happens first)
@@ -90,21 +91,26 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
 	if spellId == 123250 then
-		local elapsed, total = timerSpecialCD:GetTime(specialsCast+1)
-		specialRemaining = total - elapsed
+		self.vb.addsIcon = 8--This event might be too late if adds spawn before protect goes up, needs testing
+		local elapsed, total = timerSpecialCD:GetTime(self.vb.specialCast+1)
+		self.vb.specialRemaining = total - elapsed
 		lastProtect = GetTime()
-		warnProtect:Show()
+		warnProtect:Show(args.destName)
 		specWarnAnimatedProtector:Show()
+		specWarnAnimatedProtector:Play("killmob")
 		self:Schedule(0.2, function()
 			timerSpecialCD:Cancel()
 		end)
-	elseif spellId == 123505 and self.Options.SetIconOnProtector then
-		self:ScanForMobs(args.destGUID, 0, 8, nil, nil, 6)
+	elseif spellId == 123505 then
+		if self.Options.SetIconOnProtector then
+			self:ScanForMobs(args.destGUID, 2, self.vb.addsIcon, 1, nil, 8, "SetIconOnProtector")
+		end
+		self.vb.addsIcon = self.vb.addsIcon - 1
 	elseif spellId == 123461 then
-		specialsCast = specialsCast + 1
-		warnGetAway:Show(specialsCast)
-		specWarnGetAway:Show()
-		timerSpecialCD:Start(nil, specialsCast+1)
+		self.vb.specialCast = self.vb.specialCast + 1
+		specWarnGetAway:Show(self.vb.specialCast)
+		specWarnGetAway:Play("pushbackincoming")
+		timerSpecialCD:Start(nil, self.vb.specialCast+1)
 		if self:IsHeroic() then
 			timerGetAway:Start(45)
 		else
@@ -119,9 +125,11 @@ function mod:SPELL_AURA_APPLIED(args)
 				warnSpray:Show(args.destName, amount)
 				if amount >= 6 and args:IsPlayer() then
 					specWarnSpray:Show(amount)
+					specWarnSpray:Play("stackhigh")
 				else
 					if amount >= 6 and not DBM:UnitDebuff("player", args.spellName) and not UnitIsDeadOrGhost("player") then
 						specWarnSprayOther:Show(args.destName)
+						specWarnSprayOther:Play("tauntboss")
 					end
 				end
 			end
@@ -135,13 +143,13 @@ mod.SPELL_AURA_APPLIED_DOSE = mod.SPELL_AURA_APPLIED
 function mod:SPELL_AURA_REMOVED(args)
 	local spellId = args.spellId
 	if spellId == 123250 then
-		if timerSpecialCD:GetTime(specialsCast+1) == 0 then -- failsafe. (i.e : 79.8% hide -> protect... bar remains)
+		if timerSpecialCD:GetTime(self.vb.specialCast+1) == 0 then -- failsafe. (i.e : 79.8% hide -> protect... bar remains)
 			local protectElapsed = GetTime() - lastProtect
-			local specialCD = specialRemaining - protectElapsed
+			local specialCD = self.vb.specialRemaining - protectElapsed
 			if specialCD < 5 then
-				timerSpecialCD:Start(5, specialsCast+1)
+				timerSpecialCD:Restart(5, self.vb.specialCast+1)
 			else
-				timerSpecialCD:Start(specialCD, specialsCast+1)
+				timerSpecialCD:Restart(specialCD, self.vb.specialCast+1)
 			end
 		end
 	elseif spellId == 123121 then
@@ -154,12 +162,13 @@ end
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
 	if spellId == 123244 then
-		specialsCast = specialsCast + 1
-		hideActive = true
+		self.vb.specialCast = self.vb.specialCast + 1
+		self.vb.hideActive = true
 		timerScaryFogCD:Cancel()
 		self:UnscheduleMethod("ScaryFogRepeat")
-		specWarnHide:Show(specialsCast)
-		timerSpecialCD:Start(nil, specialsCast+1)
+		specWarnHide:Show(self.vb.specialCast)
+		specWarnHide:Play("phasechange")
+		timerSpecialCD:Start(nil, self.vb.specialCast+1)
 		self:SetWipeTime(60)--If she hides at 1.6% or below, she will be killed during hide. In this situration, yell fires very slowly. This hack can prevent recording as wipe.
 		self:RegisterShortTermEvents(
 			"INSTANCE_ENCOUNTER_ENGAGE_UNIT"--We register on hide, because it also fires just before hide, every time and don't want to trigger "hide over" at same time as hide.
@@ -189,8 +198,8 @@ end
 --Fires twice when boss returns, once BEFORE visible (and before we can detect unitID, so it flags unknown), then once a 2nd time after visible
 --"<233.9> [INSTANCE_ENCOUNTER_ENGAGE_UNIT] Fake Args:#nil#nil#Unknown#0xF130F6070000006C#normal#0#nil#nil#nil#nil#normal#0#nil#nil#nil#nil#normal#0#nil#nil#nil#nil#normal#0#Real Args:", -- [14168]
 function mod:INSTANCE_ENCOUNTER_ENGAGE_UNIT(event)
-	if hideActive then
-        hideActive = false
+	if self.vb.hideActive then
+        self.vb.hideActive = false
 		return
 	end
 	self:SetWipeTime(3)
