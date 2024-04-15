@@ -98,7 +98,7 @@ local timerNullBarrierCD			= mod:NewCDTimer(55, 115817, nil, nil, nil, 5)
 
 mod:AddSetIconOption("SetIconOnWS", 116784, false, 0, {7})
 mod:AddSetIconOption("SetIconOnAR", 116417, false, 0, {1, 2, 3, 4})--Not sure number of targets so incorrect icon usage count for now
-mod:AddRangeFrameOption(nil, nil, "Ranged")
+mod:AddRangeFrameOption(8, nil, "Ranged")
 
 mod.vb.arIcon = 1
 mod.vb.wildfireCount = 0
