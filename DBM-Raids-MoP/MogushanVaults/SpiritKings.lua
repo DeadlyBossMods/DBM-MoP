@@ -272,7 +272,8 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 --	"<63.5 21:23:16> [UNIT_SPELLCAST_SUCCEEDED] Qiang the Merciless [[boss1:Inactive Visual::0:118205]]", -- [14066]
 --	"<63.5 21:23:16> [UNIT_SPELLCAST_SUCCEEDED] Qiang the Merciless [[boss1:Cancel Activation::0:118219]]", -- [14068]
 	elseif spellId == 118205 and self:AntiSpam(2, 3) then--Inactive Visual
-		if UnitName(uId) == Zian then
+		local cid = self:GetUnitCreatureId(uId)
+		if cid == 60701 then
 			self.vb.ZianActive = false
 			timerChargingShadowsCD:Cancel()
 			timerShieldOfDarknessCD:Cancel()
@@ -281,18 +282,18 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 			if self.Options.RangeFrame and not self.vb.SubetaiActive then--Close range frame, but only if zian is also not active, otherwise we still need it
 				DBM.RangeCheck:Hide()
 			end
-		elseif UnitName(uId) == Meng then
+		elseif cid == 60708 then
 			self.vb.MengActive = false
 			timerDeliriousCD:Cancel()
 			timerMaddeningShoutCD:Start(30)--This boss retains Maddening Shout
-		elseif UnitName(uId) == Qiang then
+		elseif cid == 60709 then
 			self.vb.QiangActive = false
 			timerMassiveAttackCD:Cancel()
 			timerAnnihilateCD:Cancel()
 			timerImperviousShieldCD:Cancel()
 			warnImperviousShieldSoon:Cancel()
 			timerFlankingOrdersCD:Start(30)--This boss retains Flanking Orders
-		elseif UnitName(uId) == Subetai then
+		elseif cid == 60710 then
 			self.vb.SubetaiActive = false
 			timerVolleyCD:Cancel()
 			timerRainOfArrowsCD:Cancel()
