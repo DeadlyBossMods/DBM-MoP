@@ -15,35 +15,32 @@ mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 122855",
 	"SPELL_CAST_SUCCESS 122752 124176 123630",
 	"RAID_BOSS_EMOTE",
-	"UNIT_SPELLCAST_SUCCEEDED"
+	"UNIT_SPELLCAST_SUCCEEDED"--Not sure why no boss nit Ids used, maybe cause they're inconsistent?
 )
 
-local warnNight							= mod:NewSpellAnnounce("ej6310", 2, 108558)
+local warnNight							= mod:NewSpellAnnounce(-6310, 2, 108558)
 local warnSunbeam						= mod:NewSpellAnnounce(122789, 3)
-local warnNightmares					= mod:NewTargetAnnounce(122770, 4)--Target scanning will only work on 1 target on 25 man (only is 1 target on 10 man so they luck out)
-local warnDay							= mod:NewSpellAnnounce("ej6315", 2, 122789)
-local warnSummonUnstableSha				= mod:NewSpellAnnounce("ej6320", 3, "627685")
-local warnSummonEmbodiedTerror			= mod:NewCountAnnounce("ej6316", 4, "627685")
+local warnDay							= mod:NewSpellAnnounce(-6315, 2, 122789)
+local warnSummonUnstableSha				= mod:NewSpellAnnounce(-6320, 3, "627685")
+local warnSummonEmbodiedTerror			= mod:NewCountAnnounce(-6316, 4, "627685")
 local warnSunBreath						= mod:NewCountAnnounce(122855, 3)
-local warnLightOfDay					= mod:NewStackAnnounce(123716, 1, nil, "Healer", "warnLightOfDay")
+local warnLightOfDay					= mod:NewTargetCountAnnounce(123716, 1, nil, "Healer", nil, nil, nil, nil, true)
 
-local specWarnShadowBreath				= mod:NewSpecialWarningSpell(122752, "Tank")
-local specWarnDreadShadows				= mod:NewSpecialWarningStack(122768, nil, 9)--For heroic, 10 is unhealable, and it stacks pretty fast so adaquate warning to get over there would be abou 5-6
-local specWarnNightmares				= mod:NewSpecialWarningSpell(122770, nil, nil, nil, 2)
-local specWarnNightmaresYou				= mod:NewSpecialWarningYou(122770)
-local specWarnNightmaresNear			= mod:NewSpecialWarningClose(122770)
+local specWarnShadowBreath				= mod:NewSpecialWarningSpell(122752, nil, nil, nil, 1, 2)
+local specWarnDreadShadows				= mod:NewSpecialWarningStack(122768, nil, 9, nil, nil, 1, 6)--For heroic, 10 is unhealable, and it stacks pretty fast so adaquate warning to get over there would be abou 5-6
+local specWarnNightmares				= mod:NewSpecialWarningDodge(122770, nil, nil, nil, 2, 2)
 local yellNightmares					= mod:NewYell(122770)
-local specWarnDarkOfNight				= mod:NewSpecialWarningSwitchCount("ej6550", "Dps")
-local specWarnTerrorize					= mod:NewSpecialWarningDispel(123012, "Healer")
+local specWarnDarkOfNight				= mod:NewSpecialWarningSwitchCount(-6550, "Dps", nil, nil, 1, 2)
+local specWarnTerrorize					= mod:NewSpecialWarningDispel(123012, "RemoveMagic", nil, nil, 1, 2)
 
-local timerNightCD						= mod:NewNextTimer(121, "ej6310", nil, nil, nil, 6, 130013)
-local timerSunbeamCD					= mod:NewCDTimer(41, 122789)
-local timerShadowBreathCD				= mod:NewCDTimer(26, 122752, nil, "Tank|Healer", nil, 5)
+local timerNightCD						= mod:NewNextTimer(121, -6310, nil, nil, nil, 6, 130013, DBM_COMMON_L.DAMAGE_ICON)
+local timerSunbeamCD					= mod:NewCDTimer(41, 122789, nil, nil, nil, 3)
+local timerShadowBreathCD				= mod:NewCDTimer(26, 122752, nil, "Tank|Healer", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerNightmaresCD					= mod:NewNextTimer(15.5, 122770, nil, nil, nil, 3, nil, nil, nil, 1, 4)
-local timerDarkOfNightCD				= mod:NewCDTimer(30.5, "ej6550", nil, nil, nil, 1, 130013)
-local timerDayCD						= mod:NewNextTimer(121, "ej6315", nil, nil, nil, 6, 122789)
-local timerSummonUnstableShaCD			= mod:NewNextTimer(18, "ej6320", nil, nil, nil, 1, "627685")
-local timerSummonEmbodiedTerrorCD		= mod:NewNextCountTimer(41, "ej6316", nil, nil, nil, 1, "627685")
+local timerDarkOfNightCD				= mod:NewCDCountTimer(30.5, -6550, nil, nil, nil, 1, 130013)
+local timerDayCD						= mod:NewNextTimer(121, -6315, nil, nil, nil, 6, 122789)
+local timerSummonUnstableShaCD			= mod:NewNextTimer(18, -6320, nil, nil, nil, 1, "627685")
+local timerSummonEmbodiedTerrorCD		= mod:NewNextCountTimer(41, -6316, nil, nil, nil, 1, "627685")
 local timerTerrorizeCD					= mod:NewCDTimer(13.5, 123012, nil, nil, nil, 5)--Besides being cast 14 seconds after they spawn, i don't know if they recast it if they live too long, their health was too undertuned to find out.
 local timerSunBreathCD					= mod:NewNextCountTimer(29, 122855, nil, nil, nil, 5, nil, nil, nil, mod:IsHealer() and 1 or nil, 4)--LuaLS has a problem with this for some reason but seems valid
 local timerBathedinLight				= mod:NewBuffFadesTimer(6, 122858, nil, "Healer", nil, 5)
@@ -52,25 +49,15 @@ local timerLightOfDay					= mod:NewTargetTimer(6, 123716, nil, "Healer", nil, 5)
 local berserkTimer						= mod:NewBerserkTimer(490)--a little over 8 min, basically 3rd dark phase is auto berserk.
 
 local terrorName = DBM:EJ_GetSectionInfo(6316)
-local terrorCount = 0
-local darkOfNightCount = 0
-local lightOfDayCount = 0
-local breathCount = 0
+mod.vb.terrorCount = 0
+mod.vb.darkOfNightCount = 0
+mod.vb.lightOfDayCount = 0
+mod.vb.breathCount = 0
 
 function mod:ShadowsTarget(targetname, uId)
 	if not targetname then return end
-	warnNightmares:Show(targetname)
 	if targetname == UnitName("player") then
-		specWarnNightmaresYou:Show()
 		yellNightmares:Yell()
-	end
-	if uId then
-		local inRange = DBM.RangeCheck:GetDistance("player", uId)
-		if inRange and inRange < 10 then
-			specWarnNightmaresNear:Show(targetname)
-		elseif self:IsDifficulty("normal25", "heroic25", "lfr25") then -- On 25 man, he casts nightmare to 3 men, but target warning works with only 1 man. (like Putricide in ICC Marble Goo). So 25 man shows generic special warning for safety.
-			specWarnNightmares:Show()
-		end
 	end
 end
 
@@ -83,9 +70,9 @@ function mod:OnCombatStart(delay)
 		berserkTimer:Start(-delay)
 	end
 	if self:IsHeroic() then
-		timerDarkOfNightCD:Start(10-delay)
-		darkOfNightCount = 0
-		lightOfDayCount = 0
+		timerDarkOfNightCD:Start(10-delay, 1)
+		self.vb.darkOfNightCount = 0
+		self.vb.lightOfDayCount = 0
 	end
 end
 
@@ -95,14 +82,16 @@ function mod:SPELL_AURA_APPLIED(args)
 		local amount = args.amount or 1
 		if amount >= 9 and amount % 3 == 0  then
 			specWarnDreadShadows:Show(amount)
+			specWarnDreadShadows:Play("stackhigh")
 		end
-	elseif spellId == 123012 and args:GetDestCreatureID() == 62442 then
+	elseif spellId == 123012 and args:GetDestCreatureID() == 62442 and self:CheckDispelFilter("magic") then
 		specWarnTerrorize:Show(args.destName)
+		specWarnTerrorize:Play("helpdispel")
 	elseif spellId == 122858 and args:IsPlayer() then
 		timerBathedinLight:Start()
 	elseif spellId == 123716 then
-		lightOfDayCount = lightOfDayCount + 1
-		warnLightOfDay:Show(args.destName, lightOfDayCount)
+		self.vb.lightOfDayCount = self.vb.lightOfDayCount + 1
+		warnLightOfDay:Show(self.vb.lightOfDayCount, args.destName)
 		timerLightOfDay:Start(args.destName)
 	end
 end
@@ -111,10 +100,10 @@ mod.SPELL_AURA_APPLIED_DOSE = mod.SPELL_AURA_APPLIED
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
 	if spellId == 122855 then
-		breathCount = breathCount + 1
-		warnSunBreath:Show(breathCount)
-		if timerNightCD:GetTime() < 100 then
-			timerSunBreathCD:Start(29, breathCount+1)
+		self.vb.breathCount = self.vb.breathCount + 1
+		warnSunBreath:Show(self.vb.breathCount)
+		if timerNightCD:GetTime(self.vb.darkOfNightCount+1) < 100 then
+			timerSunBreathCD:Start(29, self.vb.breathCount+1)
 		end
 	end
 end
@@ -122,8 +111,11 @@ end
 function mod:SPELL_CAST_SUCCESS(args)
 	local spellId = args.spellId
 	if spellId == 122752 then
-		specWarnShadowBreath:Show()
-		if timerNightCD:GetTime() < 93 then
+		if self:IsTanking("player", nil, nil, true, args.sourceGUID) then
+			specWarnShadowBreath:Show()
+			specWarnShadowBreath:Play("breathsoon")
+		end
+		if timerNightCD:GetTime(self.vb.darkOfNightCount+1) < 93 then
 			timerShadowBreathCD:Start()
 		end
 --"<267.3 22:12:00> [CLEU] SPELL_CAST_SUCCESS#false#0xF150F3EA00000157#Tsulong#68168#0#0x0000000000000000#nil#-2147483648#-2147483648#124176#Gold Active#1", -- [44606]
@@ -140,11 +132,11 @@ function mod:RAID_BOSS_EMOTE(msg)
 			timerSunbeamCD:Start()
 		end
 	elseif msg:find(terrorName) then
-		terrorCount = terrorCount + 1
+		self.vb.terrorCount = self.vb.terrorCount + 1
 		timerTerrorizeCD:Start()--always cast 14-15 seconds after one spawns (Unless stunned, if you stun the mob you can delay the cast, using this timer)
-		warnSummonEmbodiedTerror:Show(terrorCount)
-		if terrorCount < 3 then
-			timerSummonEmbodiedTerrorCD:Start(nil, terrorCount+1)
+		warnSummonEmbodiedTerror:Show(self.vb.terrorCount)
+		if self.vb.terrorCount < 3 then
+			timerSummonEmbodiedTerrorCD:Start(nil, self.vb.terrorCount+1)
 		end
 	end
 end
@@ -152,23 +144,25 @@ end
 function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	if spellId == 122770 and self:AntiSpam(2, 1) then--Nightmares (Night Phase)
 		self:BossTargetScanner(62442, "ShadowsTarget")
+		specWarnNightmares:Show()
+		specWarnNightmares:Play("watchstep")
 		if timerDayCD:GetTime() < 106 then
 			timerNightmaresCD:Start()
 		end
 	elseif spellId == 123252 and self:IsInCombat() then--Dread Shadows Cancel (Sun Phase)
-		lightOfDayCount = 0
-		terrorCount = 0
-		breathCount = 0
+		self.vb.lightOfDayCount = 0
+		self.vb.terrorCount = 0
+		self.vb.breathCount = 0
 		timerShadowBreathCD:Cancel()
 		timerSunbeamCD:Cancel()
 		timerNightmaresCD:Cancel()
 		timerDarkOfNightCD:Cancel()
 		warnDay:Show()
 		timerSunBreathCD:Start(29, 1)
-		timerNightCD:Start()
+		timerNightCD:Start(nil, self.vb.darkOfNightCount+1)
 	elseif spellId == 122953 and self:AntiSpam(2, 1) then--Summon Unstable Sha (122946 is another ID, but it always triggers at SAME time as Dread Shadows Cancel so can just trigger there too without additional ID scanning.
 		warnSummonUnstableSha:Show()
-		if timerNightCD:GetTime() < 103 then
+		if timerNightCD:GetTime(self.vb.darkOfNightCount+1) < 103 then
 			timerSummonUnstableShaCD:Start()
 		end
 	elseif spellId == 122767 then--Dread Shadows (Night Phase)
@@ -180,12 +174,13 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 		timerNightmaresCD:Start()
 		timerDayCD:Start()
 		if self:IsHeroic() then
-			timerDarkOfNightCD:Start(10)
-			darkOfNightCount = 0
+			timerDarkOfNightCD:Start(10, self.vb.darkOfNightCount+1)
+			self.vb.darkOfNightCount = 0
 		end
 	elseif spellId == 123813 then--The Dark of Night (Night Phase)
-		darkOfNightCount = darkOfNightCount + 1
-		specWarnDarkOfNight:Show(darkOfNightCount)
-		timerDarkOfNightCD:Start()
+		self.vb.darkOfNightCount = self.vb.darkOfNightCount + 1
+		specWarnDarkOfNight:Show(self.vb.darkOfNightCount)
+		specWarnDarkOfNight:Play("targetchange")
+		timerDarkOfNightCD:Start(nil, self.vb.darkOfNightCount+1)
 	end
 end

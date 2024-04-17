@@ -280,10 +280,6 @@ L:SetOptionLocalization({
 ------------
 L = DBM:GetModLocalization(742)
 
-L:SetOptionLocalization({
-	warnLightOfDay	= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.target:format(123716)
-})
-
 L:SetMiscLocalization{
 	Victory	= "I thank you, strangers. I have been freed."
 }
@@ -334,7 +330,7 @@ L:SetOptionLocalization({
 	warnThrash					= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(131996),
 	warnBreathOnPlatform		= "Show $spell:119414 warning when you are on platform<br/>(not recommended, for raid leader)",
 	specWarnBreathOfFearSoon	= "Show pre-special warning for $spell:119414 if you not have a $spell:117964 buff",
-	specWarnMovement			= "Show special warning directing where to move when $spell:120047 is being cast<br/>(based on common position strategy)",
+	specWarnMovement			= "Show special warning directing where to move when $spell:120047 is being cast<br/>(based on common position strategy of standing at entrance pizza slice and then following movements when DBM gives them)",
 	timerSpecialAbility			= "Show timer for when next special ability will be cast",
 	RangeFrame					= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(2, 119519),
 	SetIconOnHuddle				= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(120629)
