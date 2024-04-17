@@ -4,7 +4,7 @@ local L		= mod:GetLocalizedStrings()
 mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(60585, 60586, 60583)--60583 Protector Kaolan, 60585 Elder Regail, 60586 Elder Asani
 mod:SetEncounterID(1409)
-mod:SetUsedIcons(8, 7, 6, 5, 4, 3, 2, 1)
+mod:SetUsedIcons(5, 4, 3, 2, 1)
 mod:SetBossHPInfoToHighest()
 
 mod:RegisterCombat("combat")
@@ -21,59 +21,58 @@ local Kaolan = DBM:EJ_GetSectionInfo(5789)
 local Regail = DBM:EJ_GetSectionInfo(5793)
 local Asani = DBM:EJ_GetSectionInfo(5794)
 
-local warnPhase2					= mod:NewPhaseAnnounce(2)
-local warnPhase3					= mod:NewPhaseAnnounce(3)
---Elder Asani
-local warnWaterBolt					= mod:NewCountAnnounce(118312, 3, nil, false)
-local warnCleansingWaters			= mod:NewTargetAnnounce(117309, 3)--Phase 1+ ability. If target scanning fails, will switch to spell announce
---Elder Regail (Also uses Overwhelming Corruption in phase 3)
-local warnLightningPrison			= mod:NewTargetAnnounce(111850, 3)--Phase 1+ ability.
---Protector Kaolan
-local warnTouchofSha				= mod:NewTargetAnnounce(117519, 3, nil, "Healer")--Phase 1+ ability. He stops casting it when everyone in raid has it then ceases. If someone dies and is brezed, he casts it on them again.
-local warnDefiledGround				= mod:NewSpellAnnounce(117986, 3, nil, "Melee")--Phase 2+ ability.
---Heroic
-local warnGroupOrder				= mod:NewAnnounce("warnGroupOrder", 1, 118191, false)--25 man for now, unless someone codes a 10 man version of it into code then it can be both.
-
---Elder Asani
-local specWarnCleansingWaters		= mod:NewSpecialWarningTarget(117309, false)--This is if you want to move the boss out of waters before they can even gain it. Many strats don't ever move boss and just dispel it
-local specWarnCleansingWatersDispel	= mod:NewSpecialWarningDispel(117309, "MagicDispeller")--The boss wasn't moved in time, now he needs to be dispelled.
-local specWarnCorruptingWaters		= mod:NewSpecialWarningSwitch("ej5821", "Dps")
---Elder Regail
-local specWarnLightningPrison		= mod:NewSpecialWarningYou(111850)--Debuff you gain before you are hit with it.
-local yellLightningPrison			= mod:NewYell(111850)
-local specWarnLightningStorm		= mod:NewSpecialWarningSpell(118077, nil, nil, nil, 2)--Since it's multiple targets, will just use spell instead of dispel warning.
---Protector Kaolan
-local specWarnDefiledGround			= mod:NewSpecialWarningMove(117986, "Tank")
-local specWarnExpelCorruption		= mod:NewSpecialWarningSpell(117975, nil, nil, nil, 2)--Entire raid needs to move.
---Minions of Fear
-local specWarnYourGroup				= mod:NewSpecialWarning("specWarnYourGroup", false)
-local specWarnCorruptedEssence		= mod:NewSpecialWarningStack(118191, true, 9)--You cannot get more than 9, if you get 9 you need to GTFO or you do big damage to raid
-
---Elder Asani
-local timerCleansingWatersCD		= mod:NewCDTimer(32.5, 117309, nil, nil, nil, 3)
-local timerCorruptingWatersCD		= mod:NewNextTimer(42, 117227, nil, nil, nil, 1)
---Elder Regail
-local timerLightningPrisonCD		= mod:NewCDTimer(25, 111850, nil, nil, nil, 3)
-local timerLightningStormCD			= mod:NewCDTimer(42, 118077, nil, nil, nil, 2)--Shorter Cd in phase 3 32 seconds.
-local timerLightningStorm			= mod:NewBuffActiveTimer(14, 118077)
---Protector Kaolan
-local timerTouchOfShaCD				= mod:NewCDTimer(29, 117519)--Need new heroic data, timers confirmed for 10 man and 25 man normal as 29 and 12
-local timerDefiledGroundCD			= mod:NewNextTimer(15.5, 117986, nil, "Melee")
-local timerExpelCorruptionCD		= mod:NewNextTimer(38.5, 117975, nil, nil, nil, 2, nil, nil, nil, 1, 4)--It's a next timer, except first cast. that one variates.
+local warnPhase						= mod:NewPhaseChangeAnnounce(2, 2, nil, nil, nil, nil, nil, 2)
 
 local berserkTimer					= mod:NewBerserkTimer(490)
+--Elder Asani
+mod:AddTimerLine(Asani)
+local warnWaterBolt					= mod:NewCountAnnounce(118312, 3, nil, false)
+local warnCleansingWaters			= mod:NewTargetNoFilterAnnounce(117309, 3)--Phase 1+ ability.
 
-mod:AddBoolOption("RangeFrame")--For Lightning Prison
-mod:AddBoolOption("SetIconOnPrison", true)--For Lightning Prison (icons don't go out until it's DISPELLABLE, not when targetting is up).
+local specWarnCleansingWatersDispel	= mod:NewSpecialWarningDispel(117309, "MagicDispeller", nil, nil, 1, 2)--The boss wasn't moved in time, now he needs to be dispelled.
+local specWarnCorruptingWaters		= mod:NewSpecialWarningSwitch(117227, "Dps", nil, nil, 1, 2)
 
-local phase = 1
-local totalTouchOfSha = 0
-local prisonTargets = {}
-local prisonIcon = 1--Will try to start from 1 and work up, to avoid using icons you are probalby putting on bosses (unless you really fail at spreading).
+local timerCleansingWatersCD		= mod:NewCDTimer(32.5, 117309, nil, nil, nil, 3, nil, DBM_COMMON_L.MAGIC_ICON)
+local timerCorruptingWatersCD		= mod:NewNextTimer(42, 117227, nil, nil, nil, 1, nil, DBM_COMMON_L.DAMAGE_ICON)
+--Elder Regail
+mod:AddTimerLine(Regail)
+local warnLightningPrison			= mod:NewTargetAnnounce(111850, 3)--Phase 1+ ability.
+
+local specWarnLightningPrison		= mod:NewSpecialWarningMoveAway(111850, nil, nil, nil, 1, 2)--Debuff you gain before you are hit with it.
+local yellLightningPrison			= mod:NewYell(111850)
+local specWarnLightningStorm		= mod:NewSpecialWarningSpell(118077, nil, nil, nil, 2, 2)--Since it's multiple targets, will just use spell instead of dispel warning.
+
+local timerLightningPrisonCD		= mod:NewCDTimer(25, 111850, nil, nil, nil, 3)
+local timerLightningStormCD			= mod:NewCDTimer(42, 118077, nil, nil, nil, 2)--Shorter Cd in phase 3 32 seconds.
+local timerLightningStorm			= mod:NewBuffActiveTimer(14, 118077, nil, nil, nil, 5, nil, DBM_COMMON_L.HEALER_ICON)
+
+mod:AddRangeFrameOption(8, 111850)--For Lightning Prison
+mod:AddSetIconOption("SetIconOnPrison", 111850, true, 0, {1, 2, 3, 4, 5})--For Lightning Prison (icons don't go out until it's DISPELLABLE, not when targetting is up).
+--Protector Kaolan
+mod:AddTimerLine(Kaolan)
+local warnTouchofSha				= mod:NewTargetAnnounce(117519, 3, nil, "Healer")--Phase 1+ ability. He stops casting it when everyone in raid has it. If someone dies and is brezed, he casts it on them again.
+local warnDefiledGround				= mod:NewSpellAnnounce(117986, 3, nil, "Melee")--Phase 2+ ability.
+
+local specWarnDefiledGround			= mod:NewSpecialWarningMove(117986, nil, nil, nil, 1, 2)
+local specWarnExpelCorruption		= mod:NewSpecialWarningRun(117975, nil, nil, nil, 4, 2)--Entire raid needs to move.
+
+local timerTouchOfShaCD				= mod:NewCDTimer(29, 117519, nil, nil, nil, 3)--Need new heroic data, timers confirmed for 10 man and 25 man normal as 29 and 12
+local timerDefiledGroundCD			= mod:NewNextTimer(15.5, 117986, nil, "Melee", nil, 3)
+local timerExpelCorruptionCD		= mod:NewNextTimer(38.5, 117975, nil, nil, nil, 2, nil, nil, nil, 1, 4)--It's a next timer, except first cast. that one variates.
+--Heroic (Minions of Fear)
+mod:AddTimerLine(Kaolan)
+local warnGroupOrder				= mod:NewAnnounce("warnGroupOrder", 1, 118191, false, nil, nil, 118191)--25 man for now, unless someone codes a 10 man version of it into code then it can be both.
+
+local specWarnYourGroup				= mod:NewSpecialWarning("specWarnYourGroup", false, nil, nil, 1, 2, 3, nil, 118191)
+local specWarnCorruptedEssence		= mod:NewSpecialWarningStack(118191, true, 9, nil, nil, 1, 6)--You cannot get more than 9, if you get 9 you need to GTFO or you do big damage to raid
+
+mod.vb.totalTouchOfSha = 0
+mod.vb.prisonIcon = 1--Will try to start from 1 and work up, to avoid using icons you are probalby putting on bosses (unless you really fail at spreading).
+mod.vb.prisonCount = 0
+mod.vb.asaniCasts = 0
+mod.vb.corruptedCount = 0
 local prisonDebuff = DBM:GetSpellInfo(111850)
-local prisonCount = 0
-local asaniCasts = 0
-local corruptedCount = 0
+local prisonTargets = {}
 local myGroup = nil
 local notARaid = false
 
@@ -84,15 +83,15 @@ do
 	end
 end
 
-local function resetPrisonStatus()
-	prisonCount = 0
-	if mod.Options.RangeFrame then
+local function resetPrisonStatus(self)
+	self.vb.prisonCount = 0
+	if self.Options.RangeFrame then
 		DBM.RangeCheck:Hide()
 	end
 end
 
-local function warnPrisonTargets()
-	if mod.Options.RangeFrame then
+local function warnPrisonTargets(self)
+	if self.Options.RangeFrame then
 		if DBM:UnitDebuff("player", prisonDebuff) then--You have debuff, show everyone
 			DBM.RangeCheck:Show(8, nil)
 		else--You do not have debuff, only show players who do
@@ -102,16 +101,13 @@ local function warnPrisonTargets()
 	warnLightningPrison:Show(table.concat(prisonTargets, "<, >"))
 	timerLightningPrisonCD:Start()
 	table.wipe(prisonTargets)
-	prisonIcon = 1
-	mod:Schedule(11, resetPrisonStatus)--Because if a mage or paladin bubble/iceblock debuff, they do not get the stun, and it messes up prisonCount
+	self.vb.prisonIcon = 1
+	self:Schedule(11, resetPrisonStatus, self)--Because if a mage or paladin bubble/iceblock debuff, they do not get the stun, and it messes up self.vb.prisonCount
 end
 
 function mod:WatersTarget(targetname)
 	if not targetname then return end
 	warnCleansingWaters:Show(targetname)
-	if targetname == UnitName("target") then--You are targeting the target of this spell.
-		specWarnCleansingWaters:Show(targetname)
-	end
 end
 
 local function findGroupNumber()
@@ -123,11 +119,11 @@ local function findGroupNumber()
 end
 
 function mod:OnCombatStart(delay)
-	phase = 1
-	totalTouchOfSha = 0
-	prisonCount = 0
-	asaniCasts = 0
-	corruptedCount = 0
+	self:SetStage(1)
+	self.vb.totalTouchOfSha = 0
+	self.vb.prisonCount = 0
+	self.vb.asaniCasts = 0
+	self.vb.corruptedCount = 0
 	notARaid = false
 	table.wipe(prisonTargets)
 	timerCleansingWatersCD:Start(10-delay)
@@ -152,36 +148,38 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
 	if spellId == 117519 then
-		totalTouchOfSha = totalTouchOfSha + 1
+		self.vb.totalTouchOfSha = self.vb.totalTouchOfSha + 1
 		warnTouchofSha:Show(args.destName)
-		if totalTouchOfSha < DBM:GetNumGroupMembers() then--This ability will not be cast if everyone in raid has it.
+		if self.vb.totalTouchOfSha < DBM:GetNumRealGroupMembers() then--This ability will not be cast if everyone in raid has it.
 			if self:IsDifficulty("normal10", "heroic10") then--Heroic is assumed same as 10 normal.
-				timerTouchOfShaCD:Start()
+				timerTouchOfShaCD:Start()--29
 			else
 				timerTouchOfShaCD:Start(12)--every 12 seconds on 25 man. Not sure about LFR though. Will adjust next week accordingly
 			end
 		end
 	elseif spellId == 111850 then--111850 is targeting debuff (NOT dispelable one)
 		prisonTargets[#prisonTargets + 1] = args.destName
-		prisonCount = prisonCount + 1
+		self.vb.prisonCount = self.vb.prisonCount + 1
 		if args:IsPlayer() then
 			specWarnLightningPrison:Show()
+			specWarnLightningPrison:Play("runout")
 			yellLightningPrison:Yell()
 		end
 		self:Unschedule(warnPrisonTargets)
 		self:Schedule(0.3, warnPrisonTargets)
 	elseif spellId == 117436 then--111850 is pre warning, mainly for player, 117436 is the actual final result, mainly for the healer dispel icons
-		if self.Options.SetIconOnPrison then
-			self:SetIcon(args.destName, prisonIcon)
-			prisonIcon = prisonIcon + 1
+		if self.Options.SetIconOnPrison and self.vb.prisonIcon < 6 then
+			self:SetIcon(args.destName, self.vb.prisonIcon)
 		end
+		self.vb.prisonIcon = self.vb.prisonIcon + 1
 	elseif spellId == 117283 and args.destGUID == (UnitGUID("target") or UnitGUID("focus")) then -- not needed to dispel except for raid member's dealing boss.
 		specWarnCleansingWatersDispel:Show(args.destName)
+		specWarnCleansingWatersDispel:Play("dispelboss")
 	elseif spellId == 117052 then--Phase changes
 		--Here we go off applied because then we can detect both targets in phase 1 to 2 transition.
 		--There is some possiblity that other timers are reset or altered on phase 2-3 start. Light in case of Lightning storm Cd resetting in phase 3.
 		--If any are missing that actually ALTER during a phase 2 or 3 transition they will be updated here.
-		if phase == 2 then
+		if self:GetStage(2) then
 			if args:GetDestCreatureID() == 60585 then--Elder Regail
 				timerLightningStormCD:Start(25.5)--Starts 25.5~27
 			elseif args:GetDestCreatureID() == 60586 then--Elder Asani
@@ -189,7 +187,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			elseif args:GetDestCreatureID() == 60583 then--Protector Kaolan
 				timerDefiledGroundCD:Start(5)
 			end
-		elseif phase == 3 then
+		elseif self:GetStage(3) then
 			if args:GetDestCreatureID() == 60583 then--Elder Regail
 				timerLightningStormCD:Start(9.5)--His LS cd seems to reset in phase 3 since the CD actually changes.
 			elseif args:GetDestCreatureID() == 60583 then--Protector Kaolan
@@ -200,6 +198,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		local amount = args.amount or 1
 		if amount >= 9 then
 			specWarnCorruptedEssence:Show(amount)
+			specWarnCorruptedEssence:Play("stackhigh")
 		end
 	end
 end
@@ -208,10 +207,10 @@ mod.SPELL_AURA_APPLIED_DOSE = mod.SPELL_AURA_APPLIED
 function mod:SPELL_AURA_REMOVED(args)
 	local spellId = args.spellId
 	if spellId == 117519 then
-		totalTouchOfSha = totalTouchOfSha - 1
+		self.vb.totalTouchOfSha = self.vb.totalTouchOfSha - 1
 	elseif spellId == 117436 then
-		prisonCount = prisonCount - 1
-		if prisonCount == 0 and self.Options.RangeFrame then
+		self.vb.prisonCount = self.vb.prisonCount - 1
+		if self.vb.prisonCount == 0 and self.Options.RangeFrame then
 			DBM.RangeCheck:Hide()
 		end
 		if self.Options.SetIconOnPrison then
@@ -227,21 +226,24 @@ function mod:SPELL_CAST_START(args)
 		timerCleansingWatersCD:Start()
 	elseif spellId == 117975 then
 		specWarnExpelCorruption:Show()
+		specWarnExpelCorruption:Play("justrun")
 		timerExpelCorruptionCD:Start()
 	elseif spellId == 117227 then
 		specWarnCorruptingWaters:Show()
+		specWarnCorruptingWaters:Play("targetchange")
 		timerCorruptingWatersCD:Start()
 	elseif spellId == 118077 then
 		specWarnLightningStorm:Show()
-		if phase == 3 then
+		specWarnLightningStorm:Play("aesoon")
+		if self:GetStage(3) then
 			timerLightningStormCD:Start(32)
 		else
 			timerLightningStormCD:Start(41)
 		end
 	elseif spellId == 118312 then--Asani water bolt
-		if asaniCasts == 3 then asaniCasts = 0 end
-		asaniCasts = asaniCasts + 1
-		warnWaterBolt:Show(asaniCasts)
+		if self.vb.asaniCasts == 3 then self.vb.asaniCasts = 0 end
+		self.vb.asaniCasts = self.vb.asaniCasts + 1
+		warnWaterBolt:Show(self.vb.asaniCasts)
 	end
 end
 
@@ -250,11 +252,19 @@ function mod:SPELL_CAST_SUCCESS(args)
 	if spellId == 117986 then
 		warnDefiledGround:Show()
 		timerDefiledGroundCD:Start()
-		if args.sourceName == UnitName("target") then
+		if self:IsTanking("player", nil, nil, true, args.sourceGUID) then
 			specWarnDefiledGround:Show()
+			specWarnDefiledGround:Play("moveboss")
 		end
-	elseif spellId == 117052 and phase < 3 then--Phase changes
-		phase = phase + 1
+	elseif spellId == 117052 and self:GetStage(3, 1) then--Phase changes
+		self:SetStage(0)
+		if self.vb.phase == 2 then
+			warnPhase:Show(DBM_CORE_L.AUTO_ANNOUNCE_TEXTS.stage:format(2))
+			warnPhase:Play("ptwo")
+		else
+			warnPhase:Show(DBM_CORE_L.AUTO_ANNOUNCE_TEXTS.stage:format(3))
+			warnPhase:Play("pthree")
+		end
 		--We cancel timers for whatever boss just died (ie boss that cast the buff, not the ones getting it)
 		if args:GetSrcCreatureID() == 60585 then--Elder Regail
 			timerLightningPrisonCD:Cancel()
@@ -270,38 +280,42 @@ function mod:SPELL_CAST_SUCCESS(args)
 			timerDefiledGroundCD:Cancel()
 		end
 	elseif spellId == 118191 then--Corrupted Essence
-		--You dced, rebuild group number. Not sure how to recover corruptedCount though. Sync maybe, but then it may get screwed up by similtanious events like getting a sync .1 sec before this event and then being off by +1
+		--You dced, rebuild group number.
 		if not myGroup then
 			findGroupNumber()
 		end
 		if notARaid then return end
-		corruptedCount = corruptedCount + 1
+		self.vb.corruptedCount = self.vb.corruptedCount + 1
 		if self:IsDifficulty("heroic25") then
 			--25 man 5 2 2 2, 1 2 2 2, 1 2 2 2, 1 2 2 2, 1 1 1 1 strat.
-			if corruptedCount == 5 or corruptedCount == 12 or corruptedCount == 19 or corruptedCount == 26 or corruptedCount == 33 then
+			if self.vb.corruptedCount == 5 or self.vb.corruptedCount == 12 or self.vb.corruptedCount == 19 or self.vb.corruptedCount == 26 or self.vb.corruptedCount == 33 then
 				warnGroupOrder:Show(2)
 				if myGroup == 2 then
 					specWarnYourGroup:Show()
+					specWarnYourGroup:Play("group2")
 				end
-			elseif corruptedCount == 7 or corruptedCount == 14 or corruptedCount == 21 or corruptedCount == 28 or corruptedCount == 34 then
+			elseif self.vb.corruptedCount == 7 or self.vb.corruptedCount == 14 or self.vb.corruptedCount == 21 or self.vb.corruptedCount == 28 or self.vb.corruptedCount == 34 then
 				warnGroupOrder:Show(3)
 				if myGroup == 3 then
 					specWarnYourGroup:Show()
+					specWarnYourGroup:Play("group3")
 				end
-			elseif corruptedCount == 9 or corruptedCount == 16 or corruptedCount == 23 or corruptedCount == 30 or corruptedCount == 35 then
+			elseif self.vb.corruptedCount == 9 or self.vb.corruptedCount == 16 or self.vb.corruptedCount == 23 or self.vb.corruptedCount == 30 or self.vb.corruptedCount == 35 then
 				warnGroupOrder:Show(4)
 				if myGroup == 4 then
 					specWarnYourGroup:Show()
+					specWarnYourGroup:Play("group4")
 				end
-			elseif corruptedCount == 11 or corruptedCount == 18 or corruptedCount == 25 or corruptedCount == 32 then
+			elseif self.vb.corruptedCount == 11 or self.vb.corruptedCount == 18 or self.vb.corruptedCount == 25 or self.vb.corruptedCount == 32 then
 				warnGroupOrder:Show(1)
 				if myGroup == 1 then
 					specWarnYourGroup:Show()
+					specWarnYourGroup:Play("group1")
 				end
-			elseif corruptedCount == 36 then--Groups 1-4 are all at 9 stacks, boss not dead yet (low dps?) you send healer group in so you don't wipe.
+			elseif self.vb.corruptedCount == 36 then--Groups 1-4 are all at 9 stacks, boss not dead yet (low dps?) you send healer group in so you don't wipe.
 				warnGroupOrder:Show(5)
 			end
-		--TODO, give 10 man some kind of rotation helper. Blue? I do not raid 10 man and cannot test this
+		--TODO, give 10 man some kind of rotation helper. I do not raid 10 man and cannot test this
 		end
 	end
 end
