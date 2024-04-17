@@ -166,7 +166,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			yellLightningPrison:Yell()
 		end
 		self:Unschedule(warnPrisonTargets)
-		self:Schedule(0.3, warnPrisonTargets)
+		self:Schedule(0.3, warnPrisonTargets, self)
 	elseif spellId == 117436 then--111850 is pre warning, mainly for player, 117436 is the actual final result, mainly for the healer dispel icons
 		if self.Options.SetIconOnPrison and self.vb.prisonIcon < 6 then
 			self:SetIcon(args.destName, self.vb.prisonIcon)
