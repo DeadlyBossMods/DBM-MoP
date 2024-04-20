@@ -158,7 +158,7 @@ function mod:SPELL_CAST_START(args)
 		end
 	elseif spellId == 117708 then
 		specWarnMaddeningShout:Show()
-		specWarnMaddeningShout:Play("mindcontrol")
+		specWarnMaddeningShout:Play("findmc")
 		if self.vb.MengActive then
 			timerMaddeningShoutCD:Start()
 		else

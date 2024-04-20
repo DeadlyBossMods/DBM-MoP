@@ -80,7 +80,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		self:updateRangeFrame()
 		if args:IsPlayer() then
 			specWarnGrowingAnger:Show()
-			specWarnGrowingAnger:Play("mindcontrol")
+			specWarnGrowingAnger:Play("findmc")
 		end
 	elseif spellId == 119626 then
 		--Maybe add in function to update icons here in case of a spread that results in more then the original 3 getting the final MC debuff.
