@@ -103,7 +103,7 @@ local function addsDelay(self, add)
 		self.vb.courageCount = self.vb.courageCount + 1
 		if self.Options[specWarnCourageActivated.option] then
 			specWarnCourageActivated:Show(self.vb.courageCount)
-			specWarnCourageActivated:Play("killadd")
+			specWarnCourageActivated:Play("killmob")
 		else
 			warnCourageActivated:Show(self.vb.courageCount)
 		end

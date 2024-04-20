@@ -318,7 +318,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 		timerChainsOfShadowCD:Start()
 	elseif spellId == 115817 then
 		specWarnNullBarrier:Show()
-		specWarnNullBarrier:Play("findsheild")
+		specWarnNullBarrier:Play("findshield")
 		timerNullBarrier:Start()
 		if self:IsDifficulty("lfr25") then
 			timerNullBarrierCD:Start(25)

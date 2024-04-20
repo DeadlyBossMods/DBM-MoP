@@ -54,7 +54,7 @@ function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
 	if spellId == 137457 then
 		specWarnPiercingRoar:Show()
-		specWarnPiercingRoar:Play("stopcasting")
+		specWarnPiercingRoar:Play("stopcast")
 		timerPiercingRoarCD:Start()
 	elseif spellId == 137505 then
 		specWarnFrillBlast:Show()
