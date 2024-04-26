@@ -52,7 +52,7 @@ end
 function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	if not self.Options.Enabled then return end
 	if spellId == 122949 and self:AntiSpam() and self:GetCIDFromGUID(UnitGUID(uId)) == 64340 then
-		self:SendSync("UnseenTrash", DBM:GetSpellInfo(spellId))
+		self:SendSync("UnseenTrash", DBM:GetSpellName(spellId))
 	end
 end
 

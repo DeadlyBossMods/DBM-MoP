@@ -68,7 +68,7 @@ local stalkerCount = 0
 local horrorCount = 0
 local lastStalker = 0
 local playerName = UnitName("player")
-local vitaName, animaName, animaDebuff = DBM:GetSpellInfo(138332), DBM:GetSpellInfo(138331), DBM:GetSpellInfo(138288)
+local vitaName, animaName = DBM:GetSpellName(138332), DBM:GetSpellName(138331)
 
 function mod:OnCombatStart(delay)
 	creationCount = 0

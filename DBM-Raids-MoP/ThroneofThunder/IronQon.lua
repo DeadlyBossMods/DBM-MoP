@@ -79,7 +79,7 @@ mod:AddBoolOption("InfoFrame")
 local Roshak = select(2, EJ_GetCreatureInfo(2, 817))
 local Quetzal = select(2, EJ_GetCreatureInfo(3, 817))
 local Damren = select(2, EJ_GetCreatureInfo(4, 817))
-local arcingName = DBM:GetSpellInfo(136193)
+local arcingName = DBM:GetSpellName(136193)
 mod.vb.phase = 1
 mod.vb.fistSmashCount = 0
 local spearSpecWarnFired = false

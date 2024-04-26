@@ -159,27 +159,27 @@ mod:AddSetIconOption("SetIconOnAim", 142948, false)
 mod:AddSetIconOption("SetIconOnMesmerize", 142671, false)
 mod:AddArrowOption("AimArrow", 142948, false, true)
 
-local calculatingDude, readyToFight = DBM:EJ_GetSectionInfo(8012), DBM:GetSpellInfo(143542)
-local vulnerable1, vulnerable2, vulnerable3, vulnerable4 = DBM:GetSpellInfo(143279), DBM:GetSpellInfo(143275), DBM:GetSpellInfo(142929), DBM:GetSpellInfo(142931)
-local catalystBlue, catalystRed, catalystYellow = DBM:GetSpellInfo(142532), DBM:GetSpellInfo(142533), DBM:GetSpellInfo(142534)
-local RedDebuffs = {DBM:GetSpellInfo(143605), DBM:GetSpellInfo(143610), DBM:GetSpellInfo(143615), DBM:GetSpellInfo(143620), (DBM:GetSpellInfo(143627))}
-local PurpleDebuffs = {DBM:GetSpellInfo(143606), DBM:GetSpellInfo(143611), DBM:GetSpellInfo(143616), DBM:GetSpellInfo(143621), (DBM:GetSpellInfo(143628))}
-local BlueDebuffs = {DBM:GetSpellInfo(143607), DBM:GetSpellInfo(143612), DBM:GetSpellInfo(143617), DBM:GetSpellInfo(143622), (DBM:GetSpellInfo(143629))}
-local GreenDebuffs = {DBM:GetSpellInfo(143608), DBM:GetSpellInfo(143613), DBM:GetSpellInfo(143618), DBM:GetSpellInfo(143623), (DBM:GetSpellInfo(143630))}
-local YellowDebuffs = {DBM:GetSpellInfo(143610), DBM:GetSpellInfo(143614), DBM:GetSpellInfo(143619), DBM:GetSpellInfo(143624), (DBM:GetSpellInfo(143631))}
+local calculatingDude, readyToFight = DBM:EJ_GetSectionInfo(8012), DBM:GetSpellName(143542)
+local vulnerable1, vulnerable2, vulnerable3, vulnerable4 = DBM:GetSpellName(143279), DBM:GetSpellName(143275), DBM:GetSpellName(142929), DBM:GetSpellName(142931)
+local catalystBlue, catalystRed, catalystYellow = DBM:GetSpellName(142532), DBM:GetSpellName(142533), DBM:GetSpellName(142534)
+local RedDebuffs = {DBM:GetSpellName(143605), DBM:GetSpellName(143610), DBM:GetSpellName(143615), DBM:GetSpellName(143620), (DBM:GetSpellName(143627))}
+local PurpleDebuffs = {DBM:GetSpellName(143606), DBM:GetSpellName(143611), DBM:GetSpellName(143616), DBM:GetSpellName(143621), (DBM:GetSpellName(143628))}
+local BlueDebuffs = {DBM:GetSpellName(143607), DBM:GetSpellName(143612), DBM:GetSpellName(143617), DBM:GetSpellName(143622), (DBM:GetSpellName(143629))}
+local GreenDebuffs = {DBM:GetSpellName(143608), DBM:GetSpellName(143613), DBM:GetSpellName(143618), DBM:GetSpellName(143623), (DBM:GetSpellName(143630))}
+local YellowDebuffs = {DBM:GetSpellName(143610), DBM:GetSpellName(143614), DBM:GetSpellName(143619), DBM:GetSpellName(143624), (DBM:GetSpellName(143631))}
 
-local SwordDebuffs = {DBM:GetSpellInfo(143605), DBM:GetSpellInfo(143606), DBM:GetSpellInfo(143607), DBM:GetSpellInfo(143608), (DBM:GetSpellInfo(143609))}
-local DrumDebuffs = {DBM:GetSpellInfo(143610), DBM:GetSpellInfo(143611), DBM:GetSpellInfo(143612), DBM:GetSpellInfo(143613), (DBM:GetSpellInfo(143614))}
-local BombDebuffs = {DBM:GetSpellInfo(143615), DBM:GetSpellInfo(143616), DBM:GetSpellInfo(143617), DBM:GetSpellInfo(143618), (DBM:GetSpellInfo(143619))}
-local MantidDebuffs = {DBM:GetSpellInfo(143620), DBM:GetSpellInfo(143621), DBM:GetSpellInfo(143622), DBM:GetSpellInfo(143623), (DBM:GetSpellInfo(143624))}
-local StaffDebuffs = {DBM:GetSpellInfo(143627), DBM:GetSpellInfo(143628), DBM:GetSpellInfo(143629), DBM:GetSpellInfo(143630), (DBM:GetSpellInfo(143631))}
+local SwordDebuffs = {DBM:GetSpellName(143605), DBM:GetSpellName(143606), DBM:GetSpellName(143607), DBM:GetSpellName(143608), (DBM:GetSpellName(143609))}
+local DrumDebuffs = {DBM:GetSpellName(143610), DBM:GetSpellName(143611), DBM:GetSpellName(143612), DBM:GetSpellName(143613), (DBM:GetSpellName(143614))}
+local BombDebuffs = {DBM:GetSpellName(143615), DBM:GetSpellName(143616), DBM:GetSpellName(143617), DBM:GetSpellName(143618), (DBM:GetSpellName(143619))}
+local MantidDebuffs = {DBM:GetSpellName(143620), DBM:GetSpellName(143621), DBM:GetSpellName(143622), DBM:GetSpellName(143623), (DBM:GetSpellName(143624))}
+local StaffDebuffs = {DBM:GetSpellName(143627), DBM:GetSpellName(143628), DBM:GetSpellName(143629), DBM:GetSpellName(143630), (DBM:GetSpellName(143631))}
 
 local AllDebuffs = {
-	DBM:GetSpellInfo(143605), DBM:GetSpellInfo(143606), DBM:GetSpellInfo(143607), DBM:GetSpellInfo(143608), DBM:GetSpellInfo(143609),
-	DBM:GetSpellInfo(143610), DBM:GetSpellInfo(143611), DBM:GetSpellInfo(143612), DBM:GetSpellInfo(143613), DBM:GetSpellInfo(143614),
-	DBM:GetSpellInfo(143615), DBM:GetSpellInfo(143616), DBM:GetSpellInfo(143617), DBM:GetSpellInfo(143618), DBM:GetSpellInfo(143619),
-	DBM:GetSpellInfo(143620), DBM:GetSpellInfo(143621), DBM:GetSpellInfo(143622), DBM:GetSpellInfo(143623), DBM:GetSpellInfo(143624),
-	DBM:GetSpellInfo(143627), DBM:GetSpellInfo(143628), DBM:GetSpellInfo(143629), DBM:GetSpellInfo(143630), (DBM:GetSpellInfo(143631))
+	DBM:GetSpellName(143605), DBM:GetSpellName(143606), DBM:GetSpellName(143607), DBM:GetSpellName(143608), DBM:GetSpellName(143609),
+	DBM:GetSpellName(143610), DBM:GetSpellName(143611), DBM:GetSpellName(143612), DBM:GetSpellName(143613), DBM:GetSpellName(143614),
+	DBM:GetSpellName(143615), DBM:GetSpellName(143616), DBM:GetSpellName(143617), DBM:GetSpellName(143618), DBM:GetSpellName(143619),
+	DBM:GetSpellName(143620), DBM:GetSpellName(143621), DBM:GetSpellName(143622), DBM:GetSpellName(143623), DBM:GetSpellName(143624),
+	DBM:GetSpellName(143627), DBM:GetSpellName(143628), DBM:GetSpellName(143629), DBM:GetSpellName(143630), (DBM:GetSpellName(143631))
 }
 
 local FlavorTable = {

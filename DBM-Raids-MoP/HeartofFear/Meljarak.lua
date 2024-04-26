@@ -73,8 +73,7 @@ local berserkTimer						= mod:NewBerserkTimer(480)
 
 mod:AddBoolOption("AmberPrisonIcons", true)
 
-local Reinforcement = DBM:EJ_GetSectionInfo(6554)
-local strikeSpell = DBM:GetSpellInfo(123963)
+local strikeSpell = DBM:GetSpellName(123963)
 local addsCount = 0
 local amberPrisonIcon = 2
 local zarthikCount = 0

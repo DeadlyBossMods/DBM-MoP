@@ -55,7 +55,7 @@ local timerEmpowerGolemCD			= mod:NewCDTimer(16, 138780)
 
 local berserkTimer					= mod:NewBerserkTimer(600)
 
-local crimsonWake = DBM:GetSpellInfo(138485)--Debuff ID I believe, not cast one. Same spell name though
+local crimsonWake = DBM:GetSpellName(138485)--Debuff ID I believe, not cast one. Same spell name though
 local siphon = 0
 local jolt = 0
 

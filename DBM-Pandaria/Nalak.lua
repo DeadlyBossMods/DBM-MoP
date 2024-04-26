@@ -30,7 +30,7 @@ mod:AddReadyCheckOption(32518, false)
 
 local stormcloudTargets = {}
 local tetherTargets = {}
-local cloudDebuff = DBM:GetSpellInfo(136340)
+local cloudDebuff = DBM:GetSpellName(136340)
 
 local debuffFilter
 do

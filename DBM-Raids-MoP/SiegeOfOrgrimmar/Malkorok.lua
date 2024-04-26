@@ -58,7 +58,7 @@ mod:AddSetIconOption("SetIconOnAdds", "ej7952", false, true)
 mod:AddArrowOption("BloodrageArrow", 142879, true, true)
 
 --Upvales, don't need variables
-local displacedEnergyDebuff = DBM:GetSpellInfo(142913)
+local displacedEnergyDebuff = DBM:GetSpellName(142913)
 local UnitIsDeadOrGhost = UnitIsDeadOrGhost
 --Not important, don't need to recover
 local playerDebuffs = 0

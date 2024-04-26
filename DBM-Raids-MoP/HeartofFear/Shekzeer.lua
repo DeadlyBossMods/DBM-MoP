@@ -79,7 +79,7 @@ local resinTargets = {}
 local resinIcon = 2
 local phase3Started = false
 local fieldCount = 0
-local screechDebuff, fixateDebuff = DBM:GetSpellInfo(123735), DBM:GetSpellInfo(125390)
+local screechDebuff, fixateDebuff = DBM:GetSpellName(123735), DBM:GetSpellName(125390)
 
 local function warnVisionsTargets()
 	warnVisions:Show(table.concat(visonsTargets, "<, >"))

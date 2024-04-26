@@ -45,7 +45,7 @@ mod:AddSetIconOption("SetIconOnTurtles", "ej7129", false, true)
 mod:AddBoolOption("ClearIconOnTurtles", false)--Different option, because you may want auto marking but not auto clearing. or you may want auto clearning when they "die" but not auto marking when they spawn
 mod:AddBoolOption("AnnounceCooldowns", "RaidCooldown")
 
-local shelldName, shellConcussion = DBM:GetSpellInfo(137633), DBM:GetSpellInfo(136431)
+local shelldName, shellConcussion = DBM:GetSpellName(137633), DBM:GetSpellName(136431)
 local stompActive = false
 local stompCount = 0
 local firstRockfall = false--First rockfall after a stomp

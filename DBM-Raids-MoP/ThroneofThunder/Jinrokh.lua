@@ -43,7 +43,7 @@ local berserkTimer					= mod:NewBerserkTimer(540)
 mod:AddBoolOption("RangeFrame")
 
 local scanFailed = false
-local ionization, stormDebuff, Fluidity, focusedLight = DBM:GetSpellInfo(138732), DBM:GetSpellInfo(137313), DBM:GetSpellInfo(138002), DBM:GetSpellInfo(137422)
+local ionization, stormDebuff, Fluidity, focusedLight = DBM:GetSpellName(138732), DBM:GetSpellName(137313), DBM:GetSpellName(138002), DBM:GetSpellName(137422)
 
 local function checkWaterIonization()
 	if DBM:UnitDebuff("player", Fluidity) and DBM:UnitDebuff("player", ionization) and not UnitIsDeadOrGhost("player") then

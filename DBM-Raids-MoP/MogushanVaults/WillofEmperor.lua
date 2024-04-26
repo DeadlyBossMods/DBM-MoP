@@ -67,8 +67,8 @@ mod:AddInfoFrameOption(116525, false)
 mod:AddBoolOption("ArrowOnCombo", "Tank")--Very accurate for tank, everyone else not so much (tanks always in front, and boss always faces tank, so if he spins around on you, you expect it, melee on other hand have backwards arrows if you spun him around.
 
 --Upvales, don't need variables
-local focusedAssault = DBM:GetSpellInfo(116525)
-local UnitIsUnit, UnitPower, UnitGUID = UnitIsUnit, UnitPower, UnitGUID
+local focusedAssault = DBM:GetSpellName(116525)
+local UnitIsUnit = UnitIsUnit
 --Important, needs recover
 mod.vb.boss1ComboCount = 0
 mod.vb.boss2ComboCount = 0

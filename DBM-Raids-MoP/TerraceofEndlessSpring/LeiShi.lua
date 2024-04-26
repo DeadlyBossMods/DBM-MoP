@@ -45,7 +45,7 @@ mod.vb.addsIcon = 8
 local lostHealth = 0
 local prevlostHealth = 0
 local lastProtect = 0--No sense making syncable varaible, it's GetTime which differs PC to PC
-local hideName = DBM:GetSpellInfo(123244)
+local hideName = DBM:GetSpellName(123244)
 
 local bossTank
 do

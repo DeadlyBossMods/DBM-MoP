@@ -32,7 +32,7 @@ mod:AddRangeFrameOption(5, 119622)
 mod:AddSetIconOption("SetIconOnMC2", 119626, false, false, {8, 7, 6, 5, 4, 3, 2, 1})
 mod:AddReadyCheckOption(32099, false)
 
-local bitterThought, growingAnger = DBM:GetSpellInfo(119601), DBM:GetSpellInfo(119622)
+local bitterThought, growingAnger = DBM:GetSpellName(119601), DBM:GetSpellName(119622)
 local playerMCed = false
 
 local function debuffFilter(uId)

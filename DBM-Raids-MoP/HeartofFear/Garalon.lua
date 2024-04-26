@@ -52,8 +52,8 @@ local berserkTimer				= mod:NewBerserkTimer(420)
 
 mod:AddBoolOption("PheromonesIcon", true)
 
-local crushWarnText = DBM:GetSpellInfo(122774)
-local crushCountWarnText = DBM:GetSpellInfo(122774).." (%d)"
+local crushWarnText = DBM:GetSpellName(122774)
+local crushCountWarnText = DBM:GetSpellName(122774).." (%d)"
 local brokenLegs = 0
 local crushCount = 0
 

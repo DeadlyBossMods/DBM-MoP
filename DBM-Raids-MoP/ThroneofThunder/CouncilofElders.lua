@@ -91,7 +91,7 @@ mod:AddBoolOption("SetIconOnBitingCold", true)
 mod:AddBoolOption("SetIconOnFrostBite", true)
 mod:AddBoolOption("AnnounceCooldowns", "RaidCooldown")
 
-local lingeringPresence = DBM:GetSpellInfo(136467)
+local lingeringPresence = DBM:GetSpellName(136467)
 local boltCasts = 0
 local kazraPossessed = false
 local possessesDone = 0

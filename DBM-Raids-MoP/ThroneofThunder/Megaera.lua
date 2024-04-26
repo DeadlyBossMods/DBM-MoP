@@ -87,7 +87,7 @@ local rampageCast = 0
 local cinderIcon = 7
 local iceIcon = 6
 local activeHeadGUIDS = {}
-local iceTorrent = DBM:GetSpellInfo(139857)
+local iceTorrent = DBM:GetSpellName(139857)
 local torrentExpires = {}
 local arcaneRecent = false
 

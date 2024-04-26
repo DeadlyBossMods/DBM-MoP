@@ -89,7 +89,7 @@ mod:AddInfoFrameOption("ej7909")
 
 --Upvales, don't need variables
 local UnitName, UnitExists, UnitGUID, UnitDetailedThreatSituation = UnitName, UnitExists, UnitGUID, UnitDetailedThreatSituation
-local spellName1, spellName2, spellName3, spellName4, sunder = DBM:GetSpellInfo(143500), DBM:GetSpellInfo(143536), DBM:GetSpellInfo(143503), DBM:GetSpellInfo(143872), DBM:GetSpellInfo(143494)
+local spellName1, spellName2, spellName3, spellName4, sunder = DBM:GetSpellName(143500), DBM:GetSpellName(143536), DBM:GetSpellName(143503), DBM:GetSpellName(143872), DBM:GetSpellName(143494)
 --Tables, can't recover
 local dotWarned = {}
 --Important, needs recover

@@ -106,7 +106,7 @@ mod.vb.sparkCount = 0
 mod.vb.fragmentCount = 5
 mod.vb.specialCount = 0
 local arcaneResonanceTargets = {}
-local nullBarrier = DBM:GetSpellInfo(115811)
+local nullBarrier = DBM:GetSpellName(115811)
 
 local function warnWildfire(self)
 	warnWildfireInfusion:Cancel()

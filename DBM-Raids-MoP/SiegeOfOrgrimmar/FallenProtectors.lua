@@ -101,7 +101,7 @@ mod:AddRangeFrameOption(5, 143423, false)--For heroic. Need to chage smart range
 local UnitExists = UnitExists
 local UnitGUID = UnitGUID
 local UnitDetailedThreatSituation = UnitDetailedThreatSituation
-local calamitySpellText = DBM:GetSpellInfo(143491)
+local calamitySpellText = DBM:GetSpellName(143491)
 
 --Not important, don't need to recover
 local isInfernoTarget = false

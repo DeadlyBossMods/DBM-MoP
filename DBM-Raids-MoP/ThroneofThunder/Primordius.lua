@@ -58,8 +58,8 @@ local badCount = 0
 local bigOozeCount = 0
 local bigOozeAlive = 0
 local bigOozeGUIDS = {}
-local good1, good2, good3, good4 = DBM:GetSpellInfo(136180), DBM:GetSpellInfo(136182), DBM:GetSpellInfo(136184), DBM:GetSpellInfo(136186)
-local bad1, bad2, bad3, bad4 = DBM:GetSpellInfo(136181), DBM:GetSpellInfo(136183), DBM:GetSpellInfo(136185), DBM:GetSpellInfo(136187)
+local good1, good2, good3, good4 = DBM:GetSpellName(136180), DBM:GetSpellName(136182), DBM:GetSpellName(136184), DBM:GetSpellName(136186)
+local bad1, bad2, bad3, bad4 = DBM:GetSpellName(136181), DBM:GetSpellName(136183), DBM:GetSpellName(136185), DBM:GetSpellName(136187)
 
 local function BigOoze()
 	bigOozeCount = bigOozeCount + 1
