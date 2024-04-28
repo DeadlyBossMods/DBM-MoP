@@ -29,7 +29,7 @@ local timerUnleashedWrathCD		= mod:NewCDTimer(53, 119488, nil, nil, nil, 2)--Bas
 local timerUnleashedWrath		= mod:NewBuffActiveTimer(24, 119488, nil, "Tank|Healer", nil, 5)
 
 mod:AddRangeFrameOption(5, 119622)
-mod:AddSetIconOption("SetIconOnMC2", 119626, false, false, {8, 7, 6, 5, 4, 3, 2, 1})
+mod:AddSetIconOption("SetIconOnMC2", 119626, false, 0, {8, 7, 6, 5, 4, 3, 2, 1})
 mod:AddReadyCheckOption(32099, false)
 
 local bitterThought, growingAnger = DBM:GetSpellName(119601), DBM:GetSpellName(119622)

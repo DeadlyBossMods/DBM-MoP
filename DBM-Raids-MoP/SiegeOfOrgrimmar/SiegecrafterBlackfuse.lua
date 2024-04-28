@@ -76,7 +76,7 @@ local timerBreakinPeriod				= mod:NewTargetTimer(60, 145269, nil, false)--Many m
 local timerMagneticCrush				= mod:NewBuffActiveTimer(30, 144466)
 
 mod:AddInfoFrameOption("ej8202")
-mod:AddSetIconOption("SetIconOnMines", "ej8212", false, true)
+mod:AddSetIconOption("SetIconOnMines", "ej8212", false, 5)
 mod:AddSetIconOption("SetIconOnlaserFixate", 143828, false)
 mod:AddSetIconOption("SetIconOnSawBlade", 143265, false)
 

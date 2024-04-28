@@ -107,7 +107,7 @@ local timerFixate					= mod:NewTargetTimer(12, 147665)
 local berserkTimer					= mod:NewBerserkTimer(1080)
 
 mod:AddBoolOption("yellMaliceFading", false)
-mod:AddSetIconOption("SetIconOnShaman", "ej8294", false, true)
+mod:AddSetIconOption("SetIconOnShaman", "ej8294", false, 5)
 mod:AddSetIconOption("SetIconOnMC", 145071, false)
 mod:AddSetIconOption("SetIconOnMalice", 147209, false)
 mod:AddArrowOption("ShowDesecrateArrow", 144748, false)

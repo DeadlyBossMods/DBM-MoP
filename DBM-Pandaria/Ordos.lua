@@ -30,7 +30,7 @@ local timerBurningSoul			= mod:NewBuffFadesTimer(10, 144689, nil, nil, nil, 5)
 
 local berserkTimer				= mod:NewBerserkTimer(300)
 
-mod:AddSetIconOption("SetIconOnBurningSoul", 144689, true, false, {8, 7, 6})
+mod:AddSetIconOption("SetIconOnBurningSoul", 144689, true, 0, {8, 7, 6})
 mod:AddRangeFrameOption(8, 144689)
 mod:AddReadyCheckOption(33118, false, 90)
 

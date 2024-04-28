@@ -54,7 +54,7 @@ local berserkTimer						= mod:NewBerserkTimer(360)
 
 mod:AddRangeFrameOption("8/5")--Various things
 mod:AddSetIconOption("SetIconOnDisplacedEnergy", 142913, false)
-mod:AddSetIconOption("SetIconOnAdds", "ej7952", false, true)
+mod:AddSetIconOption("SetIconOnAdds", "ej7952", false, 5)
 mod:AddArrowOption("BloodrageArrow", 142879, true, true)
 
 --Upvales, don't need variables

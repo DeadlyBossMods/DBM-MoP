@@ -88,7 +88,7 @@ local timerPulsingFlamesCD			= mod:NewNextCountTimer(25, 147042, nil, nil, nil, 
 local timerPulsingFlames			= mod:NewBuffActiveTimer(7, 147042)
 
 mod:AddSetIconOption("FixateIcon", 147068)
-mod:AddSetIconOption("SetIconOnAdds", "ej8556", false, true)
+mod:AddSetIconOption("SetIconOnAdds", "ej8556", false, 5)
 
 --Important, needs recover
 mod.vb.addsCount = 0

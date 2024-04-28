@@ -41,7 +41,7 @@ local timerShellConcussion			= mod:NewBuffFadesTimer(20, 136431)
 local berserkTimer					= mod:NewBerserkTimer(780)
 
 mod:AddBoolOption("InfoFrame")
-mod:AddSetIconOption("SetIconOnTurtles", "ej7129", false, true)
+mod:AddSetIconOption("SetIconOnTurtles", "ej7129", false, 5)
 mod:AddBoolOption("ClearIconOnTurtles", false)--Different option, because you may want auto marking but not auto clearing. or you may want auto clearning when they "die" but not auto marking when they spawn
 mod:AddBoolOption("AnnounceCooldowns", "RaidCooldown")
 
