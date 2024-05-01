@@ -173,7 +173,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerDrawFlame:Start()
 		specWarnDrawFlame:Show(self.vb.specialCount)
 		specWarnDrawFlame:Play("specialsoon")
-		if DBM:UnitBuff(nullBarrier, "player") and self:IsDifficulty("lfr25") then
+		if DBM:UnitBuff("player", nullBarrier) and self:IsDifficulty("lfr25") then
 			specWarnBarrierNow:Show()
 			specWarnBarrierNow:Play("useextraaction")
 		end
@@ -198,7 +198,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		specWarnArcaneVelocity:Show(self.vb.specialCount)
 		specWarnArcaneVelocity:Play("runin")--A mechanic that does less damage closer to boss you are
 		timerArcaneVelocity:Start()
-		if DBM:UnitBuff(nullBarrier, "player") and self:IsDifficulty("lfr25") then
+		if DBM:UnitBuff("player", nullBarrier) and self:IsDifficulty("lfr25") then
 			specWarnBarrierNow:Show()
 		end
 	end
@@ -302,7 +302,7 @@ function mod:SPELL_CAST_START(args)
 		specWarnEpicenter:Play("aesoon")
 		timerEpicenter:Start()
 		timerEpicenterCD:Start(nil, self.vb.specialCount + 1)
-		if DBM:UnitBuff(nullBarrier, "player") and self:IsDifficulty("lfr25") then
+		if DBM:UnitBuff("player", nullBarrier) and self:IsDifficulty("lfr25") then
 			specWarnBarrierNow:Schedule(2)
 		end
 	elseif args:IsSpellID(116157, 116295) then
