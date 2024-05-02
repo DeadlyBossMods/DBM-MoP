@@ -410,7 +410,7 @@ function mod:CHAT_MSG_MONSTER_EMOTE(msg, npc, _, _, target)
 		timerLifeDrain:Start()
 		timerLifeDrainCD:Start(not lifeDrained and 50 or nil)--first is 50, 2nd and later is 40
 		lifeDrained = true
-		if self.Options.SetIconLifeDrain then
+		if target and self.Options.SetIconLifeDrain then
 			self:SetIcon(target, 8)--Skull
 		end
 		if self.Options.InfoFrame and not self:IsDifficulty("lfr25") then
