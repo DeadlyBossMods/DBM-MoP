@@ -21,9 +21,12 @@ mod:RegisterEventsInCombat(
 	"CHAT_MSG_ADDON"
 )
 
+mod:AddBoolOption("AGStartNorushen", true)
+
 mod:RegisterEvents(
 	"ENCOUNTER_START",
-	"CHAT_MSG_MONSTER_YELL"
+	"CHAT_MSG_MONSTER_YELL",
+	"GOSSIP_SHOW"
 )
 
 local boss = DBM:EJ_GetSectionInfo(8216)
@@ -261,6 +264,15 @@ function mod:CHAT_MSG_ADDON(prefix, message, channel, sender)
 		local _, rest = message:match("(%S+)%s*(.*)$")--May not work with 7.1 BW core, I am not really going out of way to fix norushen
 		if bwMsg == "InsideBigAddDeath" and not playerInside and rest then
 			addSync(rest)
+		end
+	end
+end
+
+function mod:GOSSIP_SHOW()
+	local gossipOptionID = self:GetGossipID()
+	if gossipOptionID then
+		if self.Options.AGStartNorushen and gossipOptionID == 42038 then
+			self:SelectGossip(gossipOptionID, true)
 		end
 	end
 end

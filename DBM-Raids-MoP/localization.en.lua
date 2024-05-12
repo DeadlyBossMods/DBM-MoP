@@ -692,6 +692,10 @@ L:SetWarningLocalization({
 ---------------------------
 L = DBM:GetModLocalization(866)
 
+L:SetOptionLocalization({
+	AGStartNorushen		= "Auto select gossip to start fight when interacting with Norushen"
+})
+
 L:SetMiscLocalization({
 	wasteOfTime	= "Very well, I will create a field to keep your corruption quarantined."
 })
