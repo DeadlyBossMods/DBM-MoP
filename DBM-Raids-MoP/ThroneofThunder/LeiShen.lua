@@ -20,6 +20,10 @@ mod:RegisterEventsInCombat(
 	"UNIT_SPELLCAST_SUCCEEDED"
 )
 
+mod:RegisterEvents(
+	"GOSSIP_SHOW"
+)
+
 --Conduits (All phases)
 local warnStaticShock					= mod:NewTargetAnnounce(135695, 4)
 local warnDiffusionChain				= mod:NewTargetAnnounce(135991, 3)--More informative than actually preventative. (you need to just spread out, and that's it. can't control who it targets only that it doesn't spread)
@@ -96,6 +100,7 @@ mod:AddBoolOption("OverchargeArrow")--On by default because the overcharge targe
 mod:AddBoolOption("StaticShockArrow", false)--Off by default as most static shock stack points are pre defined and not based on running to player, but rathor running to a raid flare on ground
 mod:AddBoolOption("SetIconOnOvercharge", true)
 mod:AddBoolOption("SetIconOnStaticShock", true)
+mod:AddBoolOption("AGStartDP", true)
 
 mod.vb.phase = 1
 mod.vb.warnedCount = 0
@@ -559,5 +564,14 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 		warnViolentGaleWinds:Show()
 		timerViolentGaleWinds:Start()
 		timerViolentGaleWindsCD:Start()
+	end
+end
+
+function mod:GOSSIP_SHOW()
+	local gossipOptionID = self:GetGossipID()
+	if gossipOptionID then
+		if self.Options.AGStartDP and gossipOptionID == 41812 then
+			self:SelectGossip(gossipOptionID, true)
+		end
 	end
 end
