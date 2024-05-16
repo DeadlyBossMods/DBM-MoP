@@ -1,0 +1,14 @@
+{
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "runtime.version": "Lua 5.1",
+    "diagnostics.disable": [
+        "empty-block",
+        "invisible",
+        "deprecated",
+        "duplicate-doc-field"
+    ],
+    "diagnostics.globals": [
+        "ALTERNATE_POWER_INDEX",
+        "GUILD_INTEREST_RP"
+    ]
+}
