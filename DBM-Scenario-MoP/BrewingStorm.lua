@@ -6,8 +6,8 @@ mod:SetRevision("@file-date-integer@")
 mod:RegisterCombat("scenario", 1005)
 
 mod:RegisterEventsInCombat(
-	"SPELL_CAST_START",
-	"SPELL_AURA_APPLIED",
+	"SPELL_CAST_START 115013",
+	"SPELL_AURA_APPLIED 122142",
 	"CHAT_MSG_MONSTER_SAY",
 	"UNIT_DIED"
 )
@@ -17,16 +17,12 @@ local warnSwampSmash			= mod:NewSpellAnnounce(115013, 3)--TODO, see if target sc
 local warnEarthShattering		= mod:NewSpellAnnounce(122142, 3)
 
 --Borokhula the Destroyer
-local specWarnSwampSmash		= mod:NewSpecialWarningSpell(115013, nil, nil, nil, 2)
-
---Borokhula the Destroyer
-local timerSwampSmashCD			= mod:NewCDTimer(8, 115013)
-local timerEarthShatteringCD	= mod:NewCDTimer(18, 122142)--Limited sample size, may be shorter
+local timerSwampSmashCD			= mod:NewCDTimer(8, 115013, nil, nil, nil, 3)
+local timerEarthShatteringCD	= mod:NewCDTimer(18, 122142, nil, nil, nil, 3)--Limited sample size, may be shorter
 
 function mod:SPELL_CAST_START(args)
 	if args.spellId == 115013 then
 		warnSwampSmash:Show()
-		specWarnSwampSmash:Show()
 		timerSwampSmashCD:Start()
 	end
 end

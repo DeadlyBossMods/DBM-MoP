@@ -6,45 +6,45 @@ mod:SetRevision("@file-date-integer@")
 mod:RegisterCombat("scenario", 1130)
 
 mod:RegisterEventsInCombat(
-	"SPELL_CAST_START",
-	"SPELL_CAST_SUCCESS",
+	"SPELL_CAST_START 141423",
+	"SPELL_CAST_SUCCESS 132980 142669",
 	"UNIT_DIED",
 	"CHAT_MSG_RAID_BOSS_EMOTE"
 )
 
---Farastu
-local warnIceSpikes			= mod:NewSpellAnnounce(132980, 3)
-local warnFrozenSolid		= mod:NewTargetAnnounce(141407, 3)
 --Hekima the Wise
 local warnHekimasWisdom		= mod:NewCastAnnounce(141423, 4, 4)
-local warnZandalarBanner	= mod:NewSpellAnnounce(142669, 4, 4)
 
 --Farastu
-local specWarnIceSpikes		= mod:NewSpecialWarningMove(132980)
-local specWarnFrozenSolid	= mod:NewSpecialWarningSwitch(141407)
+local specWarnIceSpikes		= mod:NewSpecialWarningDodge(132980, nil, nil, nil, 2, 2)
+local specWarnFrozenSolid	= mod:NewSpecialWarningTarget(141407, nil, nil, nil, 1, 2)
 --Hekima the Wise
-local specWarnHekimasWisdom	= mod:NewSpecialWarningInterrupt(141423)--Not only cast by last boss but trash near him as well, interrupt important for both. Although only bosses counts for achievement.
-local specWarnZandalarBanner= mod:NewSpecialWarningSwitch(142669)
+local specWarnHekimasWisdom	= mod:NewSpecialWarningInterrupt(141423, "HasInterrupt", nil, nil, 1, 2)--Not only cast by last boss but trash near him as well, interrupt important for both. Although only bosses counts for achievement.
+local specWarnZandalarBanner= mod:NewSpecialWarningSwitch(142669, nil, nil, nil, 1, 2)
 
 --Farastu
-local timerIceSpikesCD		= mod:NewCDTimer(10, 132980)
-local timerFrozenSolidCD	= mod:NewCDTimer(20, 141407)
+local timerIceSpikesCD		= mod:NewCDTimer(10, 132980, nil, nil, nil, 3)
+local timerFrozenSolidCD	= mod:NewCDTimer(20, 141407, nil, nil, nil, 3)
 
 function mod:SPELL_CAST_START(args)
 	if args.spellId == 141423 then
-		warnHekimasWisdom:Show()
-		specWarnHekimasWisdom:Show(args.sourceName)
+		if self.Options.SpecWarn141423interrupt and self:CheckInterruptFilter(args.sourceGUID, nil, true) then
+			specWarnHekimasWisdom:Show(args.sourceName)
+			specWarnHekimasWisdom:Play("kickcast")
+		else
+			warnHekimasWisdom:Show()
+		end
 	end
 end
 
 function mod:SPELL_CAST_SUCCESS(args)
 	if args.spellId == 132980 then
-		warnIceSpikes:Show()
 		specWarnIceSpikes:Show()
+		specWarnIceSpikes:Play("watchstep")
 		timerIceSpikesCD:Start()
 	elseif args.spellId == 142669 then
-		warnZandalarBanner:Show()
 		specWarnZandalarBanner:Show()
+		specWarnZandalarBanner:Play("targetchange")
 	end
 end
 
@@ -59,8 +59,8 @@ end
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 	if msg:find("spell:141407") and target then--Does show in combat log, but emote gives targetname 2 seconds earlier.
 		target = DBM:GetUnitFullName(target)
-		warnFrozenSolid:Show(target)
-		specWarnFrozenSolid:Show()
+		specWarnFrozenSolid:Show(target)
+		specWarnFrozenSolid:Play("targetchange")
 		timerFrozenSolidCD:Start()
 	end
 end

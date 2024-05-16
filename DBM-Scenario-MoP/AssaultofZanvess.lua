@@ -8,26 +8,25 @@ mod:SetRevision("@file-date-integer@")
 mod:RegisterCombat("scenario", 1050)
 
 mod:RegisterEventsInCombat(
-	"SPELL_CAST_SUCCESS",
+	"SPELL_CAST_SUCCESS 135546 134974",
 	"UNIT_DIED",
 	"CHAT_MSG_MONSTER_YELL"
 )
 
 --Zan'thik Swarmer spawns don't show in logs, so might need to do /chatlog and /yell when they spawn and schedule a loop to get add wave timers for final boss
-local warnGuidedMissle		= mod:NewCastAnnounce(135546, 3, 5)
 local warnImpale			= mod:NewSpellAnnounce(133942, 2)
 
-local specWarnGuidedMissle	= mod:NewSpecialWarningPreWarn(135546, nil, 5)--So you can use Force field and not get weapons disabled.
+local specWarnGuidedMissle	= mod:NewSpecialWarningPreWarn(135546, nil, 5, nil, nil, 1, 2)--So you can use Force field and not get weapons disabled.
 
-local timerGuidedMissle		= mod:NewCastTimer(5, 135546)--Time until impact
-local timerImpaleCD			= mod:NewNextTimer(6, 133942)
+local timerGuidedMissle		= mod:NewCastTimer(5, 135546, nil, nil, nil, 5)--Time until impact
+local timerImpaleCD			= mod:NewNextTimer(6, 133942, nil, nil, nil, 3)
 
 function mod:SPELL_CAST_SUCCESS(args)
 	if args.spellId == 135546 then
 		timerGuidedMissle:Start(args.sourceGUID)
 		if self:AntiSpam(2) then--Sometime 2 fire within 1-2 sec of eachother. We want to throttle warning spam but not cast timers so we can time our shield so it's up for both missles
-			warnGuidedMissle:Show()
 			specWarnGuidedMissle:Show()
+			specWarnGuidedMissle:Play("specialsoon")
 		end
 	elseif args.spellId == 134974 then
 		warnImpale:Show()

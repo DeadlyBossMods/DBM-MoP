@@ -8,16 +8,13 @@ mod:SetRevision("@file-date-integer@")
 mod:RegisterCombat("scenario", 1048)
 
 mod:RegisterEventsInCombat(
-	"SPELL_AURA_APPLIED",
+	"SPELL_AURA_APPLIED 121934",
 	"UNIT_SPELLCAST_SUCCEEDED target focus",
 	"SCENARIO_UPDATE"
 )
 
 --Captain Ook
-local warnOrange			= mod:NewTargetAnnounce(121895, 3)
-
---Captain Ook
-local specWarnOrange		= mod:NewSpecialWarningSpell(121895)
+local warnOrange		= mod:NewSpellAnnounce(121895, 3)
 
 --Captain Ook
 --local timerOrangeCD		= mod:NewCDTimer(45, 121895)--Not good sample size, could be inaccurate
@@ -25,13 +22,13 @@ local specWarnOrange		= mod:NewSpecialWarningSpell(121895)
 local timerKegRunner		= mod:NewAchievementTimer(240, 7232)
 
 function mod:SPELL_AURA_APPLIED(args)
-	if args.spellId == 121934 and self:AntiSpam() then
+	if args.spellId == 121934 and self:AntiSpam(3, 1) then
 		self:SendSync("Phase3")
 	end
 end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
-	if spellId == 121895 and self:AntiSpam() then
+	if spellId == 121895 and self:AntiSpam(3, 2) then
 		self:SendSync("Orange")
 	end
 end
@@ -42,7 +39,6 @@ function mod:OnSync(msg)
 --		timerOrangeCD:Start()
 	elseif msg == "Orange" then
 		warnOrange:Show()
-		specWarnOrange:Show()
 	end
 end
 

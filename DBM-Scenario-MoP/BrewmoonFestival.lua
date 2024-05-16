@@ -8,19 +8,17 @@ mod:SetRevision("@file-date-integer@")
 mod:RegisterCombat("scenario", 1051)
 
 mod:RegisterEventsInCombat(
-	"SPELL_AURA_APPLIED",
-	"SPELL_CAST_START"
+	"SPELL_AURA_APPLIED 124428",
+	"SPELL_CAST_START 124359 125392"
 )
 
 --Li Te
 local warnWaterShell	= mod:NewSpellAnnounce(124653, 2)
 --Den Mother Moof
 local warnBurrow		= mod:NewSpellAnnounce(124359, 2)
---Warbringer Qobi
-local warnFireLine		= mod:NewCastAnnounce(125392, 4, 3)
 
 --Warbringer Qobi
-local specWarnFireLine	= mod:NewSpecialWarningSpell(125392, nil, nil, nil, 2)
+local specWarnFireLine	= mod:NewSpecialWarningDodge(125392, nil, nil, nil, 2, 2)
 
 function mod:SPELL_AURA_APPLIED(args)
 	if args.spellId == 124428 then
@@ -32,7 +30,7 @@ function mod:SPELL_CAST_START(args)
 	if args.spellId == 124359 then
 		warnBurrow:Show()
 	elseif args.spellId == 125392 then
-		warnFireLine:Show()
 		specWarnFireLine:Show()
+		specWarnFireLine:Play("farfromline")
 	end
 end

@@ -14,35 +14,37 @@ mod:RegisterEventsInCombat(
 	"UNIT_DIED"
 )
 
---Cursed Brew
-local warnBrewBubble			= mod:NewTargetAnnounce(131143, 3)
 --Beast of Jade
 local warnJadeStatue			= mod:NewSpellAnnounce(119364, 4)
 --Vengeful Hui
 local warnSummonSeedlings		= mod:NewSpellAnnounce(117664, 2)
 
 --Cursed Brew
-local specWarnBrewBubble		= mod:NewSpecialWarningSwitch(131143, "Dps")
+local specWarnBrewBubble		= mod:NewSpecialWarningSwitch(131143, "Dps", nil, nil, 1, 2)
 --Beast of Jade
-local specWarnJadeStatue		= mod:NewSpecialWarningInterrupt(119364)
+local specWarnJadeStatue		= mod:NewSpecialWarningInterrupt(119364, "HasInterrupt", nil, nil, 1, 2)
 
 --Cursed Brew
-local timerBrewBubbleCD			= mod:NewCDTimer(15, 131143)
+local timerBrewBubbleCD			= mod:NewCDTimer(15, 131143, nil, nil, nil, 3)
 --Beast of Jade
-local timerJadeStatueCD			= mod:NewCDTimer(18, 119364)--Small sample size. May be incorrect.
+local timerJadeStatueCD			= mod:NewCDTimer(18, 119364, nil, nil, nil, 4, nil, DBM_COMMON_L.INTERRUPT_ICON)--Small sample size. May be incorrect.
 --Vengeful Hui
-local timerSummonSeedlingsCD	= mod:NewNextTimer(14.4, 117664)
+local timerSummonSeedlingsCD	= mod:NewNextTimer(14.4, 117664, nil, nil, nil, 1)
 
 function mod:SPELL_AURA_APPLIED(args)
 	if args.spellId == 131143 then
-		warnBrewBubble:Show(args.destName)
 		timerBrewBubbleCD:Start()
 		if not args:IsPlayer() then--Only those not trapped in bubble can help
 			specWarnBrewBubble:Show()
+			specWarnBrewBubble:Play("targetchange")
 		end
 	elseif args.spellId == 119364 then
-		warnJadeStatue:Show()
-		specWarnJadeStatue:Show()
+		if self.Options.SpecWarn119364interrupt and self:CheckInterruptFilter(args.sourceGUID, nil, true) then
+			specWarnJadeStatue:Show(args.sourceName)
+			specWarnJadeStatue:Play("kickcast")
+		else
+			warnJadeStatue:Show()
+		end
 		timerJadeStatueCD:Start()
 	end
 end

@@ -9,34 +9,30 @@ mod:RegisterCombat("scenario", 1095)
 
 mod:RegisterEventsInCombat(
 	"CHAT_MSG_MONSTER_SAY",
-	"SPELL_CAST_START",
-	"SPELL_CAST_SUCCESS",
-	"SPELL_PERIODIC_DAMAGE",
-	"SPELL_PERIODIC_MISSED",
+	"SPELL_CAST_START 133121 133804",
+	"SPELL_CAST_SUCCESS 132984",
+	"SPELL_PERIODIC_DAMAGE 133001",
+	"SPELL_PERIODIC_MISSED 133001",
 	"UNIT_DIED",
 	"UNIT_SPELLCAST_SUCCEEDED target focus"
 )
 
 --Darkhatched Lizard-Lord
 local warnWaterJets			= mod:NewCastAnnounce(133121, 2, 3)
---Broodmaster Noshi
-local warnDeathNova			= mod:NewCastAnnounce(133804, 4, 20)
 --Rak'gor Bloodrazor
 local warnFixate			= mod:NewSpellAnnounce(132984, 3)
 
---Darkhatched Lizard-Lord
-local specWarnWaterJets		= mod:NewSpecialWarningSpell(133121, false)--For achievement primarily
 --Broodmaster Noshi
-local specWarnDeathNova		= mod:NewSpecialWarningSpell(133804, nil, nil, nil, 2)
+local specWarnDeathNova		= mod:NewSpecialWarningSpell(133804, nil, nil, nil, 2, 2)
 --Rak'gor Bloodrazor
-local specWarnGasBomb		= mod:NewSpecialWarningMove(133001)
+local specWarnGasBomb		= mod:NewSpecialWarningGTFO(133001, nil, nil, nil, 1, 8)
 
 --Darkhatched Lizard-Lord
-local timerAddsCD			= mod:NewTimer(60, "timerAddsCD", 2457)
+local timerAddsCD			= mod:NewTimer(60, "timerAddsCD", 2457, nil, nil, 1)
 --Broodmaster Noshi
-local timerDeathNova		= mod:NewCastTimer(20, 133804)
+local timerDeathNova		= mod:NewCastTimer(20, 133804, nil, nil, nil, 2)
 --Rak'gor Bloodrazor
-local timerFixateCD			= mod:NewNextTimer(20, 132984)
+local timerFixateCD			= mod:NewNextTimer(20, 132984, nil, nil, nil, 3)
 
 function mod:CHAT_MSG_MONSTER_SAY(msg)
 	if msg == L.LizardLord or msg:find(L.LizardLord) then
@@ -47,10 +43,9 @@ end
 function mod:SPELL_CAST_START(args)
 	if args.spellId == 133121 then
 		warnWaterJets:Show()
-		specWarnWaterJets:Show()
 	elseif args.spellId == 133804 then
-		warnDeathNova:Show()
 		specWarnDeathNova:Show()
+		specWarnDeathNova:Play("specialsoon")
 		timerDeathNova:Start()
 	end
 end
@@ -62,9 +57,10 @@ function mod:SPELL_CAST_SUCCESS(args)
 	end
 end
 
-function mod:SPELL_PERIODIC_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
+function mod:SPELL_PERIODIC_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId, spellName)
 	if spellId == 133001 and destGUID == UnitGUID("player") and self:AntiSpam() then
-		specWarnGasBomb:Show()
+		specWarnGasBomb:Show(spellName)
+		specWarnGasBomb:Play("watchfeet")
 	end
 end
 mod.SPELL_PERIODIC_MISSED = mod.SPELL_PERIODIC_DAMAGE

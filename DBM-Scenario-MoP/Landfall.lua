@@ -8,16 +8,15 @@ mod:SetRevision("@file-date-integer@")
 mod:RegisterCombat("scenario", 1103, 1102)
 
 mod:RegisterEventsInCombat(
-	"SPELL_CAST_START",
+	"SPELL_CAST_START 135403 135404",
 	"UNIT_DIED"
 )
 
 local warnDivineStorm		= mod:NewSpellAnnounce(135404, 4, nil, "Melee")
 local warnDivineLight		= mod:NewSpellAnnounce(135403, 4)
-
 local warnAchFiveAlive		= mod:NewAnnounce("WarnAchFiveAlive", 3, nil, false)
 
-local specWarnDivineLight	= mod:NewSpecialWarningInterrupt(135403)
+local specWarnDivineLight	= mod:NewSpecialWarningInterrupt(135403, "HasInterrupt", nil, nil, 1, 2)
 
 --[[ Alliance 'heroes'
 68581 Daggin Windbeard
@@ -48,8 +47,12 @@ end
 
 function mod:SPELL_CAST_START(args)
 	if args.spellId == 135403 then
-		warnDivineLight:Show()
-		specWarnDivineLight:Show(args.sourceName)
+		if self.Options. SpecWarn135403interrupt and self:CheckInterruptFilter(args.sourceGUID, nil, true) then
+			specWarnDivineLight:Show(args.sourceName)
+			specWarnDivineLight:Play("kickcast")
+		else
+			warnDivineLight:Show()
+		end
 	elseif args.spellId == 135404 then
 		warnDivineStorm:Show()
 	end

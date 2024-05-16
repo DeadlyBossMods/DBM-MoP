@@ -8,13 +8,11 @@ mod:SetRevision("@file-date-integer@")
 mod:RegisterCombat("scenario", 1031)
 
 mod:RegisterEventsInCombat(
-	"SPELL_CAST_START"
+	"SPELL_CAST_START 123966"
 --	"SPELL_AURA_REMOVED"
 )
 
-local warnFlameWall		= mod:NewSpellAnnounce(123966, 4)
-
-local specWarnFlameWall	= mod:NewSpecialWarningSpell(123966, nil, nil, nil, 2)
+local specWarnFlameWall	= mod:NewSpecialWarningSwitch(123966, nil, nil, nil, 2, 2)
 
 --[[
 --Needs more data, i'm not sure if it has a CD or is just health based atm so no CD timer just yet.
@@ -27,8 +25,8 @@ local specWarnFlameWall	= mod:NewSpecialWarningSpell(123966, nil, nil, nil, 2)
 
 function mod:SPELL_CAST_START(args)
 	if args.spellId == 123966 then
-		warnFlameWall:Show()
 		specWarnFlameWall:Show()
+		specWarnFlameWall:Play("targetchange")
 	end
 end
 

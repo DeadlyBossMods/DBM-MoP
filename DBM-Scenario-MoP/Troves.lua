@@ -15,8 +15,8 @@ mod:RegisterEventsInCombat(
 
 local warnStoneSmash		= mod:NewCastAnnounce(139777, 3, nil, nil, false)
 
-local specWarnMightycrash	= mod:NewSpecialWarningMove(136844)
-local specWarnSaurok		= mod:NewSpecialWarningSpell(140009)
+local specWarnMightycrash	= mod:NewSpecialWarningDodge(136844, nil, nil, nil, 2, 2)
+local specWarnSaurok		= mod:NewSpecialWarningSwitch(140009, nil, nil, nil, 1, 2)
 
 local timerEvent			= mod:NewBuffFadesTimer(299, 140000, nil, nil, nil, 6, nil, nil, nil, 1, 10)
 local timerStoneSmash		= mod:NewCastTimer(3, 139777, nil, false)
@@ -39,6 +39,7 @@ function mod:SPELL_CAST_START(args)
 		timerStoneSmash:Start(3, args.sourceGUID)
 	elseif args.spellId == 136844 then
 		specWarnMightycrash:Show()
+		specWarnMightycrash:Play("shockwave")
 	end
 end
 
@@ -47,6 +48,7 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	if args.spellId == 139812 then
 		specWarnSaurok:Show()
+		specWarnSaurok:Play("killbigmob")
 	end
 end
 

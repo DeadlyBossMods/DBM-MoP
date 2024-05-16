@@ -7,31 +7,28 @@ mod:RegisterCombat("scenario", 1131)
 
 mod:RegisterEventsInCombat(
 	"CHAT_MSG_MONSTER_YELL",
-	"SPELL_CAST_START",
-	"SPELL_CAST_SUCCESS",
-	"SPELL_DAMAGE",
-	"SPELL_MISSED",
+	"SPELL_CAST_START 142771",
+	"SPELL_CAST_SUCCESS 142320 142306 142773",
+	"SPELL_DAMAGE 142311 142768",
+	"SPELL_MISSED 142311 142768",
 	"UNIT_DIED"
 )
 
 --Dark Shaman Xorenth
 local warnGlacialFreezeTotem		= mod:NewSpellAnnounce(142320, 2)
-local warnRuinedEarth				= mod:NewSpellAnnounce(142306, 3)
 --Overseer Elaglo
 local warnShatteringStomp			= mod:NewSpellAnnounce(142771, 3)--The cds on these abilities were HIGHLY variable
-local warnShatteringCharge			= mod:NewTargetAnnounce(142773, 3)--So timers probably not useful, I localized pull just in case though
+local warnShatteringCharge			= mod:NewTargetNoFilterAnnounce(142773, 3)--So timers probably not useful, I localized pull just in case though
 
 --Dark Shaman Xorenth
-local specWarnGlacialFreezeTotem	= mod:NewSpecialWarningSwitch(142320)
-local specWarnRuinedEarth			= mod:NewSpecialWarningSpell(142306, nil, nil, nil, 2)
-local specWarnRuinedEarthMove		= mod:NewSpecialWarningMove(142311)
+local specWarnRuinedEarthMove		= mod:NewSpecialWarningDodge(142311, nil, nil, nil, 2, 2)
 --Overseer Elaglo
-local specWarnShatteredEarth		= mod:NewSpecialWarningMove(142768)
+local specWarnGTFO					= mod:NewSpecialWarningGTFO(142768, nil, nil, nil, 1, 8)
 
 --Dark Shaman Xorenth
-local timerGlacialFreezeTotemCD		= mod:NewCDTimer(25, 142320)--Only got cast twice in my log, so cd may be variable, need more data.
+local timerGlacialFreezeTotemCD		= mod:NewCDTimer(25, 142320, nil, nil, nil, 1)--Only got cast twice in my log, so cd may be variable, need more data.
 local timerRuinedEarth				= mod:NewBuffActiveTimer(15, 142306)
-local timerRuinedEarthCD			= mod:NewCDTimer(19.5, 142306)--Timer started when last ended, but actual CD is 34.5ish
+local timerRuinedEarthCD			= mod:NewCDTimer(19.5, 142306, nil, nil, nil, 3)--Timer started when last ended, but actual CD is 34.5ish
 
 function mod:CHAT_MSG_MONSTER_YELL(msg)
 	if msg == L.XorenthPull or msg:find(L.XorenthPull) then
@@ -52,8 +49,8 @@ function mod:SPELL_CAST_SUCCESS(args)
 		warnGlacialFreezeTotem:Show()
 		timerGlacialFreezeTotemCD:Start()
 	elseif args.spellId == 142306 then
-		warnRuinedEarth:Show()
 		specWarnRuinedEarthMove:Show()
+		specWarnRuinedEarthMove:Play("watchstep")
 		timerRuinedEarth:Start()
 		timerRuinedEarthCD:Schedule(15)--Start CD when current one ends
 	elseif args.spellId == 142773 then
@@ -61,11 +58,10 @@ function mod:SPELL_CAST_SUCCESS(args)
 	end
 end
 
-function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
-	if spellId == 142311 and destGUID == UnitGUID("player") and self:AntiSpam() then
-		specWarnRuinedEarthMove:Show()
-	elseif spellId == 142768 and destGUID == UnitGUID("player") and self:AntiSpam() then
-		specWarnShatteredEarth:Show()
+function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId, spellName)
+	if (spellId == 142311 or spellId == 142768) and destGUID == UnitGUID("player") and self:AntiSpam(3, 1) then
+		specWarnGTFO:Show(spellName)
+		specWarnGTFO:Play("watchfeet")
 	end
 end
 mod.SPELL_MISSED = mod.SPELL_DAMAGE
