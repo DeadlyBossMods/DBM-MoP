@@ -3,8 +3,11 @@ local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(69768, 69769, 69841, 69842)
+mod:SetHotfixNoticeRev(20240516000000)
+mod:SetMinSyncRevision(20240516000000)
 
 mod:RegisterCombat("combat")
+mod:SetWipeTime(20)--Combat drops between adds waves
 
 mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 138040 138044 138036 138042 138043",
@@ -20,7 +23,7 @@ local specwarnThunderCrush		= mod:NewSpecialWarningDodge(138044, nil, nil, nil, 
 local specwarnVengefulSpirit	= mod:NewSpecialWarningRun(138043, "-Tank", nil, nil, 1, 2)--Assume a tank is just going to tank it
 
 local timerThunderCrushCD		= mod:NewCDTimer(7, 138044, nil, nil, nil, 3)
-local timerHorrificVisageCD		= mod:NewCDTimer(7, 138040, nil, nil, nil, 4)
+--local timerHorrificVisageCD	= mod:NewCDTimer(7, 138040, nil, nil, nil, 4)
 
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
@@ -52,9 +55,8 @@ do
 	local function checkforWin(self, firstCheck)
 		if not self:GroupInCombat() then
 			DBM:EndCombat(self)
-			if firstCheck then
-				self:Schedule(3, checkforWin, self)--Check again in case a spirit was lingering around keeping in combat
-			end
+		elseif firstCheck then
+			self:Schedule(3, checkforWin, self)--Check again in case a spirit was lingering around keeping in combat
 		end
 	end
 

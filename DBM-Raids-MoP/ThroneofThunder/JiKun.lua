@@ -170,6 +170,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 	end
 end
 
+--[[
 local nestCoords = {
 	--Lower Nests
 	[1] = { 57.70, 30.50 },--Lower Northeast
@@ -184,6 +185,7 @@ local nestCoords = {
 	[9] = { 47.20, 40.70 },--Upper Middle (aka, upper west)
 	[10] = { 43.50, 24.10 }--Upper Northwest
 }
+--]]
 
 local function GetNestPositions(flockC)
 	local dir = DBM_COMMON_L.UNKNOWN --direction
