@@ -25,18 +25,16 @@ mod:AddBoolOption("warnBreathOnPlatform", false, "announce")
 local warnOminousCackle					= mod:NewTargetAnnounce(129147, 3)--129147 is debuff, 119693 is cast. We do not reg warn cast cause we reg warn the actual targets instead. We special warn cast to give a little advanced heads up though.
 -- Heroic Phase 2
 local warnPhase2						= mod:NewPhaseAnnounce(2)
-local warnDreadThrash					= mod:NewSpellAnnounce(132007, 4, nil, "Tank|Healer")
-local warnNakedAndAfraid				= mod:NewTargetAnnounce(120669, 2, nil, "Tank")
 local warnWaterspout					= mod:NewTargetCountAnnounce(120519, 3)
 local warnHuddleInTerror				= mod:NewTargetCountAnnounce(120629, 3)
-local warnImplacableStrike				= mod:NewCountAnnounce(120672, 4)
 local warnChampionOfTheLight			= mod:NewTargetAnnounce(120268, 3, nil, false)--seems spammy.
+local warnSubmerge						= mod:NewCountAnnounce(120455)
 local warnDreadSpawns					= mod:NewCountAnnounce(132018)
 
 -- Normal and heroic Phase 1
-local specWarnBreathOfFearSoon			= mod:NewSpecialWarning("specWarnBreathOfFearSoon")
-local specWarnThrash					= mod:NewSpecialWarningSpell(131996, "Tank")
-local specWarnOminousCackleYou			= mod:NewSpecialWarningYou(129147)--You have debuff, just warns you.
+local specWarnBreathOfFearSoon			= mod:NewSpecialWarning("specWarnBreathOfFearSoon", nil, nil, nil, 2, 2)
+local specWarnThrash					= mod:NewSpecialWarningDefensive(131996, nil, nil, nil, 1, 2)
+local specWarnOminousCackleYou			= mod:NewSpecialWarningYou(129147, nil, nil, nil, 1, 6)--You have debuff, just warns you.
 local specWarnDreadSpray				= mod:NewSpecialWarningSpell(120047, nil, nil, nil, 2)--Platform ability, particularly nasty damage, and fear.
 local specWarnDeathBlossom				= mod:NewSpecialWarningSpell(119888, nil, nil, nil, 2)--Cast, warns the entire raid.
 mod:AddBoolOption("specWarnMovement", false, "announce")--https://www.icy-veins.com/wow/sha-of-fear-strategy-guide-normal-heroic (doesn't match our built in strat but similar idea)
@@ -44,25 +42,23 @@ local MoveWarningForward				= mod:NewSpecialWarning("MoveForward", nil, false)--
 local MoveWarningRight					= mod:NewSpecialWarning("MoveRight", nil, false)--Warning to move one eighth to the right
 local MoveWarningBack					= mod:NewSpecialWarning("MoveBack", nil, false)--Move back to starting position
 -- Heroic Phase 2
-local specWarnDreadThrash				= mod:NewSpecialWarningSpell(132007, "Tank", nil, nil, 3)--Extra emphesis special warning.
-local specWarnNakedAndAfraidOther		= mod:NewSpecialWarningTaunt(120669)
-local specWarnWaterspoutCast			= mod:NewSpecialWarningSpell(120519, nil, nil, nil, 2)
-local specWarnWaterspout				= mod:NewSpecialWarningYou(120519)
-local specWarnWaterspoutNear			= mod:NewSpecialWarningClose(120519)
+local specWarnDreadThrash				= mod:NewSpecialWarningDefensive(132007, nil, nil, nil, 3, 2)--Extra emphesis special warning.
+local specWarnNakedAndAfraidOther		= mod:NewSpecialWarningTaunt(120669, nil, nil, nil, 1, 2)
+local specWarnWaterspoutCast			= mod:NewSpecialWarningDodge(120519, nil, nil, nil, 2, 2)
+local specWarnWaterspout				= mod:NewSpecialWarningYou(120519, nil, nil, nil, 1, 2)
 local yellWaterspout					= mod:NewYell(120519)
-local specWarnImplacableStrike			= mod:NewSpecialWarningSpell(120672)
-local specWarnChampionOfTheLight		= mod:NewSpecialWarningYou(120268)
-local specWarnSubmerge					= mod:NewSpecialWarningCount(120455, nil, nil, nil, 2)
+local specWarnImplacableStrike			= mod:NewSpecialWarningDodgeCount(120672, nil, nil, nil, 2, 2)
+local specWarnChampionOfTheLight		= mod:NewSpecialWarningYou(120268, nil, nil, nil, 1, 7)
 
 -- Normal and heroic Phase 1
 local timerThrashCD						= mod:NewCDTimer(9, 131996, nil, "Tank|Healer", nil, 5)--Every 9-12 seconds.
 local timerBreathOfFearCD				= mod:NewNextTimer(33.3, 119414, nil, nil, nil, 2, nil, nil, nil, 1, 8)--Based off bosses energy, he casts at 100 energy, and gains about 3 energy per second, so every 33-34 seconds is a breath.
 local timerOminousCackleCD				= mod:NewNextTimer(45.5, 119693, nil, nil, nil, 3)
-local timerDreadSpray					= mod:NewBuffActiveTimer(8, 120047)
+local timerDreadSpray					= mod:NewBuffActiveTimer(8, 120047, nil, nil, nil, 5)
 local timerDreadSprayCD					= mod:NewNextTimer(20.5, 120047, nil, nil, nil, 2)
-local timerDeathBlossom					= mod:NewBuffActiveTimer(5, 119888)
+local timerDeathBlossom					= mod:NewBuffActiveTimer(5, 119888, nil, nil, nil, 5)
 --local timerTerrorSpawnCD				= mod:NewNextTimer(60, 119108)--every 60 or so seconds, maybe a little more maybe a little less, not sure. this is just based on instinct after seeing where 30 fit.
-local timerFearless						= mod:NewBuffFadesTimer(30, 118977)
+local timerFearless						= mod:NewBuffFadesTimer(30, 118977, nil, nil, nil, 5)
 -- Heroic Phase 2
 local timerDreadTrashCD					= mod:NewCDTimer(9, 132007, nil, "Tank|Healer", nil, 5)--Share Trash CD.
 local timerNakedAndAfraid				= mod:NewTargetTimer(25, 120669, nil, "Tank|Healer")--25 on 10 man, 50 on 25 (requiring 3 tanks)
@@ -161,6 +157,7 @@ function mod:CheckWall()
 	local fearlessTime = timerFearless:GetTime()
 	if not onPlatform and not DBM:UnitBuff("player", wallLight) and (fearlessTime == 0 or fearlessTime > 21.5) and not UnitIsDeadOrGhost("player") then
 		specWarnBreathOfFearSoon:Show()
+		specWarnBreathOfFearSoon:Play("breathsoon")
 	end
 end
 
@@ -268,6 +265,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			platformSent = true
 			timerThrashCD:Cancel()
 			specWarnOminousCackleYou:Show()
+			specWarnOminousCackleYou:Play("teleyou")
 			if not self.Options.warnBreathOnPlatform then
 				timerBreathOfFearCD:Cancel()
 				self:UnscheduleMethod("CheckPlatformLeaved")
@@ -281,6 +279,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		self:Schedule(2, warnOminousCackleTargets)--this actually staggers a bit, so wait the full 2 seconds to get em all in one table
 	elseif spellId == 120047 and MobID == args:GetSrcCreatureID() then--might change
 		specWarnDreadSpray:Show()
+		specWarnDreadSpray:Play("stilldanger")
 		timerDreadSpray:Start(args.sourceGUID)
 		timerDreadSprayCD:Start(args.sourceGUID)
 	elseif spellId == 119888 and MobID == args:GetSrcCreatureID() then
@@ -290,7 +289,10 @@ function mod:SPELL_AURA_APPLIED(args)
 		self:UnscheduleMethod("CheckPlatformLeaved")
 		self:LeavePlatform()
 	elseif spellId == 131996 and not platformSent then
-		specWarnThrash:Show()
+		if self:IsTanking("player", nil, nil, true, args.destGUID) then
+			specWarnThrash:Show()
+			specWarnThrash:Play("defensive")
+		end
 		if self.vb.phase == 2 then
 			self.vb.thrashCount = self.vb.thrashCount + 1
 			if self.Options.warnThrash then
@@ -309,12 +311,14 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif spellId == 132007 then
 		self.vb.thrashCount = 0
-		warnDreadThrash:Show()
-		specWarnDreadThrash:Show()
+		if self:IsTanking("player", nil, nil, true, args.destGUID) then
+			specWarnDreadThrash:Show()
+			specWarnDreadThrash:Play("defensive")
+		end
 		timerThrashCD:Start()
 	elseif spellId == 120669 then
-		warnNakedAndAfraid:Show(args.destName)
 		specWarnNakedAndAfraidOther:Show(args.destName)
+		specWarnNakedAndAfraidOther:Play("tauntboss")
 		timerNakedAndAfraidCD:Start()
 		if self:IsDifficulty("heroic25") then
 			timerNakedAndAfraid:Start(50, args.destName)
@@ -325,9 +329,8 @@ function mod:SPELL_AURA_APPLIED(args)
 		waterspoutTargets[#waterspoutTargets + 1] = args.destName
 		if args:IsPlayer() then
 			specWarnWaterspout:Show()
+			specWarnWaterspout:Play("targetyou")
 			yellWaterspout:Yell()
-		elseif self:IsClassic() and self:CheckNearby(10, args.destName) then
-			specWarnWaterspoutNear:Show(args.destName)
 		end
 		if self:AntiSpam(5, 3) then
 			if self.vb.specialCount == 3 then self.vb.specialCount = 0 end
@@ -359,9 +362,11 @@ function mod:SPELL_AURA_APPLIED(args)
 		self:Schedule(0.5, warnHuddleInTerrorTargets)
 		startSpecialTimers(self)
 	elseif spellId == 120268 then -- Champion Of The Light
-		warnChampionOfTheLight:Show(args.destName)
 		if args:IsPlayer() then
 			specWarnChampionOfTheLight:Show()
+			specWarnChampionOfTheLight:Play("lightinfusion")
+		else
+			warnChampionOfTheLight:Show(args.destName)
 		end
 	end
 end
@@ -399,13 +404,13 @@ function mod:SPELL_CAST_START(args)
 		if self.vb.specialCount == 3 then self.vb.specialCount = 0 end
 		self.vb.specialCount = self.vb.specialCount + 1
 		self.vb.specialsCast = self.vb.specialsCast + 1--Huddle (100), Spout(10), Strike(1)
-		warnImplacableStrike:Show(self.vb.specialCount)
-		specWarnImplacableStrike:Show()
+		specWarnImplacableStrike:Show(self.vb.specialCount)
+		specWarnImplacableStrike:Play("shockwave")
 		startSpecialTimers(self)
 	elseif spellId == 120455 then
 		self.vb.submergeCount = self.vb.submergeCount + 1
 		warnDreadSpawns:Schedule(5, Spawns[self.vb.submergeCount])
-		specWarnSubmerge:Show(self.vb.submergeCount)
+		warnSubmerge:Show(self.vb.submergeCount)
 		timerSubmergeCD:Start(nil, self.vb.submergeCount+1)
 		self.vb.specialsCast = 000
 		if self.Options.timerSpecialAbility then
@@ -413,6 +418,7 @@ function mod:SPELL_CAST_START(args)
 		end
 	elseif spellId == 120519 then--Waterspout
 		specWarnWaterspoutCast:Show()
+		specWarnWaterspoutCast:Play("watchstep")
 	end
 end
 
