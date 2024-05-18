@@ -7,6 +7,7 @@ mod:RegisterCombat("scenario", 1005)
 
 mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 115013",
+	"SPELL_CAST_SUCCESS 115013",
 	"SPELL_AURA_APPLIED 122142",
 	"CHAT_MSG_MONSTER_SAY",
 	"UNIT_DIED"
@@ -18,12 +19,17 @@ local warnEarthShattering		= mod:NewSpellAnnounce(122142, 3)
 
 --Borokhula the Destroyer
 local timerSwampSmashCD			= mod:NewCDTimer(8, 115013, nil, nil, nil, 3)
-local timerEarthShatteringCD	= mod:NewCDTimer(18, 122142, nil, nil, nil, 3)--Limited sample size, may be shorter
+local timerEarthShatteringCD	= mod:NewCDTimer(15.8, 122142, nil, nil, nil, 3)
 
 function mod:SPELL_CAST_START(args)
 	if args.spellId == 115013 then
 		warnSwampSmash:Show()
-		timerSwampSmashCD:Start()
+	end
+end
+
+function mod:SPELL_CAST_SUCCESS(args)
+	if args.spellId == 115013 then
+		timerSwampSmashCD:Start(6)--Only start timer if cast finishes. Boss can be stunned and it interrupts cast but doesn't put it on CD
 	end
 end
 

@@ -36,7 +36,7 @@ local timerRelentless		= mod:NewTargetTimer(10, 120817, nil, nil, nil, 5)
 local timerEnrage			= mod:NewBuffActiveTimer(10, 127823, nil, nil, nil, 5, nil, DBM_COMMON_L.ENRAGE_ICON)
 --local timerRelentlessCD		= mod:NewCDTimer(10, 120817)
 --Abomination of Anger
-local timerBreathCD			= mod:NewCDTimer(21.5, 120929, nil, nil, nil, 3)--Limited sample size, may be shorter
+local timerBreathCD			= mod:NewCDTimer(18.2, 120929, nil, nil, nil, 3)
 local timerCloudofAngerCD	= mod:NewCDTimer(17, 120824, nil, nil, nil, 3)--Limited sample size, may be shorter
 local timerDarkforce		= mod:NewCastTimer(5, 120215, nil, nil, nil, 5)
 local timerDarkforceCD		= mod:NewCDTimer(32, 120215, nil, nil, nil, 3)

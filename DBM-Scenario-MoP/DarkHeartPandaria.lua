@@ -26,14 +26,13 @@ local warnMalevolentForce		= mod:NewCastAnnounce(142840, 4, 2)
 local specWarnStoneRain			= mod:NewSpecialWarningInterrupt(142139, "HasInterrupt", nil, nil, 1, 2)
 local specWarnSpellShatter		= mod:NewSpecialWarningCast(141421, "SpellCaster", nil, 3, 1, 2)
 local specWarnSummonFieryAnger	= mod:NewSpecialWarningInterrupt(141488, "HasInterrupt", nil, nil, 1, 2)
-local specWarnDetonate			= mod:NewSpecialWarningRun(141456)--Technically can kill it too vs run, but I favor run strategy more.
 --Urtharges the Destroyer
 local specWarnRuptureLine		= mod:NewSpecialWarningMoveAway(141418, nil, nil, nil, 1, 2)
 --Echo of Y'Shaarj
 local specWarnMalevolentForce	= mod:NewSpecialWarningInterrupt(142840, "HasInterrupt", nil, nil, 1, 2)--Not only cast by last boss but trash near him as well, interrupt important for both. Although only bosses counts for achievement.
 
 --Trash
-local timerSpellShatter			= mod:NewCastTimer(2, 141421, nil, "SpellCaster", nil, 2)
+--local timerSpellShatter			= mod:NewCDTimer(2, 141421, nil, nil, nil, 2)--Refine and nameplate timer maybe?
 
 function mod:SPELL_CAST_START(args)
 	if args.spellId == 142139 and self:AntiSpam(3, 1) then
@@ -46,7 +45,6 @@ function mod:SPELL_CAST_START(args)
 	elseif args.spellId == 141421 then
 		specWarnSpellShatter:Show()
 		specWarnSpellShatter:Play("stopcast")
-		timerSpellShatter:Start(nil, args.sourceGUID)
 	elseif args.spellId == 141421 and self:AntiSpam(3, 2) then
 		if self.Options.SpecWarn141421interrupt and self:CheckInterruptFilter(args.sourceGUID, nil, true) then
 			specWarnSummonFieryAnger:Show(args.sourceName)
@@ -72,20 +70,19 @@ function mod:SPELL_CAST_SUCCESS(args)
 		else
 			warnRuptureLine:Show(args.destName)
 		end
-	elseif args.spellId == 141456 then
+	elseif args.spellId == 141456 and self:AntiSpam(2, 1) then
 		warnDetonate:Show()
-		specWarnDetonate:Show()
 	end
 end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
-	if spellId == 141872 and self:AntiSpam(3, 1) then--Call Elemental
+	if spellId == 141872 and self:AntiSpam(3, 2) then--Call Elemental
 		self:SendSync("CallElemental")
 	end
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(msg)
-	if (msg == L.summonElemental or msg:find(L.summonElemental)) and self:AntiSpam(3, 1) then
+	if (msg == L.summonElemental or msg:find(L.summonElemental)) and self:AntiSpam(3, 2) then
 		self:SendSync("CallElemental")
 	end
 end

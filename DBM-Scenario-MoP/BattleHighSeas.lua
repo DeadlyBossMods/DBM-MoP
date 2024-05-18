@@ -19,7 +19,7 @@ local specWarnSwashbuckling		= mod:NewSpecialWarningDefensive(141438, nil, nil, 
 --Lieutenant Fizzel
 local specWarnVolatileConcoction= mod:NewSpecialWarningRun(141327, nil, nil, nil, 4, 2)
 --Admiral Hagman
-local specWarnVerticalSlash		= mod:NewSpecialWarningDefensive(141187, nil, nil, nil, 1, 2)
+local specWarnVerticalSlash		= mod:NewSpecialWarningDefensive(141187, nil, nil, nil, 1, 12)
 local specWarnCounterShot		= mod:NewSpecialWarningCast(136473, "SpellCaster", nil, nil, 1, 2)
 
 --Lieutenant Drak'on
@@ -45,7 +45,7 @@ function mod:SPELL_CAST_START(args)
 	elseif args.spellId == 141187 then
 		if self:IsTanking("player", nil, nil, true, args.sourceGUID) then
 			specWarnVerticalSlash:Show()
-			specWarnVerticalSlash:Play("defensive")
+			specWarnVerticalSlash:Play("useextraaction")
 		end
 		timerVerticalSlashCD:Start()
 	elseif args.spellId == 136473 then

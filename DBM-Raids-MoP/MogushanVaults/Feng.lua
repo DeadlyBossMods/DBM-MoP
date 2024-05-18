@@ -200,6 +200,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerArcaneVelocity:Start()
 		if DBM:UnitBuff("player", nullBarrier) and self:IsDifficulty("lfr25") then
 			specWarnBarrierNow:Show()
+			specWarnBarrierNow:Play("useextraaction")
 		end
 	end
 end
@@ -304,6 +305,7 @@ function mod:SPELL_CAST_START(args)
 		timerEpicenterCD:Start(nil, self.vb.specialCount + 1)
 		if DBM:UnitBuff("player", nullBarrier) and self:IsDifficulty("lfr25") then
 			specWarnBarrierNow:Schedule(2)
+			specWarnBarrierNow:ScheduleVoice(2, "useextraaction")
 		end
 	elseif args:IsSpellID(116157, 116295) then
 		warnLightningFists:Show()
