@@ -206,7 +206,9 @@ function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
 	if spellId == 130395 then
 		jasperChainsTargets[#jasperChainsTargets + 1] = args.destName
-		timerJasperChainsCD:Start()
+		if self:AntiSpam(3, 1) then
+			timerJasperChainsCD:Start()
+		end
 		self:Unschedule(warnJasperChainsTargets)
 		self:Schedule(0.3, warnJasperChainsTargets)
 		if self.vb.activePetrification ~= "Jasper" then
