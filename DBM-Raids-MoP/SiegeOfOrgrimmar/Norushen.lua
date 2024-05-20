@@ -6,6 +6,7 @@ mod.statTypes = "normal,heroic,mythic,lfr"
 mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(72276)
 --mod:SetEncounterID(1624)
+--mod:SetZone(1234)--FIXME RIGHT ID
 
 mod:RegisterCombat("combat")
 mod.syncThreshold = 1
