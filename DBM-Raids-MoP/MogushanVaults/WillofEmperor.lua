@@ -59,6 +59,7 @@ local timerCourageActivates		= mod:NewNextCountTimer(100, -5676, nil, nil, nil, 
 local timerBossesActivates		= mod:NewNextTimer(107, -5726, nil, nil, nil, 1, 116815)--Might be a little funny sounding "Next Jan-xi and Qin-xi" May just localize it later.
 local timerTitanGas				= mod:NewBuffActiveTimer(30, 116779, nil, nil, nil, 5, nil, DBM_COMMON_L.HEALER_ICON..DBM_COMMON_L.TANK_ICON)
 local timerTitanGasCD			= mod:NewNextCountTimer(150, 116779, nil, nil, nil, 6)
+local timerComboCD				= mod:NewNextTimer(20, -5672, nil, nil, nil, 3)
 
 local berserkTimer				= mod:NewBerserkTimer(780)
 
@@ -140,6 +141,7 @@ local function addsDelay(self, add)
 		else
 			warnBossesActivated:Show()
 		end
+		timerComboCD:Start()
 		if not self:IsHeroic() then
 			timerTitanGasCD:Start(113, 1)
 		end
@@ -301,19 +303,21 @@ end
 
 do
 	--On 10.2.7 it seems to be 100 based power now not 20 based like OG mop or 2 based like bugged 10.2.6 and previous.
-	--Needs new transcriptor log to review, I accidentally deleted mine
+	--"<141.70 23:20:55> [UNIT_POWER_UPDATE] boss2#Jan-xi#TYPE:ENERGY/3#MAIN:0/100#ALT:0/0",
+	--"<162.94 23:21:16> [UNIT_POWER_UPDATE] boss2#Jan-xi#TYPE:ENERGY/3#MAIN:100/100#ALT:0/0",
 	local warned = {}
 	function mod:UNIT_POWER_UPDATE(uId)
 		local powerLevel = UnitPower(uId)
 		if UnitIsUnit(uId, "target") or UnitIsUnit(uId, "targettarget") then
-			if not warned[uId] and powerLevel >= 18 then--Give more than 1 second to find comboMob
+			if not warned[uId] and powerLevel >= 85 then--Give more than 1 second to find comboMob
 				warned[uId] = true
-				--specWarnCombo:Show(UnitName(uId))
-				--specWarnCombo:Play("specialsoon")
+				specWarnCombo:Show(UnitName(uId))
+				specWarnCombo:Play("specialsoon")
 			end
 		end
 		if warned[uId] and powerLevel < 18 then
 			warned[uId] = false
+			timerComboCD:Start()
 			if uId == "boss1" then
 				self.vb.boss1ComboCount = 0
 			else
