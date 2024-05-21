@@ -11,8 +11,8 @@ mod:SetMinCombatTime(25)
 mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED 116525 116778 116829",
 	"CHAT_MSG_MONSTER_YELL",
-	"UNIT_SPELLCAST_SUCCEEDED boss1 boss2 target focus"--Target and focus needed for Focused smash used by the big adds
---	"UNIT_POWER_UPDATE boss1 boss2"
+	"UNIT_SPELLCAST_SUCCEEDED boss1 boss2 target focus",--Target and focus needed for Focused smash used by the big adds
+	"UNIT_POWER_UPDATE boss1 boss2"
 )
 
 mod:RegisterEvents(
@@ -299,18 +299,17 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	end
 end
 
---[[
 do
-	--On 10.2.6 the bosses are buggged and never reset energy, once they start a combo they do it the rest of the fight
-	--They also seem to only have 2 power. They start at 1, go to 2 then stay at 2 spamming combo indefinitely
+	--On 10.2.7 it seems to be 100 based power now not 20 based like OG mop or 2 based like bugged 10.2.6 and previous.
+	--Needs new transcriptor log to review, I accidentally deleted mine
 	local warned = {}
 	function mod:UNIT_POWER_UPDATE(uId)
 		local powerLevel = UnitPower(uId)
 		if UnitIsUnit(uId, "target") or UnitIsUnit(uId, "targettarget") then
 			if not warned[uId] and powerLevel >= 18 then--Give more than 1 second to find comboMob
 				warned[uId] = true
-				specWarnCombo:Show(UnitName(uId))
-				specWarnCombo:Play("specialsoon")
+				--specWarnCombo:Show(UnitName(uId))
+				--specWarnCombo:Play("specialsoon")
 			end
 		end
 		if warned[uId] and powerLevel < 18 then
@@ -323,4 +322,3 @@ do
 		end
 	end
 end
---]]
