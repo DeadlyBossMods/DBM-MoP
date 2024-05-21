@@ -85,7 +85,7 @@ local rageTimers = {
 	[1] = 33,
 	[2] = 33,
 	[3] = 33,
-	[4] = 33,--24.3 now? no idea, maybe this one is just random 33-40, rest are dead on though.
+	[4] = 24.3,--Confirmed lower than rest for some reason, seen it multiple times now
 	[5] = 33,
 	[6] = 83,
 	[7] = 33,--15.5?
@@ -161,7 +161,7 @@ function mod:OnCombatStart(delay)
 		timerCourageActivates:Start(69-delay, 1)
 		timerBossesActivates:Start(101-delay)
 	else
-		timerStrengthActivates:Start(42-delay, 1)
+		timerStrengthActivates:Start(41.8-delay, 1)
 		timerCourageActivates:Start(75-delay, 1)
 		timerBossesActivates:Start(-delay)
 	end

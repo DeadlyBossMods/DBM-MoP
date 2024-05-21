@@ -22,7 +22,7 @@ local specWarnLightningTether	= mod:NewSpecialWarningMoveTo(136339, nil, nil, ni
 local specWarnArcNova			= mod:NewSpecialWarningRun(136338, "Melee", nil, 2, 4, 2)
 
 local timerStormcloudCD			= mod:NewCDTimer(21.5, 136340, nil, nil, nil, 3)
-local timerLightningTetherCD	= mod:NewCDTimer(30.5, 136339, nil, nil, nil, 3)--Needs more data, they may have tweaked it some.
+local timerLightningTetherCD	= mod:NewCDTimer(27.9, 136339, nil, nil, nil, 3)--Needs more data, they may have tweaked it some.
 local timerArcNovaCD			= mod:NewCDTimer(35.5, 136338, nil, nil, nil, 2)
 
 mod:AddRangeFrameOption(10, 136340)

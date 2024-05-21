@@ -76,7 +76,7 @@ local timerEpicenterCD				= mod:NewCDCountTimer(27.9, 116018, nil, nil, nil, 2)
 local timerEpicenter				= mod:NewBuffActiveTimer(10, 116018, nil, nil, nil, 5, nil, DBM_COMMON_L.TANK_ICON..DBM_COMMON_L.HEALER_ICON)
 --Fire/Spear
 local timerFlamingSpear				= mod:NewTargetTimer(20, 116942, nil, false, 2, 5, nil, DBM_COMMON_L.TANK_ICON)
-local timerFlamingSpearCD			= mod:NewCDTimer(9, 116942, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)--8-11second variation, usually 10 though.
+local timerFlamingSpearCD			= mod:NewCDTimer(8, 116942, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)--8-11second variation, usually 10 though.
 local timerWildSpark				= mod:NewTargetTimer(5, 116784, nil, false, 2, 5)
 local timerDrawFlame				= mod:NewBuffActiveTimer(6, 116711, nil, nil, nil, 5, nil, DBM_COMMON_L.TANK_ICON..DBM_COMMON_L.HEALER_ICON)
 local timerDrawFlameCD				= mod:NewNextCountTimer(30, 116711, nil, nil, nil, 2)--30 seconds after last ended.

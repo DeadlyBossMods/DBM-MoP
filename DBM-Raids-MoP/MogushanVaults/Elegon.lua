@@ -70,7 +70,7 @@ function mod:OnCombatStart(delay)
 	self.vb.powerCount = 0
 	table.wipe(closedCircuitTargets)
 	table.wipe(stunTargets)
-	timerBreathCD:Start(3.4-delay)--Will use instant on pull if tank range pulls it
+--	timerBreathCD:Start(3.4-delay)--Will use instant on pull if tank range pulls it (which is most of time so disabling timer)
 	timerProtectorCD:Start(10-delay, 1)
 	berserkTimer:Start(-delay)
 end
