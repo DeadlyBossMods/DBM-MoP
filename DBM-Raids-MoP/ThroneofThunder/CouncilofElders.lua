@@ -20,10 +20,10 @@ mod:RegisterEventsInCombat(
 	"UNIT_SPELLCAST_SUCCEEDED boss1 boss2 boss3 boss4 boss5"
 )
 
-local Sul = DBM:EJ_GetSectionInfo(7049)
-local Malakk = DBM:EJ_GetSectionInfo(7047)
-local Marli = DBM:EJ_GetSectionInfo(7050)
-local Kazrajin = DBM:EJ_GetSectionInfo(7048)
+--local Sul = DBM:EJ_GetSectionInfo(7049)
+--local Malakk = DBM:EJ_GetSectionInfo(7047)
+--local Marli = DBM:EJ_GetSectionInfo(7050)
+--local Kazrajin = DBM:EJ_GetSectionInfo(7048)
 
 --All
 local warnPossessed					= mod:NewStackAnnounce(136442, 2, nil, nil, "warnPossessed")
