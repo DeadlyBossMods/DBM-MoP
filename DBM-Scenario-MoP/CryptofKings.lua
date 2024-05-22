@@ -24,7 +24,7 @@ local warnCloudofAnger		= mod:NewSpellAnnounce(120824, 3, 120743)--142432 is her
 
 --Jin Ironfist
 --local specWarnRelentless	= mod:NewSpecialWarningRun(120817)--Maybe on heroic this actually deadly and you must run? if so, uncomment
-local specWarnEnrage		= mod:NewSpecialWarningDispel(127823, "RemoveEnrage")
+local specWarnEnrage		= mod:NewSpecialWarningDispel(127823, "RemoveEnrage", nil, nil, 1, 2)
 --Maragor
 local specWarnFear			= mod:NewSpecialWarningInterrupt(142884, "HasInterrupt", nil, nil, 1, 2)
 local specWarnGuardianStrike= mod:NewSpecialWarningRun(119843, "Melee", nil, nil, 4, 2)
