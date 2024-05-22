@@ -149,7 +149,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 		if timerDayCD:GetTime() < 106 then
 			timerNightmaresCD:Start()
 		end
-	elseif spellId == 123252 and self:IsInCombat() then--Dread Shadows Cancel (Sun Phase)
+	elseif spellId == 123252 and self:IsInCombat() and self:AntiSpam(3, 2) then--Dread Shadows Cancel (Sun Phase)
 		self.vb.lightOfDayCount = 0
 		self.vb.terrorCount = 0
 		self.vb.breathCount = 0
@@ -160,12 +160,12 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 		warnDay:Show()
 		timerSunBreathCD:Start(29, 1)
 		timerNightCD:Start(nil, self.vb.darkOfNightCount+1)
-	elseif spellId == 122953 and self:AntiSpam(2, 1) then--Summon Unstable Sha (122946 is another ID, but it always triggers at SAME time as Dread Shadows Cancel so can just trigger there too without additional ID scanning.
+	elseif spellId == 122953 and self:AntiSpam(2, 3) then--Summon Unstable Sha (122946 is another ID, but it always triggers at SAME time as Dread Shadows Cancel so can just trigger there too without additional ID scanning.
 		warnSummonUnstableSha:Show()
 		if timerNightCD:GetTime(self.vb.darkOfNightCount+1) < 103 then
 			timerSummonUnstableShaCD:Start()
 		end
-	elseif spellId == 122767 then--Dread Shadows (Night Phase)
+	elseif spellId == 122767 and self:AntiSpam(3, 4) then--Dread Shadows (Night Phase)
 		timerSummonUnstableShaCD:Cancel()
 		timerSummonEmbodiedTerrorCD:Cancel()
 		timerSunBreathCD:Cancel()
