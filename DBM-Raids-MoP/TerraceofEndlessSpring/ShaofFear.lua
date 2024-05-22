@@ -70,9 +70,9 @@ local timerWaterspoutCD					= mod:NewCDTimer(10, 120519, nil, nil, false, 3)
 local timerHuddleInTerrorCD				= mod:NewCDTimer(10, 120629, nil, nil, false, 3)
 local timerImplacableStrikeCD			= mod:NewCDTimer(9.5, 120672, nil, nil, false, 3)
 local timerSpecialAbilityCD				= mod:NewTimer(12, "timerSpecialAbilityCD", 1449, nil, false, 3)--1st Ability 12sec after Submerge
-local timerSpoHudCD						= mod:NewTimer(10, "timerSpoHudCD", 64044, nil, false, 3)--Waterspout or Huddle in Terror next
+--local timerSpoHudCD						= mod:NewTimer(10, "timerSpoHudCD", 64044, nil, false, 3)--Waterspout or Huddle in Terror next
 local timerSpoStrCD						= mod:NewTimer(10, "timerSpoStrCD", 1953, nil, false, 3)--Waterspout or Implacable Strike next
-local timerHudStrCD						= mod:NewTimer(10, "timerHudStrCD", 64044, nil, false, 3)-- Huddle in Terror or Implacable Strike next
+--local timerHudStrCD						= mod:NewTimer(10, "timerHudStrCD", 64044, nil, false, 3)-- Huddle in Terror or Implacable Strike next
 
 local berserkTimer						= mod:NewBerserkTimer(900)
 
@@ -95,28 +95,7 @@ local platformSent = false
 local onPlatform = false--Used to determine when YOU are sent to a platform, so we know to activate MobID on next shoot
 local MobID = 0
 
-local Spawns = {
-	[1] = 1,
-	[2] = 2,
-	[3] = 2,
-	[4] = 3,
-	[5] = 3,
-	[6] = 4,
-	[7] = 4,
-	[8] = 5,
-	[9] = 5,
-	[10]= 6,
-	[11]= 6,
-	[12]= 7,
-	[13]= 7,
-	[14]= 8,
-	[15]= 8,
-	[16]= 9,
-	[17]= 9,
-	[18]= 10,
-	[19]= 10,
-	[20]= 11,
-}
+local Spawns = {1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11}
 
 local function warnOminousCackleTargets()
 	warnOminousCackle:Show(table.concat(ominousCackleTargets, "<, >"))
@@ -136,20 +115,20 @@ end
 local function startSpecialTimers(self)
 	if not mod.Options.timerSpecialAbility then return end
 	--Huddle(100), Spout(10), Strike(1)
-	if self.vb.specialsCast == 110 then
-		timerImplacableStrikeCD:Start()
+	if self.vb.specialsCast == 110 then--Huddle and spoput cast
+		timerImplacableStrikeCD:Start()--So strike is next
 	end
-	if self.vb.specialsCast == 101 then
-		timerWaterspoutCD:Start()
+	if self.vb.specialsCast == 101 then--Huddle and strike already used
+		timerWaterspoutCD:Start()--So Only waterspout can be next
 	end
-	if self.vb.specialsCast == 100 then
-		timerSpoStrCD:Start()
+	if self.vb.specialsCast == 100 then--Huddle already cast
+		timerSpoStrCD:Start()--So Waterspout or Implacable Strike next
 	end
-	if self.vb.specialsCast == 010 then--Huddle is NEVER cast 3rd.
-		timerHuddleInTerrorCD:Start()
+	if self.vb.specialsCast == 010 then--Spout was cast, and Huddle is NEVER cast 3rd.
+		timerHuddleInTerrorCD:Start()--So we know for sure huddle is next
 	end
-	if self.vb.specialsCast == 001 then
-		timerHuddleInTerrorCD:Start()
+	if self.vb.specialsCast == 001 then--Strike cast, and Huddle is NEVER cast 3rd
+		timerHuddleInTerrorCD:Start()--So we know huddle is next
 	end
 end
 
