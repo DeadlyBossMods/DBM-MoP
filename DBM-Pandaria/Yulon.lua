@@ -21,7 +21,7 @@ local specWarnJadefireBreath	= mod:NewSpecialWarningSpell(144530, nil, nil, nil,
 local specWarnJadefireWall		= mod:NewSpecialWarningDodge(144533, nil, nil, nil, 2, 2)
 local specWarnGTFO				= mod:NewSpecialWarningGTFO(144538, nil, nil, nil, 1, 8)
 
-local timerJadefireBreathCD		= mod:NewCDTimer(18.5, 144530, nil, "Tank", nil, 5)
+local timerJadefireBreathCD		= mod:NewCDTimer(17.3, 144530, nil, "Tank", nil, 5)
 local timerJadefireWallCD		= mod:NewNextTimer(60, 144533, nil, nil, nil, 3)
 
 mod:AddRangeFrameOption(11, 144532)

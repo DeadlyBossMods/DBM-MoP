@@ -358,8 +358,8 @@ function mod:OnSync(msg)
 		self:SetStage(0)
 		warnPhase:Show(self.vb.phase)
 		timerEpicenterCD:Start(3.3, 1)--Seems much shorter now
+		timerLightningFistsCD:Start(5)
 		timerLightningLashCD:Start(7)
-		timerLightningFistsCD:Start(11.3)
 		if self.Options.RangeFrame then
 			DBM.RangeCheck:Hide()
 		end

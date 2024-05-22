@@ -190,7 +190,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 	local spellId = args.spellId
 	if spellId == 117685 then
 		warnChargedShadows:Show(args.destName)
-		timerChargingShadowsCD:Start()
+		timerChargingShadowsCD:Start(10.7)
 	elseif spellId == 117506 then
 		warnUndyingShadows:Show()
 		if self.vb.ZianActive then

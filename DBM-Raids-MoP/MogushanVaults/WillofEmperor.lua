@@ -85,8 +85,8 @@ local rageTimers = {
 	[0] = 15.6,--Varies from heroic vs normal, number here doesn't matter though, we don't start this on pull we start it off first yell (which does always happen).
 	[1] = 33,
 	[2] = 33,
-	[3] = 33,
-	[4] = 24.3,--Confirmed lower than rest for some reason, seen it multiple times now
+	[3] = 24.3,--Confirmed lower than rest for some reason, seen it multiple times now
+	[4] = 33,
 	[5] = 33,
 	[6] = 83,
 	[7] = 33,--15.5?
@@ -163,7 +163,7 @@ function mod:OnCombatStart(delay)
 		timerCourageActivates:Start(69-delay, 1)
 		timerBossesActivates:Start(101-delay)
 	else
-		timerStrengthActivates:Start(41.8-delay, 1)
+		timerStrengthActivates:Start(41.4-delay, 1)
 		timerCourageActivates:Start(75-delay, 1)
 		timerBossesActivates:Start(-delay)
 	end
@@ -315,7 +315,7 @@ do
 				specWarnCombo:Play("specialsoon")
 			end
 		end
-		if warned[uId] and powerLevel < 18 then
+		if warned[uId] and powerLevel < 10 then
 			warned[uId] = false
 			timerComboCD:Start()
 			if uId == "boss1" then

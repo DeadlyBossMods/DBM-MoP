@@ -98,7 +98,7 @@ function mod:OnCombatStart(delay)
 	elseif self:IsDifficulty("lfr25") then
 		timerTotemCD:Start(30-delay, 1)
 	else
-		timerTotemCD:Start(36-delay, 1)
+		timerTotemCD:Start(35.2-delay, 1)
 	end
 	timerBanishmentCD:Start(-delay, 1)
 	if not self:IsDifficulty("lfr25") then -- lfr seems not berserks.
