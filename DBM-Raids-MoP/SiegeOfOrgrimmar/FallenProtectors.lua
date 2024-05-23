@@ -15,11 +15,8 @@ mod:RegisterEventsInCombat(
 	"SPELL_CAST_SUCCESS 143027 143423",
 	"SPELL_AURA_APPLIED 143959 143301 143198 143840 143546 143955 143812 143423",
 	"SPELL_AURA_REMOVED 143546 143955 143812",
-	"SPELL_DAMAGE 144357 144367 143009",
-	"SPELL_MISSED 144357 144367 143009",
 	"RAID_BOSS_WHISPER",
-	"UNIT_SPELLCAST_SUCCEEDED boss1 boss2 boss3",
-	"UNIT_HEALTH boss1 boss2 boss3 boss4 boss5"
+	"UNIT_SPELLCAST_SUCCEEDED boss1 boss2 boss3"
 )
 
 local Softfoot = DBM:EJ_GetSectionInfo(7889)
@@ -28,66 +25,60 @@ local Tenderheart = DBM:EJ_GetSectionInfo(7904)
 
 --All
 local warnBondGoldenLotus			= mod:NewCastAnnounce(143497, 4)
+
+local specWarnMeasures				= mod:NewSpecialWarning("specWarnMeasures", nil, DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.soon:format(-7956), nil, 2, 2)
+local specWarnGTFO					= mod:NewSpecialWarningGTFO(143959, nil, nil, nil, 1, 8)
 --Rook Stonetoe
+mod:AddTimerLine(Stonetoe)
 local warnCorruptedBrew				= mod:NewTargetAnnounce(143019, 2)--I do believe target scanning WILL work here, i just need more time to mess with it next round of testing
 ----Rook Stonetoe's Desperate Measures (66% and 33%)
 local warnDefiledGround				= mod:NewSpellAnnounce(143961, 3, nil, "Tank")--Embodied Misery
-local warnInfernoStrike				= mod:NewTargetAnnounce(143962, 3)
---He Softfoot
-local warnGougeStun					= mod:NewTargetAnnounce(143301, 4, nil, "Tank")--Failed, stunned. the success ID is 143331 (knockback)
-local warnGarrote					= mod:NewTargetAnnounce(143198, 3, nil, "Healer")
-----He Softfoot's Desperate Measures
-local warnMarkOfAnguish				= mod:NewSpellAnnounce(143812, 2)--Activation
-local warnMarked					= mod:NewTargetAnnounce(143840, 3)--Embodied Anguish
---Sun Tenderheart
-local warnShaShear					= mod:NewCastAnnounce(143423, 3, 5, nil, false)
-local warnBane						= mod:NewCastAnnounce(143446, 4, nil, nil, "Healer")
+local warnInfernoStrike				= mod:NewTargetNoFilterAnnounce(143962, 3)
 
---All
-local specWarnMeasures				= mod:NewSpecialWarning("specWarnMeasures", nil, DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.soon:format("ej7956"))
---Rook Stonetoe
-local specWarnVengefulStrikes		= mod:NewSpecialWarningSpell(144396, "Tank")
-local specWarnClash					= mod:NewSpecialWarningSpell(143027)
-local specWarnKick					= mod:NewSpecialWarningMove(143007, "-Tank")
-local specWarnCorruptedBrew			= mod:NewSpecialWarningYou(143019)
+local specWarnVengefulStrikes		= mod:NewSpecialWarningDefensive(144396, nil, nil, nil, 1, 2)
+local specWarnClash					= mod:NewSpecialWarningDodge(143027, nil, nil, nil, 2, 2)
+local specWarnCorruptedBrew			= mod:NewSpecialWarningYou(143019, nil, nil, nil, 1, 2)
 local yellCorruptedBrew				= mod:NewYell(143019)
-local specWarnCorruptedBrewNear		= mod:NewSpecialWarningClose(143019)
 ----Rook Stonetoe's Desperate Measures
-local specWarnMiserySorrowGloom		= mod:NewSpecialWarningSpell(143955)
-local specWarnCorruptionShock		= mod:NewSpecialWarningInterrupt(143958, "-Healer")
-local specWarnDefiledGround			= mod:NewSpecialWarningMove(143959)
-local specWarnInfernoStrike			= mod:NewSpecialWarningYou(143962)
-local yellInfernoStrike				= mod:NewYell(143962)
---He Softfoot
-local specWarnGouge					= mod:NewSpecialWarningLookAway(143330, nil, nil, nil, 3, 2)
-local specWarnGougeStunOther		= mod:NewSpecialWarningTaunt(143301)--Tank is stunned, other tank must taunt or he'll start killing people
-local specWarnNoxiousPoison			= mod:NewSpecialWarningMove(144367)
-----He Softfoot's Desperate measures
-local specWarnMarked				= mod:NewSpecialWarningYou(143840)
-local yellMarked					= mod:NewYell(143840, nil, false)
---Sun Tenderheart
-local specWarnShaShear				= mod:NewSpecialWarningInterrupt(143423, false)
-local specWarnShaShearYou			= mod:NewSpecialWarningMoveAway(143423)--some heroic player request. Warning to move away from group so Sha shear not hit everyone.
-local yellShaShear					= mod:NewYell(143423)
-local specWarnCalamity				= mod:NewSpecialWarning("specWarnCalamity", nil, DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format(143491), nil, 2)
-----Sun Tenderheart's Desperate Measures
-local specWarnDarkMeditation		= mod:NewSpecialWarningSpell(143546)
+local specWarnMiserySorrowGloom		= mod:NewSpecialWarningSpell(143955, nil, nil, nil, 1, 2)
+local specWarnCorruptionShock		= mod:NewSpecialWarningInterrupt(143958, "HasInterrupt", nil, nil, 1, 2)
+local specWarnInfernoStrike			= mod:NewSpecialWarningYou(143962, nil, nil, nil, 1, 2)
+local yellInfernoStrike				= mod:NewYell(143962, nil, nil, nil, "YELL")
 
---Rook Stonetoe
-mod:AddTimerLine(Stonetoe)
 local timerVengefulStrikesCD		= mod:NewCDTimer(21, 144396, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerCorruptedBrewCD			= mod:NewCDTimer(10.1, 143019, nil, nil, nil, 3)--10.1-27
 local timerClashCD					= mod:NewCDTimer(46, 143027, nil, nil, nil, 3)--46 second next timer IF none of bosses enter a special between casts, otherwise always delayed by specials (and usually cast within 5 seconds after special ends)
 ----Rook Stonetoe's Desperate Measures
 local timerDefiledGroundCD			= mod:NewCDTimer(10.5, 143961, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerInfernoStrikeCD			= mod:NewNextTimer(9.5, 143962, nil, nil, nil, 3)
-local timerInfernoStrike			= mod:NewBuffFadesTimer(7.7, 143962)
+local timerInfernoStrike			= mod:NewBuffFadesTimer(7.7, 143962, nil, nil, nil, 5)
 --He Softfoot
 mod:AddTimerLine(Softfoot)
+local warnGougeStun					= mod:NewTargetNoFilterAnnounce(143301, 4, nil, "Tank")--Failed, stunned. the success ID is 143331 (knockback)
+local warnGarrote					= mod:NewTargetNoFilterAnnounce(143198, 3, nil, "Healer")
+----He Softfoot's Desperate Measures
+local warnMarkOfAnguish				= mod:NewSpellAnnounce(143812, 2)--Activation
+local warnMarked					= mod:NewTargetAnnounce(143840, 3)--Embodied Anguish
+
+local specWarnGouge					= mod:NewSpecialWarningLookAway(143330, nil, nil, nil, 3, 2)
+local specWarnGougeStunOther		= mod:NewSpecialWarningTaunt(143301, nil, nil, nil, 1, 2)--Tank is stunned, other tank must taunt or he'll start killing people
+----He Softfoot's Desperate measures
+local specWarnMarked				= mod:NewSpecialWarningYou(143840, nil, nil, nil, 1, 2)
+local yellMarked					= mod:NewYell(143840, nil, false)
+
 local timerGougeCD					= mod:NewCDTimer(26.7, 143330, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)--26.8-41
 local timerGarroteCD				= mod:NewCDTimer(29, 143198, nil, "Healer", nil, 5, nil, DBM_COMMON_L.HEALER_ICON)--30-46 (heroic 20-26)
 --Sun Tenderheart
 mod:AddTimerLine(Tenderheart)
+local warnBane						= mod:NewCastAnnounce(143446, 4, nil, nil, "Healer")
+
+local specWarnShaShear				= mod:NewSpecialWarningInterrupt(143423, "HasInterrupt", nil, nil, 1, 2)
+local specWarnShaShearYou			= mod:NewSpecialWarningMoveAway(143423, nil, nil, nil, 1, 2)--some heroic player request. Warning to move away from group so Sha shear not hit everyone.
+local yellShaShear					= mod:NewYell(143423)
+local specWarnCalamity				= mod:NewSpecialWarning("specWarnCalamity", nil, DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format(143491), nil, 2, 2)
+----Sun Tenderheart's Desperate Measures
+local specWarnDarkMeditation		= mod:NewSpecialWarningSpell(143546)
+
 local timerBaneCD					= mod:NewCDTimer(17, 143446, nil, "Healer", nil, 5, nil, DBM_COMMON_L.HEALER_ICON)--17-25 (heroic 13-20)
 local timerCalamity					= mod:NewCastTimer(5, 143491, nil, "Healer")
 local timerCalamityCD				= mod:NewCDTimer(37.5, 143491, nil, "Healer", nil, 5, nil, DBM_COMMON_L.HEALER_ICON)--37.5-50 (when two can be cast in a row) Also affected by boss specials
@@ -114,27 +105,28 @@ mod.vb.warned71480 = 0
 
 function mod:BrewTarget(targetname, uId)
 	if not targetname then return end
-	warnCorruptedBrew:Show(targetname)
 	if targetname == UnitName("player") then
 		specWarnCorruptedBrew:Show()
+		specWarnCorruptedBrew:Play("targetyou")
 		yellCorruptedBrew:Yell()
-	elseif self:CheckNearby(6, targetname) then
-		specWarnCorruptedBrewNear:Show(targetname)
+	else
+		warnCorruptedBrew:Show(targetname)
 	end
 end
 
 function mod:InfernoStrikeTarget(targetname, uId)
 	if not targetname then return end
-	warnInfernoStrike:Show(targetname)
 	if self.Options.SetIconOnStrike then
 		self:SetIcon(targetname, 7, 5)
 	end
 	if targetname == UnitName("player") then
 		isInfernoTarget = true
 		specWarnInfernoStrike:Show()
+		specWarnInfernoStrike:Play("gathershare")
 		yellInfernoStrike:Yell()
 		timerInfernoStrike:Start()
 	else
+		warnInfernoStrike:Show(targetname)
 		isInfernoTarget = false
 	end
 end
@@ -160,9 +152,17 @@ function mod:OnCombatStart(delay)
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Show(5)
 	end
+	if not self:IsTrivial() then
+		self:RegisterShortTermEvents(
+			"SPELL_DAMAGE 144357 144367 143009",
+			"SPELL_MISSED 144357 144367 143009",
+			"UNIT_HEALTH boss1 boss2 boss3 boss4 boss5"
+		)
+	end
 end
 
 function mod:OnCombatEnd()
+	self:UnregisterShortTermEvents()
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Hide()
 	end
@@ -172,9 +172,9 @@ end
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
 	if spellId == 143958 then
-		local source = args.sourceName
-		if source == UnitName("target") or source == UnitName("focus") then
-			specWarnCorruptionShock:Show(source)
+		if self:CheckInterruptFilter(args.sourceGUID, nil, true) then
+			specWarnCorruptionShock:Show(args.sourceName)
+			specWarnCorruptionShock:Play("kickcast")
 		end
 	elseif spellId == 143330 then
 		timerGougeCD:Start()
@@ -193,6 +193,7 @@ function mod:SPELL_CAST_START(args)
 		end
 		local displayText = calamitySpellText..perText
 		specWarnCalamity:Show(displayText.."!")
+		specWarnCalamity:Play("aesoon")
 		timerCalamity:Start()
 		timerCalamityCD:Start()
 	elseif spellId == 143961 then
@@ -205,12 +206,9 @@ function mod:SPELL_CAST_START(args)
 		warnBondGoldenLotus:Show()
 	elseif spellId == 144396 then
 		timerVengefulStrikesCD:Start()
-		for i = 1, 5 do
-			local bossUnitID = "boss"..i
-			if UnitExists(bossUnitID) and UnitGUID(bossUnitID) == args.sourceGUID and UnitDetailedThreatSituation("player", bossUnitID) then--We are highest threat target
-				specWarnVengefulStrikes:Show()--So show tank warning
-				break
-			end
+		if self:IsTanking("player", nil, nil, true, args.sourceGUID) then
+			specWarnVengefulStrikes:Show()
+			specWarnVengefulStrikes:Play("defensive")
 		end
 	end
 end
@@ -220,11 +218,11 @@ function mod:SPELL_CAST_SUCCESS(args)
 	if spellId == 143027 then
 		timerClashCD:Start()
 		specWarnClash:Show()
+		specWarnClash:Play("chargemove")
 	elseif spellId == 143423 then
-		local source = args.sourceName
-		if source == UnitName("target") or source == UnitName("focus") then--Only warn if your target or focus, period, because if you aren't actually dpsing her, you just stay out of melee range and ignore this
-			warnShaShear:Show()
-			specWarnShaShear:Show(source)
+		if self:CheckInterruptFilter(args.sourceGUID, nil, true) then
+			specWarnShaShear:Show(args.sourceName)
+			specWarnShaShear:Play("kickcast")
 		end
 	end
 end
@@ -232,11 +230,13 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
 	if spellId == 143959 and args:IsPlayer() and self:AntiSpam(1.5, 2) then
-		specWarnDefiledGround:Show()
+		specWarnGTFO:Show(args.spellName)
+		specWarnGTFO:Play("watchfeet")
 	elseif spellId == 143301 then--Stun debuff spellid
 		warnGougeStun:Show(args.destName)
 		if not args:IsPlayer() then
 			specWarnGougeStunOther:Show(args.destName)
+			specWarnGougeStunOther:Play("tauntboss")
 		end
 	elseif spellId == 143198 then
 		warnGarrote:CombinedShow(1, args.destName)
@@ -249,6 +249,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		warnMarked:Show(args.destName)
 		if args:IsPlayer() then
 			specWarnMarked:Show(args.destName)
+			specWarnMarked:Play("targetyou")
 			yellMarked:Yell()
 		end
 	--Special phases
@@ -261,6 +262,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif spellId == 143955 then--Misery, Sorrow, and Gloom
 		self.vb.sorrowActive = true
 		specWarnMiserySorrowGloom:Show()
+		specWarnMiserySorrowGloom:Play("bigmob")
 		timerVengefulStrikesCD:Cancel()
 		timerClashCD:Cancel()
 		timerCorruptedBrewCD:Cancel()
@@ -276,6 +278,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerCalamityCD:Cancel()--Can't be cast during THIS special
 	elseif spellId == 143423 and args:IsPlayer() and self.vb.sorrowActive and not self:IsDifficulty("lfr25") and not isInfernoTarget then
 		specWarnShaShearYou:Show()
+		specWarnShaShearYou:Play("runout")
 		yellShaShear:Yell()
 	end
 end
@@ -300,13 +303,10 @@ function mod:SPELL_AURA_REMOVED(args)
 	end
 end
 
-function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
-	if spellId == 144357 and destGUID == UnitGUID("player") and self:AntiSpam(1.5, 3) and not self:IsTrivial() then
-		specWarnDefiledGround:Show()
-	elseif spellId == 144367 and destGUID == UnitGUID("player") and self:AntiSpam(1.5, 4) and not self:IsTrivial() then
-		specWarnNoxiousPoison:Show()
-	elseif spellId == 143009 and destGUID == UnitGUID("player") and self:AntiSpam(1.5, 5) and not self:IsTrivial() then
-		specWarnKick:Show()
+function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId, spellName)
+	if (spellId == 144357 or spellId == 144367 or spellId == 143009) and destGUID == UnitGUID("player") and self:AntiSpam(2.5, 3) then
+		specWarnGTFO:Show(spellName)
+		specWarnGTFO:Play("watchfeet")
 	end
 end
 mod.SPELL_MISSED = mod.SPELL_DAMAGE
@@ -333,7 +333,6 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 end
 
 function mod:UNIT_HEALTH(uId)
-	if self:IsTrivial() then return end--Totally not cpu efficient
 	if self.vb.warned71475 == 2 and self.vb.warned71479 == 2 and self.vb.warned71480 == 2 then return end
 	local cId = self:GetUnitCreatureId(uId)
 	if cId == 71475 or cId == 71479 or cId == 71480 then
@@ -341,10 +340,12 @@ function mod:UNIT_HEALTH(uId)
 		if hp < 0.71 and self.vb["warned"..cId] == 0 then
 			local bossName = UnitName(uId)
 			specWarnMeasures:Show(bossName)
+			specWarnMeasures:Play("specialsoon")
 			self.vb["warned"..cId] = 1
 		elseif hp < 0.37 and self.vb["warned"..cId] == 1 then
 			local bossName = UnitName(uId)
 			specWarnMeasures:Show(bossName)
+			specWarnMeasures:Play("specialsoon")
 			self.vb["warned"..cId] = 2
 		end
 	end

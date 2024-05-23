@@ -68,7 +68,6 @@ local specWarnFlamesofGalakrondYou	= mod:NewSpecialWarningYou(147068)
 local yellFlamesofGalakrond			= mod:NewYell(147068)
 local specWarnFlamesofGalakrondStack= mod:NewSpecialWarningStack(147029, nil, 6)
 local specWarnFlamesofGalakrondOther= mod:NewSpecialWarningTarget(147029, "Tank")
-local specWarnPulsingFlames			= mod:NewSpecialWarningCount(147042, false, nil, nil, 2)
 
 --Stage 2: Bring Her Down!
 local timerCombatStarts				= mod:NewCombatTimer(34.5)
@@ -175,7 +174,6 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif spellId == 147042 then
 		self.vb.pulseCount = self.vb.pulseCount + 1
 		warnPulsingFlames:Show(self.vb.pulseCount)
-		specWarnPulsingFlames:Show(self.vb.pulseCount)
 		timerPulsingFlames:Start()
 		timerPulsingFlamesCD:Start(nil, self.vb.pulseCount + 1)
 	end
