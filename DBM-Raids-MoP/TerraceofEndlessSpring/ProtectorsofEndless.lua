@@ -32,8 +32,8 @@ local warnCleansingWaters			= mod:NewTargetNoFilterAnnounce(117309, 3)--Phase 1+
 local specWarnCleansingWatersDispel	= mod:NewSpecialWarningDispel(117309, "MagicDispeller", nil, nil, 1, 2)--The boss wasn't moved in time, now he needs to be dispelled.
 local specWarnCorruptingWaters		= mod:NewSpecialWarningSwitch(117227, "Dps", nil, nil, 1, 2)
 
-local timerCleansingWatersCD		= mod:NewCDTimer(32.5, 117309, nil, nil, nil, 3, nil, DBM_COMMON_L.MAGIC_ICON)
-local timerCorruptingWatersCD		= mod:NewNextTimer(42, 117227, nil, nil, nil, 1, nil, DBM_COMMON_L.DAMAGE_ICON)
+local timerCleansingWatersCD		= mod:NewCDTimer(31.6, 117309, nil, nil, nil, 3, nil, DBM_COMMON_L.MAGIC_ICON)
+local timerCorruptingWatersCD		= mod:NewNextTimer(29.1, 117227, nil, nil, nil, 1, nil, DBM_COMMON_L.DAMAGE_ICON)--Was 42 prior to 10.2.7
 --Elder Regail
 mod:AddTimerLine(Regail)
 local warnLightningPrison			= mod:NewTargetAnnounce(111850, 3)--Phase 1+ ability.
@@ -181,9 +181,9 @@ function mod:SPELL_AURA_APPLIED(args)
 		--If any are missing that actually ALTER during a phase 2 or 3 transition they will be updated here.
 		if self:GetStage(2) then
 			if args:GetDestCreatureID() == 60585 then--Elder Regail
-				timerLightningStormCD:Start(25.5)--Starts 25.5~27
+	--			timerLightningStormCD:Start(25.5)--Starts 25.5~27 (now used immediately in 10.2.7
 			elseif args:GetDestCreatureID() == 60586 then--Elder Asani
-				timerCorruptingWatersCD:Start(10)
+	--			timerCorruptingWatersCD:Start(10)--(now used immediately in 10.2.7)
 			elseif args:GetDestCreatureID() == 60583 then--Protector Kaolan
 				timerDefiledGroundCD:Start(5)
 			end
@@ -235,6 +235,7 @@ function mod:SPELL_CAST_START(args)
 	elseif spellId == 118077 then
 		specWarnLightningStorm:Show()
 		specWarnLightningStorm:Play("aesoon")
+		timerLightningStorm:Start()
 		if self:GetStage(3) then
 			timerLightningStormCD:Start(32)
 		else
