@@ -857,14 +857,12 @@ L:SetTimerLocalization({
 L:SetOptionLocalization({
 	timerRoleplay		= "Mostrar temporizador para el diálogo entre Garrosh y Thrall",
 	RangeFrame			= "Mostrar marco de distancia (8 m) dinámico (se mostrará al estar en el umbral de alcance de $spell:147126)",
-	InfoFrame			= "Mostrar marco de información de jugadores sin reducción de daño durante el intermedio",
-	yellMaliceFading	= "Gritar cuando $spell:147209 esté a punto de expirar"
+	InfoFrame			= "Mostrar marco de información de jugadores sin reducción de daño durante el intermedio"
 })
 
 L:SetMiscLocalization({
 	wasteOfTime		= "No es demasiado tarde, Garrosh. Renuncia al cargo de Jefe de Guerra. Esto puede acabar ahora, sin más sangre.",
 	NoReduce		= "Sin reducción de daño",
-	MaliceFadeYell	= "Malicia expirando en %s (%d)",
 	phase3End		= "¿Creéis que habéis ganado?"
 })
 

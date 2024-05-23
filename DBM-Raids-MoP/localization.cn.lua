@@ -776,14 +776,12 @@ L = DBM:GetModLocalization(869)
 L:SetOptionLocalization({
 	timerRoleplay		= "计时条：NPC剧情",
 	RangeFrame			= "显示动态距离框架(10码)<br/>(这是智慧距离框架，当到达$spell:147126阈值时自动切换)",
-	InfoFrame			= "为玩家在中场阶段时没有伤害减免显示信息框架",
-	yellMaliceFading	= "当$spell:147209將要退去时大喊"
+	InfoFrame			= "为玩家在中场阶段时没有伤害减免显示信息框架"
 })
 
 L:SetMiscLocalization({
 	wasteOfTime		= "现在还不迟，加尔鲁什。卸下酋长的包裹吧。我们可以就此结束这场流血冲突。",
 	NoReduce		= "无减伤",
-	MaliceFadeYell	= "%s的恶意消退中(%d)",
 	phase3End		= "别以为你们已经赢了"
 })
 

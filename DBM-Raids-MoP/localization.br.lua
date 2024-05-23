@@ -170,14 +170,12 @@ L = DBM:GetModLocalization(869)
 L:SetOptionLocalization({
 	timerRoleplay		= "Mostrar temporizador Garrosh/Thrall RP",
 	RangeFrame			= "Mostrar frame dinâmico de distância (8)<br/>(Este é um frame de distância inteligente que mostra quando você alcança o limiar de $spell:147126)",
-	InfoFrame			= "Mostrar um frame informativo para jogadores sem redução de dano durante a intermission",
-	yellMaliceFading	= "Gritar quando $spell:147209 estiver para acabar"
+	InfoFrame			= "Mostrar um frame informativo para jogadores sem redução de dano durante a intermission"
 })
 
 L:SetMiscLocalization({
 	wasteOfTime		= "Não é tarde demais, Garrosh. Abstenha-se do posto de Chefe Guerreiro. Podemos encerrar isso sem mais derramamento de sangue.",
 	NoReduce		= "Sem redução de dano",
-	MaliceFadeYell	= "Malícia acabando em %s (%d)",
 	phase3End		= "Vocês pensam que VENCERAM?"
 })
 

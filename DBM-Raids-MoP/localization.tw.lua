@@ -764,14 +764,12 @@ L = DBM:GetModLocalization(869)
 L:SetOptionLocalization({
 	timerRoleplay		= "為卡爾洛斯/索爾劇情事件顯示計時器",
 	RangeFrame			= "顯示動態距離框架(10碼)<br/>(這是智慧距離框架，當到達$spell:147126門檻時自動切換)",
-	InfoFrame			= "為玩家在中場階段時沒有傷害減免顯示訊息框架",
-	yellMaliceFading	= "當$spell:147209將要退去時大喊"
+	InfoFrame			= "為玩家在中場階段時沒有傷害減免顯示訊息框架"
 })
 
 L:SetMiscLocalization({
 	wasteOfTime		= "卡爾洛斯，現在還不遲。放下大酋長的權力。我們可以在此時此地就結束，停止流血。",
 	NoReduce		= "無傷害減免",
-	MaliceFadeYell	= "%s的惡意消退中(%d)",
 	phase3End		= "你們以為贏了嗎?"
 })
 
