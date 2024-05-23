@@ -85,7 +85,7 @@ local timerCalamityCD				= mod:NewCDTimer(37.5, 143491, nil, "Healer", nil, 5, n
 
 local berserkTimer					= mod:NewBerserkTimer(600)
 
-mod:AddSetIconOption("SetIconOnStrike", 143962, false)
+mod:AddSetIconOption("SetIconOnStrike", 143962, false, 0, {7})
 mod:AddRangeFrameOption(5, 143423, false)--For heroic. Need to chage smart range frame?
 
 --Upvales, don't need variables

@@ -32,84 +32,87 @@ mod:RegisterEventsInCombat(
 	"CHAT_MSG_MONSTER_YELL"
 )
 
---Stage 2: Bring Her Down!
+--Stage 1: Bring Her Down!
+mod:AddTimerLine(DBM:EJ_GetSectionInfo(8417))
 local warnFracture					= mod:NewTargetNoFilterAnnounce(146899, 3)
 local warnChainHeal					= mod:NewCastAnnounce(146757, 4)
-local warnAdd						= mod:NewCountAnnounce("ej8553", 2, "134170")
-local warnProto						= mod:NewCountAnnounce("ej8587", 2, 59961)
+local warnAdd						= mod:NewCountAnnounce(-8553, 2, "134170")
+local warnProto						= mod:NewCountAnnounce(-8587, 2, 59961)
 local warnTowerOpen					= mod:NewAnnounce("warnTowerOpen", 1, "236351")
-local warnDemolisher				= mod:NewSpellAnnounce("ej8562", 3, 116040)
+local warnDemolisher				= mod:NewSpellAnnounce(-8562, 3, 116040)
 local warnTowerGrunt				= mod:NewAnnounce("warnTowerGrunt", 3, 89253)
 ----High Enforcer Thranok (Road)
 local warnShatteringCleave			= mod:NewSpellAnnounce(146849, 3, nil, "Tank")
 
---Phase 3: Galakras,The Last of His Progeny
-local warnPhase2					= mod:NewPhaseAnnounce(2, 2)
-local warnFlamesofGalakrondTarget	= mod:NewTargetAnnounce(147068, 4)
-local warnFlamesofGalakrond			= mod:NewStackAnnounce(147029, 2, nil, "Tank")
-local warnPulsingFlames				= mod:NewCountAnnounce(147042, 3, nil, false)
-
---Stage 2: Bring Her Down!
-local specWarnAdds					= mod:NewSpecialWarningSpell("ej8553", false)
-local specWarnProto					= mod:NewSpecialWarningSpell("ej8587", false)
+local specWarnProto					= mod:NewSpecialWarningSpell(-8587, nil, nil, nil, 1, 2)
 local specWarnWarBanner				= mod:NewSpecialWarningSwitch(147328, "-Healer", nil, nil, 1, 2)
 local specWarnChainheal				= mod:NewSpecialWarningInterrupt(146757, "HasInterrupt", nil, nil, 1, 2)
-----Master Cannoneer Dragryn (Tower)
-local specWarnMuzzleSpray			= mod:NewSpecialWarningSpell(147824, nil, nil, nil, 2)
-----Lieutenant General Krugruk (Tower)
-local specWarnArcingSmash			= mod:NewSpecialWarningSpell(147688, nil, nil, nil, 2)
-----High Enforcer Thranok (Road)
-local specWarnCrushersCall			= mod:NewSpecialWarningSpell(146769, false, nil, nil, 2)--optional pre warning for the grip soon. although melee/tank probably don't really care and ranged are 50/50
-----Korgra the Snake (Road)
-local specWarnPoisonCloud			= mod:NewSpecialWarningMove(147705)
---Phase 3: Galakras,The Last of His Progeny
-local specWarnFlamesofGalakrond		= mod:NewSpecialWarningSpell(147029, false)--Cast often, so lets make this optional since it's spammy
-local specWarnFlamesofGalakrondYou	= mod:NewSpecialWarningYou(147068)
-local yellFlamesofGalakrond			= mod:NewYell(147068)
-local specWarnFlamesofGalakrondStack= mod:NewSpecialWarningStack(147029, nil, 6)
-local specWarnFlamesofGalakrondOther= mod:NewSpecialWarningTarget(147029, "Tank")
 
---Stage 2: Bring Her Down!
+----High Enforcer Thranok (Road)
+local specWarnCrushersCall			= mod:NewSpecialWarningSpell(146769, false, nil, nil, 2, 12)--optional pre warning for the grip soon. although melee/tank probably don't really care and ranged are 50/50
+----Korgra the Snake (Road)
+local specWarnPoisonCloud			= mod:NewSpecialWarningGTFO(147705, nil, nil, nil, 1, 8)
+----Master Cannoneer Dragryn (Tower)
+local specWarnMuzzleSpray			= mod:NewSpecialWarningDodge(147824, nil, nil, nil, 2, 2)
+----Lieutenant General Krugruk (Tower)
+local specWarnArcingSmash			= mod:NewSpecialWarningDodge(147688, nil, nil, nil, 2, 2)
+
 local timerCombatStarts				= mod:NewCombatTimer(34.5)
-local timerAddsCD					= mod:NewNextCountTimer(54.7, "ej8553", nil, nil, nil, 1, "134170")
-local timerProtoCD					= mod:NewNextCountTimer(54.7, "ej8587", nil, nil, nil, 1, 59961)
+local timerAddsCD					= mod:NewNextCountTimer(54.7, -8553, nil, nil, nil, 1, "134170")
+local timerProtoCD					= mod:NewNextCountTimer(54.7, -8587, nil, nil, nil, 1, 59961)
 local timerTowerCD					= mod:NewTimer(99, "timerTowerCD", 88852, nil, nil, 5)
 local timerTowerGruntCD				= mod:NewTimer(60, "timerTowerGruntCD", 89253, nil, nil, 1, DBM_COMMON_L.HEROIC_ICON)
-local timerDemolisherCD				= mod:NewNextTimer(20, "ej8562", nil, nil, nil, 1, 116040)--EJ is just not complete, shouldn't need localizing
+local timerDemolisherCD				= mod:NewNextTimer(20, -8562, nil, nil, nil, 1, 116040)--EJ is just not complete, shouldn't need localizing
 ----High Enforcer Thranok (Road)
 local timerShatteringCleaveCD		= mod:NewCDTimer(7.5, 146849, nil, "Tank", nil, 5)
 local timerCrushersCallCD			= mod:NewCDTimer(30, 146769, nil, nil, nil, 2)
 
---Phase 3: Galakras,The Last of His Progeny
+mod:AddSetIconOption("SetIconOnAdds", -8556, false, 5, {8, 7})
+--Stage 2: Galakras,The Last of His Progeny
+mod:AddTimerLine(DBM:EJ_GetSectionInfo(8418))
+local warnPhase2					= mod:NewPhaseAnnounce(2, 2, nil, nil, nil, nil, nil, 2)
+local warnFlamesofGalakrondTarget	= mod:NewTargetAnnounce(147068, 4)
+local warnFlamesofGalakrond			= mod:NewStackAnnounce(147029, 2, nil, "Tank")
+local warnPulsingFlames				= mod:NewCountAnnounce(147042, 3, nil, false)
+
+local specWarnFlamesofGalakrondYou	= mod:NewSpecialWarningYou(147068, nil, nil, nil, 1, 2)
+local yellFlamesofGalakrond			= mod:NewYell(147068)
+local specWarnFlamesofGalakrondStack= mod:NewSpecialWarningStack(147029, nil, 6, nil, nil, 1, 6)
+local specWarnFlamesofGalakrondOther= mod:NewSpecialWarningTarget(147029, "Tank", nil, nil, 1, 2)
+
 local timerFlamesofGalakrondCD		= mod:NewCDTimer(6, 147068, nil, nil, nil, 3)
 local timerFlamesofGalakrond		= mod:NewTargetTimer(15, 147029, nil, "Tank", nil, 5)
 local timerPulsingFlamesCD			= mod:NewNextCountTimer(25, 147042, nil, nil, nil, 2, nil, DBM_COMMON_L.HEALER_ICON)
 local timerPulsingFlames			= mod:NewBuffActiveTimer(7, 147042)
 
-mod:AddSetIconOption("FixateIcon", 147068)
-mod:AddSetIconOption("SetIconOnAdds", "ej8556", false, 5)
+mod:AddSetIconOption("FixateIcon", 147068, true, 0, {2})
 
 --Important, needs recover
 mod.vb.addsCount = 0
 mod.vb.firstTower = 0--0: first tower not started, 1: first tower started, 2: first tower breached
 mod.vb.pulseCount = 0
 
-local function protos()
-	mod.vb.addsCount = mod.vb.addsCount + 1
-	warnProto:Show(mod.vb.addsCount)
+---@param self DBMMod
+local function protos(self)
+	self.vb.addsCount = self.vb.addsCount + 1
 	if UnitPower("player", 10) == 0 then
 		specWarnProto:Show()
+		specWarnProto:Play("bigmob")
+	else
+		warnProto:Show(self.vb.addsCount)
 	end
-	timerAddsCD:Start(nil, mod.vb.addsCount + 1)
+	timerAddsCD:Start(nil, self.vb.addsCount + 1)
 end
 
-local function TowerGrunt()
+---@param self DBMMod
+local function TowerGrunt(self)
 	warnTowerGrunt:Show()
 	timerTowerGruntCD:Start()
-	mod:Schedule(60, TowerGrunt)
+	self:Schedule(60, TowerGrunt, self)
 end
 
 function mod:OnCombatStart(delay)
+	self:SetStage(1)
 	self.vb.addsCount = 0
 	self.vb.firstTower = 0
 	self.vb.pulseCount = 0
@@ -117,7 +120,7 @@ function mod:OnCombatStart(delay)
 		timerTowerCD:Start(116.5-delay)
 	else
 		timerTowerGruntCD:Start(6)
-		self:Schedule(6, TowerGrunt)
+		self:Schedule(6, TowerGrunt, self)
 	end
 end
 
@@ -129,12 +132,13 @@ function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
 	if spellId == 147688 and (not DBM.Options.DontShowFarWarnings or UnitPower("player", 10) > 0) then--Tower Spell
 		specWarnArcingSmash:Show()
+		specWarnArcingSmash:Play("shockwave")
 	elseif spellId == 146757 and (not DBM.Options.DontShowFarWarnings or UnitPower("player", 10) == 0) then
-		local source = args.sourceGUID
-		warnChainHeal:Show()
-		if source == UnitGUID("target") or source == UnitGUID("focus") then
+		if self:CheckInterruptFilter(args.sourceGUID, nil, true) then
 			specWarnChainheal:Show(args.sourceName)
 			specWarnChainheal:Play("kickcast")
+		else
+			warnChainHeal:Show()
 		end
 	end
 end
@@ -143,8 +147,10 @@ function mod:SPELL_CAST_SUCCESS(args)
 	local spellId = args.spellId
 	if spellId == 147824 and (not DBM.Options.DontShowFarWarnings or UnitPower("player", 10) > 0) and self:AntiSpam(3, 2) then--Tower Spell
 		specWarnMuzzleSpray:Show()
+		specWarnMuzzleSpray:Play("shockwave")
 	elseif spellId == 146769 and (not DBM.Options.DontShowFarWarnings or UnitPower("player", 10) == 0) then
 		specWarnCrushersCall:Show()
+		specWarnCrushersCall:Play("pullin")
 		timerCrushersCallCD:Start()
 	elseif spellId == 146849 and (not DBM.Options.DontShowFarWarnings or UnitPower("player", 10) == 0) then
 		warnShatteringCleave:Show()
@@ -155,13 +161,13 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
 	if spellId == 147068 then
-		warnFlamesofGalakrondTarget:Show(args.destName)
 		timerFlamesofGalakrondCD:Start()
 		if args:IsPlayer() then
 			specWarnFlamesofGalakrondYou:Show()
+			specWarnFlamesofGalakrondYou:Play("targetyou")
 			yellFlamesofGalakrond:Yell()
 		else
-			specWarnFlamesofGalakrond:Show()
+			warnFlamesofGalakrondTarget:Show(args.destName)
 		end
 		if self.Options.FixateIcon then
 			self:SetIcon(args.destName, 2)
@@ -183,21 +189,21 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 	local spellId = args.spellId
 	if spellId == 147029 then
 		local amount = args.amount or 1
-		if amount >= 6 and args:IsPlayer() then
-			specWarnFlamesofGalakrondStack:Show(amount)
-		end
-		local uId = DBM:GetRaidUnitId(args.destName)
-		for i = 1, 5 do
-			local bossUnitID = "boss"..i
-			if UnitExists(bossUnitID) and UnitGUID(bossUnitID) == args.sourceGUID then
-				if self:IsTanking(uId, bossUnitID) then
+		if args:IsPlayer() then
+			if amount >= 6 then
+				specWarnFlamesofGalakrondStack:Show(amount)
+				specWarnFlamesofGalakrondStack:Play("stackhigh")
+			end
+		else
+			local uId = DBM:GetRaidUnitId(args.destName)
+			if self:IsTanking(uId, nil, nil, false, args.sourceGUID) then
+				timerFlamesofGalakrond:Start(args.destName)
+				if amount >= 6 and not DBM:UnitDebuff("player", spellId) then
+					specWarnFlamesofGalakrondOther:Show(args.destName)
+					specWarnFlamesofGalakrondOther:Play("tauntboss")
+				else
 					warnFlamesofGalakrond:Show(args.destName, amount)
-					timerFlamesofGalakrond:Start(args.destName)
-					if amount >= 6 then
-						specWarnFlamesofGalakrondOther:Show(args.destName)
-					end
 				end
-				break--break loop if find right boss
 			end
 		end
 	end
@@ -217,6 +223,7 @@ end
 function mod:SPELL_PERIODIC_DAMAGE(_, _, _, _, destGUID, destName, _, _, spellId)
 	if spellId == 147705 and destGUID == UnitGUID("player") and self:AntiSpam(2, 1) then
 		specWarnPoisonCloud:Show()
+		specWarnPoisonCloud:Play("watchfeet")
 	end
 end
 mod.SPELL_PERIODIC_MISSED = mod.SPELL_PERIODIC_DAMAGE
@@ -233,9 +240,11 @@ end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	if spellId == 50630 and self:AntiSpam(2, 3) then--Eject All Passengers:
+		self:SetStage(2)
 		timerAddsCD:Cancel()
 		timerProtoCD:Cancel()
 		warnPhase2:Show()
+		warnPhase2:Play("ptwo")
 		timerFlamesofGalakrondCD:Start(13.5)
 		timerPulsingFlamesCD:Start(39, 1)--unconfirmed
 		self:Unschedule(protos)
@@ -284,7 +293,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 		warnDemolisher:Show()
 		if self:IsMythic() and self.vb.firstTower == 0 then
 			timerTowerGruntCD:Start(15)
-			self:Schedule(15, TowerGrunt)
+			self:Schedule(15, TowerGrunt, self)
 			self.vb.firstTower = 2
 		end
 	elseif msg:find(L.tower) then
@@ -302,11 +311,8 @@ function mod:OnSync(msg)
 		self.vb.addsCount = self.vb.addsCount + 1
 		if self.vb.addsCount % 5 == 3 then
 			warnAdd:Show(self.vb.addsCount)
-			if UnitPower("player", 10) == 0 then
-				specWarnAdds:Show()
-			end
 			timerProtoCD:Start(nil, self.vb.addsCount + 1)
-			self:Schedule(55, protos)
+			self:Schedule(55, protos, self)
 		elseif self.vb.addsCount == 1 then
 			warnAdd:Show(self.vb.addsCount)
 			timerAddsCD:Start(48, 2)
