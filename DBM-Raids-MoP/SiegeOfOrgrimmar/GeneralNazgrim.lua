@@ -39,7 +39,7 @@ local warnHealingTideTotem			= mod:NewSpellAnnounce(143474, 4)
 local warnHuntersMark				= mod:NewTargetAnnounce(143882, 3, nil, false)
 
 --Nazgrim Core Abilities
-local specWarnAdds					= mod:NewSpecialWarningCount("ej7920", "-Healer")
+local specWarnAdds					= mod:NewSpecialWarningCount(-7920, "-Healer")
 local specWarnSunder				= mod:NewSpecialWarningStack(143494, nil, 4)
 local specWarnSunderOther			= mod:NewSpecialWarningTaunt(143494)
 local specWarnExecute				= mod:NewSpecialWarningSpell(143502, "Tank", nil, nil, 3)
@@ -69,7 +69,7 @@ local yellHuntersMark				= mod:NewYell(143882, nil, false)
 local specWarnHuntersMarkOther		= mod:NewSpecialWarningTarget(143882, false)
 
 --Nazgrim Core Abilities
-local timerAddsCD					= mod:NewNextCountTimer(45, "ej7920", nil, nil, nil, 1, "132349", nil, nil, 1, 4)
+local timerAddsCD					= mod:NewNextCountTimer(45, -7920, nil, nil, nil, 1, "132349", nil, nil, 1, 4)
 local timerSunder					= mod:NewTargetTimer(30, 143494, nil, "Tank|Healer")
 local timerSunderCD					= mod:NewCDTimer(7.5, 143494, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerExecuteCD				= mod:NewCDTimer(18, 143502, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
@@ -84,11 +84,11 @@ local timerEmpoweredChainHealCD		= mod:NewNextSourceTimer(6, 143473, nil, nil, n
 
 local berserkTimer					= mod:NewBerserkTimer(600)
 
-mod:AddSetIconOption("SetIconOnAdds", "ej7920", false, 5)
+mod:AddSetIconOption("SetIconOnAdds", -7920, false, 5, {7, 6, 4, 2, 1})
 mod:AddInfoFrameOption("ej7909")
 
 --Upvales, don't need variables
-local UnitName, UnitExists, UnitGUID, UnitDetailedThreatSituation = UnitName, UnitExists, UnitGUID, UnitDetailedThreatSituation
+local UnitName, UnitExists, UnitGUID = UnitName, UnitExists, UnitGUID
 local spellName1, spellName2, spellName3, spellName4, sunder = DBM:GetSpellName(143500), DBM:GetSpellName(143536), DBM:GetSpellName(143503), DBM:GetSpellName(143872), DBM:GetSpellName(143494)
 --Tables, can't recover
 local dotWarned = {}
@@ -96,14 +96,6 @@ local dotWarned = {}
 mod.vb.addsCount = 0
 mod.vb.defensiveActive = false
 mod.vb.allForcesReleased = false
-
-local addsTable = {
-	[71519] = 7,--Shaman
-	[71517] = 6,--Arcweaver
-	[71518] = 1,--Assassin
-	[71516] = 2,--Iron Blade
-	[71656] = 4,--Sniper (Heroic)
-}
 
 local updateInfoFrame
 do
@@ -233,7 +225,7 @@ function mod:SPELL_CAST_START(args)
 	elseif spellId == 143420 then
 		local source = args.sourceName
 		warnIronstorm:Show()
-		if source == UnitName("target") or source == UnitName("focus") then
+		if self:CheckInterruptFilter(args.sourceGUID, true) then
 			specWarnIronstorm:Show(source)
 		end
 	elseif spellId == 143473 then
@@ -243,7 +235,7 @@ function mod:SPELL_CAST_START(args)
 		timerEmpoweredChainHealCD:Start(source, args.sourceGUID)
 	elseif spellId == 143502 then
 		timerExecuteCD:Start()
-		if UnitExists("boss1") and UnitGUID("boss1") == args.sourceGUID and UnitDetailedThreatSituation("player", "boss1") then--threat check instead of target because we may be helping dps adds
+		if self:IsTanking("player", "boss1", nil, true) then--threat check instead of target because we may be helping dps adds
 			specWarnExecute:Show()
 		end
 	end
@@ -398,28 +390,37 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 	end
 end
 
-function mod:OnSync(msg)
-	if not self:IsInCombat() then return end
-	if msg == "Adds" and self:AntiSpam(10, 3) then
-		self.vb.addsCount = self.vb.addsCount + 1
-		specWarnAdds:Show(self.vb.addsCount)
-		if self.vb.addsCount < 10 then
-			timerAddsCD:Start(nil, self.vb.addsCount+1)
-		end
-		if self.Options.SetIconOnAdds then
-			if self:IsMythic() or self.vb.addsCount > 6 then--3 Adds
-				self:ScanForMobs(71519, 2, 7, 3, addsTable, 15)
-			else
-				self:ScanForMobs(71519, 2, 7, 2, addsTable, 15)--2 adds
+do
+	local addsTable = {
+		[71519] = 7,--Shaman
+		[71517] = 6,--Arcweaver
+		[71518] = 1,--Assassin
+		[71516] = 2,--Iron Blade
+		[71656] = 4,--Sniper (Heroic)
+	}
+	function mod:OnSync(msg)
+		if not self:IsInCombat() then return end
+		if msg == "Adds" and self:AntiSpam(10, 3) then
+			self.vb.addsCount = self.vb.addsCount + 1
+			specWarnAdds:Show(self.vb.addsCount)
+			if self.vb.addsCount < 10 then
+				timerAddsCD:Start(nil, self.vb.addsCount+1)
 			end
+			if self.Options.SetIconOnAdds then
+				if self:IsMythic() or self.vb.addsCount > 6 then--3 Adds
+					self:ScanForMobs(71519, 2, 7, 3, addsTable, 15)
+				else
+					self:ScanForMobs(71519, 2, 7, 2, addsTable, 15)--2 adds
+				end
+			end
+			if self.Options.InfoFrame then
+				DBM.InfoFrame:Show(5, "function", updateInfoFrame)
+			end
+		elseif msg == "AllAdds" and self:AntiSpam(10, 4) then
+			self.vb.allForcesReleased = true
+			self.vb.defensiveActive = false
+			self:UnregisterShortTermEvents()--Do not warn defensive stance below 10%
+			--Icon setting not put here on purpose, so as not ot mess with existing adds (it's burn boss phase anyawys)
 		end
-		if self.Options.InfoFrame then
-			DBM.InfoFrame:Show(5, "function", updateInfoFrame)
-		end
-	elseif msg == "AllAdds" and self:AntiSpam(10, 4) then
-		self.vb.allForcesReleased = true
-		self.vb.defensiveActive = false
-		self:UnregisterShortTermEvents()--Do not warn defensive stance below 10%
-		--Icon setting not put here on purpose, so as not ot mess with existing adds (it's burn boss phase anyawys)
 	end
 end
