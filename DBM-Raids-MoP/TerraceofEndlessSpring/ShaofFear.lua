@@ -315,10 +315,10 @@ function mod:SPELL_AURA_APPLIED(args)
 			if self.vb.specialCount == 3 then self.vb.specialCount = 0 end
 			self.vb.specialCount = self.vb.specialCount + 1
 			self.vb.specialsCast = self.vb.specialsCast + 10--Huddle (100), Spout(10), Strike(1)
+			startSpecialTimers(self)
 		end
 		self:Unschedule(warnWaterspoutTargets)
 		self:Schedule(0.3, warnWaterspoutTargets)
-		startSpecialTimers(self)
 	elseif spellId == 120629 then-- Huddle In Terror
 		huddleInTerrorTargets[#huddleInTerrorTargets + 1] = args.destName
 		if self.Options.SetIconOnHuddle then
@@ -336,10 +336,10 @@ function mod:SPELL_AURA_APPLIED(args)
 			if self.vb.specialCount == 3 then self.vb.specialCount = 0 end
 			self.vb.specialCount = self.vb.specialCount + 1
 			self.vb.specialsCast = self.vb.specialsCast + 100--Huddle (100), Spout(10), Strike(1)
+			startSpecialTimers(self)
 		end
 		self:Unschedule(warnHuddleInTerrorTargets)
 		self:Schedule(0.5, warnHuddleInTerrorTargets)
-		startSpecialTimers(self)
 	elseif spellId == 120268 then -- Champion Of The Light
 		if args:IsPlayer() then
 			specWarnChampionOfTheLight:Show()

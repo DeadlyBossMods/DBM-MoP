@@ -58,7 +58,7 @@ mod:AddBoolOption("timerBreaths", "Tank|Healer", "timer")--Better to have one op
 --LuaLS hates mods setting option name to false
 local timerArcticFreezeCD		= mod:NewCDTimer(16, 139843, nil, nil, false)--We keep timers for artic and freeze for engage, since the breaths might be out of sync until after first rampage
 local timerRotArmorCD			= mod:NewCDTimer(16, 139840, nil, nil, false)--^
-local timerBreathsCD			= mod:NewTimer(16, "timerBreathsCD", 137731, nil, false, 5)--Rest of breaths after first rampage consolidated into one timer instead of 2
+local timerBreathsCD			= mod:NewTimer("d16", "timerBreathsCD", 137731, nil, false, 5)--Rest of breaths after first rampage consolidated into one timer instead of 2
 
 --TODO, maybe monitor length since last cast and if it's 28 instead of 25, make next timer also 28 for remainder of that head phase (then return to 25 after rampage unless we detect another 28)
 --TODO, Verify timers on normal. WoL bugs out and combines GUIDs making it hard to determine actual CDs in my logs.
@@ -236,7 +236,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			if rampageCount == 0 then--In first phase, the breaths aren't at same time because the cds don't start until the specific head is engaged, thus, they can be desynced 1-3 seconds, so we want each breath to use it's own timer until after first rampage
 				timerArcticFreezeCD:Start()
 			else
-				timerBreathsCD:Start()
+				timerBreathsCD:DelayedStart(0.3)
 			end
 		end
 	elseif spellId == 137731 then
@@ -248,7 +248,7 @@ function mod:SPELL_AURA_APPLIED(args)
 				specWarnIgniteFlesh:Show(amount)
 			end
 			if not self.Options.timerBreaths then return end
-			timerBreathsCD:Start()
+			timerBreathsCD:DelayedStart(0.3)
 		end
 	elseif spellId == 139840 then
 		local uId = DBM:GetRaidUnitId(args.destName)
@@ -262,7 +262,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			if rampageCount == 0 then--In first phase, the breaths aren't at same time because the cds don't start until the specific head is engaged, thus, they can be desynced 1-3 seconds, so we want each breath to use it's own timer until after first rampage
 				timerRotArmorCD:Start()
 			else
-				timerBreathsCD:Start()
+				timerBreathsCD:DelayedStart(0.3)
 			end
 		end
 	elseif spellId == 139993 then
@@ -274,7 +274,7 @@ function mod:SPELL_AURA_APPLIED(args)
 				specWarnArcaneDiffusion:Show(amount)
 			end
 			if not self.Options.timerBreaths then return end
-			timerBreathsCD:Start()
+			timerBreathsCD:DelayedStart(0.3)
 		end
 	elseif spellId == 139822 then
 		warnCinders:Show(args.destName)
@@ -338,7 +338,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 		arcaneRecent = false
 		specWarnRampageFaded:Show()
 		if self.Options.timerBreaths then
-			timerBreathsCD:Start(10)
+			timerBreathsCD:Start(3.2)--Used to be 10
 		end
 		--timers below may need adjusting by 1-2 seconds as I had to substitute last rampage SPELL_DAMAGE event for rampage ends emote when i reg expressioned these timers on WoL
 --[[		if iceBehind > 0 then

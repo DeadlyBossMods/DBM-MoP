@@ -36,7 +36,7 @@ local timerScaryFogCD					= mod:NewNextTimer(10, 123705, nil, nil, nil, 2)
 local berserkTimer						= mod:NewBerserkTimer(600)
 
 mod:AddRangeFrameOption(3, nil, true)
-mod:AddSetIconOption("SetIconOnProtector", -6224, false, 5, {3, 4, 5, 6, 7, 8})
+mod:AddSetIconOption("SetIconOnProtector", -6224, true, 5, {3, 4, 5, 6, 7, 8})
 
 mod.vb.specialCast = 0
 mod.vb.hideActive = false

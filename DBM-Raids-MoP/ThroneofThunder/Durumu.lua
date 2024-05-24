@@ -14,8 +14,8 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED 133767 133597 133598 134626 137727 133798",
 	"SPELL_AURA_APPLIED_DOSE 133767 133798",
 	"SPELL_AURA_REMOVED 133767 137727 133597",
-	"SPELL_DAMAGE 134044",
-	"SPELL_MISSED 134044",
+	"SPELL_DAMAGE 133793",
+	"SPELL_MISSED 133793",
 	"SPELL_PERIODIC_DAMAGE 134755",
 	"SPELL_PERIODIC_MISSED 134755",
 	"CHAT_MSG_MONSTER_EMOTE",
@@ -35,12 +35,11 @@ local warnIceWall					= mod:NewSpellAnnounce(134587, 3, 111231)
 
 local specWarnSeriousWound			= mod:NewSpecialWarningStack(133767, nil, 5)--This we will use debuff on though.
 local specWarnSeriousWoundOther		= mod:NewSpecialWarningTaunt(133767)
-local specWarnForceOfWill			= mod:NewSpecialWarningYou(136413, nil, nil, nil, 3)--VERY important, if you get hit by this you are out of fight for rest of pull.
-local specWarnForceOfWillNear		= mod:NewSpecialWarningClose(136413, nil, nil, nil, 3)
+local specWarnForceOfWill			= mod:NewSpecialWarningDodge(136413, nil, nil, nil, 3, 2)
 local yellForceOfWill				= mod:NewYell(136413)
-local specWarnLingeringGaze			= mod:NewSpecialWarningYou(134044)
-local yellLingeringGaze				= mod:NewYell(134044, nil, false)
-local specWarnLingeringGazeMove		= mod:NewSpecialWarningMove(134044)
+local specWarnLingeringGaze			= mod:NewSpecialWarningYou(138467)
+local yellLingeringGaze				= mod:NewYell(138467, nil, false)
+local specWarnLingeringGazeMove		= mod:NewSpecialWarningMove(138467)
 local specWarnBlueBeam				= mod:NewSpecialWarning("specWarnBlueBeam", nil, nil, nil, 3)
 local specWarnBlueBeamLFR			= mod:NewSpecialWarningYou(139202, true, false)
 local specWarnRedBeam				= mod:NewSpecialWarningYou(139204, nil, nil, nil, 3)
@@ -51,7 +50,7 @@ local specWarnEyeSore				= mod:NewSpecialWarningMove(140502)
 local specWarnLifeDrain				= mod:NewSpecialWarningTarget(133795, "Tank")
 local yellLifeDrain					= mod:NewYell(133795, L.LifeYell)
 
-local timerHardStareCD				= mod:NewCDTimer(12, 133765, nil, "Tank|Healer", nil, 5)
+local timerHardStareCD				= mod:NewCDTimer(11.2, 133765, nil, "Tank|Healer", nil, 5)
 local timerSeriousWound				= mod:NewTargetTimer(60, 133767, nil, "Tank|Healer")
 local timerLingeringGazeCD			= mod:NewCDTimer(46, 138467, nil, nil, nil, 3)
 local timerForceOfWillCD			= mod:NewCDTimer(20, 136413, nil, nil, nil, 3, nil, DBM_COMMON_L.DEADLY_ICON)--Actually has a 20 second cd but rarely cast more than once per phase because of how short the phases are (both beams phases cancel this ability)
@@ -172,7 +171,7 @@ function mod:OnCombatStart(delay)
 	CVAR = nil
 	timerHardStareCD:Start(5-delay)
 	timerLingeringGazeCD:Start(15.5-delay)
-	timerForceOfWillCD:Start(33.5-delay)
+	timerForceOfWillCD:Start(32.3-delay)
 	timerLightSpectrumCD:Start(40-delay)
 	if self:IsHeroic() then
 		timerDarkParasiteCD:Start(-delay)
@@ -233,20 +232,13 @@ function mod:SPELL_CAST_SUCCESS(args)
 	local spellId = args.spellId
 	if spellId == 136932 then--Force of Will Precast
 		warnForceOfWill:Show(args.destName)
+		specWarnForceOfWill:Show()
+		specWarnForceOfWill:Play("stilldanger")
 		if timerLightSpectrumCD:GetTime() > 22 or timerDisintegrationBeamCD:GetTime() > 110 then--Don't start timer if either beam or spectrum will come first (cause both disable force ability)
 			timerForceOfWillCD:Start()
 		end
 		if args:IsPlayer() then
-			specWarnForceOfWill:Show()
 			yellForceOfWill:Yell()
-		else
-			local uId = DBM:GetRaidUnitId(args.destName)
-			if uId then
-				local inRange = DBM.RangeCheck:GetDistance("player", uId)
-				if inRange and inRange < 21 then--Range hard to get perfect, a player 30 yards away might still be in it. I say 15 is probably good middle ground to catch most of the "near"
-					specWarnForceOfWillNear:Show(args.destName)
-				end
-			end
 		end
 	elseif spellId == 134122 then--Blue Beam Precas
 		lingeringGazeCD = not spectrumStarted and 25 or 40 -- First spectrum Lingering Gaze CD = 25, second = 40
@@ -365,7 +357,7 @@ function mod:SPELL_AURA_REMOVED(args)
 end
 
 function mod:SPELL_DAMAGE(_, _, _, _, destGUID, destName, _, _, spellId)
-	if spellId == 134044 and destGUID == UnitGUID("player") and self:AntiSpam(3, 1) then
+	if spellId == 133793 and destGUID == UnitGUID("player") and self:AntiSpam(3, 1) then--134044
 		specWarnLingeringGazeMove:Show()
 	end
 	if not lfrEngaged or lfrAmberFogRevealed then return end -- To reduce cpu usage normal and heroic.
@@ -377,7 +369,7 @@ function mod:SPELL_DAMAGE(_, _, _, _, destGUID, destName, _, _, spellId)
 end
 
 function mod:SPELL_MISSED(_, _, _, _, destGUID, _, _, _, spellId)
-	if spellId == 134044 and destGUID == UnitGUID("player") and self:AntiSpam(3, 1) then
+	if spellId == 133793 and destGUID == UnitGUID("player") and self:AntiSpam(3, 1) then
 		specWarnLingeringGazeMove:Show()
 	end
 end

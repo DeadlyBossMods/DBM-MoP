@@ -31,7 +31,7 @@ local specWarnElectrifiedWaters		= mod:NewSpecialWarningMove(138006)
 local specWarnIonization			= mod:NewSpecialWarningSpell(138732, "-Tank", nil, nil, 2)
 
 local timerFocusedLightningCD		= mod:NewCDTimer(10, 137399, nil, nil, nil, 3)--10-18 second variation, tends to lean toward 11-12 except when delayed by other casts such as throw or storm. Pull one also seems to variate highly
-local timerStaticBurstCD			= mod:NewCDTimer(19, 137162, nil, "Tank", nil, 5)
+local timerStaticBurstCD			= mod:NewCDTimer(18.6, 137162, nil, "Tank", nil, 5)
 local timerThrowCD					= mod:NewCDTimer(26, 137175, nil, nil, nil, 5)--90-93 variable (26-30 seconds after storm. verified in well over 50 logs)
 local timerStorm					= mod:NewBuffActiveTimer(17, 137313)--2 second cast, 15 second duration
 local timerStormCD					= mod:NewCDTimer(60.5, 137313, nil, nil, nil, 2)--90-93 variable (60.5~67 seconds after throw)

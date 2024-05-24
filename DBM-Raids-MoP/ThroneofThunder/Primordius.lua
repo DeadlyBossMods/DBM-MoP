@@ -39,7 +39,7 @@ local specWarnEruptingPustules		= mod:NewSpecialWarningTarget(136246, false)
 
 local timerFullyMutated				= mod:NewBuffFadesTimer(120, 140546)
 local timerMalformedBlood			= mod:NewTargetTimer(60, 136050, nil, "Tank|Healer", nil, 5)
-local timerPrimordialStrikeCD		= mod:NewCDTimer(24, 136037)
+local timerPrimordialStrikeCD		= mod:NewCDTimer(21.1, 136037)--Used to be 24?
 local timerCausticGasCD				= mod:NewCDTimer(14, 136216)
 local timerVolatilePathogenCD		= mod:NewCDTimer(27, 136228)
 local timerBlackBlood				= mod:NewTargetTimer(60, 137000, nil, "Tank|Healer")

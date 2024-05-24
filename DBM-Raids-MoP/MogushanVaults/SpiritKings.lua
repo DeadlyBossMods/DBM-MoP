@@ -115,7 +115,7 @@ function mod:OnCombatStart(delay)
 	self.vb.QiangActive = true
 	berserkTimer:Start(-delay)
 	timerAnnihilateCD:Start(10.5)
-	timerFlankingOrdersCD:Start(25)
+	timerFlankingOrdersCD:Start(16.9)--Old 25
 	if self:IsHeroic() then
 		timerImperviousShieldCD:Start(40.7)
 		warnImperviousShieldSoon:Schedule(35.7)
@@ -278,7 +278,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 			timerChargingShadowsCD:Cancel()
 			timerShieldOfDarknessCD:Cancel()
 			warnShieldOfDarknessSoon:Cancel()
---			timerUndyingShadowsCD:Update(40.3, 41.5)--Used to restart, but in 10.2.7 now fires instantly on becoming ghost
+			timerUndyingShadowsCD:Cancel()--Used to restart, but in 10.2.7 now fires instantly on becoming ghost
 			if self.Options.RangeFrame and not self.vb.SubetaiActive then--Close range frame, but only if zian is also not active, otherwise we still need it
 				DBM.RangeCheck:Hide()
 			end
@@ -292,13 +292,13 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 			timerAnnihilateCD:Cancel()
 			timerImperviousShieldCD:Cancel()
 			warnImperviousShieldSoon:Cancel()
---			timerFlankingOrdersCD:Update(37.6, 40)--Used to restart to 30 remaining, but in 10.2.7 now fires instantly on becoming ghost
+			timerFlankingOrdersCD:Cancel()--Used to restart to 30 remaining, but in 10.2.7 now fires instantly on becoming ghost
 		elseif cid == 60710 then
 			self.vb.SubetaiActive = false
 			timerVolleyCD:Cancel()
 			timerRainOfArrowsCD:Cancel()
 			timerSleightOfHandCD:Cancel()
---			timerPillageCD:Restart(30)--Used to restart to 30 remaining, but in 10.2.7 now fires instantly on becoming ghost
+			timerPillageCD:Cancel()--Used to restart to 30 remaining, but in 10.2.7 now fires instantly on becoming ghost
 			if self.Options.RangeFrame and not self.vb.ZianActive then--Close range frame, but only if subetai is also not active, otherwise we still need it
 				DBM.RangeCheck:Hide()
 			end

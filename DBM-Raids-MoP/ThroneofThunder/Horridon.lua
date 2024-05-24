@@ -64,7 +64,7 @@ local timerPuncture				= mod:NewTargetTimer(90, 136767, nil, false, 2)
 local timerPunctureCD			= mod:NewCDTimer(10.5, 136767, nil, "Tank|Healer", nil, 5)
 local timerJalakCD				= mod:NewNextTimer(10, "ej7087", nil, nil, nil, 1, 2457)--Maybe it's time for a better worded spawn timer than "Next mobname". Maybe NewSpawnTimer with "mobname activates" or something.
 local timerBestialCryCD			= mod:NewNextCountTimer(10, 136817, nil, nil, nil, 2)
-local timerDireCallCD			= mod:NewCDCountTimer(62, 137458, nil, nil, nil, 2)--Heroic (every 62-70 seconds)
+local timerDireCallCD			= mod:NewCDCountTimer(60.4, 137458, nil, nil, nil, 2)--Heroic (every 60.4-70 seconds)
 
 local berserkTimer				= mod:NewBerserkTimer(720)
 
@@ -135,7 +135,7 @@ function mod:SPELL_CAST_START(args)
 		end
 	elseif spellId == 136770 and self:AntiSpam(3, 5) then--Double swipe that follows a charge (136769)
 		specWarnDoubleSwipe:Show()
-		timerDoubleSwipeCD:Start(10.6)--Hard coded failsafe. 136741 version is always 11 seconds after 136770 version
+		timerDoubleSwipeCD:Start(6.2)--Hard coded failsafe. 136741 version is always 11 seconds after 136770 version (was 10.6)
 	elseif spellId == 137458 then
 		direNumber = direNumber + 1
 		specWarnDireCall:Show(direNumber)

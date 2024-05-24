@@ -12,57 +12,42 @@ mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 133939 136294 135251 134920",
 	"SPELL_AURA_APPLIED 133971 133974",
 	"SPELL_AURA_REMOVED 137633",
-	"SPELL_CAST_SUCCESS 134476 134031",
+	"SPELL_CAST_SUCCESS 134031",
 	"UNIT_AURA boss1",
 	"UNIT_SPELLCAST_SUCCEEDED boss1"
 )
 
 local warnBite						= mod:NewSpellAnnounce(135251, 3, nil, "Tank")
-local warnRockfall					= mod:NewSpellAnnounce(134476, 2)
 local warnKickShell					= mod:NewAnnounce("warnKickShell", 2, 134031)
 local warnShellConcussion			= mod:NewTargetAnnounce(136431, 1)
 
 local specWarnCallofTortos			= mod:NewSpecialWarningSpell(136294)
 local specWarnQuakeStomp			= mod:NewSpecialWarningCount(134920, nil, nil, nil, 2)
-local specWarnRockfall				= mod:NewSpecialWarningSpell(134476, false, nil, nil, 2)
 local specWarnStoneBreath			= mod:NewSpecialWarningInterrupt(133939, nil, nil, 2, 3)
 local specWarnCrystalShell			= mod:NewSpecialWarning("specWarnCrystalShell", false)
-local specWarnSummonBats			= mod:NewSpecialWarningSwitch("ej7140", "Tank")--Dps can turn it on too, but not on by default for dps cause quite frankly dps should NOT switch right away, tank needs to get aggro first and where they spawn is semi random.
+local specWarnSummonBats			= mod:NewSpecialWarningSwitch(-7140, "Tank")--Dps can turn it on too, but not on by default for dps cause quite frankly dps should NOT switch right away, tank needs to get aggro first and where they spawn is semi random.
 
-local timerBiteCD					= mod:NewCDTimer(8, 135251, nil, "Tank", nil, 5)
-local timerRockfallCD				= mod:NewCDTimer(10, 134476, nil, nil, nil, 3)
+local timerBiteCD					= mod:NewCDTimer(6.9, 135251, nil, "Tank", nil, 5)
 local timerCallTortosCD				= mod:NewNextTimer(60.5, 136294, nil, nil, nil, 1)
 local timerStompCD					= mod:NewCDCountTimer(47, 134920, nil, nil, nil, 2, nil, nil, nil, 1, 4)
 local timerBreathCD					= mod:NewCDTimer(46, 133939, nil, nil, nil, 4, nil, nil, nil, 2, 4)--TODO, adjust timer when Growing Anger is cast, so we can use a Next bar more accurately
-local timerSummonBatsCD				= mod:NewCDTimer(45, "ej7140", nil, nil, nil, 1, 136685)--45-47. This doesn't always sync up to furious stone breath. Longer fight goes on more out of sync they get. So both bars needed I suppose
+local timerSummonBatsCD				= mod:NewCDTimer(45, -7140, nil, nil, nil, 1, 136685)--45-47. This doesn't always sync up to furious stone breath. Longer fight goes on more out of sync they get. So both bars needed I suppose
 local timerStompActive				= mod:NewBuffActiveTimer(10.8, 134920)--Duration of the rapid caveins
 local timerShellConcussion			= mod:NewBuffFadesTimer(20, 136431)
 
 local berserkTimer					= mod:NewBerserkTimer(780)
 
 mod:AddBoolOption("InfoFrame")
-mod:AddSetIconOption("SetIconOnTurtles", "ej7129", false, 5)
+mod:AddSetIconOption("SetIconOnTurtles", -7129, true, 5, {6, 7, 6, 5, 4, 3, 2, 1})
 mod:AddBoolOption("ClearIconOnTurtles", false)--Different option, because you may want auto marking but not auto clearing. or you may want auto clearning when they "die" but not auto marking when they spawn
 mod:AddBoolOption("AnnounceCooldowns", "RaidCooldown")
 
 local shelldName, shellConcussion = DBM:GetSpellName(137633), DBM:GetSpellName(136431)
-local stompActive = false
 local stompCount = 0
-local firstRockfall = false--First rockfall after a stomp
 local shellsRemaining = 0
 local lastConcussion = 0
 local kickedShells = {}
 local addsActivated = 0
-
-local function clearStomp()
-	stompActive = false
-	firstRockfall = false--First rockfall after a stomp
-	if mod:AntiSpam(9, 1) then--prevent double warn.
-		warnRockfall:Show()
-		specWarnRockfall:Show()
-		timerRockfallCD:Start()--Resume normal CDs, first should be 5 seconds after stomp spammed ones
-	end
-end
 
 local function checkCrystalShell()
 	if not DBM:UnitDebuff("player", shelldName) and not UnitIsDeadOrGhost("player") then
@@ -76,15 +61,12 @@ local function checkCrystalShell()
 end
 
 function mod:OnCombatStart(delay)
-	stompActive = false
 	stompCount = 0
-	firstRockfall = false--First rockfall after a stomp
 	shellsRemaining = 0
 	lastConcussion = 0
 	addsActivated = 0
 	table.wipe(kickedShells)
-	timerRockfallCD:Start(15-delay)
-	timerCallTortosCD:Start(21-delay)
+	timerCallTortosCD:Start(20.4-delay)
 	timerStompCD:Start(27-delay, 1)
 	timerBreathCD:Start(-delay)
 	if self:IsHeroic() then
@@ -123,11 +105,9 @@ function mod:SPELL_CAST_START(args)
 		warnBite:Show()
 		timerBiteCD:Start()
 	elseif spellId == 134920 then
-		stompActive = true
 		stompCount = stompCount + 1
 		specWarnQuakeStomp:Show(stompCount)
 		timerStompActive:Start()
-		timerRockfallCD:Start(7.4)--When the spam of rockfalls start
 		timerStompCD:Start(nil, stompCount+1)
 		if self.Options.AnnounceCooldowns then
 			DBM:PlayCountSound(stompCount)
@@ -166,22 +146,7 @@ end
 
 function mod:SPELL_CAST_SUCCESS(args)
 	local spellId = args.spellId
-	if spellId == 134476 then
-		if stompActive then--10 second cd normally, but cd is disabled when stomp active
-			if not firstRockfall then--Announce first one only and ignore the next ones spammed for about 9-10 seconds
-				firstRockfall = true
-				warnRockfall:Show()
-				specWarnRockfall:Show()--To warn of massive incoming for the 9 back to back rockfalls that are incoming
-				self:Schedule(10, clearStomp)
-			end
-		else
-			if self:AntiSpam(9, 1) then--sometimes clearstomp doesn't work? i can't find reason cause all logs match this system exactly.
-				warnRockfall:Show()
-				specWarnRockfall:Show()
-				timerRockfallCD:Start()
-			end
-		end
-	elseif spellId == 134031 and not kickedShells[args.destGUID] then--Kick Shell
+	if spellId == 134031 and not kickedShells[args.destGUID] then--Kick Shell
 		kickedShells[args.destGUID] = true
 		shellsRemaining = shellsRemaining - 1
 		warnKickShell:Show(args.spellName, args.sourceName, shellsRemaining)
@@ -190,7 +155,7 @@ end
 
 --Does not show in combat log, so UNIT_AURA must be used instead
 function mod:UNIT_AURA(uId)
-	local _, _, _, _, duration, expires = DBM:UnitDebuff(uId, shellConcussion)
+	local _, _, _, _, _, expires = DBM:UnitDebuff(uId, shellConcussion)
 	if expires and lastConcussion ~= expires then
 		lastConcussion = expires
 		timerShellConcussion:Start()
