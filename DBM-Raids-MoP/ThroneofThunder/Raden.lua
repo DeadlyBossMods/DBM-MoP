@@ -24,11 +24,11 @@ mod:RegisterEventsInCombat(
 
 --Anima
 local warnAnima					= mod:NewSpellAnnounce(138331, 2)--Switched to anima phase
-local warnUnstableAnima			= mod:NewTargetAnnounce(138288)--May range frame needed. 138295/138296 is damage ids, 138288 is debuff cast.
+local warnUnstableAnima			= mod:NewTargetNoFilterAnnounce(138288)--May range frame needed. 138295/138296 is damage ids, 138288 is debuff cast.
 local warnSanguineHorror		= mod:NewCountAnnounce(138338, 3, nil, "-Healer")--Adds
 --Vita
 local warnVita					= mod:NewSpellAnnounce(138332, 2)--Switched to vita phase
-local warnUnstableVita			= mod:NewTargetAnnounce(138297, 4)
+local warnUnstableVita			= mod:NewTargetNoFilterAnnounce(138297, 4)
 --General
 local warnPhase2				= mod:NewPhaseAnnounce(2, 2)
 

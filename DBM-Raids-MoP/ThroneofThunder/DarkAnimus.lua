@@ -25,9 +25,9 @@ local warnMatterSwapped				= mod:NewAnnounce("warnMatterSwapped", 3, 138618)--Ac
 local warnExplosiveSlam				= mod:NewStackAnnounce(138569, 2, nil, "Tank|Healer")
 --Boss
 local warnActivation				= mod:NewCastAnnounce(139537, 3, 60)
-local warnAnimaRing					= mod:NewTargetAnnounce(136954, 3, nil, "Tank")
+local warnAnimaRing					= mod:NewTargetNoFilterAnnounce(136954, 3, nil, "Tank")
 local warnAnimaFont					= mod:NewTargetAnnounce(138691, 3)
-local warnEmpowerGolem				= mod:NewTargetAnnounce(138780, 3)
+local warnEmpowerGolem				= mod:NewTargetNoFilterAnnounce(138780, 3)
 
 local specWarnCrimsonWakeYou		= mod:NewSpecialWarningRun(138480, nil, nil, nil, 4)--Kiter
 local specWarnCrimsonWake			= mod:NewSpecialWarningMove(138485)--Standing in stuff left behind by kiter

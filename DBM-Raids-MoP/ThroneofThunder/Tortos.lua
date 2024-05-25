@@ -19,7 +19,7 @@ mod:RegisterEventsInCombat(
 
 local warnBite						= mod:NewSpellAnnounce(135251, 3, nil, "Tank")
 local warnKickShell					= mod:NewAnnounce("warnKickShell", 2, 134031)
-local warnShellConcussion			= mod:NewTargetAnnounce(136431, 1)
+local warnShellConcussion			= mod:NewTargetNoFilterAnnounce(136431, 1)
 
 local specWarnCallofTortos			= mod:NewSpecialWarningSpell(136294)
 local specWarnQuakeStomp			= mod:NewSpecialWarningCount(134920, nil, nil, nil, 2)

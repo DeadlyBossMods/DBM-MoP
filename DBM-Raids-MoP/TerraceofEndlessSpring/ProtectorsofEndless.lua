@@ -32,7 +32,7 @@ local warnCleansingWaters			= mod:NewTargetNoFilterAnnounce(117309, 3)--Phase 1+
 local specWarnCleansingWatersDispel	= mod:NewSpecialWarningDispel(117309, "MagicDispeller", nil, nil, 1, 2)--The boss wasn't moved in time, now he needs to be dispelled.
 local specWarnCorruptingWaters		= mod:NewSpecialWarningSwitch(117227, "Dps", nil, nil, 1, 2)
 
-local timerCleansingWatersCD		= mod:NewCDTimer(31.6, 117309, nil, nil, nil, 3, nil, DBM_COMMON_L.MAGIC_ICON)
+local timerCleansingWatersCD		= mod:NewCDTimer(30.4, 117309, nil, nil, nil, 3, nil, DBM_COMMON_L.MAGIC_ICON)
 local timerCorruptingWatersCD		= mod:NewNextTimer(29.1, 117227, nil, nil, nil, 1, nil, DBM_COMMON_L.DAMAGE_ICON)--Was 42 prior to 10.2.7
 --Elder Regail
 mod:AddTimerLine(Regail)

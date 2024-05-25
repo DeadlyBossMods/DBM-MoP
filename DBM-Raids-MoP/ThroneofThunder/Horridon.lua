@@ -25,7 +25,7 @@ TODO: See if this has some target scanning. On heroic these can one shot non tan
 "<431.7 15:32:55> [CLEU] SPELL_CAST_SUCCESS#false#0xF1310E38000020EE#Amani'shi Beast Shaman#2632#128##Unknown#-2147483648#-2147483648#136487#Lightning Nova Totem#1", -- [67956]
 "<431.7 15:32:55> [CLEU] SPELL_SUMMON#false#0xF1310E38000020EE#Amani'shi Beast Shaman#2632#128#0xF1310E5F00002779#Lightning Nova Totem#2600#0#136487#Lightning Nova Totem#1", -- [67957]
 --]]
-local warnCharge				= mod:NewTargetAnnounce(136769, 4)
+local warnCharge				= mod:NewTargetNoFilterAnnounce(136769, 4)
 local warnPuncture				= mod:NewStackAnnounce(136767, 2, nil, "Tank|Healer")
 local warnAdds					= mod:NewAnnounce("warnAdds", 2, 43712)--Some random troll icon
 local warnOrbofControl			= mod:NewAnnounce("warnOrbofControl", 4, "134333")

@@ -22,7 +22,7 @@ mod:RegisterEventsInCombat(
 )
 
 local warnImpale						= mod:NewStackAnnounce(134691, 2, nil, "Tank|Healer")
-local warnThrowSpear					= mod:NewTargetAnnounce(134926, 3)--Target scanning does not work for this.
+local warnThrowSpear					= mod:NewTargetNoFilterAnnounce(134926, 3)--Target scanning does not work for this.
 local warnPhase1						= mod:NewPhaseAnnounce(1)
 local warnMoltenInferno					= mod:NewSpellAnnounce(134664, 2, nil, false)--highly variables cd, also can be spammy. disbled by default.
 local warnUnleashedFlame				= mod:NewSpellAnnounce(134611, 3, nil, false)--Spammy and unnesssary. Every 6 seconds is too often for a non important warning. people can turn it on if they want.
@@ -53,7 +53,6 @@ local yellLightningStorm				= mod:NewYell(136192)
 local specWarnFrozenBlood				= mod:NewSpecialWarningMove(136520)
 local specWarnFistSmash					= mod:NewSpecialWarningCount(136146, nil, nil, nil, 2)
 
-local timerImpale						= mod:NewTargetTimer(40, 134691, nil, "Tank|Healer")
 local timerImpaleCD						= mod:NewCDTimer(20, 134691, nil, "Tank|Healer", nil, 5)
 local timerThrowSpearCD					= mod:NewCDTimer(30, 134926, nil, nil, nil, 3)--30-42 second variation observed
 local timerUnleashedFlameCD				= mod:NewCDTimer(6, 134611, nil, false, nil, 5)--CD for the periodic trigger, not when he'll actually be at 30 energy and use it.

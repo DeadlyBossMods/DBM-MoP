@@ -31,7 +31,7 @@ local warnDiffusionChain				= mod:NewTargetNoFilterAnnounce(135991, 3)--More inf
 local warnDiffusionChainSpread			= mod:NewAnnounce("warnDiffusionChainSpread", 4, 135991)
 local warnOvercharged					= mod:NewTargetNoFilterAnnounce(136295, 3)
 --Phase 1
-local warnDecapitate					= mod:NewTargetAnnounce(134912, 4, nil, "Tank|Healer")
+local warnDecapitate					= mod:NewTargetNoFilterAnnounce(134912, 4, nil, "Tank|Healer")
 --Phase 2
 local warnPhase2						= mod:NewPhaseAnnounce(2)
 local warnSummonBallLightning			= mod:NewCountAnnounce(136543, 3)--This seems to be VERY important to spread for. It spawns an orb for every person who takes damage. MUST range 6 this.
