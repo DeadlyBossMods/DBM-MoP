@@ -228,7 +228,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			self:SetIcon(args.destName, staticIcon)
 			staticIcon = staticIcon - 1
 		end
-		if not self.vb.intermissionActive then
+		if not self.vb.intermissionActive and self:AntiSpam(3, 7) then
 			timerStaticShockCD:Start()
 		end
 		self:Unschedule(warnStaticShockTargets)
@@ -258,12 +258,14 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif spellId == 136295 then
 		overchargeTarget[#overchargeTarget + 1] = args.destName
-		timerOvercharge:Start()
+		if self:AntiSpam(3, 8) then
+			timerOvercharge:Start()
+		end
 		if self.Options.SetIconOnOvercharge then
 			self:SetIcon(args.destName, overchargeIcon)
 			overchargeIcon = overchargeIcon + 1
 		end
-		if not self.vb.intermissionActive then
+		if not self.vb.intermissionActive and self:AntiSpam(3, 9) then
 			timerOverchargeCD:Start()
 		end
 		self:Unschedule(warnOverchargeTargets)

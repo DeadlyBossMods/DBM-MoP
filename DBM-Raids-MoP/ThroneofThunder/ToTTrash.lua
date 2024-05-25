@@ -129,7 +129,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 end
 
 function mod:OnSync(msg, guid)
-	if msg == "OMGSnail" and guid  then
+	if msg == "OMGSnail" and guid then
 		warnFixated:Show()
 		timerFixatedCD:Start(nil, guid)
 	end
