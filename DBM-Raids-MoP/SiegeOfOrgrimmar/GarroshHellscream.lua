@@ -66,7 +66,7 @@ local warnGrippingDespair			= mod:NewStackAnnounce(145183, 2, nil, "Tank")
 local specWarnWhirlingCorruption	= mod:NewSpecialWarningRunCount(144985, nil, nil, nil, 4, 2)--Two options important, for distinction and setting custom sounds for empowered one vs non empowered one, don't merge
 local specWarnGrippingDespair		= mod:NewSpecialWarningStack(145183, nil, 4, nil, nil, 1, 6)--Unlike whirling and desecrate, doesn't need two options, distinction isn't important for tank swaps.
 local specWarnGrippingDespairOther	= mod:NewSpecialWarningTaunt(145183, nil, nil, nil, 1, 2)
-local specWarnTouchOfYShaarj		= mod:NewSpecialWarningSwitchCount(145071, "-Healer")
+local specWarnTouchOfYShaarj		= mod:NewSpecialWarningSwitchCount(145071, "-Healer", nil, nil, 1, 2)
 local specWarnTouchInterrupt		= mod:NewSpecialWarningInterrupt(145599, "HasInterrupt", nil, nil, 1, 2)
 
 local timerWhirlingCorruptionCD		= mod:NewCDCountTimer(49.5, 144985, nil, nil, nil, 2, nil, DBM_COMMON_L.HEALER_ICON, nil, 1, 4)--One bar for both, "empowered" makes timer too long
