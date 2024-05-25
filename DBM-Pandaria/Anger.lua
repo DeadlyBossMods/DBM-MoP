@@ -52,7 +52,7 @@ function mod:OnCombatStart(delay, yellTriggered)
 	playerMCed = false
 	if yellTriggered then
 		timerUnleashedWrathCD:Start(-delay)
-		timerGrowingAngerCD:Start(-delay)
+		timerGrowingAngerCD:Start(30.6-delay)
 	end
 end
 
