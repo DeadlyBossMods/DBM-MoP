@@ -74,7 +74,7 @@ local timerProjection			= mod:NewCastTimer(6, 146822)
 
 local berserkTimer				= mod:NewBerserkTimer(600)
 
-mod:AddInfoFrameOption("ej8255")
+mod:AddInfoFrameOption(-8255)
 mod:AddSetIconOption("SetIconOnMark", 144351, false)
 mod:AddBoolOption("SetIconOnFragment", false)--This does not get along with SetIconOnMark though
 mod.findFastestComputer = {"SetIconOnFragment"} -- for set icon stuff.

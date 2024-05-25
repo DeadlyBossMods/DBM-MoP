@@ -26,10 +26,10 @@ mod:RegisterEvents(
 )
 
 --Conduits (All phases)
-local warnStaticShock					= mod:NewTargetAnnounce(135695, 4)
-local warnDiffusionChain				= mod:NewTargetAnnounce(135991, 3)--More informative than actually preventative. (you need to just spread out, and that's it. can't control who it targets only that it doesn't spread)
+local warnStaticShock					= mod:NewTargetNoFilterAnnounce(135695, 4)
+local warnDiffusionChain				= mod:NewTargetNoFilterAnnounce(135991, 3)--More informative than actually preventative. (you need to just spread out, and that's it. can't control who it targets only that it doesn't spread)
 local warnDiffusionChainSpread			= mod:NewAnnounce("warnDiffusionChainSpread", 4, 135991)
-local warnOvercharged					= mod:NewTargetAnnounce(136295, 3)
+local warnOvercharged					= mod:NewTargetNoFilterAnnounce(136295, 3)
 --Phase 1
 local warnDecapitate					= mod:NewTargetAnnounce(134912, 4, nil, "Tank|Healer")
 --Phase 2
@@ -40,16 +40,14 @@ local warnGorefiendsGrasp				= mod:NewCountAnnounce(108199, 1)
 local warnPhase3						= mod:NewPhaseAnnounce(3)
 local warnViolentGaleWinds				= mod:NewSpellAnnounce(136889, 3)
 --Heroic
-local warnHelmOfCommand					= mod:NewTargetAnnounce(139011, 3)
+local warnHelmOfCommand					= mod:NewTargetNoFilterAnnounce(139011, 3)
 
 --Conduits (All phases)
 local specWarnStaticShock				= mod:NewSpecialWarningYou(135695)
 local yellStaticShock					= mod:NewYell(135695, L.StaticYell)
-local specWarnStaticShockNear			= mod:NewSpecialWarningClose(135695)
 local specWarnDiffusionChainSoon		= mod:NewSpecialWarningPreWarn(135991, nil, 4)
 local specWarnOvercharged				= mod:NewSpecialWarningYou(136295)
 local yellOvercharged					= mod:NewYell(136295)
-local specWarnOverchargedNear			= mod:NewSpecialWarningClose(136295)
 local specWarnBouncingBoltSoon			= mod:NewSpecialWarningPreWarn(136361, nil, 4)
 local specWarnBouncingBolt				= mod:NewSpecialWarningSpell(136361)
 --Phase 1
@@ -96,9 +94,9 @@ local timerHelmOfCommand				= mod:NewCDTimer(14, 139011, nil, nil, nil, 3)
 
 local berserkTimer						= mod:NewBerserkTimer(900)--Confirmed in LFR, probably the same in all modes though?
 
-mod:AddBoolOption("RangeFrame")
-mod:AddBoolOption("SetIconOnOvercharge", true)
-mod:AddBoolOption("SetIconOnStaticShock", true)
+mod:AddRangeFrameOption("8/6", nil, true)
+mod:AddSetIconOption("SetIconOnOvercharge", 136295, true, 0, {1, 2, 3})
+mod:AddSetIconOption("SetIconOnStaticShock", 135695, true, 0, {6, 7, 8})
 mod:AddBoolOption("AGStartDP", true)
 
 mod.vb.warnedCount = 0

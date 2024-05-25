@@ -31,7 +31,7 @@ local warnAutomatedShredder				= mod:NewCountAnnounce("ej8199", 3, 85914)
 local warnOverload						= mod:NewStackAnnounce(145444, 3)
 local warnDeathFromAbove				= mod:NewTargetAnnounce(144208, 4)--Player target, not vulnerable shredder target. (should always be cast on highest threat target, but i like it still being a "target" warning)
 --The Assembly Line
-local warnAssemblyLine					= mod:NewCountAnnounce("ej8202", 3, 85914, "Dps")
+local warnAssemblyLine					= mod:NewCountAnnounce(-8202, 3, 85914, "Dps")
 local warnInactive						= mod:NewTargetAnnounce(138089, 1)
 local warnLaserFixate					= mod:NewTargetAnnounce(143828, 3, 143867)
 local warnReadyToGo						= mod:NewTargetAnnounce(145580, 4)--Crawler mine not dead fast enough
@@ -48,7 +48,7 @@ local specWarnDeathFromAboveNear		= mod:NewSpecialWarningClose(144208)
 local specWarnAutomatedShredderSwitch	= mod:NewSpecialWarningSwitch("ej8199", false)--Strat dependant, you may just ignore them and have tank kill them with laser pools
 --The Assembly Line
 local specWarnCrawlerMine				= mod:NewSpecialWarningSwitch("ej8212", "-Healer")
-local specWarnAssemblyLine				= mod:NewSpecialWarningCount("ej8202", false)--Not all in raid need, just those assigned
+local specWarnAssemblyLine				= mod:NewSpecialWarningCount(-8202, false)--Not all in raid need, just those assigned
 local specWarnShockwaveMissile			= mod:NewSpecialWarningSpell(143641, nil, nil, nil, 2)
 local specWarnReadyToGo					= mod:NewSpecialWarningTarget(145580)
 local specWarnLaserFixate				= mod:NewSpecialWarningRun(143828, nil, nil, 2, 4)
@@ -69,13 +69,13 @@ local timerOverloadCD					= mod:NewCDCountTimer(10, 145444, nil, nil, nil, 2, ni
 local timerDeathFromAboveDebuff			= mod:NewTargetTimer(5, 144210, nil, "-Healer")
 local timerDeathFromAboveCD				= mod:NewNextTimer(40, 144208, nil, "-Healer")
 --The Assembly Line
-local timerAssemblyLineCD				= mod:NewNextCountTimer(40, "ej8202", nil, "Dps", nil, 5, 59193, DBM_COMMON_L.DAMAGE_ICON)
+local timerAssemblyLineCD				= mod:NewNextCountTimer(40, -8202, nil, "Dps", nil, 5, 59193, DBM_COMMON_L.DAMAGE_ICON)
 local timerPatternRecognition			= mod:NewBuffFadesTimer(60, 144236, nil, false)
 local timerLaserFixate					= mod:NewBuffFadesTimer(15, 143828)
 local timerBreakinPeriod				= mod:NewTargetTimer(60, 145269, nil, false)--Many mines can be up at once so timer off by default do to spam
 local timerMagneticCrush				= mod:NewBuffActiveTimer(30, 144466)
 
-mod:AddInfoFrameOption("ej8202")
+mod:AddInfoFrameOption(-8202)
 mod:AddSetIconOption("SetIconOnMines", "ej8212", false, 5)
 mod:AddSetIconOption("SetIconOnlaserFixate", 143828, false)
 mod:AddSetIconOption("SetIconOnSawBlade", 143265, false)

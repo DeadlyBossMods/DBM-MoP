@@ -85,7 +85,7 @@ local timerEmpoweredChainHealCD		= mod:NewNextSourceTimer(6, 143473, nil, nil, n
 local berserkTimer					= mod:NewBerserkTimer(600)
 
 mod:AddSetIconOption("SetIconOnAdds", -7920, false, 5, {7, 6, 4, 2, 1})
-mod:AddInfoFrameOption("ej7909")
+mod:AddInfoFrameOption(-7909)
 
 --Upvales, don't need variables
 local UnitName, UnitExists, UnitGUID = UnitName, UnitExists, UnitGUID
