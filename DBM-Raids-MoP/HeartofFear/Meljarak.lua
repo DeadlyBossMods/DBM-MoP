@@ -84,6 +84,7 @@ local zarthikGUIDS = {}
 
 local function clearWindBombTargets()
 	table.wipe(windBombTargets)
+	timerWindBombCD:Start(5.5)
 end
 
 function mod:OnCombatStart(delay)
@@ -95,7 +96,7 @@ function mod:OnCombatStart(delay)
 	table.wipe(windBombTargets)
 	table.wipe(zarthikGUIDS)
 	timerKorthikStrikeCD:Start(18-delay)
-	timerRainOfBladesCD:Start(60-delay)
+	timerRainOfBladesCD:Start(21.7-delay)--Former, 60
 	if not self:IsDifficulty("lfr25") then
 		berserkTimer:Start(-delay)
 	end
@@ -182,9 +183,8 @@ function mod:SPELL_DAMAGE(_, _, _, _, destGUID, destName, _, _, spellId)
 	if spellId == 131830 and not windBombTargets[destGUID] then
 		windBombTargets[destGUID] = true
 		warnWindBomb:CombinedShow(0.5, destName)
-		timerWindBombCD:Start()
 		self:Unschedule(clearWindBombTargets)
-		self:Schedule(0.3, clearWindBombTargets)
+		self:Schedule(0.5, clearWindBombTargets)
 		if destGUID == UnitGUID("player") and self:AntiSpam(3, 3) then
 			specWarnWindBomb:Show()
 			if not self:IsDifficulty("lfr25") then
