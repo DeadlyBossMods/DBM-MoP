@@ -157,7 +157,6 @@ local berserkTimer					= mod:NewBerserkTimer(720)
 mod:AddRangeFrameOption("6/5/3")
 mod:AddSetIconOption("SetIconOnAim", 142948, false)
 mod:AddSetIconOption("SetIconOnMesmerize", 142671, false)
-mod:AddArrowOption("AimArrow", 142948, false, true)
 
 local calculatingDude, readyToFight = DBM:EJ_GetSectionInfo(8012), DBM:GetSpellName(143542)
 local vulnerable1, vulnerable2, vulnerable3, vulnerable4 = DBM:GetSpellName(143279), DBM:GetSpellName(143275), DBM:GetSpellName(142929), DBM:GetSpellName(142931)
@@ -464,9 +463,6 @@ function mod:OnCombatEnd()
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Hide()
 	end
-	if self.Options.AimArrow then
-		DBM.Arrow:Hide()
-	end
 end
 
 --"<13.6 19:16:29> [UNIT_SPELLCAST_SUCCEEDED] Iyyokuk the Lucid [[boss2:Jump to Center::0:143545]]", -- [95]
@@ -717,9 +713,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 		if self.Options.SetIconOnAim then
 			self:SetIcon(args.destName, 3)
-		end
-		if self.Options.AimArrow then
-			DBM.Arrow:ShowRunTo(args.destName, 3, 5)
 		end
 	end
 end

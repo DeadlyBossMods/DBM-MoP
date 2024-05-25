@@ -55,7 +55,6 @@ local berserkTimer						= mod:NewBerserkTimer(360)
 mod:AddRangeFrameOption("8/5")--Various things
 mod:AddSetIconOption("SetIconOnDisplacedEnergy", 142913, false)
 mod:AddSetIconOption("SetIconOnAdds", "ej7952", false, 5)
-mod:AddArrowOption("BloodrageArrow", 142879, true, true)
 
 --Upvales, don't need variables
 local displacedEnergyDebuff = DBM:GetSpellName(142913)
@@ -123,16 +122,6 @@ function mod:SPELL_CAST_START(args)
 			timerArcingSmashCD:Start(14, 1)
 			timerBreathofYShaarjCD:Start(70, 2)
 		else--Breath 2
-			if self.Options.BloodrageArrow then
-				for uId in DBM:GetGroupMembers() do
-					local tanking, status = UnitDetailedThreatSituation(uId, "boss1")
-					if status == 3 then
-						if UnitIsUnit("player", uId) then return end
-						DBM.Arrow:ShowRunTo(uId, 3, 5)
-						break
-					end
-				end
-			end
 			if self.Options.RangeFrame then
 				DBM.RangeCheck:Hide()
 			end
