@@ -81,7 +81,7 @@ mod.vb.prevBoss1Power = 0
 mod.vb.prevBoss2Power = 0
 
 --NOTE, spawns are altered when they are rapidly killed on retail
-local rageTimers = {
+--[[local rageTimers = {
 	[0] = 15.6,--Varies from heroic vs normal, number here doesn't matter though, we don't start this on pull we start it off first yell (which does always happen).
 	[1] = 33,
 	[2] = 33,
@@ -97,7 +97,7 @@ local rageTimers = {
 	[12]= 83,
 --Rest are all 33
 --timers variate slightly so never will be perfect but trying to get as close as possible. seem same in all modes.
-}
+}--]]
 
 local function addsDelay(self, add)
 	if add == "Courage" then
@@ -132,8 +132,9 @@ local function addsDelay(self, add)
 		self.vb.rageCount = self.vb.rageCount + 1
 		warnRageActivated:Show(self.vb.rageCount)
 		--Titan gas delay has funny interaction with these and causes 30 or 60 second delays. Pretty much have to use a table.
-		timerRageActivates:Start(rageTimers[self.vb.rageCount] or 33, self.vb.rageCount+1)
-		self:Schedule(rageTimers[self.vb.rageCount] or 33, addsDelay, self, "Rage")--Because he doesn't always yell, schedule next one here as a failsafe
+--		local timer = rageTimers[self.vb.rageCount] or 33
+--		timerRageActivates:Start(timer, self.vb.rageCount+1)
+--		self:Schedule(timer, addsDelay, self, "Rage")--Because he doesn't always yell, schedule next one here as a failsafe
 	elseif add == "Boss" then
 		if self.Options[specWarnBossesActivated.option] then
 			specWarnBossesActivated:Show()

@@ -333,7 +333,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg, boss)
 	if boss == Zian then
 		warnActivated:Show(boss)
 		self.vb.ZianActive = true
-		timerChargingShadowsCD:Start()
+		timerChargingShadowsCD:Start(9.9)
 		timerUndyingShadowsCD:Start(20)
 		if self:IsHeroic() then
 			warnShieldOfDarknessSoon:Schedule(35, 5)--Start pre warning with regular warnings only as you don't move at this point yet.

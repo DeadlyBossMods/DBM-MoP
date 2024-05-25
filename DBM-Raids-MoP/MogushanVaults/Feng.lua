@@ -378,7 +378,7 @@ function mod:OnSync(msg)
 		-- 10/13 01:11:24.437  YELL: Oh sage of the ages! Instill to me your arcane wisdom!
 		-- 10/13 01:11:36.671  SPELL_CAST_SUCCESS,0xF150EA690000478E,"",0x10a48,0x0,0x0000000000000000,nil,0x80000000,0x80000000,116417,"",0x40
 		timerArcaneResonanceCD:Start(12)
-		timerArcaneVelocityCD:Start(11.4, 1)--It's either this, or this +10. Not yet sure what causes the +10 (14.5 old timer)
+		timerArcaneVelocityCD:Start(8.8, 1)--It's either this, or this +10. Not yet sure what causes the +10 (14.5 old timer)
 		if self.Options.RangeFrame then
 			DBM.RangeCheck:Show(6)
 		end
