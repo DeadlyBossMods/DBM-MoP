@@ -160,7 +160,7 @@ local function checkArcing()
 end
 
 function mod:OnCombatStart(delay)
-	self.vb.phase = 1
+	self:SetStage(1)
 	self.vb.fistSmashCount = 0
 	warnPhase1:Show()
 	timerThrowSpearCD:Start(-delay)
@@ -220,7 +220,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerMoltenOverload:Start()
 	elseif spellId == 136192 then
 		warnLightningStorm:Show(args.destName)
-		if self.vb.phase == 2 then
+		if self:GetStage(2) then
 			timerLightningStormCD:Start()
 		else--Heroic phase 1 or 4
 			timerLightningStormCD:Start(37.5)
@@ -234,7 +234,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif spellId == 135145 then
 		warnFreeze:Show(args.destName)
-		if self.vb.phase == 3 then
+		if self:GetStage(3) then
 			timerFreezeCD:Start()
 		else--Heroic phase 2 or 4
 			timerFreezeCD:Start(36)
@@ -289,7 +289,7 @@ end
 
 function mod:SPELL_SUMMON(args)
 	local spellId = args.spellId
-	if spellId == 134926 and self.vb.phase < 4 then
+	if spellId == 134926 and self:GetStage(4, 1) then
 		if self:AntiSpam(15, 6) and not spearSpecWarnFired then--Basically, if the target scanning failed, we do an aoe warning on the actual summon.
 			specWarnThrowSpear:Show()
 		end
@@ -326,13 +326,13 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	elseif spellId == 50630 then--Eject All Passengers (heroic phase change trigger)
 		local cid = self:GetCIDFromGUID(UnitGUID(uId))
 		self:Unschedule(checkSpear)
-		timerThrowSpearCD:Start()
+		timerThrowSpearCD:Restart()
 		if cid == 68079 then--Ro'shak
 			if self.Options.RangeFrame then
 				DBM.RangeCheck:Show(10, nil, nil, 1)--Switch range frame back to 1. Range is assumed 10, no spell info
 			end
 			--Only one log, but i looks like spear cd from phase 1 remains intact
-			self.vb.phase = 2
+			self:SetStage(2)
 			timerUnleashedFlameCD:Cancel()
 			timerMoltenOverload:Cancel()
 			timerWhirlingWindsCD:Cancel()
@@ -348,7 +348,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 			timerWindStorm:Schedule(52)
 			timerWindStormCD:Start(52)
 		elseif cid == 68080 then--Quet'zal
-			self.vb.phase = 3
+			self:SetStage(3)
 			timerLightningStormCD:Cancel()
 			timerWindStorm:Cancel()
 			timerWindStormCD:Cancel()
@@ -361,7 +361,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 			checkArcing()
 		elseif cid == 68081 then--Dam'ren
 			--confirmed, dam'ren's abilities do NOT reset in phase 4, cds from phase 3 carry over.
-			self.vb.phase = 4
+			self:SetStage(4)
 			timerImpaleCD:Cancel()
 			warnPhase4:Show()
 			timerRisingAngerCD:Start(15)
@@ -381,15 +381,15 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	elseif spellId == 139181 then--Frost Spike (Phase 2 Heroic)
 		warnFrostSpike:Show()
 		timerFrostSpikeCD:Start()
-	elseif spellId == 137656 and self.vb.phase == 2 and self:AntiSpam(2, 1) then--Rushing Winds (Wind Storm end trigger). ANTISPAM still needed, multiple get cast
+	elseif spellId == 137656 and self:GetStage(2) and self:AntiSpam(2, 1) then--Rushing Winds (Wind Storm end trigger). ANTISPAM still needed, multiple get cast
 		specWarnWindStorm:Cancel()
 		warnWindStormEnd:Show()
 		specWarnWindStorm:Schedule(70)
 		timerWindStorm:Schedule(70)
 		timerWindStormCD:Start()
 	elseif spellId == 136146 and self:AntiSpam(2, 5) then
-		if self.vb.phase < 4 then--Shit broke, which happens sometimes
-			self.vb.phase = 4
+		if self:GetStage(4, 1) then--Shit broke, which happens sometimes
+			self:SetStage(4)
 			timerThrowSpearCD:Cancel()
 			self:Unschedule(checkSpear)
 		end
@@ -419,16 +419,16 @@ function mod:UNIT_DIED(args)
 				DBM.InfoFrame:SetHeader(arcingName)
 				DBM.InfoFrame:Show(5, "playerbaddebuff", arcingName)
 			end
-			self.vb.phase = 2
+			self:SetStage(2)
 			timerImpaleCD:Cancel()
 			timerLightningStormCD:Start(17)
 			self:Unschedule(checkSpear)
 			self:Schedule(25, checkSpear)
-			timerThrowSpearCD:Start()
+			timerThrowSpearCD:Restart()
 			warnPhase2:Show()
-			specWarnWindStorm:Schedule(49.5)
-			timerWindStorm:Schedule(49.5)
-			timerWindStormCD:Start(49.5)
+			specWarnWindStorm:Schedule(14.5)--Old, 49.5
+			timerWindStorm:Schedule(14.5)
+			timerWindStormCD:Start(14.5)
 		end
 	elseif cid == 68080 then--Quet'zal
 		timerLightningStormCD:Cancel()
@@ -445,13 +445,13 @@ function mod:UNIT_DIED(args)
 		if self:IsHeroic() then--In heroic, all mounts die in phase 4.
 
 		else
-			self.vb.phase = 3
+			self:SetStage(3)
 			timerImpaleCD:Cancel()
 			warnPhase3:Show()
 			timerDeadZoneCD:Start(6)
 			self:Unschedule(checkSpear)
 			self:Schedule(25, checkSpear)
-			timerThrowSpearCD:Start()
+			timerThrowSpearCD:Restart()
 		end
 	elseif cid == 68081 then--Dam'ren
 		timerDeadZoneCD:Cancel()
@@ -459,7 +459,7 @@ function mod:UNIT_DIED(args)
 		if self:IsHeroic() then--In heroic, all mounts die in phase 4.
 
 		else
-			self.vb.phase = 4
+			self:SetStage(4)
 			timerImpaleCD:Cancel()
 			timerThrowSpearCD:Cancel()
 			self:Unschedule(checkSpear)

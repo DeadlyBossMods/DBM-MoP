@@ -103,7 +103,7 @@ function mod:OnCombatStart(delay)
 	darkPowerWarned = false
 	possessesDone = 0
 	boltCasts = 0
-	timerQuickSandCD:Start(8-delay)
+	timerQuickSandCD:Start(5.8-delay)
 	timerRecklessChargeCD:Start(10-delay)--the trigger is 6 seconds from pull, charge will happen at 10. I like timer ending at cast finish for this one though vs tryng to have TWO timers for something that literally only has 6 second cd
 	timerBitingColdCD:Start(15-delay)--15 seconds until debuff, 13 til cast.
 	timerBlessedLoaSpiritCD:Start(25-delay)
