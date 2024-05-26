@@ -6,7 +6,7 @@ mod.statTypes = "normal,heroic,mythic,lfr"
 mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(72276)
 --mod:SetEncounterID(1624)
---mod:SetZone(1234)--FIXME RIGHT ID
+mod:SetZone(1136)
 
 mod:RegisterCombat("combat")
 mod.syncThreshold = 1
@@ -34,28 +34,27 @@ local boss = DBM:EJ_GetSectionInfo(8216)
 
 --Amalgam of Corruption
 local warnSelfDoubt						= mod:NewStackAnnounce(146124, 2, nil, "Tank")
-local warnResidualCorruption			= mod:NewSpellAnnounce(145073)
-local warnLookWithinEnd					= mod:NewEndTargetAnnounce("ej8220", 2, nil, false)
+local warnResidualCorruption			= mod:NewSpellAnnounce(145073, 2, nil, false, 2)
+local warnLookWithinEnd					= mod:NewEndTargetAnnounce(-8220, 2, nil, false)
 local warnManifestationSoon				= mod:NewSoonAnnounce(-8232, 2)
 --Test of Reliance (Healer)
 local warnDishearteningLaugh			= mod:NewSpellAnnounce(146707, 3)
 
 --Amalgam of Corruption
-local specWarnUnleashedAnger			= mod:NewSpecialWarningSpell(145216, "Tank")--Cast warning, not stack. for active mitigation timing.
-local specWarnSelfDoubtOther			= mod:NewSpecialWarningTaunt(146124)--Stack warning, to taunt off other tank
-local specWarnBlindHatred				= mod:NewSpecialWarningSpell(145226, nil, nil, nil, 2)
-local specWarnManifestation				= mod:NewSpecialWarningSwitch(-8232, "-Healer")--Unleashed Manifestation of Corruption
-local specWarnResidualCorruption		= mod:NewSpecialWarningSpell(145073, false)--spammy. but sometimes needed.
+local specWarnUnleashedAnger			= mod:NewSpecialWarningDefensive(145216, nil, nil, nil, 1, 2)
+local specWarnSelfDoubtOther			= mod:NewSpecialWarningTaunt(146124, nil, nil, nil, 1, 2)--Stack warning, to taunt off other tank
+local specWarnBlindHatred				= mod:NewSpecialWarningSpell(145226, nil, nil, nil, 2, 2)
+local specWarnManifestation				= mod:NewSpecialWarningSwitch(-8232, "-Healer", nil, nil, 1, 2)--Unleashed Manifestation of Corruption
 --Test of Serenity (DPS)
 local specWarnTearReality				= mod:NewSpecialWarningDodge(144482, nil, nil, nil, 2, 2)
 --Test of Reliance (Healer)
-local specWarnLingeringCorruption		= mod:NewSpecialWarningDispel(144514)
-local specWarnBottomlessPitMove			= mod:NewSpecialWarningMove(146703)
+local specWarnLingeringCorruption		= mod:NewSpecialWarningDispel(144514, nil, nil, nil, 1, 2)
+local specWarnBottomlessPitMove			= mod:NewSpecialWarningGTFO(146703, nil, nil, nil, 1, 8)
 --Test of Confidence (tank)
-local specWarnTitanicSmash				= mod:NewSpecialWarningDodge(144628)
-local specWarnBurstOfCorruption			= mod:NewSpecialWarningSpell(144654, nil, nil, nil, 2)
-local specWarnHurlCorruption			= mod:NewSpecialWarningInterrupt(144649, nil, nil, nil, 3)
-local specWarnPiercingCorruption		= mod:NewSpecialWarningSpell(144657)
+local specWarnTitanicSmash				= mod:NewSpecialWarningDodge(144628, nil, nil, nil, 2, 2)
+local specWarnBurstOfCorruption			= mod:NewSpecialWarningSpell(144654, nil, nil, nil, 2, 2)
+local specWarnHurlCorruption			= mod:NewSpecialWarningInterrupt(144649, nil, nil, nil, 3, 2)
+local specWarnPiercingCorruption		= mod:NewSpecialWarningDefensive(144657, nil, nil, nil, 1, 2)
 
 --Amalgam of Corruption
 local timerCombatStarts					= mod:NewCombatTimer(25)
@@ -63,7 +62,7 @@ local timerUnleashedAngerCD				= mod:NewCDTimer(10, 145216, nil, "Tank", nil, 5,
 local timerBlindHatred					= mod:NewBuffActiveTimer(30, 145226, nil, nil, nil, 6, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerBlindHatredCD				= mod:NewNextTimer(30, 145226, nil, nil, nil, 6, nil, DBM_COMMON_L.DEADLY_ICON)
 --All Tests
-local timerLookWithin					= mod:NewBuffFadesTimer(60, "ej8220", nil, nil, nil, 6, nil, nil, nil, 1, 4)
+local timerLookWithin					= mod:NewBuffFadesTimer(60, -8220, nil, nil, nil, 6, nil, nil, nil, 1, 4)
 --Test of Serenity (DPS)
 local timerTearRealityCD				= mod:NewCDNPTimer(8.5, 144482)--8.5-10sec variation. Nameplate only timer since a lot of these can be up at once
 --Test of Reliance (Healer)
@@ -79,7 +78,6 @@ local timerExpelCorruptionCD			= mod:NewCDNPTimer(10.9, 144479)
 local berserkTimer						= mod:NewBerserkTimer(418)
 
 --Upvales, don't need variables
-local corruptionLevel = DBM:EJ_GetSectionInfo(8252)
 local Ambiguate = Ambiguate
 --Tables, can't recover
 local residue = {}
@@ -94,6 +92,7 @@ mod.vb.manifestationCount = 0
 local function addsDelay()
 	mod.vb.manifestationCount = mod.vb.manifestationCount + 1
 	specWarnManifestation:Show(mod.vb.manifestationCount)
+	specWarnManifestation:Play("bigmob")
 end
 
 local function addSync(guid)
@@ -111,8 +110,8 @@ end
 function mod:OnCombatStart(delay)
 	playerInside = false
 	table.wipe(warnedAdd)
-	mod.vb.unleashedAngerCast = 0
-	mod.vb.manifestationCount = 0
+	self.vb.unleashedAngerCast = 0
+	self.vb.manifestationCount = 0
 	table.wipe(residue)
 	timerBlindHatredCD:Start(25-delay)
 	if self:IsDifficulty("lfr25") then
@@ -130,7 +129,10 @@ function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
 	if spellId == 145216 then
 		self.vb.unleashedAngerCast = self.vb.unleashedAngerCast + 1
-		specWarnUnleashedAnger:Show()
+		if self:IsTanking("player", nil, nil, true, args.sourceGUID) then
+			specWarnUnleashedAnger:Show()
+			specWarnUnleashedAnger:Play("defensive")
+		end
 		if self.vb.unleashedAngerCast < 3 then
 			timerUnleashedAngerCD:Start(nil, self.vb.unleashedAngerCast+1)
 		end
@@ -140,14 +142,18 @@ function mod:SPELL_CAST_START(args)
 		timerTearRealityCD:Start(nil, args.sourceGUID)
 	elseif spellId == 144654 then
 		specWarnBurstOfCorruption:Show()
+		specWarnBurstOfCorruption:Play("aesoon")
 	elseif spellId == 144628 then
 		specWarnTitanicSmash:Show()
+		specWarnTitanicSmash:Play("shockwave")
 		timerTitanicSmashCD:Start()
 	elseif spellId == 144649 then
 		specWarnHurlCorruption:Show(args.sourceName)
+		specWarnHurlCorruption:Play("kickcast")
 		timerHurlCorruptionCD:Start()
 	elseif spellId == 144657 then
 		specWarnPiercingCorruption:Show()
+		specWarnPiercingCorruption:Play("defensive")
 		timerPiercingCorruptionCD:Start()
 	elseif spellId == 146707 then
 		warnDishearteningLaugh:Show()
@@ -160,7 +166,10 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
 	if spellId == 144514 then
-		specWarnLingeringCorruption:Show(args.destName)
+		if self:CheckDispelFilter("magic") then
+			specWarnLingeringCorruption:Show(args.destName)
+			specWarnLingeringCorruption:Play("helpdispel")
+		end
 		timerLingeringCorruptionCD:Start()
 	elseif spellId == 145226 then
 		self:SendSync("BlindHatredStarted")
@@ -168,12 +177,14 @@ function mod:SPELL_AURA_APPLIED(args)
 		playerInside = true
 		timerLookWithin:Start()
 	elseif spellId == 146703 and args:IsPlayer() and self:AntiSpam(3, 2) then
-		specWarnBottomlessPitMove:Show()
+		specWarnBottomlessPitMove:Show(args.spellName)
+		specWarnBottomlessPitMove:Play("watchfeet")
 	elseif spellId == 146124 then
 		local amount = args.amount or 1
 		warnSelfDoubt:Show(args.destName, amount)
 		if not args:IsPlayer() and amount >= 3 then
 			specWarnSelfDoubtOther:Show(args.destName)
+			specWarnSelfDoubtOther:Play("tauntboss")
 		end
 	end
 end
@@ -201,7 +212,6 @@ function mod:SPELL_DAMAGE(sourceGUID, _, _, _, _, _, _, _, spellId)
 	if spellId == 145073 and not residue[sourceGUID] then
 		residue[sourceGUID] = true
 		warnResidualCorruption:Show()
-		specWarnResidualCorruption:Show()
 	end
 end
 
@@ -256,6 +266,7 @@ function mod:OnSync(msg, guid)
 	elseif msg == "BlindHatredStarted" and self:AntiSpam(5, 3) then
 		if not playerInside then
 			specWarnBlindHatred:Show()
+			specWarnBlindHatred:Play("farfromline")
 		end
 		timerBlindHatred:Start()
 	end
