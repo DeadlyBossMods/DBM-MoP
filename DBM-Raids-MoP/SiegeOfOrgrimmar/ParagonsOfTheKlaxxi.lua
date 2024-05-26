@@ -259,7 +259,7 @@ local function CheckBosses(self)
 				timerMutateCD:Start(23, 1)
 				if DBM:UnitDebuff("player", vulnerable2) then vulnerable = true end
 			elseif cid == 71153 then--Hisek the Swarmkeeper
-				timerAimCD:Start(32, 1)--Might be 35-37 with unitdebuff filter
+				timerAimCD:Start(28.2, 1)--Might be 35-37 with unitdebuff filter (former 32)
 				if self:IsMythic() then
 					timerRapidFireCD:Start(47.5)--47-50 with unitdebuff filter
 				end
@@ -279,7 +279,7 @@ local function CheckBosses(self)
 			elseif cid == 71155 then--Korven the Prime
 				timerShieldBashCD:Start(19)--20seconds from REAL IEEU
 			elseif cid == 71160 then--Iyyokuk the Lucid
-				timerInsaneCalculationCD:Start()
+				timerInsaneCalculationCD:Start(15)--Former 25
 			elseif cid == 71154 then--Ka'roz the Locust
 				timerWhirlingCD:Start(9.8)
 				timerHurlAmberCD:Start(41.3)
@@ -599,7 +599,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 	if spellId == 142528 then
 		self.vb.toxicInjection = true
 		warnToxicInjection:Show()
-		timerToxicCatalystCD:Start(20)
+		timerToxicCatalystCD:Start(16.9)--Former 20
 	elseif spellId == 142232 then
 		self:StopRepeatedScan("DFAScan")
 		self:ScheduleMethod(28, "StartRepeatedScan", args.sourceGUID, "DFAScan", 0.25, true)

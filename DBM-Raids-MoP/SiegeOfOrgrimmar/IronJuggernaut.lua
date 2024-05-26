@@ -132,7 +132,9 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
 	if spellId == 144467 then
-		timerIgniteArmorCD:Start()
+		if self:AntiSpam(3, 1) then
+			timerIgniteArmorCD:Start()
+		end
 		local uId = DBM:GetRaidUnitId(args.destName)
 		if self:IsTanking(uId, "boss1") then
 			local amount = args.amount or 1
@@ -167,7 +169,7 @@ function mod:SPELL_AURA_REMOVED(args)
 end
 
 function mod:SPELL_PERIODIC_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
-	if spellId == 144218 and destGUID == UnitGUID("player") and self:AntiSpam(1.5) then
+	if spellId == 144218 and destGUID == UnitGUID("player") and self:AntiSpam(2.5, 2) then
 		specWarnBorerDrillMove:Show()
 	end
 end

@@ -189,7 +189,7 @@ function mod:OnCombatStart(delay)
 	specWarnSiegeEngineer:Schedule(16-delay)
 	specWarnSiegeEngineer:ScheduleVoice(16-delay, "mobsoon")
 	timerSiegeEngineerCD:Start(20-delay, 1)
-	timerHellscreamsWarsongCD:Start(22-delay)
+	timerHellscreamsWarsongCD:Start(20.6-delay)
 	timerFarseerWolfRiderCD:Start(30-delay, 1)
 	if self:IsDifficulty("lfr25") then
 		berserkTimer:Start(1500-delay)

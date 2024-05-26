@@ -117,7 +117,7 @@ function mod:OnCombatStart(delay)
 	self.vb.firstTower = 0
 	self.vb.pulseCount = 0
 	if not self:IsMythic() then
-		timerTowerCD:Start(116.5-delay)
+		timerTowerCD:Start(116.5-delay)--Initial timer
 	else
 		timerTowerGruntCD:Start(6)
 		self:Schedule(6, TowerGrunt, self)
@@ -246,7 +246,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 		warnPhase2:Show()
 		warnPhase2:Play("ptwo")
 		timerFlamesofGalakrondCD:Start(13.5)
-		timerPulsingFlamesCD:Start(39, 1)--unconfirmed
+		timerPulsingFlamesCD:Start(26.2, 1)--(used to be 39?)
 		self:Unschedule(protos)
 	end
 end
@@ -280,9 +280,11 @@ function mod:UPDATE_UI_WIDGET(table)
 	if widgetInfo and widgetInfo.text then
 		local text = widgetInfo.text
 		local percent = tonumber(string.match(text or "", "%d+"))
-		if percent == 1 and (self.vb.firstTower == 0) and not self:IsMythic() then
-			self.vb.firstTower = 1
-			timerTowerCD:Start()
+		if percent == 1 and not self:IsMythic() then
+			if (self.vb.firstTower == 0) then
+				self.vb.firstTower = 1
+			end
+			timerTowerCD:Restart()--Corrected timer using widget api
 		end
 	end
 end

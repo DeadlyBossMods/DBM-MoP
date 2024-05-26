@@ -266,7 +266,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerVengefulStrikesCD:Cancel()
 		timerClashCD:Cancel()
 		timerCorruptedBrewCD:Cancel()
-		timerInfernoStrikeCD:Start(8)
+		timerInfernoStrikeCD:Start(7.2)
 		timerDefiledGroundCD:Start(8.9)
 		self:RegisterShortTermEvents(
 			"UNIT_DIED"--We register here to make sure we wipe variables on pull

@@ -12,7 +12,7 @@ mod:RegisterCombat("combat")
 mod.syncThreshold = 1
 
 mod:RegisterEventsInCombat(
-	"SPELL_CAST_START 145216 144482 144654 144628 144649 144657 146707",
+	"SPELL_CAST_START 145216 144482 144654 144628 144649 144657 146707 144479",
 	"SPELL_AURA_APPLIED 144514 145226 144849 144850 144851 146703",
 	"SPELL_AURA_APPLIED_DOSE 146124",
 	"SPELL_AURA_REMOVED 145226 144849 144850 144851",
@@ -36,6 +36,7 @@ local boss = DBM:EJ_GetSectionInfo(8216)
 local warnSelfDoubt						= mod:NewStackAnnounce(146124, 2, nil, "Tank")
 local warnResidualCorruption			= mod:NewSpellAnnounce(145073)
 local warnLookWithinEnd					= mod:NewEndTargetAnnounce("ej8220", 2, nil, false)
+local warnManifestationSoon				= mod:NewSoonAnnounce(-8232, 2)
 --Test of Reliance (Healer)
 local warnDishearteningLaugh			= mod:NewSpellAnnounce(146707, 3)
 
@@ -43,11 +44,10 @@ local warnDishearteningLaugh			= mod:NewSpellAnnounce(146707, 3)
 local specWarnUnleashedAnger			= mod:NewSpecialWarningSpell(145216, "Tank")--Cast warning, not stack. for active mitigation timing.
 local specWarnSelfDoubtOther			= mod:NewSpecialWarningTaunt(146124)--Stack warning, to taunt off other tank
 local specWarnBlindHatred				= mod:NewSpecialWarningSpell(145226, nil, nil, nil, 2)
-local specWarnManifestation				= mod:NewSpecialWarningSwitch("ej8232", "-Healer")--Unleashed Manifestation of Corruption
-local specWarnManifestationSoon			= mod:NewSpecialWarningSoon("ej8232", "-Healer", nil, nil, 2)--WHen the ones die inside they don't spawn right away, there is like a 5 second lag.
+local specWarnManifestation				= mod:NewSpecialWarningSwitch(-8232, "-Healer")--Unleashed Manifestation of Corruption
 local specWarnResidualCorruption		= mod:NewSpecialWarningSpell(145073, false)--spammy. but sometimes needed.
 --Test of Serenity (DPS)
-local specWarnTearReality				= mod:NewSpecialWarningDodge(144482)
+local specWarnTearReality				= mod:NewSpecialWarningDodge(144482, nil, nil, nil, 2, 2)
 --Test of Reliance (Healer)
 local specWarnLingeringCorruption		= mod:NewSpecialWarningDispel(144514)
 local specWarnBottomlessPitMove			= mod:NewSpecialWarningMove(146703)
@@ -59,13 +59,13 @@ local specWarnPiercingCorruption		= mod:NewSpecialWarningSpell(144657)
 
 --Amalgam of Corruption
 local timerCombatStarts					= mod:NewCombatTimer(25)
-local timerUnleashedAngerCD				= mod:NewCDTimer(11, 145216, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
+local timerUnleashedAngerCD				= mod:NewCDTimer(10, 145216, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerBlindHatred					= mod:NewBuffActiveTimer(30, 145226, nil, nil, nil, 6, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerBlindHatredCD				= mod:NewNextTimer(30, 145226, nil, nil, nil, 6, nil, DBM_COMMON_L.DEADLY_ICON)
 --All Tests
 local timerLookWithin					= mod:NewBuffFadesTimer(60, "ej8220", nil, nil, nil, 6, nil, nil, nil, 1, 4)
 --Test of Serenity (DPS)
-local timerTearRealityCD				= mod:NewCDTimer(8.5, 144482)--8.5-10sec variation
+local timerTearRealityCD				= mod:NewCDNPTimer(8.5, 144482)--8.5-10sec variation. Nameplate only timer since a lot of these can be up at once
 --Test of Reliance (Healer)
 local timerDishearteningLaughCD			= mod:NewNextTimer(12, 146707)
 local timerLingeringCorruptionCD		= mod:NewNextTimer(15.5, 144514, nil, nil, nil, 5, nil, nil, nil, 2, 4)
@@ -73,6 +73,8 @@ local timerLingeringCorruptionCD		= mod:NewNextTimer(15.5, 144514, nil, nil, nil
 local timerTitanicSmashCD				= mod:NewCDTimer(14.5, 144628, nil, nil, nil, 3)--14-17sec variation
 local timerPiercingCorruptionCD			= mod:NewCDTimer(14, 144657, nil, nil, nil, 5)--14-17sec variation
 local timerHurlCorruptionCD				= mod:NewNextTimer(20, 144649, nil, nil, nil, 4, nil, DBM_COMMON_L.INTERRUPT_ICON, nil, 2, 3)
+--All of them?
+local timerExpelCorruptionCD			= mod:NewCDNPTimer(10.9, 144479)
 
 local berserkTimer						= mod:NewBerserkTimer(418)
 
@@ -88,9 +90,7 @@ local warnedAdd = {}
 mod.vb.unleashedAngerCast = 0
 mod.vb.manifestationCount = 0
 
---May be buggy with two adds spawning at exact same time
---Two different icon functions end up both marking same mob with 8 and 7 and other mob getting no mark.
---Not sure if GUID table will be fast enough to prevent, we shall see!
+--May be spammy with multiple adds spawning at exact same time
 local function addsDelay()
 	mod.vb.manifestationCount = mod.vb.manifestationCount + 1
 	specWarnManifestation:Show(mod.vb.manifestationCount)
@@ -99,11 +99,11 @@ end
 local function addSync(guid)
 	if not warnedAdd[guid] then
 		warnedAdd[guid] = true
-		specWarnManifestationSoon:Show()
+		warnManifestationSoon:Show()
 		if mod:IsDifficulty("lfr25") then
-			mod:Schedule(15, addsDelay, GetTime())
+			mod:Schedule(15, addsDelay)
 		else
-			mod:Schedule(5, addsDelay, GetTime())
+			mod:Schedule(5, addsDelay)
 		end
 	end
 end
@@ -136,7 +136,8 @@ function mod:SPELL_CAST_START(args)
 		end
 	elseif spellId == 144482 then
 		specWarnTearReality:Show()
-		timerTearRealityCD:Start()
+		specWarnTearReality:Play("shockwave")
+		timerTearRealityCD:Start(nil, args.sourceGUID)
 	elseif spellId == 144654 then
 		specWarnBurstOfCorruption:Show()
 	elseif spellId == 144628 then
@@ -151,6 +152,8 @@ function mod:SPELL_CAST_START(args)
 	elseif spellId == 146707 then
 		warnDishearteningLaugh:Show()
 		timerDishearteningLaughCD:Start()
+	elseif spellId == 144479 then
+		timerExpelCorruptionCD:Start(nil, args.sourceGUID)
 	end
 end
 
@@ -182,7 +185,6 @@ function mod:SPELL_AURA_REMOVED(args)
 		warnLookWithinEnd:CombinedShow(1, args.destName)
 		if args:IsPlayer() then
 			playerInside = false
-			timerTearRealityCD:Cancel()
 			timerLingeringCorruptionCD:Cancel()
 			timerDishearteningLaughCD:Cancel()
 			timerTitanicSmashCD:Cancel()
@@ -206,7 +208,7 @@ end
 function mod:UNIT_DIED(args)
 	local cid = self:GetCIDFromGUID(args.destGUID)
 	if cid == 71977 then--Manifestation of Corruption (Dps Test)
-		timerTearRealityCD:Cancel()
+		timerTearRealityCD:Cancel(args.destGUID)
 		self:SendSync("ManifestationDied", args.destGUID)
 	elseif cid == 72001 then--Greater Corruption (Healer Test)
 		timerLingeringCorruptionCD:Cancel()
@@ -215,13 +217,15 @@ function mod:UNIT_DIED(args)
 		timerTitanicSmashCD:Cancel()
 		timerHurlCorruptionCD:Cancel()
 		timerPiercingCorruptionCD:Cancel()
+	elseif cid == 71976 then--Essence of Corruption
+		timerExpelCorruptionCD:Stop(args.destGUID)
 	end
 end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	if spellId == 145769 and self:AntiSpam(1, 5) then--Unleash Corruption
-		specWarnManifestationSoon:Show()
-		self:Schedule(5, addsDelay, GetTime())
+		warnManifestationSoon:Show()
+		self:Schedule(5, addsDelay)
 	end
 end
 

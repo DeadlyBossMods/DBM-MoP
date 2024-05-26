@@ -160,7 +160,9 @@ function mod:SPELL_AURA_APPLIED(args)
 		self.vb.screechCount = args.amount or 1
 		warnAcceleration:Show(args.destName, self.vb.screechCount)
 	elseif spellId == 143766 then
-		timerFearsomeRoarCD:Start()
+		if self:AntiSpam(3, 1) then
+			timerFearsomeRoarCD:Start()
+		end
 		local uId = DBM:GetRaidUnitId(args.destName)
 		if self:IsTanking(uId, "boss1") then
 			local amount = args.amount or 1
@@ -245,7 +247,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif spellId == 143777 then
 		warnFrozenSolid:CombinedShow(1, args.destName)--On 25 man, many targets get frozen and often at/near the same time. try to batch em up a bit
-		if self:AntiSpam(3, 1) then
+		if self:AntiSpam(3, 2) then
 			specWarnFrozenSolid:Show(args.destName)
 		end
 	elseif spellId == 145974 then
@@ -308,7 +310,7 @@ end
 mod.SPELL_MISSED = mod.SPELL_DAMAGE
 
 function mod:SPELL_PERIODIC_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
-	if spellId == 143784 and destGUID == UnitGUID("player") and self:AntiSpam(1.5, 2) then--Different from abobe ID, this is ID that fires for standing in fire on ground (even if you weren't target the fire spawned under)
+	if spellId == 143784 and destGUID == UnitGUID("player") and self:AntiSpam(1.5, 3) then--Different from abobe ID, this is ID that fires for standing in fire on ground (even if you weren't target the fire spawned under)
 		specWarnBurningBloodMove:Show()
 	end
 end
