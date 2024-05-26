@@ -339,13 +339,17 @@ function mod:UNIT_HEALTH(uId)
 		local hp = UnitHealth(uId) / UnitHealthMax(uId)
 		if hp < 0.71 and self.vb["warned"..cId] == 0 then
 			local bossName = UnitName(uId)
-			specWarnMeasures:Show(bossName)
-			specWarnMeasures:Play("specialsoon")
+			if (self:IsTrivial() or self:IsRemix()) and self:AntiSpam(3, 4) then--Throttle on remix or trivial. remix players are zerging boss and it's super spammy
+				specWarnMeasures:Show(bossName)
+				specWarnMeasures:Play("specialsoon")
+			end
 			self.vb["warned"..cId] = 1
 		elseif hp < 0.37 and self.vb["warned"..cId] == 1 then
 			local bossName = UnitName(uId)
-			specWarnMeasures:Show(bossName)
-			specWarnMeasures:Play("specialsoon")
+			if (self:IsTrivial() or self:IsRemix()) and self:AntiSpam(3, 4) then--Throttle on remix or trivial. remix players are zerging boss and it's super spammy
+				specWarnMeasures:Show(bossName)
+				specWarnMeasures:Play("specialsoon")
+			end
 			self.vb["warned"..cId] = 2
 		end
 	end
