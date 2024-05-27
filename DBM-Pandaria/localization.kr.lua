@@ -100,5 +100,5 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization("Zandalari")
 
 L:SetGeneralLocalization({
-	name	= "잔달라 부족"
+	name	= "잔달라 트롤"
 })
