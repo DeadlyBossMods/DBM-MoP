@@ -1,6 +1,7 @@
 ## Interface: 100207
 ## X-Min-Interface: 80000
 ## Title:|cffffe00a<|r|cffff7d0aDBM Mod|r|cffffe00a>|r |cffff6010Raids (MoP)|r
+## Title-koKR:|cffffe00a<|r|cffff7d0aDBM Mod|r|cffffe00a>|r |cffff6010공격대 (판다)|r
 ## Title-ruRU:|cffffe00a<|r|cffff7d0aDBM Мод|r|cffffe00a>|r |cffff6010Рейды (Пандария)|r
 ## Author: MysticalOS
 ## LoadOnDemand: 1
@@ -14,6 +15,7 @@
 ## X-DBM-StatTypes: normal,normal25,heroic,heroic25,lfr
 ## X-DBM-Mod-SubCategoriesID: 1136, 1098, 996, 1009, 1008
 ## X-DBM-Mod-Name: Raids (MoP)
+## X-DBM-Mod-Name-koKR: 공격대 (판다)
 ## X-DBM-Mod-Name-ruRU: Рейды (Пандария)
 ## X-DBM-Mod-Sort: 701
 ## X-DBM-Mod-MapID: 1136, 1098, 996, 1009, 1008

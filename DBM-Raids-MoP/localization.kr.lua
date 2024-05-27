@@ -1,6 +1,4 @@
-if GetLocale() ~= "koKR" then
-	return
-end
+if GetLocale() ~= "koKR" then return end
 local L
 
 ------------
@@ -9,14 +7,14 @@ local L
 L = DBM:GetModLocalization(679)
 
 L:SetWarningLocalization({
-	SpecWarnOverloadSoon		= "곧 %s - 생존기 준비 또는 수호자 이동!",
-	specWarnBreakJasperChains	= "벽옥 석화 해제 가능 - 다른 대상과 멀리 떨어지세요!"
+	SpecWarnOverloadSoon		= "곧 %s!",
+	specWarnBreakJasperChains	= "벽옥 사슬 푸세요!"
 })
 
 L:SetOptionLocalization({
-	SpecWarnOverloadSoon		= "석화중이지 않은 수호자가 과부화되려고 할 때 특수 경고 보기",
-	specWarnBreakJasperChains	= "$spell:130395 를 안전하게 해제할 수 있을 때 특수 경고 보기",
-	InfoFrame					= "수호자 기력, 현재 석화상태, 석화 진행중인 수호자를 정보 창으로 보기"
+	SpecWarnOverloadSoon		= "과부하되기 전에 특수 알림 보기",
+	specWarnBreakJasperChains	= "$spell:130395을 안전하게 풀 수 있을 때 특수 알림 보기",
+	InfoFrame					= "보스 기력, 석화 상태, 어느 보스가 석화를 시전중인지 정보 창에 표시"
 })
 
 L:SetMiscLocalization({
@@ -29,14 +27,14 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(689)
 
 L:SetWarningLocalization({
-	WarnPhase			= "%d 단계",
-	specWarnBarrierNow	= "지금 무효화의 장벽 사용!"
+	WarnPhase			= "%d단계",
+	specWarnBarrierNow	= "무효화의 장벽을 사용하세요!"
 })
 
 L:SetOptionLocalization({
-	WarnPhase			= "단계 전환 알림 보기",
-	specWarnBarrierNow	= "$spell:115817 을 사용해야 할 때 특수 경고 보기(공격대 찾기 전용)",
-	RangeFrame			= "지팡이의 혼 단계에서" .. DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format("6")
+	WarnPhase			= "단계 전환 알림",
+	specWarnBarrierNow	= "$spell:115817을 사용해야 할 때 특수 알림 보기 (공찾에서만 작동)",
+	RangeFrame			= "비전 단계 동안 " .. DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format("6")
 })
 
 L:SetMiscLocalization({
@@ -61,17 +59,16 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(687)
 
 L:SetWarningLocalization({
-	DarknessSoon	= "%d초 후 암흑의 방패"
+	DarknessSoon	= "암흑의 방패 %d초 전"
 })
 
 L:SetTimerLocalization({
-	timerUSRevive		= "불멸의 어둠 재형성",
-	timerRainOfArrowsCD	= "%s"
+	timerUSRevive		= "불멸의 어둠 재형성"
 })
 
 L:SetOptionLocalization({
-	DarknessSoon	= "$spell:117697 이전에 초읽기 알림 보기(5초 전부터)",
-	timerUSRevive	= "$spell:117506 재형성 바 보기"
+	DarknessSoon	= "$spell:117697에 사전 경고 초읽기 보기 (5초 전부터)",
+	timerUSRevive	= "$spell:117506 재형성 타이머 바 보기"
 })
 
 ------------
@@ -80,16 +77,16 @@ L:SetOptionLocalization({
 L = DBM:GetModLocalization(726)
 
 L:SetWarningLocalization({
-	specWarnDespawnFloor	= "6초 후 가운데 바닥 사라짐 - 낙사 주의!"
+	specWarnDespawnFloor	= "바닥 사라짐 6초 전!"
 })
 
 L:SetTimerLocalization({
-	timerDespawnFloor	= "가운데 바닥 사라짐"
+	timerDespawnFloor	= "바닥 사라짐"
 })
 
 L:SetOptionLocalization({
-	specWarnDespawnFloor	= "가운데 바닥이 사라짐 이전에 특수 경고 보기",
-	timerDespawnFloor		= "가운데 바닥이 사라짐 바 보기"
+	specWarnDespawnFloor	= "바닥이 사라지기 전 특수 알림 보기",
+	timerDespawnFloor		= "바닥이 사라지면 타이머 바 표시"
 })
 
 ------------
@@ -98,9 +95,9 @@ L:SetOptionLocalization({
 L = DBM:GetModLocalization(677)
 
 L:SetOptionLocalization({
-	InfoFrame		= "$spell:116525 대상을 정보 창으로 보기",
-	CountOutCombo	= "$journal:5673 횟수를 소리로 듣기<br/>알림: 초읽기 소리가 Corsica (Female)로 설정되어 있을때만 작동합니다.",
-	ArrowOnCombo	= "$journal:5673 도중 이동해야 할 방향을 DBM 화살표로 보기<br/>알림: 방어전담이 우두머리 앞에 있고 나머지 공격대원이 뒤에 있을때를 기준으로 합니다."
+	InfoFrame		= "$spell:116525에 걸린 사람을 정보 창에 표시",
+	CountOutCombo	= "$journal:5673 시전 횟수 음성 알림<br/>알림: 현재는 음성이 Corsica 일때만 작동합니다.",
+	ArrowOnCombo	= "$journal:5673 도중 DBM 화살표 표시<br/>알림: 방향은 탱커가 보스 앞에 있고 본진이 뒤에 있을때가 기준입니다."
 })
 
 L:SetMiscLocalization({
@@ -117,28 +114,28 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(745)
 
 L:SetWarningLocalization({
-	warnEcho			= "메아리 생성",
+	warnEcho			= "메아리 등장",
 	warnEchoDown		= "메아리 처치",
 	specwarnAttenuation	= "%s : %s (%s)",
-	specwarnPlatform	= "단상 이동!"
+	specwarnPlatform	= "단상 변경"
 })
 
 L:SetOptionLocalization({
-	warnEcho			= "메아리 생성 알림 보기",
-	warnEchoDown		= "메아리 처치 알림 보기",
-	specwarnPlatform	= "단상 이동 특수 경고 보기",
-	ArrowOnAttenuation	= "$spell:127834 활성화 중에 이동해야 될 방향을 DBM 화살표로 보기"
+	warnEcho			= "메아리 등장시 알림",
+	warnEchoDown		= "메아리가 잡히면 알림",
+	specwarnPlatform	= "보스가 단상을 바꾸면 특수 알림 보기",
+	ArrowOnAttenuation	= "$spell:127834 동안 이동할 방향을 DBM 화살표로 표시"
 })
 
 L:SetMiscLocalization({
-	Platform	= "황실 장로 조르로크가 단상으로 날아갑니다!",
+	Platform	= "단상으로 날아갑니다!",
 	Defeat		= "우리는 어두운 공허의 절망에 지지 않으리라. 우리가 죽는 것이 그분의 뜻이라면, 그대로 따르리라."
 })
 
 ------------
 -- Blade Lord Ta'yak --
 ------------
-L = DBM:GetModLocalization(744)
+--L = DBM:GetModLocalization(744)
 
 -------------------------------
 -- Garalon --
@@ -146,12 +143,11 @@ L = DBM:GetModLocalization(744)
 L = DBM:GetModLocalization(713)
 
 L:SetWarningLocalization({
-	warnCrush		= "%s",
-	specwarnUnder	= "보라색 원 바깥으로 나가세요!"
+	specwarnUnder	= "보라색 원 밖으로 나가세요!"
 })
 
 L:SetOptionLocalization({
-	specwarnUnder	= "가랄론의 보라색 원 안에 있을때 특수 경고 보기",
+	specwarnUnder	= "보스의 주시 대상일 때 특수 알림 보기"
 })
 
 L:SetMiscLocalization({
@@ -162,7 +158,7 @@ L:SetMiscLocalization({
 ----------------------
 -- Wind Lord Mel'jarak --
 ----------------------
-L = DBM:GetModLocalization(741)
+--L = DBM:GetModLocalization(741)
 
 ------------
 -- Amber-Shaper Un'sok --
@@ -171,34 +167,35 @@ L = DBM:GetModLocalization(737)
 
 L:SetWarningLocalization({
 	warnReshapeLife				= "%s : >%s< (%d)",
-	warnReshapeLifeTutor		= "1: 대상 차단/중첩 생성, 2: 본인 차단, 3: 체력/의지력 회복(주로 3단계에서 사용), 4: 피조물에서 탈출(1,2단계에서 사용)",
-	warnAmberExplosion			= "주문시전 %2$s : >%1$s<",
-	warnAmberExplosionAM		= "호박석 괴수가 호박석 폭발 시전 중 - 지금 차단!",--personal warning.
-	warnInterruptsAvailable		= "%s의 호박석 폭발 차단 가능: >%s<",
-	warnWillPower				= "현재 의지력 : %s",
-	specwarnWillPower			= "의지력 낮음 - 피조물에서 탈출하거나 바닥을 드세요!",
-	specwarnAmberExplosionYou	= "당신에게 %s 사용 - 2번으로 차단!",
-	specwarnAmberExplosionAM	= "%s 시전: %s - 1번으로 차단!",
-	specwarnAmberExplosionOther	= "%s 시전: %s - 1번으로 차단!"
+	warnReshapeLifeTutor		= "1: 대상 차단/디버프 걸기 (보스에 디버프 중첩 쌓는 용도), 2: 호박석 폭발 시전시 차단, 3: 의지력 낮을 때 회복 (주로 3단계에서 사용), 4: 피조물 탈주 (1, 2단계 전용)",
+	warnAmberExplosion			= ">%s<가 %s|1을;를; 시전합니다",
+	warnAmberExplosionAM		= "호박석 괴수가 호박석 폭발 시전 - 차단!",--personal warning.
+	warnInterruptsAvailable		= "%s 차단 가능: >%s<",
+	warnWillPower				= "현재 의지력: %s",
+	specwarnWillPower			= "의지력 낮음! - 피조물에서 탈주하거나 바닥을 흡수하세요!",
+	specwarnAmberExplosionYou	= "%s|1을;를; 차단!",
+	specwarnAmberExplosionAM	= "%s: %s 차단!",
+	specwarnAmberExplosionOther	= "%s: %s 차단!"
 })
 
 L:SetTimerLocalization({
 	timerDestabalize		= "불안정화 (%2$d) : %1$s",
-	timerAmberExplosionAMCD	= "폭발 가능: 호박석 괴수"
+	timerAmberExplosionAMCD	= "폭발 쿨타임: 괴수"
 })
 
 L:SetOptionLocalization({
-	warnReshapeLifeTutor		= "돌연변이 피조물 탑승시 피조물 능력 설명 보기",
-	warnAmberExplosion			= "$spell:122398 시전 알림 보기(당신 포함)",
-	warnAmberExplosionAM		= "호박석 괴수가 $spell:122402 을 시전할 때 개인 차단 알림 보기",
-	warnInterruptsAvailable		= "누가 $spell:122402 을 차단할 수 있는지 알림 보기",
-	warnWillPower				= "의지력이 80, 50, 30, 10, 4 일때 알림 보기",
-	specwarnWillPower			= "피조물 탑승 도중 의지력이 낮을 때 특수 경고 보기",
-	specwarnAmberExplosionYou	= "당신의 피조물이 $spell:122402 을 시전할때 차단 특수 경고 보기",
-	specwarnAmberExplosionAM	= "호박석 괴수가 $spell:122402 을 시전할때 차단 특수 경고 보기",
-	specwarnAmberExplosionOther	= "탑승자가 없는 피조물이 $spell:122398 을 시전할때 차단 특수 경고 보기",
-	timerAmberExplosionAMCD		= "호박석 괴수의 다음 $spell:122402 바 보기",
-	InfoFrame					= "의지력 정보를 정보 창으로 보기"
+	warnReshapeLifeTutor		= "돌연변이 피조물의 스킬 용도 표시",
+	warnAmberExplosion			= "$spell:122398 시전시 특수 알림 보기 (시전자 포함)",
+	warnAmberExplosionAM		= "호박석 괴수가 $spell:122398을 시전할 때<br/> 개인 알림 보기 (차단)",
+	warnInterruptsAvailable		= "누가 $spell:122402을 차단 가능한 지 알림",
+	warnWillPower				= "현재 의지력이 80, 50, 30, 10, 4일 때 알림",
+	specwarnWillPower			= "피조물에 탑승한 동안 의지력이 낮을 때 특수 알림 보기",
+	specwarnAmberExplosionYou	= "$spell:122398 차단 특수 알림 보기",
+	specwarnAmberExplosionAM	= "호박석 괴수의 $spell:122402 차단 특수 알림 보기",
+	specwarnAmberExplosionOther	= "풀려난 돌연변이 피조물의 $spell:122398 차단 특수 알림 보기",
+	timerAmberExplosionAMCD		= "호박석 괴수의 다음 $spell:122402 타이머 바 보기",
+	InfoFrame					= "의지력을 정보 창에 표시",
+	FixNameplates				= "피조물에 탑승한 동안 이름표 관련 기능 작동 중단<br/>(전투가 끝나면 설정 복구)"
 })
 
 L:SetMiscLocalization({
@@ -211,16 +208,16 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(743)
 
 L:SetWarningLocalization({
-	warnAmberTrap	= "호박석 덪 생성중 (%d/5)"
+	warnAmberTrap	= "호박석 덪 설치: (%d/5)"
 })
 
 L:SetOptionLocalization({
-	warnAmberTrap	= "$spell:125826 생성 과정 알림 보기",
-	InfoFrame		= "$spell:125390 대상을 정보 창으로 보기"
+	warnAmberTrap	= "$spell:125826이 깔리면 알림 보기",
+	InfoFrame		= "$spell:125390 대상을 정보 창에 표시"
 })
 
 L:SetMiscLocalization({
-	PlayerDebuffs	= "시선 집중 대상",
+	PlayerDebuffs	= "주시 대상",
 	YellPhase3		= "변명은 이제 지겹다, 여제! 당장 이 멍청이들을 쓸어버리지 않으면 내가 몸소 널 죽이겠다!"
 })
 
@@ -230,7 +227,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization("HoFTrash")
 
 L:SetGeneralLocalization({
-	name	= "공포의 심장: 일반구간"
+	name	= "공포의 심장 일반몹"
 })
 
 ------------
@@ -239,14 +236,14 @@ L:SetGeneralLocalization({
 L = DBM:GetModLocalization(683)
 
 L:SetWarningLocalization({
-	warnGroupOrder		= "타락한 정수 순번 : %s 파티",
-	specWarnYourGroup	= "타락한 정수 받을 차례입니다. 준비하세요!"
+	warnGroupOrder		= "디버프 순서: %s파티",
+	specWarnYourGroup	= "당신 파티 차례 - 디버프 받으세요!"
 })
 
 L:SetOptionLocalization({
-	warnGroupOrder		= "$spell:118191 파티 순서 알림 보기(25인 전용)<br/>참고: 1파-5번/2파-2번/3파-2번/4파-2번, 그 후 1/2/2/2 순서대로 알립니다.",
-	specWarnYourGroup	= "$spell:118191를 받을 차례가 된 경우 특수 경고 보기(25인 전용)",
-	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(8, 111850) .. "<br/>(대상이 된 경우 모든 공격대원을 보임, 그 외에는 대상자만 보임)"
+	warnGroupOrder		= "$spell:118191를 받을 파티 순서 알림<br/>(25인 전용으로 5,2,2,2씩 맞는 공략)",
+	specWarnYourGroup	= "내가 속한 파티가 $spell:118191를 받을 차례가 되면 특수 알림 보기<br/>(25인 전용)",
+	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(8, 111850) .. "<br/>(디버프에 걸리면 모든 공대원을 표시하고 안걸렸을땐 대상자만)"
 })
 
 ------------
@@ -268,13 +265,13 @@ L:SetWarningLocalization({
 })
 
 L:SetTimerLocalization({
-	timerSpecialCD	= "숨기/저리 가! 가능 (%d)"
+	timerSpecialCD	= "특수 기술 쿨타임 (%d)"
 })
 
 L:SetOptionLocalization({
-	warnHideOver	= "$spell:123244 종료 알림 보기",
-	timerSpecialCD	= "$spell:123244 또는 $spell:123461 대기시간 바 보기",
-	RangeFrame		= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(3, 123121).."<br/>(숨기 중일때는 모든 공격대원 보임, 그 외에는 방어전담만 보임)"
+	warnHideOver	= "$spell:123244 종료시 알림 보기",
+	timerSpecialCD	= "특수 스킬 쿨타임 타이머 바 보기",
+	RangeFrame		= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(3, 123121).."<br/>(숨어있을 땐 모든 공대원을 표시하고 나오면 탱커만 표시)"
 })
 
 L:SetMiscLocalization{
@@ -287,24 +284,24 @@ L:SetMiscLocalization{
 L = DBM:GetModLocalization(709)
 
 L:SetWarningLocalization({
-	MoveForward					= "건너편으로 이동!",
-	MoveRight					= "오른쪽으로 이동!",
-	MoveBack					= "이전 위치로 이동!",
-	specWarnBreathOfFearSoon	= "곧 공포 숨결 - 장벽 안으로 이동하세요!"
+	MoveForward					= "건너편으로 이동",
+	MoveRight					= "오른쪽으로 이동",
+	MoveBack					= "이전 위치로 이동",
+	specWarnBreathOfFearSoon	= "곧 공포 숨결 - 장벽 안으로 이동!"
 })
 
 L:SetTimerLocalization({
-	timerSpecialAbilityCD	= "다음 용오름/혼비백산/일격",
-	timerSpoHudCD			= "혼비백산/용오름 가능",
-	timerSpoStrCD			= "용오름/일격 가능",
-	timerHudStrCD			= "혼비백산/일격 가능"
+	timerSpecialAbilityCD	= "다음 특수 기술",
+	timerSpoHudCD			= "공포 / 용오름 쿨타임",
+	timerSpoStrCD			= "용오름 / 일격 쿨타임",
+	timerHudStrCD			= "공포 / 일격 쿨타임"
 })
 
 L:SetOptionLocalization({
-	warnBreathOnPlatform		= "외부 정자에 있을 때도 $spell:119414 알림 보기<br/>(가급적 설정하지 않기를 권장합니다. 공격대 진행자용 설정입니다.)",
-	specWarnBreathOfFearSoon	= "$spell:119414 전에 $spell:117964 효과가 없을 경우 특수 경고 보기",
-	specWarnMovement			= "$spell:120047 활성화 중에 이동 경고 보기",
-	timerSpecialAbility			= "다음 $spell:120519 또는 $spell:120629 또는 $spell:120672 바 보기"
+	warnBreathOnPlatform		= "단상에 있을 때에도 $spell:119414 알림 보기<br/>(권장하지 않음, 공대장용)",
+	specWarnBreathOfFearSoon	= "$spell:117964 버프가 없으면 $spell:119414 사전 경고 보기",
+	specWarnMovement			= "$spell:120047가 시전되면 이동 방향 특수 알림 보기<br/>(입구에서 시작해서 이동하는 일반적인 공략을 기반으로 하며 DBM이 제시하는 방향을 따라가야 합니다)",
+	timerSpecialAbility			= "다음 특수 기술 시전 타이머 바 보기"
 })
 
 --------------------------
@@ -313,11 +310,11 @@ L:SetOptionLocalization({
 L = DBM:GetModLocalization(827)
 
 L:SetWarningLocalization({
-	specWarnWaterMove	= "곧 %s - 전도성 물에서 빠지세요!"
+	specWarnWaterMove	= "곧 %s - 전도성 물 밖으로 나오세요!"
 })
 
 L:SetOptionLocalization({
-	specWarnWaterMove	= "$spell:138470 위에 있을 때 특수 경고 보기<br/>($spell:137313 이전 또는 $spell:138732 시간이 얼마 안 남았을때)"
+	specWarnWaterMove	= "$spell:138470 속에 있을 때 특수 알림 보기<br/>($spell:137313 시전 이전 또는 $spell:138732 디버프가 사라지기 직전에 알림)"
 })
 
 --------------
@@ -326,23 +323,22 @@ L:SetOptionLocalization({
 L = DBM:GetModLocalization(819)
 
 L:SetWarningLocalization({
-	warnAdds				= "%s",
 	warnOrbofControl		= "조종의 구슬 떨어짐",
 	specWarnOrbofControl	= "조종의 구슬 떨어짐!"
 })
 
 L:SetTimerLocalization({
-	timerDoor				= "다음 부족의 문 열림",
+	timerDoor				= "다음 부족의 문",
 	timerAdds				= "다음 %s"
 })
 
 L:SetOptionLocalization({
-	warnAdds				= "병력 등장시 알림 보기",
-	warnOrbofControl		= "$journal:7092 떨어짐시 알림 보기",
-	specWarnOrbofControl	= "$journal:7092 떨어짐시 특수 경고 보기",
-	timerDoor				= "다음 부족의 문 열림 바 보기",
-	timerAdds				= "다음 추가 병력 바 보기",
-	SetIconOnAdds			= "추가 병력들에게 전술 목표 아이콘 설정"
+	warnAdds				= "새로운 쫄이 내려오면 알림",
+	warnOrbofControl		= "$journal:7092이 떨어지면 알림",
+	specWarnOrbofControl	= "$journal:7092이 떨어지면 특수 알림 보기",
+	timerDoor				= "다음 부족의 문 단계 타이머 바 보기",
+	timerAdds				= "다음 쫄 등장 타이머 바 보기",
+	SetIconOnAdds			= "벽에서 내려오는 쫄에 공격대 징표 설정"
 })
 
 L:SetMiscLocalization({
@@ -356,11 +352,11 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(816)
 
 L:SetWarningLocalization({
-	specWarnPossessed	= "%s : %s - 대상 전환!"
+	specWarnPossessed	= "%s : %s - 대상 변경!"
 })
 
 L:SetOptionLocalization({
-	AnnounceCooldowns	= "공격대 생존기 사용을 위해 $spell:137166 횟수를 소리로 듣기<br/>(카즈라진의 빙의가 풀리면 초기화됨)"
+	AnnounceCooldowns	= "공생기 사용을 위해 $spell:137166 시전 횟수 음성 알림 (3회 까지)"
 })
 
 ------------
@@ -370,14 +366,14 @@ L = DBM:GetModLocalization(825)
 
 L:SetWarningLocalization({
 	warnKickShell			= "%s 사용 : >%s< (%d 남음)",
-	specWarnCrystalShell	= "%s 받으세요!"
+	specWarnCrystalShell	= "%s을 집으세요"
 })
 
 L:SetOptionLocalization({
-	specWarnCrystalShell	= "$spell:137633 없고 체력이 90% 이상인 경우 특수 경고 보기",
-	InfoFrame				= "$spell:137633 없는 대상을 정보 창으로 보기",
-	ClearIconOnTurtles		= "$journal:7129이 $spell:133971를 얻은 경우 전술 목표 아이콘 지우기",
-	AnnounceCooldowns		= "공격대 생존기 사용을 위해 $spell:134920 횟수를 소리로 듣기"
+	specWarnCrystalShell	= "$spell:137633 디버프가 없고 생명력이<br/> 90% 이상이면 특수 알림 보기",
+	InfoFrame				= "$spell:137633이 없는 공대원 정보 창에 표시",
+	ClearIconOnTurtles		= "$spell:133971에 걸리면 $journal:7129에 공격대 징표 해제",
+	AnnounceCooldowns		= "공생기 사용을 위해 $spell:134920 시전 횟수 음성 알림"
 })
 
 L:SetMiscLocalization({
@@ -394,14 +390,14 @@ L:SetTimerLocalization({
 })
 
 L:SetOptionLocalization({
-	timerBreaths			= "다음 숨결 바 보기",
-	AnnounceCooldowns		= "공격대 생존기 사용을 위해 광란/확산 횟수를 소리로 듣기",
-	Never					= "알리지 않음",
-	Every					= "횟수 초기화 하지 않음",
-	EveryTwo				= "2번 후 초기화",
-	EveryThree				= "3번 후 초기화",
-	EveryTwoExcludeDiff		= "2번 후 초기화(확산 제외)",
-	EveryThreeExcludeDiff	= "3번 후 초기화(확산 제외)"
+	timerBreaths			= "다음 숨결 타이머 바 보기",
+	AnnounceCooldowns		= "공생기 사용을 위해 광란 시전 횟수 음성 알림",
+	Never					= "사용 안함",
+	Every					= "모두 (계속 증가)",
+	EveryTwo				= "2번 이후 초기화",
+	EveryThree				= "3번 이후 초기화",
+	EveryTwoExcludeDiff		= "2번 이후 초기화 (확산 제외)",
+	EveryThreeExcludeDiff	= "3번 이후 초기화 (확산 제외)"
 })
 
 L:SetMiscLocalization({
@@ -414,9 +410,8 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(828)
 
 L:SetWarningLocalization({
-	warnFlock		= "%2$s : %1$s %3$s",
-	specWarnFlock	= "%2$s : %1$s %3$s",
-	specWarnBigBird	= "둥지 수호자 : %s"
+	specWarnBigBird	= "둥지 수호자: %s",
+	specWarnBigBirdSoon	= "곧 둥지 수호자: %s"
 })
 
 L:SetTimerLocalization({
@@ -424,23 +419,23 @@ L:SetTimerLocalization({
 })
 
 L:SetOptionLocalization({
-	ShowNestArrows	= "활성화된 둥지쪽으로 화살표 보기",
-	Never			= "보이지 않음",
-	Northeast		= "파랑 - 아래/위 북동쪽",
-	Southeast		= "초록 - 아래/위 남동쪽",
-	Southwest		= "보라/빨강 - 아래 남서쪽 & 위 남서쪽(25인)/위 중앙(10인)",
-	West			= "빨강 - 아래 서쪽 & 위 중앙(25인)",
-	Northwest		= "노랑 - 아래/위 북서쪽(25인)",
+	ShowNestArrows	= "선택한 둥지 위치만 특수 알림 보기",
+	Never			= "모든 둥지",
+	Northeast		= "파랑 - 북동쪽 아래,위",
+	Southeast		= "녹색 - 남동쪽 아래,위",
+	Southwest		= "보라/빨강 - 남서쪽 아래, 남서쪽 위(25)/중앙 위(10)",
+	West			= "빨강 - 서쪽 아래, 위 중앙 (25인 전용)",
+	Northwest		= "노랑 - 북서쪽 아래,위 (25인 전용)",
 	Guardians		= "둥지 수호자"
 })
 
 L:SetMiscLocalization({
 	eggsHatch		= "있는 알들이 부화하기 시작합니다!",
-	Upper			= "윗쪽",
+	Upper			= "위쪽",
 	Lower			= "아래쪽",
-	UpperAndLower	= "윗쪽 + 아래쪽",
-	TrippleD		= "윗쪽 + 아래쪽 + 아래쪽",
-	TrippleU		= "윗쪽 + 윗쪽 + 아래쪽",
+	UpperAndLower	= "위쪽, 아래쪽",
+	TrippleD		= "3번 (아래 2번)",
+	TrippleU		= "3번 (위 2번)",
 	NorthEast		= "|cff0000ff북동쪽|r",
 	SouthEast		= "|cFF088A08남동쪽|r",
 	SouthWest		= "|cFF9932CD남서쪽|r",
@@ -456,25 +451,25 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(818)
 
 L:SetWarningLocalization({
-	warnBeamNormal				= "광선 - |cffff0000적색|r : >%s<, |cff0000ff청색|r : >%s<",
-	warnBeamHeroic				= "광선 - |cffff0000적색|r : >%s<, |cff0000ff청색|r : >%s<, |cffffff00황색|r : >%s<",
-	warnAddsLeft				= "안개도깨비 남음 : %d",
-	specWarnBlueBeam			= "당신에게 청색 광선 - 절대 이동 금지!",
-	specWarnFogRevealed			= "%s 드러남!",
+	warnBeamNormal				= "광선 - |cffff0000빨강|r : >%s<, |cff0000ff파랑|r : >%s<",
+	warnBeamHeroic				= "광선 - |cffff0000빨강|r : >%s<, |cff0000ff파랑|r : >%s<, |cffffff00노랑|r : >%s<",
+	warnAddsLeft				= "안개도깨비 남음: %d",
+	specWarnBlueBeam			= "파란 광선 - 이동 금지",
+	specWarnFogRevealed			= "%s 발견!",
 	specWarnDisintegrationBeam	= "%s (%s)"
 })
 
 L:SetOptionLocalization({
-	warnBeam			= "광선 대상 알림 보기",
-	warnAddsLeft		= "안개도깨비 남은 횟수알림 보기",
-	specWarnFogRevealed	= "안개도깨비가 드러날 때 특수 경고 보기",
-	ArrowOnBeam			= "$journal:6882 활성화 중에 이동해야 될 방향을 DBM 화살표로 보기",
-	InfoFrame			= "$spell:133795 중첩을 정보 창으로 보기",
-	SetParticle			= "전투 시작시 입자 밀도를 최저로 설정<br/>(전투 종료 후 원상태로 복구됨)"
+	warnBeam			= "광선 대상 알림",
+	warnAddsLeft		= "안개도깨비 남은 숫자 알림",
+	specWarnFogRevealed	= "안개도깨비가 발견됐을 때 특수 알림 보기",
+	ArrowOnBeam			= "$journal:6882 중에 이동 방향을 보여주는 DBM 화살표 표시",
+	InfoFrame			= "$spell:133795 중첩을 정보 창에 표시",
+	SetParticle			= "보스가 시작되면 입자 밀도를 낮음으로 자동 설정<br/>(전투가 끝나면 설정 복구)"
 })
 
 L:SetMiscLocalization({
-	LifeYell	= "%s 생명력 흡수 중! (%d중첩)"
+	LifeYell	= "%s에 생명력 흡수 (%d)"
 })
 
 ----------------
@@ -483,12 +478,12 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(820)
 
 L:SetWarningLocalization({
-	warnDebuffCount	= "변형 정보 : 이로운 효과 - %d/5개, 해로운 효과 - %d개"
+	warnDebuffCount	= "변형 상황 : %d/5개 좋은 효과 & %d개 나쁜 효과"
 })
 
 L:SetOptionLocalization({
-	warnDebuffCount		= "웅덩이를 흡수할 때 변형 상태 알림 보기",
-	SetIconOnBigOoze	= "$journal:6969 에게 전술 목표 아이콘 설정"
+	warnDebuffCount		= "웅덩이 흡수시 디버프 중첩 알림 보기",
+	SetIconOnBigOoze	= "$journal:6969에 공격대 징표 설정"
 })
 
 -----------------
@@ -497,11 +492,11 @@ L:SetOptionLocalization({
 L = DBM:GetModLocalization(824)
 
 L:SetWarningLocalization({
-	warnMatterSwapped	= "%s 자리바꿈 : >%s<, >%s<"
+	warnMatterSwapped	= "%s: >%s<|1과;와; >%s< 자리 바꿈"
 })
 
 L:SetOptionLocalization({
-	warnMatterSwapped	= "$spell:138618 자리바꿈 알림 보기"
+	warnMatterSwapped	= "$spell:138618에 의해 자리가 바뀐 대상 알림"
 })
 
 L:SetMiscLocalization({
@@ -514,12 +509,12 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(817)
 
 L:SetWarningLocalization({
-	warnDeadZone	= "%s : %s, %s"
+	warnDeadZone	= "%s: %s|1과;와; %s 보호 상태"
 })
 
 L:SetOptionLocalization({
-	RangeFrame	= "전투 진영에 따라 거리 창 보기(10m)<br/>(일정 인원 이상이 뭉쳐 있을 때만 보이는 똑똑한 거리 창 입니다.)",
-	InfoFrame	= "$spell:136193 대상을 정보 창으로 보기"
+	RangeFrame	= "동적 거리 창 보기(10m)<br/>(많은 사람이 뭉쳐있을 때만 나오는 스마트 거리 창입니다)",
+	InfoFrame	= "$spell:136193 대상을 정보 창에 표시"
 })
 
 -------------------
@@ -534,8 +529,8 @@ L:SetWarningLocalization({
 })
 
 L:SetTimerLocalization({
-	timerDayCD	= "낮 단계",
-	timerDuskCD	= "황혼 단계"
+	timerDayCD	= "다음 낮 단계",
+	timerDuskCD	= "다음 황혼 단계"
 })
 
 L:SetMiscLocalization({
@@ -548,24 +543,25 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(832)
 
 L:SetWarningLocalization({
-	specWarnIntermissionSoon	= "곧 사잇단계!",
-	warnDiffusionChainSpread	= "%s 전이 : >%s<"
+	specWarnIntermissionSoon	= "곧 사잇단계",
+	warnDiffusionChainSpread	= "%s: >%s<에 전이"
 })
 
 L:SetTimerLocalization({
-	timerConduitCD	= "도관 기술 가능"
+	timerConduitCD	= "첫번째 도관 쿨타임"
 })
 
 L:SetOptionLocalization({
-	specWarnIntermissionSoon	= "사잇단계 진입 전에 특수 경고 보기",
-	warnDiffusionChainSpread	= "$spell:135991 전이 대상 알림 보기",
-	timerConduitCD				= "최초 도관 기술 대기시간 바 보기",
-	StaticShockArrow			= "$spell:135695 대상이 정해진 경우 DBM 화살표 보기",
-	OverchargeArrow				= "$spell:136295 대상이 정해진 경우 DBM 화살표 보기"
+	specWarnIntermissionSoon	= "사잇단계 사전 경고 보기",
+	warnDiffusionChainSpread	= "$spell:135991의 전이 대상 알림",
+	timerConduitCD				= "첫번째 도관 기술 쿨타임 타이머 바 보기",
+	StaticShockArrow			= "$spell:135695에 걸린 사람이 있으면 DBM 화살표 표시",
+	OverchargeArrow				= "$spell:136295에 걸린 사람이 있으면 DBM 화살표 표시",
+	AGStartDP				= "레이 션 앞에 있는 변위 장치 사용시 대화 자동 선택"
 })
 
 L:SetMiscLocalization({
-	StaticYell	= "%s의 전하 충격 발생 전! (%d초 남음)"
+	StaticYell	= "%s에 전하 충격 (%d)"
 })
 
 ------------
@@ -574,11 +570,11 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(831)
 
 L:SetWarningLocalization({
-	specWarnUnstablVitaJump	= "당신에게 불안정한 생령 전이됨!"
+	specWarnUnstablVitaJump	= "불안정한 생령 전이됨!"
 })
 
 L:SetOptionLocalization({
-	specWarnUnstablVitaJump	= "$spell:138297 전이 대상이 당신이 된 경우 특수 경고 보기"
+	specWarnUnstablVitaJump	= "$spell:138297이 전이되면 특수 알림 보기"
 })
 
 L:SetMiscLocalization({
@@ -591,7 +587,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization("ToTTrash")
 
 L:SetGeneralLocalization({
-	name	= "천둥의 왕좌: 일반구간"
+	name	= "천둥의 왕좌 일반몹"
 })
 
 ---------------
@@ -599,13 +595,16 @@ L:SetGeneralLocalization({
 ---------------
 L = DBM:GetModLocalization(852)
 
+L:SetMiscLocalization({
+	Victory	= "아, 역시 해냈군! 골짜기의 물이 다시 깨끗해졌네."
+})
+
 ---------------------------
 -- The Fallen Protectors --
 ---------------------------
 L = DBM:GetModLocalization(849)
 
 L:SetWarningLocalization({
-	specWarnCalamity	= "%s",
 	specWarnMeasures	= "곧 궁책 (%s)!"
 })
 
@@ -613,6 +612,10 @@ L:SetWarningLocalization({
 -- Norushen --
 ---------------------------
 L = DBM:GetModLocalization(866)
+
+L:SetOptionLocalization({
+	AGStartNorushen		= "노루셴에게 말을 걸면 전투 시작 대화 자동 선택"
+})
 
 L:SetMiscLocalization({
 	wasteOfTime	= "그래, 좋다. 너희 타락을 가두어 둘 공간을 만들겠다."
@@ -624,7 +627,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(867)
 
 L:SetOptionLocalization({
-	SetIconOnFragment	= "타락한 조각 에게 전술 목표 아이콘 설정"
+	SetIconOnFragment	= "타락한 조각에 공격대 징표 설정"
 })
 
 --------------
@@ -633,20 +636,20 @@ L:SetOptionLocalization({
 L = DBM:GetModLocalization(868)
 
 L:SetWarningLocalization({
-	warnTowerOpen	= "탑문 열림",
-	warnTowerGrunt	= "폭파조 등장"
+	warnTowerOpen	= "탑 문 열림",
+	warnTowerGrunt	= "탑 그런트"
 })
 
 L:SetTimerLocalization({
-	timerTowerCD		= "다음 탑문 열림",
-	timerTowerGruntCD	= "다음 폭파조"
+	timerTowerCD		= "다음 탑 열림",
+	timerTowerGruntCD	= "다음 탑 그런트"
 })
 
 L:SetOptionLocalization({
-	warnTowerOpen		= "탑문 열림 알림 보기",
-	warnTowerGrunt		= "폭파조 등장 알림 보기",
-	timerTowerCD		= "다음 탑문 열림 바 보기",
-	timerTowerGruntCD	= "다음 폭파조 바 보기"
+	warnTowerOpen		= "탑 문이 열리면 알림",
+	warnTowerGrunt		= "탑 그런트 등장시 알림",
+	timerTowerCD		= "다음 탑 공격 타이머 바 보기",
+	timerTowerGruntCD	= "다음 탑 그런트 타이머 바 보기"
 })
 
 L:SetMiscLocalization({
@@ -661,13 +664,18 @@ L:SetMiscLocalization({
 	tower			= "문이 뚫렸습니다!"
 })
 
+--------------------
+--Iron Juggernaut --
+--------------------
+--L = DBM:GetModLocalization(864)
+
 --------------------------
 -- Kor'kron Dark Shaman --
 --------------------------
 L = DBM:GetModLocalization(856)
 
 L:SetMiscLocalization({
-	PrisonYell	= "%s의 강철 감옥 %d초 남음!"
+	PrisonYell	= "%s에 감옥 종료 (%d)"
 })
 
 ---------------------
@@ -676,7 +684,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(850)
 
 L:SetWarningLocalization({
-	warnDefensiveStanceSoon	= "%d초 후 방어 태세"
+	warnDefensiveStanceSoon	= "방어 태세 %d초 전"
 })
 
 L:SetMiscLocalization({
@@ -686,7 +694,7 @@ L:SetMiscLocalization({
 	newForces4	= "코르크론! 날 지원하라!",
 	newForces5	= "다음 분대, 앞으로!",
 	allForces	= "전 코르크론, 내 명령을 따르라. 모두 죽여!",
-	nextAdds	= "다음 병력: "
+	nextAdds	= "다음 쫄: "
 })
 
 ------------------------
@@ -706,17 +714,13 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(851)
 
 L:SetOptionLocalization({
-	RangeFrame	= "거리 창 보기(10m) (피의 광란이 가능한 경우에만 보임)"
+	RangeFrame	= "동적 거리 창 보기 (10m)<br/>(광란 사거리에 닿을 경우에만 보이는 스마트 거리 창입니다)"
 })
 
 ----------------------------
 -- Siegecrafter Blackfuse --
 ----------------------------
 L = DBM:GetModLocalization(865)
-
-L:SetOptionLocalization({
-	InfoFrame	= "$journal:8202 정보를 정보 창으로 보기"
-})
 
 L:SetMiscLocalization({
 	newWeapons	= "생산 설비에서 미완성 무기가 나오기 시작합니다.",
@@ -729,13 +733,13 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(853)
 
 L:SetWarningLocalization({
-	specWarnActivatedVulnerable	= "%s에게 취약함 - 주의!",
+	specWarnActivatedVulnerable	= "%s에게 취약함 - 피하세요!",
 	specWarnMoreParasites		= "기생충이 더 필요합니다 - 막지마세요!"
 })
 
 L:SetOptionLocalization({
-	specWarnActivatedVulnerable	= "활성화된 용장중 주의해야 할 용장이 있을 경우 특수 경고 보기",
-	specWarnMoreParasites		= "기생충이 더 필요할 때 특수 경고 보기"
+	specWarnActivatedVulnerable	= "용장이 활성화 될 때 주의해야 할 용장이 있으면 특수 알림 보기",
+	specWarnMoreParasites		= "기생충이 더 필요할 때 특수 알림 보기"
 })
 
 L:SetMiscLocalization({
@@ -764,13 +768,13 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(869)
 
 L:SetTimerLocalization({
-	timerRoleplay	= "이벤트 진행"
+	timerRoleplay	= "NPC 대사"
 })
 
 L:SetOptionLocalization({
-	timerRoleplay		= "가로쉬/스랄 이벤트 진행 바 보기",
-	RangeFrame			= "거리 창 보기(8m)($spell:147126 주문의 경고 수치에 도달한 경우에만 보임)",
-	InfoFrame			= "사잇단계에서 피해 감소가 없는 대상을 정보 창으로 보기"
+	timerRoleplay		= "가로쉬/스랄 NPC 대사 타이머 바 보기",
+	RangeFrame			= "동적 거리 창 보기(8m)<br/>($spell:147126의 사거리에 닿을 경우에만 보이는 스마트 거리 창입니다)",
+	InfoFrame			= "사잇단계에서 뎀감이 없는 대상을 정보 창에 표시"
 })
 
 L:SetMiscLocalization({
@@ -785,5 +789,5 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization("SoOTrash")
 
 L:SetGeneralLocalization({
-	name	= "오그리마 공성전: 일반구간"
+	name	= "오그리마 공성전 일반몹"
 })

@@ -1,7 +1,7 @@
 ## Interface: 100207
 ## X-Min-Interface: 80000
 ## Title:|cffffe00a<|r|cffff7d0aDBM Mod|r|cffffe00a>|r |cff10ff10World Bosses (MoP)|r
-## Title-koKR:|cffffe00a<|r|cffff7d0aDBM Mod|r|cffffe00a>|r |cff10ff10판다리아|r
+## Title-koKR:|cffffe00a<|r|cffff7d0aDBM Mod|r|cffffe00a>|r |cff10ff10필드 보스 (판다)|r
 ## Title-deDE:|cffffe00a<|r|cffff7d0aDBM Mod|r|cffffe00a>|r |cff10ff10Pandaria|r
 ## Title-esES:|cffffe00a<|r|cffff7d0aDBM Mod|r|cffffe00a>|r |cff10ff10Pandaria|r
 ## Title-ruRU:|cffffe00a<|r|cffff7d0aDBM Мод|r|cffffe00a>|r |cff10ff10Мировые боссы (Пандария)|r
@@ -19,6 +19,7 @@
 ## X-DBM-Mod-Category: MOP
 ## X-DBM-StatTypes: normal
 ## X-DBM-Mod-Name: World Bosses (Pandaria)
+## X-DBM-Mod-Name-koKR: 필드 보스 (판다리아)
 ## X-DBM-Mod-Name-ruRU: Мировые боссы (Пандария)
 ## X-DBM-Mod-World-Boss: 1
 ## X-DBM-Mod-Sort: 704
