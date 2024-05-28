@@ -19,36 +19,35 @@ mod:RegisterEventsInCombat(
 	"UNIT_DIED"
 )
 
---[[WoL Reg expression
-(spellid = 123791 or spellid = 122713) and fulltype = SPELL_CAST_START or (spell = "Inhale" or spell = "Exhale") and (fulltype = SPELL_AURA_APPLIED or fulltype = SPELL_AURA_APPLIED_DOSE or fulltype = SPELL_AURA_REMOVED) or spellid = 127834 or spell = "Convert" or spellid = 124018
-(spellid = 123791 or spellid = 122713 or spellid = 122740 or spellid = 127834) and fulltype = SPELL_CAST_START or spellid = 124018
+--[[WCL Reg expression
+(ability.id = 123791 or ability.id = 122713) and type = "begincast" or (ability.name = "Inhale" or ability.name = "Exhale") and (type = "applydebuff" or type = "applystack?" or type = "removedebuff") or ability.id = 127834 or ability.name = "Convert" or ability.id = 124018
+(ability.id = 123791 or ability.id = 122713 or ability.id = 122740 or ability.id = 127834) and type = "begincast" or ability.id = 124018
 --]]
 --Notes: Currently, his phase 2 chi blast abiliteis are not detectable via traditional combat log. maybe with transcriptor.
 local warnInhale			= mod:NewStackAnnounce(122852, 2)
-local warnExhale			= mod:NewTargetAnnounce(122761, 3)
-local warnConvert			= mod:NewTargetAnnounce(122740, 4)
+local warnConvert			= mod:NewTargetNoFilterAnnounce(122740, 4)
 local warnEcho				= mod:NewAnnounce("warnEcho", 4, 127834)--Maybe come up with better icon later then just using attenuation icon
 local warnEchoDown			= mod:NewAnnounce("warnEchoDown", 1, 127834)--Maybe come up with better icon later then just using attenuation icon
 
-local specwarnPlatform		= mod:NewSpecialWarning("specwarnPlatform")
-local specwarnForce			= mod:NewSpecialWarningSpell(122713)
-local specwarnConvert		= mod:NewSpecialWarningSwitch(122740, "-Healer")
-local specwarnExhale		= mod:NewSpecialWarningTarget(122761, "Healer|Tank")
-local specwarnAttenuation	= mod:NewSpecialWarning("specwarnAttenuation", nil, nil, nil, 3)
+local specwarnPlatform		= mod:NewSpecialWarning("specwarnPlatform", nil, nil, nil, 1, 2)
+local specwarnForce			= mod:NewSpecialWarningSpell(122713, nil, nil, nil, 1, 2)
+--local specwarnConvert		= mod:NewSpecialWarningSwitch(122740, "-Healer")
+local specwarnExhale		= mod:NewSpecialWarningTarget(122761, "Healer|Tank", nil, nil, 1, 2)
+local specwarnAttenuation	= mod:NewSpecialWarning("specwarnAttenuation", nil, nil, nil, 3, 2)
 
 --Timers aren't worth a crap, at all, but added anyways. if people complain about how inaccurate they are tell them to go to below thread.
---http://us.battle.net/wow/en/forum/topic/7004456927 for more info on lack of timers.
-local timerExhale			= mod:NewTargetTimer(6, 122761)
+--http://us.battle.net/wow/en/forum/topic/7004456927 for more info on lack of timers. (thread long deleted?)
+local timerExhale			= mod:NewTargetTimer(6, 122761, nil, "Tank|Healer", nil, 5)
 local timerForceCD			= mod:NewCDTimer(35, 122713, nil, nil, nil, 2)--35-50 second variation
-local timerForceCast		= mod:NewCastTimer(4, 122713)
-local timerForce			= mod:NewBuffActiveTimer(12.5, 122713)
+local timerForceCast		= mod:NewCastTimer(4, 122713, nil, nil, nil, 5)
+local timerForce			= mod:NewBuffActiveTimer(12.5, 122713, nil, nil, nil, 5)
 local timerAttenuationCD	= mod:NewCDTimer(32.5, 127834, nil, nil, nil, 2)--32.5-41 second variations, when not triggered off exhale. It's ALWAYS 11 seconds after exhale.
-local timerAttenuation		= mod:NewBuffActiveTimer(14, 127834)
+local timerAttenuation		= mod:NewBuffActiveTimer(14, 127834, nil, nil, nil, 5)
 local timerConvertCD		= mod:NewCDTimer(33, 122740, nil, nil, nil, 3)--33-50 second variations
 
 local berserkTimer			= mod:NewBerserkTimer(660)
 
-mod:AddBoolOption("MindControlIcon", true)
+mod:AddSetIconOption("MindControlIcon", 122740, true, 0)--Unknown used icons
 mod:AddBoolOption("ArrowOnAttenuation", true)
 
 local MCTargets = {}
@@ -87,12 +86,13 @@ function mod:SPELL_AURA_APPLIED(args)
 	if spellId == 122852 and UnitName("target") == args.sourceName then--probalby won't work for healers but oh well. On heroic if i'm tanking echo i don't want this spam. I only care if i'm tanking zorlok. Healers won't miss this one anyways
 		warnInhale:Show(args.destName, args.amount or 1)
 	elseif spellId == 122761 then
-		local uId = DBM:GetRaidUnitId(args.destName)
-		if not uId then return end
-		local inRange = DBM.RangeCheck:GetDistance("player", uId)
-		if (inRange and inRange < 40) then--Only show exhale warning if the target is near you (ie on same platform as you). Otherwise, we ignore it since we are likely with the echo somewhere else and this doesn't concern us
-			warnExhale:Show(args.destName)
+		if self:CheckBossDistance(args.sourceGUID, true, 32698, 48) then--Only show exhale warning if the target is near you (ie on same platform as you). Otherwise, we ignore it since we are likely with the echo somewhere else and this doesn't concern us
 			specwarnExhale:Show(args.destName)
+			if self:IsTank() then
+				specwarnExhale:Play("helpsoak")
+			else
+				specwarnExhale:Play("tankheal")
+			end
 			timerExhale:Start(args.destName)
 		end
 	elseif spellId == 122740 then
@@ -129,19 +129,17 @@ function mod:SPELL_CAST_START(args)
 	elseif spellId == 127834 then--This is only id that properly identifies CORRECT boss source
 		--Example
 		--http://worldoflogs.com/reports/rt-g8ncl718wga0jbuj/xe/?enc=bosses&boss=66791&x=%28spellid+%3D+127834+or+spellid+%3D+122496+or+spellid+%3D+122497%29+and+fulltype+%3D+SPELL_CAST_START
-		local bossCID = args:GetSrcCreatureID()--Figure out CID because GetBossTarget expects a CID.
-		local _, uId = self:GetBossTarget(bossCID)--Now lets get a uId. We can't simply just use boss1target and boss2target because echos do not have BossN ID. This is why we use GetBossTarget
-		if uId then--Now we know who is tanking that boss
-			local inRange = DBM.RangeCheck:GetDistance("player", uId)--We check how far we are from the tank who has that boss
-			if (inRange and inRange < 60) then--Only show warning if we are near the boss casting it (or rathor, the player tanking that boss). I realize orbs go very far, but the special warning is for the dance, not stray discs, that's what normal warning is for
-				if self.Options.ArrowOnAttenuation then
-					DBM.Arrow:ShowStatic(lastDirection == DBM_COMMON_L.LEFT and 90 or 270, 12)
-				end
-				specwarnAttenuation:Show(args.spellName, args.sourceName, lastDirection)
-				timerAttenuation:Start()
+		local bossCID = args:GetSrcCreatureID()--Figure out CID because we need to know if it's main boss or echo casting it
+		if self:CheckBossDistance(bossCID, true, 32698, 48) then--Now we know who is tanking that boss
+			if self.Options.ArrowOnAttenuation then
+				DBM.Arrow:ShowStatic(lastDirection == DBM_COMMON_L.LEFT and 90 or 270, 12)
 			end
-		else--Could not get unitID off boss target. We give warn old special warning behavior of just showing it anyways.
 			specwarnAttenuation:Show(args.spellName, args.sourceName, lastDirection)
+			if lastDirection == DBM_COMMON_L.LEFT then
+				specwarnAttenuation:Play("moveleft")
+			else
+				specwarnAttenuation:Play("moveright")
+			end
 			timerAttenuation:Start()
 		end
 		if platform < 4 then
@@ -171,6 +169,7 @@ function mod:RAID_BOSS_EMOTE(msg)
 		platform = platform + 1
 		if platform > 1 then--Don't show for first platform, it's pretty obvious
 			specwarnPlatform:Show()
+			specwarnPlatform:Play("phasechange")
 		end
 		timerForceCD:Cancel()
 		timerAttenuationCD:Cancel()
@@ -188,6 +187,7 @@ end
 function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	if spellId == 122933 then--Clear Throat (4 seconds before force and verve)
 		specwarnForce:Show()
+		specwarnForce:Play("findshield")
 		timerForceCast:Start()
 		if platform < 4 then
 			timerForceCD:Start()
