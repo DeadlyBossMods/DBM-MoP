@@ -53,7 +53,7 @@ local yellLightningStorm				= mod:NewYell(136192)
 local specWarnFrozenBlood				= mod:NewSpecialWarningMove(136520)
 local specWarnFistSmash					= mod:NewSpecialWarningCount(136146, nil, nil, nil, 2)
 
-local timerImpaleCD						= mod:NewCDTimer(20, 134691, nil, "Tank|Healer", nil, 5)
+local timerImpaleCD						= mod:NewCDTimer(17.7, 134691, nil, "Tank|Healer", nil, 5)
 local timerThrowSpearCD					= mod:NewCDTimer(30, 134926, nil, nil, nil, 3)--30-42 second variation observed
 local timerUnleashedFlameCD				= mod:NewCDTimer(6, 134611, nil, false, nil, 5)--CD for the periodic trigger, not when he'll actually be at 30 energy and use it.
 local timerScorched						= mod:NewBuffFadesTimer(30, 134647)
@@ -325,7 +325,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	elseif spellId == 50630 then--Eject All Passengers (heroic phase change trigger)
 		local cid = self:GetCIDFromGUID(UnitGUID(uId))
 		self:Unschedule(checkSpear)
-		timerThrowSpearCD:Restart()
+		timerThrowSpearCD:Restart(9.5)
 		if cid == 68079 then--Ro'shak
 			if self.Options.RangeFrame then
 				DBM.RangeCheck:Show(10, nil, nil, 1)--Switch range frame back to 1. Range is assumed 10, no spell info
@@ -342,7 +342,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 				timerFreezeCD:Start(13)
 				timerFrostSpikeCD:Start(15)
 			end
-			timerLightningStormCD:Start()
+			timerLightningStormCD:Start(18.4)
 			specWarnWindStorm:Schedule(52)
 			timerWindStorm:Schedule(52)
 			timerWindStormCD:Start(52)
@@ -356,7 +356,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 			timerImpaleCD:Cancel()
 			warnPhase3:Show()
 			self:Schedule(25, checkSpear)
-			timerDeadZoneCD:Start(8.5)
+			timerDeadZoneCD:Start(7.5)
 			checkArcing()
 		elseif cid == 68081 then--Dam'ren
 			--confirmed, dam'ren's abilities do NOT reset in phase 4, cds from phase 3 carry over.
@@ -423,7 +423,7 @@ function mod:UNIT_DIED(args)
 			timerLightningStormCD:Start(17)
 			self:Unschedule(checkSpear)
 			self:Schedule(25, checkSpear)
-			timerThrowSpearCD:Restart()
+			timerThrowSpearCD:Restart()--30
 			warnPhase2:Show()
 			specWarnWindStorm:Schedule(14.5)--Old, 49.5
 			timerWindStorm:Schedule(14.5)

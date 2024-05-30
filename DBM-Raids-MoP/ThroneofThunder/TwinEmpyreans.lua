@@ -339,7 +339,7 @@ function mod:OnSync(msg)
 		infernoCount = infernoCount + 1
 		specWarnNuclearInferno:Show(infernoCount)
 		timerNuclearInferno:Start()
-		if phase3Started then
+		if phase3Started and self.vb.bossLeft == 2 then--Only uses longer Cd if both actually alive
 			timerNuclearInfernoCD:Start(73, infernoCount+1)
 		else
 			timerNuclearInfernoCD:Start(nil, infernoCount+1)
