@@ -314,7 +314,7 @@ end
 function mod:OnSync(msg)
 	if msg == "Adds" and self:AntiSpam(20, 4) and self:IsInCombat() then
 		self.vb.addsCount = self.vb.addsCount + 1
-		if self.vb.addsCount % 5 == self:IsMythic() and 2 or 3 then--Drakes now spawn in 3rd wave instead of 4th on mythic?
+		if self.vb.addsCount % 5 == self:IsLFR() and 3 or 2 then--On heroic and mythic at least, they spawn 3rd now, LFR they still spawn 4th
 			warnAdd:Show(self.vb.addsCount)
 			timerProtoCD:Start(54.5, self.vb.addsCount + 1)
 			self:Schedule(54.5, protos, self)
