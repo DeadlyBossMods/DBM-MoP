@@ -105,6 +105,13 @@ local function protos(self)
 	timerAddsCD:Start(nil, self.vb.addsCount + 1)
 end
 
+local function initialYellMissed(self)
+	if self.vb.addsCount == 0 then
+		self.vb.addsCount = self.vb.addsCount + 1
+		timerAddsCD:Start(38, 2)
+	end
+end
+
 ---@param self DBMMod
 local function TowerGrunt(self)
 	warnTowerGrunt:Show()
@@ -117,12 +124,14 @@ function mod:OnCombatStart(delay)
 	self.vb.addsCount = 0
 	self.vb.firstTower = 0
 	self.vb.pulseCount = 0
+	timerAddsCD:Start(10, 1)
 	if not self:IsMythic() then
 		timerTowerCD:Start(116.5-delay)--Initial timer
 	else
 		timerTowerGruntCD:Start(6)
 		self:Schedule(6, TowerGrunt, self)
 	end
+	self:Schedule(20, initialYellMissed, self)
 end
 
 function mod:OnCombatEnd()
@@ -314,13 +323,14 @@ end
 function mod:OnSync(msg)
 	if msg == "Adds" and self:AntiSpam(20, 4) and self:IsInCombat() then
 		self.vb.addsCount = self.vb.addsCount + 1
-		if self.vb.addsCount % 5 == self:IsLFR() and 3 or 2 then--On heroic and mythic at least, they spawn 3rd now, LFR they still spawn 4th
+		if self.vb.addsCount % 5 == 3 then
 			warnAdd:Show(self.vb.addsCount)
 			timerProtoCD:Start(54.5, self.vb.addsCount + 1)
 			self:Schedule(54.5, protos, self)
 		elseif self.vb.addsCount == 1 then
+			self:Unschedule(initialYellMissed)
 			warnAdd:Show(self.vb.addsCount)
-			timerAddsCD:Start(55, 2)--Now 55 instead of 48
+			timerAddsCD:Start(48, 2)--Alliance 48, horde 50?
 		else
 			warnAdd:Show(self.vb.addsCount)
 			timerAddsCD:Start(nil, self.vb.addsCount + 1)
