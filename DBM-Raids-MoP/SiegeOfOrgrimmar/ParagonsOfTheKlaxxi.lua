@@ -259,13 +259,13 @@ local function CheckBosses(self)
 				timerMutateCD:Start(23, 1)
 				if DBM:UnitDebuff("player", vulnerable2) then vulnerable = true end
 			elseif cid == 71153 then--Hisek the Swarmkeeper
-				timerAimCD:Start(28.2, 1)--Might be 35-37 with unitdebuff filter (former 32)
+				timerAimCD:Start(21.2, 1)--Might be 35-37 with unitdebuff filter (former 32)
 				if self:IsMythic() then
 					timerRapidFireCD:Start(47.5)--47-50 with unitdebuff filter
 				end
 			elseif cid == 71161 then--Kil'ruk the Wind-Reaver
 				if self:IsMythic() then
-					timerReaveCD:Start(38.5)
+					timerReaveCD:Start(32.2)
 				end
 				self:StopRepeatedScan("DFAScan")
 				self:ScheduleMethod(23, "StartRepeatedScan", unitGUID, "DFAScan", 0.25, true)--Not a large sample size, data shows it happen 29-30 seconds after IEEU fires on two different pulls. Although 2 is a poor sample

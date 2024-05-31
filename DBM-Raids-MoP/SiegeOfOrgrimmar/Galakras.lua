@@ -32,6 +32,7 @@ mod:RegisterEventsInCombat(
 	"CHAT_MSG_MONSTER_YELL"
 )
 
+--THIS module probably needs signficant rewriting if a mop classic happens. it's janky and prone to breaking on smallest of mis translations.
 --Stage 1: Bring Her Down!
 mod:AddTimerLine(DBM:EJ_GetSectionInfo(8417))
 local warnFracture					= mod:NewTargetNoFilterAnnounce(146899, 3)
@@ -80,7 +81,7 @@ local yellFlamesofGalakrond			= mod:NewYell(147068)
 local specWarnFlamesofGalakrondStack= mod:NewSpecialWarningStack(147029, nil, 6, nil, nil, 1, 6)
 local specWarnFlamesofGalakrondOther= mod:NewSpecialWarningTarget(147029, "Tank", nil, nil, 1, 2)
 
-local timerFlamesofGalakrondCD		= mod:NewCDTimer(6, 147068, nil, nil, nil, 3)
+local timerFlamesofGalakrondCD		= mod:NewCDTimer(5.7, 147068, nil, nil, nil, 3)
 local timerFlamesofGalakrond		= mod:NewTargetTimer(15, 147029, nil, "Tank", nil, 5)
 local timerPulsingFlamesCD			= mod:NewNextCountTimer(25, 147042, nil, nil, nil, 2, nil, DBM_COMMON_L.HEALER_ICON)
 local timerPulsingFlames			= mod:NewBuffActiveTimer(7, 147042)
@@ -245,7 +246,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 		timerProtoCD:Cancel()
 		warnPhase2:Show()
 		warnPhase2:Play("ptwo")
-		timerFlamesofGalakrondCD:Start(13.5)
+		timerFlamesofGalakrondCD:Start(12)
 		timerPulsingFlamesCD:Start(26.2, 1)--(used to be 39?)
 		self:Unschedule(protos)
 	end
@@ -267,7 +268,7 @@ function mod:CHAT_MSG_MONSTER_SAY(msg)
 	end
 end
 
-function mod:CHAT_MSG_MONSTER_YELL(msg)
+function mod:CHAT_MSG_MONSTER_YELL(msg)--Can also scan for NPC name and player targets, but npc name also requires translations since not in journal, and these already translated
 	if msg == L.newForces1 or msg == L.newForces1H or msg == L.newForces2 or msg == L.newForces3 or msg == L.newForces4 then
 		self:SendSync("Adds")
 	end
@@ -280,20 +281,22 @@ function mod:UPDATE_UI_WIDGET(table)
 	if widgetInfo and widgetInfo.text then
 		local text = widgetInfo.text
 		local percent = tonumber(string.match(text or "", "%d+"))
-		if percent == 1 and not self:IsMythic() then
+		if percent == 1 then
 			if (self.vb.firstTower == 0) then
 				self.vb.firstTower = 1
 			end
-			timerTowerCD:Restart()--Corrected timer using widget api
+			if not self:IsMythic() then
+				timerTowerCD:Restart()--Corrected timer using widget api
+			end
 		end
 	end
 end
 
 --"<167.7 21:23:40> [CHAT_MSG_RAID_BOSS_EMOTE] CHAT_MSG_RAID_BOSS_EMOTE#Warlord Zaela orders a |cFFFF0404|hKor'kron Demolisher|h|r to assault the tower!
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
-	if msg:find("cFFFF0404") then--They fixed epiccenter bug (figured they would). Color code should be usuable though. It's only emote on encounter that uses it.
+	if msg:find("cFFFF0404") then
 		warnDemolisher:Show()
-		if self:IsMythic() and self.vb.firstTower == 0 then
+		if self:IsMythic() and self.vb.firstTower == 1 then
 			timerTowerGruntCD:Start(15)
 			self:Schedule(15, TowerGrunt, self)
 			self.vb.firstTower = 2
@@ -311,13 +314,13 @@ end
 function mod:OnSync(msg)
 	if msg == "Adds" and self:AntiSpam(20, 4) and self:IsInCombat() then
 		self.vb.addsCount = self.vb.addsCount + 1
-		if self.vb.addsCount % 5 == 3 then
+		if self.vb.addsCount % 5 == self:IsLFR() and 3 or 2 then--On heroic and mythic at least, they spawn 3rd now, LFR they still spawn 4th
 			warnAdd:Show(self.vb.addsCount)
-			timerProtoCD:Start(nil, self.vb.addsCount + 1)
-			self:Schedule(55, protos, self)
+			timerProtoCD:Start(54.5, self.vb.addsCount + 1)
+			self:Schedule(54.5, protos, self)
 		elseif self.vb.addsCount == 1 then
 			warnAdd:Show(self.vb.addsCount)
-			timerAddsCD:Start(48, 2)
+			timerAddsCD:Start(55, 2)--Now 55 instead of 48
 		else
 			warnAdd:Show(self.vb.addsCount)
 			timerAddsCD:Start(nil, self.vb.addsCount + 1)
