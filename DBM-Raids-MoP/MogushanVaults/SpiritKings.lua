@@ -285,7 +285,8 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 		elseif cid == 60708 then
 			self.vb.MengActive = false
 			timerDeliriousCD:Cancel()
-			timerMaddeningShoutCD:Restart(30)--This boss retains Maddening Shout
+			timerMaddeningShoutCD:Stop()
+			timerMaddeningShoutCD:Start(30)--This boss retains Maddening Shout
 		elseif cid == 60709 then
 			self.vb.QiangActive = false
 			timerMassiveAttackCD:Cancel()

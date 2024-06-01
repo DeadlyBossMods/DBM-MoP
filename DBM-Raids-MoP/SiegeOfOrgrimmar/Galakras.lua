@@ -10,6 +10,8 @@ mod:SetEncounterID(1622)
 mod:SetReCombatTime(180, 20)--fix combat re-starts after killed. Same issue as tsulong. Fires TONS of IEEU for like 1-2 minutes after fight ends.
 mod:SetMainBossID(72249)
 mod:SetUsedIcons(8, 7, 2)
+mod:SetHotfixNoticeRev(20240530000000)
+mod:SetMinSyncRevision(20240530000000)
 
 mod:RegisterCombat("combat")
 
@@ -295,7 +297,8 @@ function mod:UPDATE_UI_WIDGET(table)
 				self.vb.firstTower = 1
 			end
 			if not self:IsMythic() then
-				timerTowerCD:Restart()--Corrected timer using widget api
+				timerTowerCD:Stop()
+				timerTowerCD:Start()--Corrected timer using widget api
 			end
 		end
 	end

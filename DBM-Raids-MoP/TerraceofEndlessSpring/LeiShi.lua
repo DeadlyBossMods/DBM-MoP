@@ -147,9 +147,11 @@ function mod:SPELL_AURA_REMOVED(args)
 			local protectElapsed = GetTime() - lastProtect
 			local specialCD = self.vb.specialRemaining - protectElapsed
 			if specialCD < 5 then
-				timerSpecialCD:Restart(5, self.vb.specialCast+1)
+				timerSpecialCD:Stop()
+				timerSpecialCD:Start(5, self.vb.specialCast+1)
 			else
-				timerSpecialCD:Restart(specialCD, self.vb.specialCast+1)
+				timerSpecialCD:Stop()
+				timerSpecialCD:Start(specialCD, self.vb.specialCast+1)
 			end
 		end
 	elseif spellId == 123121 then

@@ -325,7 +325,8 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	elseif spellId == 50630 then--Eject All Passengers (heroic phase change trigger)
 		local cid = self:GetCIDFromGUID(UnitGUID(uId))
 		self:Unschedule(checkSpear)
-		timerThrowSpearCD:Restart(9.5)
+		timerThrowSpearCD:Stop()
+		timerThrowSpearCD:Start(9.5)
 		if cid == 68079 then--Ro'shak
 			if self.Options.RangeFrame then
 				DBM.RangeCheck:Show(10, nil, nil, 1)--Switch range frame back to 1. Range is assumed 10, no spell info
@@ -423,7 +424,8 @@ function mod:UNIT_DIED(args)
 			timerLightningStormCD:Start(17)
 			self:Unschedule(checkSpear)
 			self:Schedule(25, checkSpear)
-			timerThrowSpearCD:Restart()--30
+			timerThrowSpearCD:Stop()
+			timerThrowSpearCD:Start()--30
 			warnPhase2:Show()
 			specWarnWindStorm:Schedule(14.5)--Old, 49.5
 			timerWindStorm:Schedule(14.5)
@@ -450,7 +452,8 @@ function mod:UNIT_DIED(args)
 			timerDeadZoneCD:Start(6)
 			self:Unschedule(checkSpear)
 			self:Schedule(25, checkSpear)
-			timerThrowSpearCD:Restart()
+			timerThrowSpearCD:Stop()
+			timerThrowSpearCD:Start()
 		end
 	elseif cid == 68081 then--Dam'ren
 		timerDeadZoneCD:Cancel()

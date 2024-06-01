@@ -150,16 +150,23 @@ function mod:SPELL_CAST_SUCCESS(args)
 		self.vb.woundCount = 0
 		bpSpecWarnFired = false
 		--Since we register this event anyways for bursting, might as well start cd bars here instead
-		timerMarkCD:Restart(10.5)
-		timerSelfReflectionCD:Restart()
-		timerCorruptedPrisonCD:Restart()
-		timerManifestationCD:Restart()
-		timerSwellingPrideCD:Restart(nil, self.vb.swellingCount + 1)
+		timerMarkCD:Stop()
+		timerMarkCD:Start(10.5)
+		timerSelfReflectionCD:Stop()
+		timerSelfReflectionCD:Start()
+		timerCorruptedPrisonCD:Stop()
+		timerCorruptedPrisonCD:Start()
+		timerManifestationCD:Stop()
+		timerManifestationCD:Start()
+		timerSwellingPrideCD:Stop()
+		timerSwellingPrideCD:Start(nil, self.vb.swellingCount + 1)
 		if not self:IsDifficulty("lfr25") then
-			timerWoundedPrideCD:Restart(11)
+			timerWoundedPrideCD:Stop()
+			timerWoundedPrideCD:Start(11)
 		end
 		if self:IsMythic() then
-			timerBanishmentCD:Restart()
+			timerBanishmentCD:Stop()
+			timerBanishmentCD:Start()
 		end
 		--This is done here because a lot can change during a cast, and we need to know players energy when cast ends, i.e. this event
 		for uId in DBM:GetGroupMembers() do
