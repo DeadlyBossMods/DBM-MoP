@@ -1,6 +1,4 @@
-if GetLocale() ~= "koKR" then
-	return
-end
+if GetLocale() ~= "koKR" then return end
 local L
 
 ---------------------
@@ -13,7 +11,7 @@ L:SetTimerLocalization({
 })
 
 L:SetOptionLocalization({
-	timerEvent	= "양조 완료 바 보기(추정)"
+	timerEvent	= "대략적인 양조 완료 시기 타이머 바 보기"
 })
 
 L:SetMiscLocalization({
@@ -34,7 +32,7 @@ L:SetMiscLocalization({
 ---------------------------
 -- Arena Of Annihilation --
 ---------------------------
-L = DBM:GetModLocalization("d511")
+--L = DBM:GetModLocalization("d511")
 
 -------------------------
 -- Assault of Zan'vess --
@@ -48,12 +46,12 @@ L:SetMiscLocalization({
 ------------------------------
 -- Battle on the High Seas ---
 ------------------------------
-L = DBM:GetModLocalization("d652")
+--L = DBM:GetModLocalization("d652")
 
 -----------------------
 -- Blood in the Snow --
 -----------------------
-L = DBM:GetModLocalization("d646")
+--L = DBM:GetModLocalization("d646")
 
 -----------------------
 -- Brewmoon Festival --
@@ -61,11 +59,11 @@ L = DBM:GetModLocalization("d646")
 L = DBM:GetModLocalization("d539")
 
 L:SetTimerLocalization({
-	timerBossCD	= "%s"
+	timerBossCD	= "%s 등장"
 })
 
 L:SetOptionLocalization({
-	timerBossCD	= "우두머리 등장 바 보기"
+	timerBossCD	= "다음 보스 등장 타이머 바 보기"
 })
 
 L:SetMiscLocalization({
@@ -78,7 +76,7 @@ L:SetMiscLocalization({
 ------------------------------
 -- Crypt of Forgotten Kings --
 ------------------------------
-L = DBM:GetModLocalization("d504")
+--L = DBM:GetModLocalization("d504")
 
 -----------------------
 -- Dagger in the Dark --
@@ -86,11 +84,11 @@ L = DBM:GetModLocalization("d504")
 L = DBM:GetModLocalization("d616")
 
 L:SetTimerLocalization({
-	timerAddsCD	= "추가병력 가능"
+	timerAddsCD	= "쫄 소환 쿨타임"
 })
 
 L:SetOptionLocalization({
-	timerAddsCD	= "도마뱀군주 추가 병력 대기시간 바 보기"
+	timerAddsCD	= "도마뱀군주의 쫄 소환 쿨타임 타이머 바 보기"
 })
 
 L:SetMiscLocalization({
@@ -108,7 +106,7 @@ L:SetMiscLocalization({
 ------------------------
 -- Greenstone Village --
 ------------------------
-L = DBM:GetModLocalization("d492")
+--L = DBM:GetModLocalization("d492")
 
 --------------
 -- Landfall --
@@ -136,17 +134,17 @@ L:SetMiscLocalization({
 ----------------------
 -- Theramore's Fall --
 ----------------------
-L = DBM:GetModLocalization("d566")
+--L = DBM:GetModLocalization("d566")
 
 --------------------------------
 -- Troves of the Thunder King --
 --------------------------------
-L = DBM:GetModLocalization("d620")
+--L = DBM:GetModLocalization("d620")
 
 ----------------
 -- Unga Ingoo --
 ----------------
-L = DBM:GetModLocalization("d499")
+--L = DBM:GetModLocalization("d499")
 
 ------------------------
 -- Warlock Green Fire --
@@ -159,13 +157,13 @@ L:SetWarningLocalization({
 })
 
 L:SetTimerLocalization({
-	timerLostSoulsCD	= "길 잃은 영혼 가능"
+	timerLostSoulsCD	= "길 잃은 영혼 쿨타임"
 })
 
 L:SetOptionLocalization({
-	specWarnLostSouls		= "길 잃은 영혼 소환시 특수 경고 보기",
-	specWarnEnslavePitLord	= "지옥의 군주 활성화 또는 지배 해제시 특수 경고 보기",
-	timerLostSoulsCD		= "길 잃은 영혼 대기시간 바 보기"
+	specWarnLostSouls		= "길 잃은 영혼 등장시 특수 알림 보기",
+	specWarnEnslavePitLord	= "지옥의 군주 활성화/지배가 풀렸을 때 악마 지배 특수 알림 보기",
+	timerLostSoulsCD		= "길 잃은 영혼 등장 쿨타임 타이머 바 보기"
 })
 
 L:SetMiscLocalization({

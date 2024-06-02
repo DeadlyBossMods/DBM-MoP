@@ -1,6 +1,4 @@
-if GetLocale() ~= "koKR" then
-	return
-end
+if GetLocale() ~= "koKR" then return end
 local L
 
 -----------------------
@@ -45,7 +43,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(857)
 
 L:SetOptionLocalization({
-	BeaconArrow	= "$spell:144473 대상이 정해진 경우 DBM 화살표 보기"
+	BeaconArrow	= "$spell:144473에 걸린 사람이 있으면 DBM 화살표 표시"
 })
 
 L:SetMiscLocalization({
@@ -73,8 +71,8 @@ L = DBM:GetModLocalization(859)
 
 L:SetMiscLocalization({
 	Pull		= "지금 확인해 보지.",
-	Victory		= "상상도 할 수 없는 강력한 적들에게 둘러싸여 있는 그런 때에도, 인내가 너희를 굳건히 지탱할 것이다. 다가오는 시간에 이 교훈을 반드시 기억해라.",
-	VictoryDem	= "Rakkas shi alar re pathrebosh il zila rethule kiel shi shi belaros rikk kanrethad adare revos shi xi thorje Rukadare zila te lok zekul melar "--Cover all bases and all
+	Victory		= "상상도 할 수 없는 강력한 적들에게 둘러싸여 있는 그런 때에도, 인내가 너희를 굳건히 지탱할 것이다. 다가오는 시간에 이 교훈을 반드시 기억해라."
+	--VictoryDem	= "Rakkas shi alar re pathrebosh il zila rethule kiel shi shi belaros rikk kanrethad adare revos shi xi thorje Rukadare zila te lok zekul melar "--Cover all bases and all
 })
 
 ---------------------------
@@ -102,5 +100,5 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization("Zandalari")
 
 L:SetGeneralLocalization({
-	name	= "잔달라 부족"
+	name	= "잔달라 트롤"
 })
