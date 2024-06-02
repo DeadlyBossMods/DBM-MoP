@@ -42,7 +42,7 @@ local specWarnLightningPrison		= mod:NewSpecialWarningMoveAway(111850, nil, nil,
 local yellLightningPrison			= mod:NewYell(111850)
 local specWarnLightningStorm		= mod:NewSpecialWarningSpell(118077, nil, nil, nil, 2, 2)--Since it's multiple targets, will just use spell instead of dispel warning.
 
-local timerLightningPrisonCD		= mod:NewCDTimer(25, 111850, nil, nil, nil, 3)
+local timerLightningPrisonCD		= mod:NewCDTimer(22.3, 111850, nil, nil, nil, 3)
 local timerLightningStormCD			= mod:NewCDTimer(42, 118077, nil, nil, nil, 2)--Shorter Cd in phase 3 32 seconds.
 local timerLightningStorm			= mod:NewBuffActiveTimer(14, 118077, nil, nil, nil, 5, nil, DBM_COMMON_L.HEALER_ICON)
 
@@ -185,9 +185,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			elseif args:GetDestCreatureID() == 60586 then--Elder Asani
 	--			timerCorruptingWatersCD:Start(10)--(now used immediately in 10.2.7)
 			elseif args:GetDestCreatureID() == 60583 then--Protector Kaolan
-				if not self:IsRemix() then--Cast instantly on remix
-					timerDefiledGroundCD:Start(5)
-				end
+				timerDefiledGroundCD:Start(1.2)--Formerly 5
 			end
 		elseif self:GetStage(3) then
 			if args:GetDestCreatureID() == 60583 then--Elder Regail
