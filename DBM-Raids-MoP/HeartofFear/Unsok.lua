@@ -271,7 +271,7 @@ function mod:SPELL_CAST_START(args)
 			self:Schedule(0.5, warnAmberExplosionCast, 122398)--Always check available interrupts and special warn if not
 		elseif args.sourceGUID == UnitGUID("player") then--Cast by YOU
 			specwarnAmberExplosionYou:Show(args.spellName)
-			timerAmberExplosionCD:Start(13, args.sourceName)--Only player needs to see this, they are only person who can do anything about it.
+			timerAmberExplosionCD:Start(10.8, args.sourceName)--Only player needs to see this, they are only person who can do anything about it.
 		end
 	elseif spellId == 122402 then--Amber Monstrosity
 		if playerIsConstruct and GetTime() - lastStrike >= 3.5 then--Player is construct and Amber Strike will be available before cast ends.

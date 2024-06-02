@@ -157,11 +157,11 @@ mod.SPELL_MISSED = mod.SPELL_DAMAGE
 
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 	if msg:find("spell:122774") then
-		timerCrush:Start()
 		if self:IsHeroic() and not msg:find(L.UnderHim) then
 			crushCount = crushCount + 1
 			warnCrush:Show(crushCountWarnText:format(crushCount))
 			specwarnCrush:Show()
+			timerCrush:Start()
 			timerCrushCD:Start(nil, crushCount+1)
 		elseif self:AntiSpam(3, 2) then
 			warnCrush:Show(crushWarnText)
