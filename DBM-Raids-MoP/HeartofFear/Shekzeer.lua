@@ -281,8 +281,8 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerScreechCD:Cancel()
 		warnPhase2:Show()
 		timerVisionsCD:Start(7)
+		timerConsumingTerrorCD:Start(11.8)
 		timerCalamityCD:Start(12)
-		timerConsumingTerrorCD:Start(14)
 	end
 end
 
