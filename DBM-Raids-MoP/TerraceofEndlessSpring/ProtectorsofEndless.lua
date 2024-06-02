@@ -185,7 +185,9 @@ function mod:SPELL_AURA_APPLIED(args)
 			elseif args:GetDestCreatureID() == 60586 then--Elder Asani
 	--			timerCorruptingWatersCD:Start(10)--(now used immediately in 10.2.7)
 			elseif args:GetDestCreatureID() == 60583 then--Protector Kaolan
-				timerDefiledGroundCD:Start(5)
+				if not self:IsRemix() then--Cast instantly on remix
+					timerDefiledGroundCD:Start(5)
+				end
 			end
 		elseif self:GetStage(3) then
 			if args:GetDestCreatureID() == 60583 then--Elder Regail
