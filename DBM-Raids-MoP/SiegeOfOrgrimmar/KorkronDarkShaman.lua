@@ -30,28 +30,27 @@ local warnRustedIronTotem			= mod:NewSpellAnnounce(144291, 3)--Heroic (95%)
 --Earthbreaker Haromm
 local warnFroststormStrike			= mod:NewStackAnnounce(144215, 2, nil, "Tank|Healer")
 local warnToxicMists				= mod:NewTargetAnnounce(144089, 2, nil, false)
-local warnFoulStream				= mod:NewTargetAnnounce(144090, 4)
+local warnFoulStream				= mod:NewTargetNoFilterAnnounce(144090, 4)
 --Wavebinder Kardris
-local warnToxicStorm				= mod:NewTargetAnnounce(144005, 2)
-local warnFoulGeyser				= mod:NewTargetAnnounce(143990, 4)
+local warnToxicStorm				= mod:NewTargetNoFilterAnnounce(144005, 2)
+local warnFoulGeyser				= mod:NewTargetNoFilterAnnounce(143990, 4)
 local warnIronPrison				= mod:NewTargetAnnounce(144330, 3)
 
 --Earthbreaker Haromm
-local specWarnFroststormStrike		= mod:NewSpecialWarningStack(144215, nil, 5)
-local specWarnFroststormStrikeOther	= mod:NewSpecialWarningTaunt(144215)
-local specWarnFoulStreamYou			= mod:NewSpecialWarningYou(144090)
+local specWarnFroststormStrike		= mod:NewSpecialWarningStack(144215, nil, 5, nil, nil, 1, 6)
+local specWarnFroststormStrikeOther	= mod:NewSpecialWarningTaunt(144215, nil, nil, nil, 1, 2)
+local specWarnFoulStreamYou			= mod:NewSpecialWarningYou(144090, nil, nil, nil, 1, 2)
 local yellFoulStream				= mod:NewYell(144090)
-local specWarnFoulStream			= mod:NewSpecialWarningSpell(144090, nil, nil, nil, 2)
-local specWarnAshenWall				= mod:NewSpecialWarningSpell(144070, nil, nil, nil, 2)
-local specWarnIronTomb				= mod:NewSpecialWarningSpell(144328, nil, nil, nil, 2)
+local specWarnFoulStream			= mod:NewSpecialWarningDodge(144090, nil, nil, nil, 2, 2)
+local specWarnAshenWall				= mod:NewSpecialWarningDodge(144070, nil, nil, nil, 2, 2)
+local specWarnIronTomb				= mod:NewSpecialWarningDodge(144328, nil, nil, nil, 2, 2)
 --Wavebinder Kardris
-local specWarnToxicStorm			= mod:NewSpecialWarningYou(144017)--Spellid changed to force an option default reset. melee default was for ptr version that always targeted tank
-local specWarnToxicStormNear		= mod:NewSpecialWarningClose(144005)
+local specWarnToxicStorm			= mod:NewSpecialWarningYou(144017, nil, nil, nil, 1, 2)--Spellid changed to force an option default reset. melee default was for ptr version that always targeted tank
 local yellToxicStorm				= mod:NewYell(144005)
-local specWarnFoulGeyser			= mod:NewSpecialWarningSpell(143990)--Hard one to perfect. melee need to treat it as a move away, ranged as a switch. Can't really say both in the same message but I don't want to split it into two
+local specWarnFoulGeyser			= mod:NewSpecialWarningSpell(143990, nil, nil, nil, 2, 2)
 local yellFoulGeyser				= mod:NewYell(143990)
-local specWarnFallingAsh			= mod:NewSpecialWarningPreWarn(143973, nil, 3, nil, 2)
-local specWarnIronPrison			= mod:NewSpecialWarningPreWarn(144330, nil, 4)--If this generic isn't too clear i'll localize it. this is warning that it's about to expire not that it's just been applied
+local specWarnFallingAsh			= mod:NewSpecialWarningPreWarn(143973, nil, 3, nil, 2, 1, 2)
+local specWarnIronPrison			= mod:NewSpecialWarningPreWarn(144330, nil, 4, nil, nil, 1, 2)--If this generic isn't too clear i'll localize it. this is warning that it's about to expire not that it's just been applied
 local yellIronPrisonFades			= mod:NewYell(144330, L.PrisonYell, false)--Off by default since it's an atypical yell (it's not used for avoiding person it's used to get healer attention to person)
 
 --Earthbreaker Haromm
@@ -100,11 +99,13 @@ function mod:FoulStreamTarget(targetname, uId)
 	if not targetname then return end
 	if self:IsTanking(uId) then--Never target tanks, so if target is tank, that means scanning failed.
 		specWarnFoulStream:Show()
+		specWarnFoulStream:Play("watchstep")
 	else
 		warnFoulStream:Show(targetname)
 		timerFoulStreamCD:Start()
 		if targetname == UnitName("player") then
 			specWarnFoulStreamYou:Show()
+			specWarnFoulStreamYou:Play("targetyou")
 			yellFoulStream:Yell()
 			if self.Options.RangeFrame then
 				DBM.RangeCheck:Show(4)
@@ -112,6 +113,7 @@ function mod:FoulStreamTarget(targetname, uId)
 			end
 		else
 			specWarnFoulStream:Show()
+			specWarnFoulStream:Play("watchstep")
 		end
 		if self.Options.SetIconOnFoulStream then
 			self:SetIcon(targetname, 8, 3)
@@ -121,12 +123,12 @@ end
 
 function mod:ToxicStormTarget(targetname, uId)
 	if not targetname then return end
-	warnToxicStorm:Show(targetname)
 	if targetname == UnitName("player") then
 		specWarnToxicStorm:Show()
+		specWarnToxicStorm:Play("targetyou")
 		yellToxicStorm:Yell()
-	elseif self:CheckNearby(10, targetname) then
-		specWarnToxicStormNear:Show(targetname)
+	else
+		warnToxicStorm:Show(targetname)
 	end
 end
 
@@ -143,24 +145,31 @@ end
 
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
-	if spellId == 144005 and self:CheckTankDistance(args.sourceGUID, 50) then
+	if spellId == 144005 and self:CheckBossDistance(args.sourceGUID, true, 32698, 48) then
 		self:BossTargetScanner(71858, "ToxicStormTarget", 0.05, 16)
 		timerToxicStormCD:Start()
-	elseif spellId == 144090 and self:CheckTankDistance(args.sourceGUID, 50) then
+	elseif spellId == 144090 and self:CheckBossDistance(args.sourceGUID, true, 32698, 48) then
 		self:BossTargetScanner(71859, "FoulStreamTarget", 0.05, 16)
-	elseif spellId == 143990 and self:CheckTankDistance(args.sourceGUID, 50) then
+	elseif spellId == 143990 and self:CheckBossDistance(args.sourceGUID, true, 32698, 48) then
 		timerFoulGeyserCD:Start()
 		specWarnFoulGeyser:Show()
+		if self:IsRanged() then
+			specWarnFoulGeyser:Play("targetchange")
+		else
+			specWarnFoulGeyser:Play("watchstep")
+		end
 	elseif spellId == 144070 and self:CheckTankDistance(args.sourceGUID, 30) then
 		timerAshenWallCD:Start()
 		specWarnAshenWall:Show()
+		specWarnAshenWall:Play("farfromline")
 	elseif spellId == 143973 then--No filter, damages entire raid. / In split strat, this sometimes goes out of combatlog range. So use sync.
 		self:SendSync("FallingAsh")
-	elseif spellId == 144330 and self:CheckTankDistance(args.sourceGUID, 50) then
+	elseif spellId == 144330 and self:CheckBossDistance(args.sourceGUID, true, 32698, 48) then
 		timerIronPrisonCD:Start()
-	elseif spellId == 144328 and self:CheckTankDistance(args.sourceGUID, 50) then
+	elseif spellId == 144328 and self:CheckBossDistance(args.sourceGUID, true, 32698, 48) then
 		timerIronTombCD:Start()
 		specWarnIronTomb:Show()
+		specWarnIronTomb:Play("watchstep")
 	end
 end
 
@@ -175,7 +184,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 	elseif spellId == 144291 and self:AntiSpam(2, 1) then
 		warnRustedIronTotem:Show()
 	elseif spellId == 143990 then
-		if self:CheckTankDistance(args.sourceGUID, 50) then
+		if self:CheckBossDistance(args.sourceGUID, true, 32698, 48) then
 			warnFoulGeyser:Show(args.destName)
 		end
 		if args:IsPlayer() then
@@ -193,7 +202,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif spellId == 144089 then
 		--Filter warnings only
-		if self:CheckTankDistance(args.sourceGUID, 50) and self:AntiSpam(2, 2) then
+		if self:CheckBossDistance(args.sourceGUID, true, 32698, 48) and self:AntiSpam(2, 2) then
 			showMist = true
 			self:Schedule(2, clearCheckTankDistanceThrottle, spellId)
 		end
@@ -206,7 +215,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			self:SetSortedIcon("roster", 0.5, args.destName, 1)
 		end
 	elseif spellId == 144330 then
-		if self:CheckTankDistance(args.sourceGUID, 50) and self:AntiSpam(2, 3) then
+		if self:CheckBossDistance(args.sourceGUID, true, 32698, 48) and self:AntiSpam(2, 3) then
 			showPrison = true
 			self:Schedule(2, clearCheckTankDistanceThrottle, spellId)
 		end
@@ -216,6 +225,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 		if args:IsPlayer() then
 			specWarnIronPrison:Schedule(56)
+			specWarnIronPrison:ScheduleVoice(56, "defensive")
 			timerIronPrisonSelf:Start()
 			yellIronPrisonFades:Schedule(59, playerName, 1)
 			yellIronPrisonFades:Schedule(58, playerName, 2)
@@ -223,7 +233,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			yellIronPrisonFades:Schedule(56, playerName, 4)
 			yellIronPrisonFades:Schedule(55, playerName, 5)
 		end
-	elseif spellId == 144215 and self:CheckTankDistance(args.sourceGUID, 50) then
+	elseif spellId == 144215 and self:CheckBossDistance(args.sourceGUID, true, 32698, 48) then
 		local amount = args.amount or 1
 		timerFroststormStrike:Start(args.destName)
 		if amount % 2 == 0 or amount >= 5 then
@@ -232,9 +242,11 @@ function mod:SPELL_AURA_APPLIED(args)
 		if amount >= 5 then
 			if args:IsPlayer() then
 				specWarnFroststormStrike:Show(amount)
+				specWarnFroststormStrike:Play("stackhigh")
 			else
 				if not DBM:UnitDebuff("player", args.spellName) and not UnitIsDeadOrGhost("player") then
 					specWarnFroststormStrikeOther:Show(args.destName)
+					specWarnFroststormStrikeOther:Play("tauntboss")
 				end
 			end
 		end
@@ -252,6 +264,7 @@ function mod:SPELL_AURA_REMOVED(args)
 		timerIronPrison:Cancel(args.destName)
 		if args:IsPlayer() then
 			specWarnIronPrison:Cancel()
+			specWarnIronPrison:CancelVoice()
 			yellIronPrisonFades:Cancel()
 			timerIronPrisonSelf:Cancel()
 		end
@@ -265,9 +278,11 @@ function mod:OnSync(msg)
 		if self:IsMythic() then--On heroic, base spell 1 second cast, not 2.
 			timerFallingAshCD:Start(16, self.vb.ashCount+1)
 			specWarnFallingAsh:Schedule(13)--Give special warning 3 seconds before happens, not cast
+			specWarnFallingAsh:ScheduleVoice(13, "watchstep")
 		else
 			timerFallingAshCD:Start(nil, self.vb.ashCount+1)
 			specWarnFallingAsh:Schedule(14)--Give special warning 3 seconds before happens, not cast
+			specWarnFallingAsh:ScheduleVoice(14, "watchstep")
 		end
 	end
 end

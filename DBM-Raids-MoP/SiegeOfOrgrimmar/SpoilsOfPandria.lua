@@ -40,32 +40,27 @@ local warnForbiddenMagic		= mod:NewTargetAnnounce(145230, 2)
 local warnTorment				= mod:NewSpellAnnounce(142934, 3, nil, "Healer")
 ----Mantid
 local warnWindStorm				= mod:NewSpellAnnounce(145286, 3)
-local warnEnrage				= mod:NewTargetAnnounce(145692, 3, nil, "Tank|RemoveEnrage")--Do not have timer for this yet, add not alive long enough.
 --Crate of Pandaren Relics
 local warnBreathofFire			= mod:NewSpellAnnounce(146222, 3)--Do not have timer for this yet, add not alive long enough.
 
-local specWarnSuperNova			= mod:NewSpecialWarningSpell(146815, false, nil, nil, 2)
 --Massive Crate of Goods
-local specWarnSetToBlowYou		= mod:NewSpecialWarningYou(145987)
-local specWarnSetToBlow			= mod:NewSpecialWarningPreWarn(145996, nil, 4, nil, 3)
+local specWarnSetToBlowYou		= mod:NewSpecialWarningYou(145987, nil, nil, nil, 1, 2)
+local specWarnSetToBlow			= mod:NewSpecialWarningPreWarn(145996, nil, 4, nil, 3, 2)
 --Stout Crate of Goods
 ----Mogu
-local specWarnForbiddenMagic	= mod:NewSpecialWarningInterrupt(145230, "HasInterrupt")
-local specWarnMatterScramble	= mod:NewSpecialWarningSpell(145288, nil, nil, nil, 2)
-local specWarnCrimsonRecon		= mod:NewSpecialWarningMove(142947, "Tank", nil, nil, 3)
-local specWarnTorment			= mod:NewSpecialWarningSpell(142934, false)
+local specWarnForbiddenMagic	= mod:NewSpecialWarningInterrupt(145230, "HasInterrupt", nil, nil, 1, 2)
+local specWarnMatterScramble	= mod:NewSpecialWarningSoak(145288, nil, nil, nil, 2, 2)
+local specWarnCrimsonRecon		= mod:NewSpecialWarningMove(142947, "Tank", nil, nil, 3, 2)
 ----Mantid
-local specWarnMantidSwarm		= mod:NewSpecialWarningSpell(142539, "Tank")
-local specWarnResidue			= mod:NewSpecialWarningSpell(145786, "MagicDispeller")
-local specWarnRageoftheEmpress	= mod:NewSpecialWarningSpell(145812, "MagicDispeller")
-local specWarnEnrage			= mod:NewSpecialWarningDispel(145692, "RemoveEnrage")--Question is, do we want to dispel it? might make this off by default since kiting it may be more desired than dispeling it
+local specWarnMantidSwarm		= mod:NewSpecialWarningSpell(142539, "Tank", nil, nil, 1, 2)
+local specWarnResidue			= mod:NewSpecialWarningSpell(145786, "MagicDispeller", nil, nil, 1, 2)
+local specWarnRageoftheEmpress	= mod:NewSpecialWarningSpell(145812, "MagicDispeller", nil, nil, 1, 2)
+local specWarnEnrage			= mod:NewSpecialWarningDispel(145692, "RemoveEnrage", nil, nil, 1, 2)--Question is, do we want to dispel it? might make this off by default since kiting it may be more desired than dispeling it
 --Lightweight Crate of Goods
 ----Mantid
-local specWarnBlazingCharge		= mod:NewSpecialWarningMove(145716)
-local specWarnBubblingAmber		= mod:NewSpecialWarningMove(145748)
-local specWarnPathOfBlossoms	= mod:NewSpecialWarningMove(146257)
+local specWarnGTFO				= mod:NewSpecialWarningGTFO(145716, nil, nil, nil, 1, 8)
 --Crate of Pandaren Relics
-local specWarnGustingCraneKick	= mod:NewSpecialWarningSpell(146180, nil, nil, nil, 2)
+local specWarnGustingCraneKick	= mod:NewSpecialWarningSpell(146180, "Melee", nil, nil, 2, 2)
 
 local timerCombatStarts			= mod:NewCombatTimer(18)
 --Massive Crate of Goods
@@ -86,8 +81,8 @@ local timerRageoftheEmpressCD	= mod:NewCDTimer(18, 145812, nil, "MagicDispeller"
 local timerEnrage				= mod:NewTargetTimer(10, 145692)
 local timerBlazingChargeCD		= mod:NewNextTimer(12, 145712, nil, false)
 --Crate of Pandaren Relics
-local timerGustingCraneKickCD	= mod:NewCDTimer(18, 146180)
-local timerPathOfBlossomsCD		= mod:NewCDTimer(15, 146253)
+local timerGustingCraneKickCD	= mod:NewCDTimer(18, 146180, nil, nil, nil, 2)
+local timerPathOfBlossomsCD		= mod:NewCDTimer(15, 146253, nil, nil, nil, 3)
 
 --Berserk Timer stuff
 local berserkTimer				= mod:NewTimer(480, DBM_CORE_L.GENERIC_TIMER_BERSERK, 28131, nil, "timer_berserk")
@@ -139,31 +134,35 @@ function mod:SPELL_CAST_START(args)
 	if spellId == 145996 then
 		timerSetToBlowCD:Start(nil, args.sourceGUID)
 	elseif spellId == 145288 then
-		specWarnMatterScramble:Show()
+		if self:AntiSpam(3, 1) then
+			specWarnMatterScramble:Show()
+			specWarnMatterScramble:Play("helpsoak")
+		end
 		timerMatterScramble:Start(nil, args.sourceGUID)
 		timerMatterScrambleCD:Start(nil, args.sourceGUID)
 	elseif spellId == 142934 then
 		warnTorment:Show()
-		specWarnTorment:Show()
 	elseif spellId == 142539 then
 		specWarnMantidSwarm:Show()
+		specWarnMantidSwarm:Play("mobsoon")
 		timerMantidSwarmCD:Start(nil, args.sourceGUID)
 	elseif spellId == 145286 and self:AntiSpam(5, args.sourceGUID) then
 		warnWindStorm:Show()
 		timerWindstormCD:Start(nil, args.sourceGUID)
-	elseif spellId == 146222 and self:CheckTankDistance(args.sourceGUID) then--Relics can be either side, must use CheckTank Distance
+	elseif spellId == 146222 and self:CheckBossDistance(args.sourceGUID, true, 32698, 48) then--Relics can be either side, must use boss Distance
 		warnBreathofFire:Show()
-	elseif spellId == 146180 and self:CheckTankDistance(args.sourceGUID) then--Also a Relic
+	elseif spellId == 146180 and self:CheckBossDistance(args.sourceGUID, true, 32698, 48) then--Also a Relic
 		specWarnGustingCraneKick:Show()
+		specWarnGustingCraneKick:Play("whirlwind")
 		timerGustingCraneKickCD:Start(nil, args.sourceGUID)
 	elseif spellId == 145489 then
 		warnReturnToStone:Show()
 		timerReturnToStoneCD:Start(nil, args.sourceGUID)
 	elseif spellId == 142947 then--Pre warn more or less
 		specWarnCrimsonRecon:Show()
-	elseif spellId == 146815 and self:AntiSpam(2, 4)then--Will do more work on this later, not enough time before raid, but i have an idea for it
+		specWarnCrimsonRecon:Play("moveboss")
+	elseif spellId == 146815 and self:AntiSpam(2, 2)then
 		warnSuperNova:Show()
-		specWarnSuperNova:Show()
 	end
 end
 
@@ -176,18 +175,20 @@ function mod:SPELL_CAST_SUCCESS(args)
 	elseif spellId == 146253 then
 		timerPathOfBlossomsCD:Start(nil, args.sourceGUID)
 	elseif spellId == 145230 then
-		local source = args.sourceName
 		if self:AntiSpam(5, args.destName) then
 			warnForbiddenMagic:CombinedShow(1, args.destName)
 		end
-		if (source == UnitName("target") or source == UnitName("focus")) and self:AntiSpam(3, 6) then
-			specWarnForbiddenMagic:Show(source)
+		if self:CheckInterruptFilter(args.sourceGUID, nil, true) then
+			specWarnForbiddenMagic:Show(args.sourceName)
+			specWarnForbiddenMagic:Play("kickcast")
 		end
 	elseif spellId == 145786 then
 		timerResidueCD:Start(nil, args.sourceGUID)
 		specWarnResidue:Show()
+		specWarnResidue:Play("dispelboss")
 	elseif spellId == 145812 then
 		specWarnRageoftheEmpress:Show()
+		specWarnRageoftheEmpress:Play("dispelboss")
 		timerRageoftheEmpressCD:Start(nil, args.sourceGUID)
 	end
 end
@@ -201,10 +202,11 @@ function mod:SPELL_AURA_APPLIED(args)
 			local buffTime = expires-GetTime()
 			timerSetToBlow:Start(buffTime)
 			specWarnSetToBlow:Schedule(buffTime)
+			specWarnSetToBlow:ScheduleVoice(buffTime, "runout")
 		end
 	elseif spellId == 145692 then
-		warnEnrage:Show(args.destName)
 		specWarnEnrage:Show(args.destName)
+		specWarnEnrage:Play("enrage")
 		timerEnrage:Start(nil, args.destName)
 	end
 end
@@ -214,18 +216,22 @@ function mod:SPELL_AURA_REMOVED(args)
 	if spellId == 145987 and args:IsPlayer() then
 		timerSetToBlow:Cancel()
 		specWarnSetToBlow:Cancel()
+		specWarnSetToBlow:CancelVoice()
 	elseif spellId == 145692 then
 		timerEnrage:Cancel(args.destName)
 	end
 end
 
-function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
-	if spellId == 145716 and destGUID == UnitGUID("player") and self:AntiSpam(2, 1) then
-		specWarnBlazingCharge:Show()
-	elseif spellId == 145748 and destGUID == UnitGUID("player") and self:AntiSpam(2, 2) then
-		specWarnBubblingAmber:Show()
-	elseif spellId == 146257 and destGUID == UnitGUID("player") and self:AntiSpam(2, 3) then
-		specWarnPathOfBlossoms:Show()
+function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId, spellName)
+	if spellId == 145716 and destGUID == UnitGUID("player") and self:AntiSpam(3, 4) then
+		specWarnGTFO:Show(spellName)
+		specWarnGTFO:Play("watchfeet")
+	elseif spellId == 145748 and destGUID == UnitGUID("player") and self:AntiSpam(3, 4) then
+		specWarnGTFO:Show(spellName)
+		specWarnGTFO:Play("watchfeet")
+	elseif spellId == 146257 and destGUID == UnitGUID("player") and self:AntiSpam(3, 4) then
+		specWarnGTFO:Show(spellName)
+		specWarnGTFO:Play("watchfeet")
 	end
 end
 mod.SPELL_MISSED = mod.SPELL_DAMAGE
@@ -258,6 +264,7 @@ end
 function mod:RAID_BOSS_WHISPER(msg)
 	if msg:find("spell:146364") then
 		specWarnSetToBlowYou:Show()
+		specWarnSetToBlowYou:Play("bombyou")
 		if self.Options.RangeFrame then
 			DBM.RangeCheck:Show(10)--Range assumed, spell tooltips not informative enough
 			self:Schedule(32, hideRangeFrame)

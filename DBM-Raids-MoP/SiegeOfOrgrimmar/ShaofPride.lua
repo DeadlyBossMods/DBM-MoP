@@ -31,8 +31,6 @@ local warnProjection			= mod:NewTargetAnnounce(146822, 3)--50-74 Energy (VERY im
 local warnAuraOfPride			= mod:NewTargetAnnounce(146817, 3, nil, false)--75-99 Energy (not important who has them)
 local warnOvercome				= mod:NewTargetAnnounce(144843, 3)--100 Energy (pre mind control) Also very important who has
 local warnOvercomeMC			= mod:NewTargetAnnounce(605, 4)--Mind control version (use priest mind control spellid to discribe. because have same spell name in pre-warning)
---Manifestation of Pride
-local warnMockingBlast			= mod:NewSpellAnnounce(144379, 3, nil, false)
 
 --Sha of Pride
 local specWarnGiftOfTitans		= mod:NewSpecialWarningYou(144359, "Healer")
@@ -125,20 +123,22 @@ function mod:SPELL_CAST_START(args)
 		self.vb.swellingCount = self.vb.swellingCount + 1
 		specWarnSwellingPride:Show(self.vb.swellingCount)
 	elseif spellId == 144379 then
-		local sourceGUID = args.sourceGUID
-		warnMockingBlast:Show()
-		if sourceGUID == UnitGUID("target") or sourceGUID == UnitGUID("focus") then
+		if self:CheckInterruptFilter(args.sourceGUID, nil, true) then
 			specWarnMockingBlast:Show(args.sourceName)
 		end
 	elseif spellId == 144832 then
 		--These abilitie cd reset on SPELL_CAST_START (they no longer desync though, they sync back up after first off sync cast)
 		timerSwellingPrideCD:Cancel()
 		if not self:IsDifficulty("lfr25") then
+			timerWoundedPrideCD:Stop()
 			timerWoundedPrideCD:Start()
 		end
+		timerSelfReflectionCD:Stop()
 		timerSelfReflectionCD:Start()
+		timerCorruptedPrisonCD:Stop()
 		timerCorruptedPrisonCD:Start()
 		if self:IsMythic() then
+			timerBanishmentCD:Stop()
 			timerBanishmentCD:Start()
 		end
 	end
