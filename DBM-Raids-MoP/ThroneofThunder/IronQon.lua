@@ -453,7 +453,7 @@ function mod:UNIT_DIED(args)
 			self:Unschedule(checkSpear)
 			self:Schedule(25, checkSpear)
 			timerThrowSpearCD:Stop()
-			timerThrowSpearCD:Start()
+			timerThrowSpearCD:Start(24.3)--Formerly 30 (and probably 30 again in MoP classic)
 		end
 	elseif cid == 68081 then--Dam'ren
 		timerDeadZoneCD:Cancel()

@@ -249,7 +249,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 		warnNight:Show()
 		timerDayCD:Start()
 		timerDuskCD:Start()
-		timerCosmicBarrageCD:Start(17, 1)
+		timerCosmicBarrageCD:Start(15.8, 1)
 		timerTearsOfTheSunCD:Start(self:IsRemix() and 8.4 or 28.5)--Confirm the shorter Cd is just remix or all the time
 		timerBeastOfNightmaresCD:Start()
 	elseif spellId == 137187 then--Lu'lin Ports away (Day Phase)
