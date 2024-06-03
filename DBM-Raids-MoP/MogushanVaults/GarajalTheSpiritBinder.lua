@@ -8,6 +8,10 @@ mod:SetUsedIcons(1, 2, 3, 4)
 
 mod:RegisterCombat("combat_yell", L.Pull)--Yell is secondary pull trigger. (leave it for lfr combat detection bug)
 
+mod:RegisterEvents(
+	"CHAT_MSG_MONSTER_YELL"
+)
+
 mod:RegisterEventsInCombat(
 	"SPELL_CAST_SUCCESS 116174 116272",
 	"SPELL_AURA_APPLIED 122151 116161 116260 116278 117543 117549 117723 117752",
@@ -31,6 +35,7 @@ local specWarnBanishment			= mod:NewSpecialWarningYou(116272, nil, nil, nil, 1, 
 local specWarnBanishmentOther		= mod:NewSpecialWarningTaunt(116272, nil, nil, nil, 1, 2)
 local specWarnVoodooDollsYou		= mod:NewSpecialWarningYou(122151, nil, nil, nil, 1, 2)
 
+local timerRP						= mod:NewRPTimer(24.7)
 local timerTotemCD					= mod:NewNextCountTimer(20, 116174, nil, nil, nil, 5)
 local timerBanishmentCD				= mod:NewCDCountTimer(65, 116272, nil, nil, nil, 3, nil, DBM_COMMON_L.TANK_ICON)
 local timerSoulSever				= mod:NewBuffFadesTimer(30, 116278, nil, nil, nil, 5, nil, nil, nil, 1, 4)--Tank version of spirit realm
@@ -196,12 +201,28 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	end
 end
 
+--"<0.25 13:15:57> [CHAT_MSG_MONSTER_YELL] Now you done made me angry!#Gara'jal the Spiritbinder#####0#0##0#2923#nil#0#false#false#false#false",
+--"<25.01 13:16:22> [DBM_Debug] ENCOUNTER_START event fired: 1434 Gara'jal the Spiritbinder 5 10#nil",
+
+--"<7.38 14:54:42> [CHAT_MSG_MONSTER_YELL] Now you done made me angry!#Gara'jal the Spiritbinder###Zandalari Terror
+--"<32.87 14:55:08> [DBM_Debug] ENCOUNTER_START event fired: 1434 Gara'jal the Spiritbinder 7 25#nil",
+
+--"<13.90 06:55:25> [CHAT_MSG_MONSTER_YELL] Now you done made me angry!#Gara'jal the Spiritbinder###Zandalari Terror Rider#
+--"<38.76 06:55:50> [DBM_Debug] ENCOUNTER_START event fired: 1434 Gara'jal the Spiritbinder 7 25#nil",
+function mod:CHAT_MSG_MONSTER_YELL(msg)
+	if msg == L.RolePlay or msg:find(L.RolePlay) then
+		self:SendSync("RolePlay")
+	end
+end
+
 function mod:OnSync(msg, guid)
 	local targetname
 	if guid then
 		targetname = DBM:GetFullPlayerNameByGUID(guid)
 	end
-	if msg == "SummonTotem" then
+	if msg == "RolePlay" then
+		timerRP:Start()
+	elseif msg == "SummonTotem" then
 		self.vb.totemCount = self.vb.totemCount + 1
 		warnTotem:Show(self.vb.totemCount)
 		if self:IsDifficulty("normal25", "heroic25") then

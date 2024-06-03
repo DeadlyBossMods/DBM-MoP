@@ -55,7 +55,8 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	Pull	= "It be dyin' time, now!"
+	Pull		= "It be dyin' time, now!",
+	RolePlay	= "Now you done made me angry!"
 })
 
 ----------------------
