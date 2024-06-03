@@ -5,6 +5,7 @@ mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(60143)
 mod:SetEncounterID(1434)
 mod:SetUsedIcons(1, 2, 3, 4)
+mod:SetZone(1008)
 
 mod:RegisterCombat("combat_yell", L.Pull)--Yell is secondary pull trigger. (leave it for lfr combat detection bug)
 
