@@ -177,7 +177,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 			timerDarkOfNightCD:Start(10, self.vb.darkOfNightCount+1)
 			self.vb.darkOfNightCount = 0
 		end
-	elseif spellId == 123813 then--The Dark of Night (Night Phase)
+	elseif spellId == 123813 and self:AntiSpam(3, 5) then--The Dark of Night (Night Phase)
 		self.vb.darkOfNightCount = self.vb.darkOfNightCount + 1
 		specWarnDarkOfNight:Show(self.vb.darkOfNightCount)
 		specWarnDarkOfNight:Play("targetchange")

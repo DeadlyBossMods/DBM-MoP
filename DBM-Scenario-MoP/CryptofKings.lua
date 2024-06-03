@@ -39,7 +39,7 @@ local timerEnrage			= mod:NewBuffActiveTimer(10, 127823, nil, nil, nil, 5, nil, 
 local timerBreathCD			= mod:NewCDTimer(18.2, 120929, nil, nil, nil, 3)
 local timerCloudofAngerCD	= mod:NewCDTimer(17, 120824, nil, nil, nil, 3)--Limited sample size, may be shorter
 local timerDarkforce		= mod:NewCastTimer(5, 120215, nil, nil, nil, 5)
-local timerDarkforceCD		= mod:NewCDTimer(32, 120215, nil, nil, nil, 3)
+local timerDarkforceCD		= mod:NewCDTimer(30.1, 120215, nil, nil, nil, 3)
 
 function mod:SPELL_CAST_START(args)
 	if args.spellId == 142884 then

@@ -149,9 +149,9 @@ function mod:SPELL_CAST_START(args)
 	elseif spellId == 145286 and self:AntiSpam(5, args.sourceGUID) then
 		warnWindStorm:Show()
 		timerWindstormCD:Start(nil, args.sourceGUID)
-	elseif spellId == 146222 and self:CheckBossDistance(args.sourceGUID, true, 32698, 48) then--Relics can be either side, must use boss Distance
+	elseif spellId == 146222 and self:CheckBossDistance(args.sourceGUID, true, 1180, 33) then--Relics can be either side, must use boss Distance
 		warnBreathofFire:Show()
-	elseif spellId == 146180 and self:CheckBossDistance(args.sourceGUID, true, 32698, 48) then--Also a Relic
+	elseif spellId == 146180 and self:CheckBossDistance(args.sourceGUID, true, 1180, 33) then--Also a Relic
 		specWarnGustingCraneKick:Show()
 		specWarnGustingCraneKick:Play("whirlwind")
 		timerGustingCraneKickCD:Start(nil, args.sourceGUID)

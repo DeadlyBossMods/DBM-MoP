@@ -67,12 +67,12 @@ local timerDarkPowerCD				= mod:NewCDTimer(68, 136507)
 --Kazra'jin
 local timerRecklessChargeCD			= mod:NewCDTimer(6, 137122, nil, false, nil, 3)
 --Sul the Sandcrawler
-local timerQuickSandCD				= mod:NewCDTimer(35, 136521, nil, nil, nil, 3)
+local timerQuickSandCD				= mod:NewCDTimer(32.7, 136521, nil, nil, nil, 3)
 local timerSandStormCD				= mod:NewCDTimer(35, 136894, nil, nil, nil, 2)
 --High Prestess Mar'li
-local timerBlessedLoaSpiritCD		= mod:NewCDTimer(33, 137203, nil, nil, nil, 1)--Every 33-35 seconds.
-local timerShadowedLoaSpiritCD		= mod:NewCDTimer(33, 137350, nil, nil, nil, 1)--Possessed version of above, shared CD
-local timerTwistedFateCD			= mod:NewCDTimer(33, 137891, nil, nil, nil, 3)--On heroic, this replaces shadowed loa spirit
+local timerBlessedLoaSpiritCD		= mod:NewCDTimer(32.7, 137203, nil, nil, nil, 1)--Every 33-35 seconds.
+local timerShadowedLoaSpiritCD		= mod:NewCDTimer(32.7, 137350, nil, nil, nil, 1)--Possessed version of above, shared CD
+local timerTwistedFateCD			= mod:NewCDTimer(32.7, 137891, nil, nil, nil, 3)--On heroic, this replaces shadowed loa spirit
 local timerMarkedSoul				= mod:NewTargetTimer(20, 137359)
 --Frost King Malak
 local timerBitingCold				= mod:NewBuffFadesTimer(30, 136917)
@@ -80,7 +80,7 @@ local timerBitingColdCD				= mod:NewCDTimer(45, 136917, nil, nil, nil, 3)--10 ma
 local timerFrostBite				= mod:NewBuffFadesTimer(30, 136990)
 local timerFrostBiteCD				= mod:NewCDTimer(45, 136990, nil, nil, nil, 3)--^same comment as above
 local timerFrigidAssault			= mod:NewTargetTimer(15, 136903, nil, "Tank|Healer")
-local timerFrigidAssaultCD			= mod:NewCDTimer(30, 136904, nil, "Tank|Healer", nil, 5)--30 seconds after last one ended (maybe even a next timer, i'll change it with more logs.)
+local timerFrigidAssaultCD			= mod:NewCDTimer(32.7, 136904, nil, "Tank|Healer", nil, 5)--30 seconds after last one ended (maybe even a next timer, i'll change it with more logs.)
 --Kazra'jin
 
 

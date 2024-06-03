@@ -316,7 +316,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 		timerDecapitateCD:Start()
 	elseif spellId == 135695 then
 		if not self.vb.intermissionActive then
-			timerStaticShockCD:Start()
+			timerStaticShockCD:Start(self:IsHeroic() and 14.3 or 40)--Used to be 40, but since remix it's 14.3 on heroic at least (leaving 40 on non heroic for now til I see debug there)
 		end
 	end
 end
@@ -470,7 +470,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 				--Basically a CD, may come later if delayed by other crap
 				--15-19 variation. but you need this timing to hit spell reflect at 15 (it lasts 5 seconds so covers the variation)
 				if self.vb.northDestroyed then
-					timerStaticShockCD:Start(14)
+					timerStaticShockCD:Start(1)--formly 14, now instantly
 				end
 				if self.vb.eastDestroyed then
 					timerDiffusionChainCD:Start(14)
