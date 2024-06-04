@@ -50,7 +50,8 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(682)
 
 L:SetMiscLocalization({
-	Pull		= "죽을 시간이다!"
+	Pull		= "죽을 시간이다!",
+	RolePlay	= "날 열받게 했겠다!"
 })
 
 ----------------------
