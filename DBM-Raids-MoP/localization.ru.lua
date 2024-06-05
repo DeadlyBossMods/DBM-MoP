@@ -58,7 +58,8 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	Pull	= "Пора умирать!"
+	Pull	= "Пора умирать!",
+	RolePlay	= "А вот теперь вы меня разозлили!"
 })
 
 ----------------------
