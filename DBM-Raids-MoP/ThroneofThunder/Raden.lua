@@ -61,7 +61,7 @@ local timerCracklingStalkerCD	= mod:NewCDCountTimer(41, 138339, nil, nil, nil, 1
 local timerCreationCD			= mod:NewCDCountTimer(32.5, 138321, nil, nil, nil, 1, nil, nil, nil, 1, 4)--32.5-35second variation
 local timerCallEssenceCD		= mod:NewNextTimer(15.5, 139040, nil, nil, nil, 1)
 
-mod:AddSetIconOption("SetIconsOnVita", 418720, false, 0, {1})
+mod:AddSetIconOption("SetIconsOnVita", 138297, false, 0, {1})
 
 local creationCount = 0
 local stalkerCount = 0
