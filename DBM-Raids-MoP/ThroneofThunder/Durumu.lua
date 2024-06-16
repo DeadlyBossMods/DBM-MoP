@@ -413,7 +413,7 @@ function mod:CHAT_MSG_MONSTER_EMOTE(msg, npc, _, _, target)
 			specWarnFogRevealed:Play("killbigmob")
 		end
 	elseif msg:find("spell:133795") and target then--Does show in combat log, but emote gives targetname 3 seconds earlier.
-		target = DBM:GetUnitFullName(target)
+		target = DBM:GetUnitFullName(target) or target
 		if self.Options.SpecWarn133795target then
 			specWarnLifeDrain:Show(target)
 			specWarnLifeDrain:Play("helpsoak")

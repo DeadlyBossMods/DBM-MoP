@@ -121,17 +121,14 @@ local function checkSpear()
 		spearSpecWarnFired = true
 		mod:Unschedule(checkSpear)
 		local targetname = DBM:GetUnitFullName("boss1target")
-		warnThrowSpear:Show(targetname)
+		if targetname then
+			warnThrowSpear:Show(targetname)
+		end
 		if UnitIsUnit("boss1target", "player") then--you are spear target
 			specWarnThrowSpearYou:Show()
 			yellThrowSpear:Yell()
 		else--Not spear target
-			local inRange = DBM.RangeCheck:GetDistance("player", "boss1target")
-			if inRange and inRange < 10 then
-				specWarnThrowSpearNear:Show(targetname)--Near spear target
-			elseif mod:AntiSpam(15, 6) then--Smart way to do a failsafe in case we never get a valid target
-				specWarnThrowSpear:Show()--not spear target or near spear target, generic aoe warning (for the lines and stuff)
-			end
+			specWarnThrowSpear:Show()--not spear target or near spear target, generic aoe warning (for the lines and stuff)
 		end
 	else
 		mod:Schedule(0.25, checkSpear)

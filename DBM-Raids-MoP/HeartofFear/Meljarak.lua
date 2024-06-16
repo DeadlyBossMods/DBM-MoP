@@ -244,7 +244,7 @@ end
 function mod:UNIT_AURA_UNFILTERED(uId)
 	if DBM:UnitDebuff(uId, strikeSpell) and not strikeTarget then
 		strikeTarget = uId
-		local name = DBM:GetUnitFullName(uId)
+		local name = DBM:GetUnitFullName(uId) or strikeTarget
 		warnKorthikStrike:Show(name)
 		if name == UnitName("player") then
 			specWarnKorthikStrike:Show()

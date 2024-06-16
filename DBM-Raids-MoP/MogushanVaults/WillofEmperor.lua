@@ -223,7 +223,7 @@ function mod:RAID_BOSS_EMOTE(msg)
 		self:Unschedule(addsDelay, self, "Courage")
 		self:Schedule(10, addsDelay, self, "Courage")
 	elseif msg == L.Boss or msg:find(L.Boss) then
-		warnBossesActivatedSoon:Show(10)
+		warnBossesActivatedSoon:Show()
 		self:Schedule(10, addsDelay, self, "Boss")
 	elseif msg:find("spell:116779") then
 		if self:IsHeroic() then--On heroic the boss activates this perminantly on pull and it's always present
