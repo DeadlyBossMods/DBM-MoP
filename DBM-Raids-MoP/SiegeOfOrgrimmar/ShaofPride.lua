@@ -17,6 +17,9 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_REMOVED 144351 147207",
 	"UNIT_POWER_UPDATE boss1"
 )
+mod:RegisterEvents(
+	"CHAT_MSG_MONSTER_SAY"
+)
 
 --Sha of Pride
 local warnGiftOfTitans			= mod:NewTargetAnnounce(144359, 1, nil, "Healer")
@@ -52,7 +55,7 @@ local yellAuraOfPride			= mod:NewYell(146818, nil, false)
 local specWarnOvercome			= mod:NewSpecialWarningYou(144843, nil, nil, nil, 3)--100 EnergyHonestly, i have a feeling your best option if this happens is to find a way to kill yourself!
 local specWarnBanishment		= mod:NewSpecialWarningYou(145215, nil, nil, nil, 3)--Heroic
 --Manifestation of Pride
-local specWarnManifestation		= mod:NewSpecialWarningSwitch("ej8262", "-Healer")--Spawn warning, need trigger first
+local specWarnManifestation		= mod:NewSpecialWarningSwitch(-8262, "-Healer")--Spawn warning, need trigger first
 local specWarnMockingBlast		= mod:NewSpecialWarningInterrupt(144379)
 
 --Sha of Pride
@@ -63,7 +66,7 @@ local timerSelfReflectionCD		= mod:NewNextTimer(25, 144800, nil, nil, nil, 1, ni
 local timerWoundedPrideCD		= mod:NewNextTimer(30, 144358, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)--A tricky on that is based off unit power but with variable timings, but easily workable with an 11, 26 rule
 local timerBanishmentCD			= mod:NewNextTimer(37.5, 145215, nil, nil, nil, 3, nil, DBM_COMMON_L.HEROIC_ICON)
 local timerCorruptedPrisonCD	= mod:NewNextTimer(53, 144574, nil, nil, nil, 3)--Technically 51 for Imprison base cast, but this is timer til debuffs go out.
-local timerManifestationCD		= mod:NewNextTimer(60, "ej8262", nil, nil, nil, 1, "627685")
+local timerManifestationCD		= mod:NewNextTimer(60, -8262, nil, nil, nil, 1, "627685")
 local timerSwellingPrideCD		= mod:NewNextCountTimer(75.5, 144400, nil, nil, nil, 2, nil, nil, nil, 1, 4)
 local timerWeakenedResolve		= mod:NewBuffFadesTimer(60, 147207, nil, false)
 --Pride
@@ -71,6 +74,7 @@ local timerBurstingPride		= mod:NewCastTimer(3, 144911)
 local timerProjection			= mod:NewCastTimer(6, 146822)
 
 local berserkTimer				= mod:NewBerserkTimer(600)
+local timerRP					= mod:NewRPTimer(49.5)
 
 mod:AddInfoFrameOption(-8255)
 mod:AddSetIconOption("SetIconOnMark", 144351, false)
@@ -95,7 +99,7 @@ function mod:OnCombatStart(delay)
 	end
 	timerSelfReflectionCD:Start(-delay)
 	timerCorruptedPrisonCD:Start(-delay)
-	timerManifestationCD:Start(-delay)
+	timerManifestationCD:Start(55.1-delay)
 	timerSwellingPrideCD:Start(-delay, 1)
 	berserkTimer:Start(-delay)
 	self.vb.woundCount = 0
@@ -131,7 +135,7 @@ function mod:SPELL_CAST_START(args)
 		timerSwellingPrideCD:Cancel()
 		if not self:IsDifficulty("lfr25") then
 			timerWoundedPrideCD:Stop()
-			timerWoundedPrideCD:Start()
+			timerWoundedPrideCD:Start(self:IsMythic() and 11 or 30)--It wasn't throwing errors on heroic, but it was on mythic. This should fix it for both
 		end
 		timerSelfReflectionCD:Stop()
 		timerSelfReflectionCD:Start()
@@ -286,5 +290,13 @@ function mod:UNIT_POWER_UPDATE(uId)
 		specWarnManifestation:Show()--No spawn trigger to speak of. fortunately for us, they spawn based on boss power.
 	elseif power > 10 and power < 82 and manifestationWarned then
 		manifestationWarned = false
+	end
+end
+
+--"<5.42 16:19:29> [CHAT_MSG_MONSTER_SAY] So Hellscream's arrogance unleashed the last of the sha. I am not surprised.#Lady Jaina Proudmoore###Sylveonyx
+--"<54.96 16:20:19> [CHAT_MSG_MONSTER_SAY] Come heroes, through the portal! The siege of Orgrimmar begins!#Lady Jaina Proudmoore###Lady Jaina Proudmoore##0#0##0#3243#nil#0#false#false#false#false"
+function mod:CHAT_MSG_MONSTER_SAY(msg)
+	if msg:find(L.PortalRP) then
+		timerRP:Start()
 	end
 end

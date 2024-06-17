@@ -711,6 +711,10 @@ L:SetOptionLocalization({
 	SetIconOnFragment	= "Set icon on Corrupted Fragment"
 })
 
+L:SetMiscLocalization({
+	PortalRP	= "So Hellscream's arrogance unleashed the last of the sha. I am not surprised."
+})
+
 --------------
 -- Galakras --
 --------------
