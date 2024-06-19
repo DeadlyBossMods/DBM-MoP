@@ -631,6 +631,10 @@ L:SetOptionLocalization({
 	SetIconOnFragment	= "타락한 조각에 공격대 징표 설정"
 })
 
+L:SetMiscLocalization({
+	PortalRP	= "헬스크림의 오만함이 결국 마지막 샤를 풀어줬군요. 놀랍진 않네요."
+})
+
 --------------
 -- Galakras --
 --------------
