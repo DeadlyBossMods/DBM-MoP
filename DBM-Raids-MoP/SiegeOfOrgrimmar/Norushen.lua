@@ -22,8 +22,6 @@ mod:RegisterEventsInCombat(
 	"CHAT_MSG_ADDON"
 )
 
-mod:AddBoolOption("AGStartNorushen", true)
-
 mod:RegisterEvents(
 	"ENCOUNTER_START",
 	"CHAT_MSG_MONSTER_YELL",
@@ -76,6 +74,8 @@ local timerHurlCorruptionCD				= mod:NewNextTimer(20, 144649, nil, nil, nil, 4, 
 local timerExpelCorruptionCD			= mod:NewCDNPTimer(10.9, 144479)
 
 local berserkTimer						= mod:NewBerserkTimer(418)
+
+mod:AddGossipOption(true, "Encounter")
 
 --Upvales, don't need variables
 local Ambiguate = Ambiguate
@@ -287,7 +287,7 @@ end
 function mod:GOSSIP_SHOW()
 	local gossipOptionID = self:GetGossipID()
 	if gossipOptionID then
-		if self.Options.AGStartNorushen and gossipOptionID == 42038 then
+		if self.Options.AutoGossipEncounter and gossipOptionID == 42038 then
 			self:SelectGossip(gossipOptionID, true)
 		end
 	end

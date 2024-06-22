@@ -557,8 +557,7 @@ L:SetOptionLocalization({
 	warnDiffusionChainSpread	= "$spell:135991의 전이 대상 알림",
 	timerConduitCD				= "첫번째 도관 기술 쿨타임 타이머 바 보기",
 	StaticShockArrow			= "$spell:135695에 걸린 사람이 있으면 DBM 화살표 표시",
-	OverchargeArrow				= "$spell:136295에 걸린 사람이 있으면 DBM 화살표 표시",
-	AGStartDP				= "레이 션 앞에 있는 변위 장치 사용시 대화 자동 선택"
+	OverchargeArrow				= "$spell:136295에 걸린 사람이 있으면 DBM 화살표 표시"
 })
 
 L:SetMiscLocalization({
@@ -613,10 +612,6 @@ L:SetWarningLocalization({
 -- Norushen --
 ---------------------------
 L = DBM:GetModLocalization(866)
-
-L:SetOptionLocalization({
-	AGStartNorushen		= "노루셴에게 말을 걸면 전투 시작 대화 자동 선택"
-})
 
 L:SetMiscLocalization({
 	wasteOfTime	= "그래, 좋다. 너희 타락을 가두어 둘 공간을 만들겠다."

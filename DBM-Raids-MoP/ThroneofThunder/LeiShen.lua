@@ -98,6 +98,7 @@ mod:AddRangeFrameOption("8/6", nil, true)
 mod:AddSetIconOption("SetIconOnOvercharge", 136295, true, 0, {1, 2, 3})
 mod:AddSetIconOption("SetIconOnStaticShock", 135695, true, 0, {6, 7, 8})
 mod:AddBoolOption("AGStartDP", true)
+mod:AddGossipOption(true, "Action")
 
 mod.vb.warnedCount = 0
 mod.vb.intermissionActive = false--Not in use yet, but will be. This will be used (once we have CD bars for regular phases mapped out) to prevent those cd bars from starting during intermissions and messing up the custom intermission bars
@@ -543,7 +544,7 @@ end
 function mod:GOSSIP_SHOW()
 	local gossipOptionID = self:GetGossipID()
 	if gossipOptionID then
-		if self.Options.AGStartDP and gossipOptionID == 41812 then
+		if self.Options.AutoGossipAction and gossipOptionID == 41812 then
 			self:SelectGossip(gossipOptionID, true)
 		end
 	end

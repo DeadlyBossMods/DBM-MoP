@@ -637,8 +637,7 @@ L:SetOptionLocalization({
 	StaticShockArrow			= "Показывать стрелку DBM, когда на ком-то $spell:135695",
 	OverchargeArrow				= "Показывать стрелку DBM, когда на ком-то $spell:136295",
 	SetIconOnOvercharge			= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(136295),
-	SetIconOnStaticShock		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(135695),
-	AGStartDP					= "Автоматический выбор диалога для использования Телепортационной площадки перед Лэй Шэнем"
+	SetIconOnStaticShock		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(135695)
 })
 
 L:SetMiscLocalization({
@@ -698,10 +697,6 @@ L:SetWarningLocalization({
 -- Norushen --
 ---------------------------
 L = DBM:GetModLocalization(866)
-
-L:SetOptionLocalization({
-	AGStartNorushen		= "Автоматический выбор диалога для начала боя при взаимодействии с Норусхеном"
-})
 
 L:SetMiscLocalization({
 	wasteOfTime	= "Хорошо, я создам поле для удерживания порчи."

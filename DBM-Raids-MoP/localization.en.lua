@@ -632,8 +632,7 @@ L:SetOptionLocalization({
 	StaticShockArrow			= "Show DBM Arrow when someone is affected by $spell:135695",
 	OverchargeArrow				= "Show DBM Arrow when someone is affected by $spell:136295",
 	SetIconOnOvercharge			= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(136295),
-	SetIconOnStaticShock		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(135695),
-	AGStartDP					= "Auto select gossip to use Displacement Pad before Lei Shen"
+	SetIconOnStaticShock		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(135695)
 })
 
 L:SetMiscLocalization({
@@ -693,10 +692,6 @@ L:SetWarningLocalization({
 -- Norushen --
 ---------------------------
 L = DBM:GetModLocalization(866)
-
-L:SetOptionLocalization({
-	AGStartNorushen		= "Auto select gossip to start fight when interacting with Norushen"
-})
 
 L:SetMiscLocalization({
 	wasteOfTime	= "Very well, I will create a field to keep your corruption quarantined."
