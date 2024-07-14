@@ -42,7 +42,7 @@ local warnDishearteningLaugh			= mod:NewSpellAnnounce(146707, 3)
 local specWarnUnleashedAnger			= mod:NewSpecialWarningDefensive(145216, nil, nil, nil, 1, 2)
 local specWarnSelfDoubtOther			= mod:NewSpecialWarningTaunt(146124, nil, nil, nil, 1, 2)--Stack warning, to taunt off other tank
 local specWarnBlindHatred				= mod:NewSpecialWarningSpell(145226, nil, nil, nil, 2, 2)
-local specWarnManifestation				= mod:NewSpecialWarningSwitch(-8232, "-Healer", nil, nil, 1, 2)--Unleashed Manifestation of Corruption
+local specWarnManifestation				= mod:NewSpecialWarningSwitchCount(-8232, "-Healer", nil, nil, 1, 2)--Unleashed Manifestation of Corruption
 --Test of Serenity (DPS)
 local specWarnTearReality				= mod:NewSpecialWarningDodge(144482, nil, nil, nil, 2, 2)
 --Test of Reliance (Healer)

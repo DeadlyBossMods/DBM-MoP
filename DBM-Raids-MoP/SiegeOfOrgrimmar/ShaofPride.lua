@@ -47,7 +47,6 @@ local specWarnCorruptedPrisonYou= mod:NewSpecialWarningYou(144574, false)--Since
 local yellCorruptedPrison		= mod:NewYell(144574, nil, false)
 --Pride
 local specWarnBurstingPride		= mod:NewSpecialWarningMove(144911)--25-49 Energy
-local specWarnBurstingPrideNear	= mod:NewSpecialWarningClose(144911)
 local yellBurstingPride			= mod:NewYell(144911, nil, false)
 local specWarnProjection		= mod:NewSpecialWarningYou(146822, nil, nil, nil, 3)--50-74 Energy
 local specWarnAuraOfPride		= mod:NewSpecialWarningYou(146817)--75-99 Energy
@@ -86,7 +85,6 @@ local UnitPower, UnitPowerMax, UnitIsDeadOrGhost, UnitGUID = UnitPower, UnitPowe
 local prideLevel = DBM:EJ_GetSectionInfo(8255)
 --Not important, don't need to recover
 local manifestationWarned = false
-local bpSpecWarnFired = false
 --Important, needs recover
 mod.vb.woundCount = 0
 mod.vb.swellingCount = 0
@@ -105,7 +103,6 @@ function mod:OnCombatStart(delay)
 	self.vb.woundCount = 0
 	manifestationWarned = false
 	self.vb.swellingCount = 0
-	bpSpecWarnFired = false
 	if self.Options.InfoFrame then
 		DBM.InfoFrame:SetHeader(prideLevel)
 		DBM.InfoFrame:Show(5, "playerpower", 5, ALTERNATE_POWER_INDEX)
@@ -152,7 +149,6 @@ function mod:SPELL_CAST_SUCCESS(args)
 	local spellId = args.spellId
 	if spellId == 144400 then--Swelling Pride Cast END
 		self.vb.woundCount = 0
-		bpSpecWarnFired = false
 		--Since we register this event anyways for bursting, might as well start cd bars here instead
 		timerMarkCD:Stop()
 		timerMarkCD:Start(10.5)
@@ -181,13 +177,9 @@ function mod:SPELL_CAST_SUCCESS(args)
 					local targetName = DBM:GetUnitFullName(uId)
 					warnBurstingPride:CombinedShow(0.5, targetName)
 					if targetName == UnitName("player") then
-						bpSpecWarnFired = true
 						specWarnBurstingPride:Show()
 						yellBurstingPride:Yell()
 						timerBurstingPride:Start()
-					elseif self:CheckNearby(6, targetName) and not bpSpecWarnFired then
-						bpSpecWarnFired = true
-						specWarnBurstingPrideNear:Show(targetName)
 					end
 				end
 			end

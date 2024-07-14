@@ -218,7 +218,7 @@ function mod:SPELL_AURA_REMOVED(args)
 		end
 	elseif spellId == 140546 and args:IsPlayer() and self:IsInCombat() then
 		timerFullyMutated:Cancel()--Can be dispeled
-		specWarnFullyMutatedFaded:Show(args.spellName)
+		specWarnFullyMutatedFaded:Show()
 	end
 end
 

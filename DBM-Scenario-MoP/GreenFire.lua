@@ -63,7 +63,7 @@ function mod:SPELL_CAST_START(args)
 		specWarnHellfire:Show(args.sourceName)
 		timerHellfireCD:Start()
 	elseif args.spellId == 138559 then
-		specWarnChaosBolt:Show()
+		specWarnChaosBolt:Show(args.sourceName)
 	end
 end
 

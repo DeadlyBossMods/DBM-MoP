@@ -46,7 +46,7 @@ function mod:SPELL_CAST_START(args)
 			local bossTarget, bossTargetUID = self:GetBossTarget(71954)
 			if bossTargetUID then
 				if self:IsTanking(bossTargetUID, nil, nil, true, args.sourceGUID) then
-					specWarnHeadbuttTaunt:Show(bossTarget)
+					specWarnHeadbuttTaunt:Show(bossTarget or DBM_COMMON_L.UNKNOWN)
 					specWarnHeadbuttTaunt:Play("tauntboss")
 				end
 			end
