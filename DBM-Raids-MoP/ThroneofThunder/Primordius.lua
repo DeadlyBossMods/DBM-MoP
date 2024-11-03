@@ -5,6 +5,7 @@ mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(69017)--69070 Viscous Horror, 69069 good ooze, 70579 bad ooze (patched out of game, :\)
 mod:SetEncounterID(1574)
 mod:SetUsedIcons(8, 7, 6, 5, 4, 3, 2, 1)--Although if you have 8 viscous horrors up, you are probably doing fight wrong.
+mod:SetZone(1098)
 
 mod:RegisterCombat("combat")
 

@@ -5,6 +5,7 @@ mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(68036)--Crimson Fog 69050
 mod:SetEncounterID(1572)
 mod:SetUsedIcons(8, 7, 6, 5, 4, 3, 1)
+mod:SetZone(1098)
 
 mod:RegisterCombat("combat")
 

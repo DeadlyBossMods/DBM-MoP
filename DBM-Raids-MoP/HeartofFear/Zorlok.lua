@@ -4,6 +4,7 @@ local L		= mod:GetLocalizedStrings()
 mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(62980)--63554 (Special invisible Vizier that casts the direction based spellid versions of attenuation)
 mod:SetEncounterID(1507)
+mod:SetZone(1009)
 
 mod:RegisterCombat("combat")
 mod:RegisterKill("yell", L.Defeat)

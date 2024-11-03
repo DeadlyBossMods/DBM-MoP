@@ -6,6 +6,7 @@ mod:SetCreatureID(68065, 70235, 70247)--Frozen 70235, Venomous 70247 (only 2 hea
 mod:SetEncounterID(1578)
 mod:SetMainBossID(68065)
 mod:SetUsedIcons(7, 6, 4, 2)
+mod:SetZone(1098)
 
 mod:RegisterCombat("combat")
 

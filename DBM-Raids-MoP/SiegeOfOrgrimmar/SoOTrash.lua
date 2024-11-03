@@ -5,6 +5,7 @@ mod.statTypes = "normal,heroic,mythic,lfr"
 
 mod:SetRevision("@file-date-integer@")
 --mod:SetModelID(47785)
+mod:SetZone(1136)
 
 mod.isTrashMod = true
 

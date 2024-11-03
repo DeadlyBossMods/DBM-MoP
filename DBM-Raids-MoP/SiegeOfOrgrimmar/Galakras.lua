@@ -12,6 +12,7 @@ mod:SetMainBossID(72249)
 mod:SetUsedIcons(8, 7, 2)
 mod:SetHotfixNoticeRev(20240530000000)
 mod:SetMinSyncRevision(20240530000000)
+mod:SetZone(1136)
 
 mod:RegisterCombat("combat")
 

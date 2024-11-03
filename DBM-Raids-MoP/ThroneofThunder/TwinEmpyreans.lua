@@ -5,6 +5,7 @@ mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(68905, 68904)--Lu'lin 68905, Suen 68904
 mod:SetEncounterID(1560)
 mod:SetBossHPInfoToHighest()
+mod:SetZone(1098)
 
 mod:RegisterCombat("combat")
 

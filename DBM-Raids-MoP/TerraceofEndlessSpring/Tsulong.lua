@@ -5,6 +5,7 @@ mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(62442)--62919 Unstable Sha, 62969 Embodied Terror
 mod:SetEncounterID(1505)
 mod:SetReCombatTime(60)--fix lfr combat re-starts after killed.
+mod:SetZone(996)
 
 mod:RegisterCombat("combat")
 mod:RegisterKill("yell", L.Victory)

@@ -3,6 +3,7 @@ local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 11184 $"):sub(12, -3))
 --mod:SetModelID(47785)
+mod:SetZone(1009)
 
 mod.isTrashMod = true
 

@@ -9,6 +9,7 @@ mod:SetEncounterID(1593)
 mod:DisableESCombatDetection()
 mod:SetUsedIcons(3, 1)
 mod:SetBossHPInfoToHighest()
+mod:SetZone(1136)
 
 mod:RegisterCombat("combat")
 

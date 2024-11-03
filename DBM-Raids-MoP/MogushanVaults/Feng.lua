@@ -5,6 +5,7 @@ mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(60009)--60781 Soul Fragment
 mod:SetEncounterID(1390)
 mod:SetUsedIcons(1, 2, 3, 4, 7)
+mod:SetZone(1008)
 
 mod:RegisterCombat("combat")
 

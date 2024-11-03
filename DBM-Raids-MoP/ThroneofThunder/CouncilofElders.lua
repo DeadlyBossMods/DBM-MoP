@@ -6,6 +6,7 @@ mod:SetCreatureID(69078, 69132, 69134, 69131)--69078 Sul the Sandcrawler, 69132 
 mod:SetEncounterID(1570)
 mod:SetUsedIcons(7, 6)
 mod:SetBossHPInfoToHighest()
+mod:SetZone(1098)
 
 mod:RegisterCombat("combat")
 

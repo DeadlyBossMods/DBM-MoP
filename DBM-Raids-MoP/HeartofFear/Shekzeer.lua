@@ -5,6 +5,7 @@ mod:SetRevision("@file-date-integer@")
 mod:SetCreatureID(62837)--62847 Dissonance Field, 63591 Kor'thik Reaver, 63589 Set'thik Windblade
 mod:SetEncounterID(1501)
 mod:SetUsedIcons(1, 2)
+mod:SetZone(1009)
 
 mod:RegisterCombat("combat")
 
