@@ -5,6 +5,7 @@ local L		= mod:GetLocalizedStrings()
 mod.statTypes = "normal"
 
 mod:SetRevision("@file-date-integer@")
+mod:SetZone(1112)
 
 mod:RegisterCombat("scenario", 1112)
 mod:RegisterZoneCombat(1112)
