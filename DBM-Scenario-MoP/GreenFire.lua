@@ -7,6 +7,7 @@ mod.statTypes = "normal"
 mod:SetRevision("@file-date-integer@")
 
 mod:RegisterCombat("scenario", 1112)
+mod:RegisterZoneCombat(1112)
 
 mod:RegisterEventsInCombat(
 	"SPELL_CAST_START",
@@ -103,6 +104,7 @@ function mod:SPELL_AURA_REMOVED(args)
 	if args.spellId == 1098 and args:GetDestCreatureID() == 70075 and kanrathadAlive then
 		timerEnslaveDemon:Cancel(args.destName)
 		specWarnEnslavePitLord:Show()
+		specWarnEnslavePitLord:Play("bigmob")
 	elseif args.spellId == 138558 then
 		timerDoom:Cancel()
 	end
@@ -125,14 +127,7 @@ end
 
 function mod:UNIT_DIED(args)
 	if args.destGUID == UnitGUID("player") then--Solo scenario, a player death is a wipe
-		timerSpellFlameCD:Cancel()
-		timerHellfireCD:Cancel()
-		timerLostSoulsCD:Cancel()
-		timerEnslaveDemon:Cancel()
-		timerPitLordCast:Cancel()
-		timerSummonImpSwarmCast:Cancel()
-		timerSummonFelhunterCast:Cancel()
-		timerSummonDoomlordCast:Cancel()
+		self:Stop()
 	end
 	local cid = self:GetCIDFromGUID(args.destGUID)
 	if cid == 68151 then--Essence of Order
@@ -143,4 +138,19 @@ function mod:UNIT_DIED(args)
 		timerEnslaveDemon:Cancel()
 		kanrathadAlive = false
 	end
+end
+
+--All timers subject to a ~0.5 second clipping due to ScanEngagedUnits
+function mod:StartNameplateTimers(guid, cid)
+	if cid == 68151 then--Essence of Order
+
+	elseif cid == 69964 then--Kanrethad Ebonlocke
+
+	end
+end
+
+--Abort timers when all players out of combat, so NP timers clear on a wipe
+--Caveat, it won't calls top with GUIDs, so while it might terminate bar objects, it may leave lingering nameplate icons
+function mod:LeavingZoneCombat()
+	self:Stop()
 end
