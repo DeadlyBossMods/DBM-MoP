@@ -1,7 +1,7 @@
 ## Interface: 110007, 110100
 ## X-Min-Interface: 80000
 ## Category: DBM
-## Group: DBM Raids
+
 ## Title:|cffffe00a<|r|cffff7d0aDBM Mod|r|cffffe00a>|r |cffff6010Raids (MoP)|r
 ## Title-koKR:|cffffe00a<|r|cffff7d0aDBM Mod|r|cffffe00a>|r |cffff6010공격대 (판다)|r
 ## Title-ruRU:|cffffe00a<|r|cffff7d0aDBM Мод|r|cffffe00a>|r |cffff6010Рейды (Пандария)|r
