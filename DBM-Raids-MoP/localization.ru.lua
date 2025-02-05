@@ -284,10 +284,6 @@ L:SetOptionLocalization({
 ------------
 L = DBM:GetModLocalization(742)
 
-L:SetOptionLocalization({
-	warnLightOfDay	= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.target:format(123716)
-})
-
 L:SetMiscLocalization{
 	Victory	= "Спасибо вам, незнакомцы. Я свободен."
 }
@@ -338,7 +334,7 @@ L:SetOptionLocalization({
 	warnThrash					= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(131996),
 	warnBreathOnPlatform		= "Предупреждать о $spell:119414, когда Вы на платформе<br/>(не рекомендуется, для рейд лидера)",
 	specWarnBreathOfFearSoon	= "Предупреждать заранее о $spell:119414, если на Вас нет баффа $spell:117964",
-	specWarnMovement			= "Спецпредупреждение, куда двигаться при выстрелах $spell:120047",
+	specWarnMovement			= "Показывать спецпредупреждение, указывающее, куда двигаться, когда произносится $spell:120047<br/>(на основе общей стратегии позиционирования)",
 	timerSpecialAbility			= "Отсчет времени до следующей спецспособности на второй фазе",
 	RangeFrame					= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(2, 119519),
 	SetIconOnHuddle				= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(120629)
@@ -443,7 +439,7 @@ L:SetOptionLocalization({
 	timerBreaths			= "Отсчёт времени до следующего дыхания",
 	SetIconOnCinders		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(139822),
 	SetIconOnTorrentofIce	= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(139889),
-	AnnounceCooldowns		= "Отсчитывать какой сейчас каст Буйство для рейдовых кулдаунов",
+	AnnounceCooldowns		= "Отсчитывать, какой сейчас каст Буйство для рейдовых кулдаунов",
 	Never					= "Никогда",
 	Every					= "Каждый (последовательно)",
 	EveryTwo				= "Кулдауны, каждый 2",
@@ -469,7 +465,7 @@ L:SetWarningLocalization({
 })
 
 L:SetTimerLocalization({
-	timerFlockCD	= "Выводок (%d): %s"
+	timerFlockCD	= "Гнездо (%d): %s"
 })
 
 L:SetOptionLocalization({
@@ -479,8 +475,8 @@ L:SetOptionLocalization({
 	specWarnBigBirdSoon	= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.soon:format("ej7827"),
 	timerFlockCD		= DBM_CORE_L.AUTO_TIMER_OPTIONS.nextcount:format("ej7348"),
 	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(10, 138923),
-	ShowNestArrows	= "Показывать стрелку DBM при активации гнезд",
-	Never			= "Никогда",
+	ShowNestArrows	= "Показывать спецпредупреждение только для выбранного Вами местоположения гнезда",
+	Never			= "Все гнезда",
 	Northeast		= "Синий - Низ & Верх СВ",
 	Southeast		= "Зеленый - Низ & Верх ЮВ",
 	Southwest		= "Фиолетовый/Красный - Низ ЮЗ & Верх ЮЗ(25) или Верх Центр(10)",
@@ -501,8 +497,10 @@ L:SetMiscLocalization({
 	SouthWest		= "|cFF9932CDЮЗ|r",--Фиолетовый
 	West			= "|cffff0000З|r",--Красный
 	NorthWest		= "|cffffff00СЗ|r",--Желтый
-	Middle10		= "|cFF9932CDЦентр|r",--Фиолетовый (Центр это верх юго-запад для 10 ппл/LFR)
-	Middle25		= "|cffff0000Центр|r"--Красный (Центр это верх запад для 25 ппл)
+	Middle10		= "|cFF9932CDЦентр|r",--Фиолетовый (Центр - это верх юго-запад для 10 ппл/LFR)
+	Middle25		= "|cffff0000Центр|r",--Красный (Центр - это верх запад для 25 ппл)
+	ArrowUpper		= " |TInterface\\Icons\\misc_arrowlup:12:12|t ",
+	ArrowLower		= " |TInterface\\Icons\\misc_arrowdown:12:12|t "
 })
 
 --------------------------
@@ -549,7 +547,7 @@ L:SetWarningLocalization({
 L:SetOptionLocalization({
 	warnDebuffCount		= "Показывать предупреждения о числе дебаффов, когда Вы поглощаете лужи",
 	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format("5/3"),
-	SetIconOnBigOoze	= "Устанавливать метки на $journal:6969"
+	SetIconOnBigOoze	= "Ставить метку на $journal:6969"
 })
 
 -----------------
@@ -582,7 +580,7 @@ L:SetWarningLocalization({
 L:SetOptionLocalization({
 	warnDeadZone			= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(137229),
 	SetIconOnLightningStorm	= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(136192),
-	RangeFrame	= "Показывать динамическое окно проверки дистанции (10м.)",
+	RangeFrame	= "Показывать динамическое окно проверки дистанции (10 м.)<br/>Это умная рамка диапазона, которая показывает, когда слишком много объектов находятся слишком близко",
 	InfoFrame	= "Показывать информационное окно для игроков с $spell:136193"
 })
 
@@ -711,6 +709,10 @@ L:SetOptionLocalization({
 	SetIconOnFragment	= "Устанавливать метку на Оскверненный осколок"
 })
 
+L:SetMiscLocalization({
+	PortalRP	= "So Hellscream's arrogance unleashed the last of the sha. I am not surprised."
+})
+
 --------------
 -- Galakras --
 --------------
@@ -805,7 +807,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(851)
 
 L:SetOptionLocalization({
-	RangeFrame	= "Показывать динамическое окно проверки дистанции (10м.)<br/>(Это умное окно проверки дистанции, которое появляется, когда Вы достигаете порога Бешенства)"
+	RangeFrame	= "Показывать динамическое окно проверки дистанции (10 м.)<br/>(Это умное окно проверки дистанции, которое появляется, когда Вы достигаете порога Бешенства)"
 })
 
 ----------------------------
@@ -866,7 +868,7 @@ L:SetTimerLocalization({
 
 L:SetOptionLocalization({
 	timerRoleplay		= "Показывать таймер для Гарроша/Тралла (ролевая игра)",
-	RangeFrame			= "Показывать динамическое окно проверки дистанции (8м.)<br/>(Это умное окно проверки дистанции, которое появляется, когда Вы достигаете порога $spell:147126)",
+	RangeFrame			= "Показывать динамическое окно проверки дистанции (8 м.)<br/>(Это умное окно проверки дистанции, которое появляется, когда Вы достигаете порога $spell:147126)",
 	InfoFrame			= "Показывать информационное окно для игроков без снижения урона на переходной фазе"
 })
 
