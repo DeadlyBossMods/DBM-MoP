@@ -64,7 +64,7 @@ local specwarnMassiveStomp		= mod:NewSpecialWarningSpell(122408, "Melee", nil, n
 --Boss
 local timerReshapeLifeCD		= mod:NewNextCountTimer(50, 122784, nil, nil, nil, 3)--50 second cd in phase 1-2, 15 second in phase 3. if no construct is up, cd is ignored and boss casts it anyways to make sure 1 is always up.
 local timerAmberScalpelCD		= mod:NewNextTimer(40, 121994, nil, nil, nil, 3)--40 seconds after last one ENDED
-local timerAmberScalpel			= mod:NewBuffActiveTimer(10, 121994)
+--local timerAmberScalpel			= mod:NewBuffActiveTimer(10, 121994)
 local timerParasiticGrowthCD	= mod:NewCDTimer(35, 121949, nil, "Healer", nil, 5)--35-50 variation (most of the time 50, rare pulls he decides to use 35 sec cd instead)
 local timerParasiticGrowth		= mod:NewTargetTimer(30, 121949, nil, "Healer")
 --Construct
@@ -74,7 +74,7 @@ local timerStruggleForControl	= mod:NewTargetTimer(5, 122395, nil, false)
 --Amber Monstrosity
 local timerMassiveStompCD		= mod:NewCDTimer(18, 122408, nil, "Melee", nil, 2)--18-25 seconds variation
 local timerFlingCD				= mod:NewCDTimer(25, 122413, nil, "Tank", nil, 5)--25-40sec variation.
-local timerAmberExplosionAMCD	= mod:NewTimer(46, "timerAmberExplosionAMCD", 122402, nil, nil, 4)--Special timer just for amber monstrosity. easier to cancel, easier to tell apart. His bar is the MOST important and needs to be seperate from any other bar option.
+local timerAmberExplosionAMCD	= mod:NewTimer(46, "timerAmberExplosionAMCD", 122402, nil, nil, 4, nil, nil, nil, nil, nil, nil, nil, 122402)--Special timer just for amber monstrosity. easier to cancel, easier to tell apart. His bar is the MOST important and needs to be seperate from any other bar option.
 local timerAmberExplosion		= mod:NewCastTimer(2.5, 122402)
 
 local berserkTimer				= mod:NewBerserkTimer(600)
