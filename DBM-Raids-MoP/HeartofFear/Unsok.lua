@@ -69,7 +69,7 @@ local timerParasiticGrowthCD	= mod:NewCDTimer(35, 121949, nil, "Healer", nil, 5)
 local timerParasiticGrowth		= mod:NewTargetTimer(30, 121949, nil, "Healer")
 --Construct
 local timerAmberExplosionCD		= mod:NewNextSourceTimer(13, 122398, nil, nil, nil, 4)--13 second cd on player controled units, 18 seconds on non player controlled constructs
-local timerDestabalize			= mod:NewTimer(15, "timerDestabalize", 123059)--timer Enables for all players. It's very importantant for heroic. (espcially on phase 2)
+local timerDestabalize			= mod:NewTimer(15, "timerDestabalize", 123059, nil, nil, 4, nil, nil, nil, nil, nil, nil, nil, 123059)--timer Enables for all players. It's very importantant for heroic. (espcially on phase 2)
 local timerStruggleForControl	= mod:NewTargetTimer(5, 122395, nil, false)
 --Amber Monstrosity
 local timerMassiveStompCD		= mod:NewCDTimer(18, 122408, nil, "Melee", nil, 2)--18-25 seconds variation
