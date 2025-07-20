@@ -213,6 +213,7 @@ mod.vb.aimActive = false
 mod.vb.mutateActive = false
 mod.vb.flashActive = false
 mod.vb.toxicInjection = false--Workaround blizzard bug (double check if hotfix live and if workaround still needed on heroic)
+local SendChatMessage = C_ChatInfo.SendChatMessage or SendChatMessage--Temp compat code
 
 local function warnActivatedTargets(self, vulnerable)
 	if #activatedTargets > 1 then
@@ -787,7 +788,7 @@ function mod:UNIT_DIED(args)
 		timerMesmerizeCD:Cancel()
 	end
 
-	if FlavorTable[cid] then
+	if not DBM:IsRetail() and FlavorTable[cid] then--Disabled on retail due to restrictions in Midnight and beyond
 		local x = math.random(1, mathNumber)
 		if x == 50 then--1% chance yay
 			SendChatMessage(FlavorTable[cid], "SAY")
