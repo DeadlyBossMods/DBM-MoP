@@ -14,8 +14,8 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	SpecWarnOverloadSoon		= "Спецпредупреждение перед насыщением",
-	specWarnBreakJasperChains	= "Спецпредупреждение, когда можно разорвать $spell:130395",
+	SpecWarnOverloadSoon		= "Показывать спецпредупреждение перед насыщением",
+	specWarnBreakJasperChains	= "Показывать спецпредупреждение, когда можно разорвать $spell:130395",
 	InfoFrame					= "Показывать информационное окно с энергией боссов, окаменением игроков и какой босс кастует окаменение"
 })
 
@@ -34,8 +34,8 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	WarnPhase			= "Объявлять смену фаз",
-	specWarnBarrierNow	= "Спецпредупреждение, когда Вам необходимо использовать $spell:115817 (только для Поиска Рейдов)",
+	WarnPhase			= "Показывать предупреждение о смене фаз",
+	specWarnBarrierNow	= "Показывать спецпредупреждение, когда Вам необходимо использовать $spell:115817 (только для Поиска Рейдов)",
 	RangeFrame	= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format("6") .. " во время аркан-фазы",
 	SetIconOnWS			= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(116784),
 	SetIconOnAR			= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(116417)
@@ -97,7 +97,7 @@ L:SetTimerLocalization({
 })
 
 L:SetOptionLocalization({
-	specWarnDespawnFloor	= "Спецпредупреждение перед исчезновением пола",
+	specWarnDespawnFloor	= "Показывать спецпредупреждение перед исчезновением пола",
 	timerDespawnFloor		= "Отсчет времени до исчезновения пола",
 	SetIconOnDestabilized	= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(132222)
 })
@@ -134,10 +134,10 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	warnEcho			= "Объявлять о появлении Эха",
-	warnEchoDown		= "Объявлять, когда Эхо будет побеждено",
+	warnEcho			= "Показывать предупреждение о появлении Эха",
+	warnEchoDown		= "Показывать предупреждение, когда Эхо будет побеждено",
 	specwarnAttenuation	= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format(127834),
-	specwarnPlatform	= "Спецпредупреждение, когда босс меняет платформу",
+	specwarnPlatform	= "Показывать спецпредупреждение, когда босс меняет платформу",
 	ArrowOnAttenuation	= "Показывать стрелку DBM во время $spell:127834, чтобы<br/>указать в каком направлении двигаться",
 	MindControlIcon		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(122740)
 })
@@ -168,7 +168,7 @@ L:SetWarningLocalization({
 
 L:SetOptionLocalization({
 	warnCrush		= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(122774),
-	specwarnUnder	= "Спецпредупреждение, когда Вы стоите под боссом",
+	specwarnUnder	= "Показывать спецпредупреждение, когда Вы стоите под боссом",
 	PheromonesIcon	= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(122835)
 })
 
@@ -213,14 +213,14 @@ L:SetTimerLocalization{
 L:SetOptionLocalization({
 	warnReshapeLife				= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.target:format(122784),
 	warnReshapeLifeTutor		= "Показывать назначение способностей у Мутировавшего организма",
-	warnAmberExplosion			= "Предупреждение (с источником) о начале применения $spell:122398",
+	warnAmberExplosion			= "Показывать предупреждение (с источником) о начале применения $spell:122398",
 	warnAmberExplosionAM		= "Персональное предупреждение о начале применения $spell:122398 (для прерывания)",
 	warnInterruptsAvailable		= "Показывать, кто может сбить $spell:122402",
 	warnWillPower				= "Предупреждать об уровне силы воли на 80, 50, 30, 10 и 4.",
-	specwarnWillPower			= "Спецпредупреждение, когда уровень силы воли слишком низок",
-	specwarnAmberExplosionYou	= "Спецпредупреждение для прерывания своего $spell:122398",
-	specwarnAmberExplosionAM	= "Спецпредупреждение для прерывания $spell:122402 у Янтарного чудовища",
-	specwarnAmberExplosionOther	= "Спецпредупреждение для прерывания $spell:122398 у Мутировавшего организма",
+	specwarnWillPower			= "Показывать спецпредупреждение, когда уровень силы воли слишком низок",
+	specwarnAmberExplosionYou	= "Показывать спецпредупреждение для прерывания своего $spell:122398",
+	specwarnAmberExplosionAM	= "Показывать спецпредупреждение для прерывания $spell:122402 у Янтарного чудовища",
+	specwarnAmberExplosionOther	= "Показывать спецпредупреждение для прерывания $spell:122398 у Мутировавшего организма",
 	timerDestabalize			= DBM_CORE_L.AUTO_TIMER_OPTIONS.target:format(123059),
 	timerAmberExplosionAMCD		= "Отсчет времени до следующего $spell:122402 у Янтарного чудовища",
 	InfoFrame					= "Показывать информационное окно для игроков с низким уровнем силы воли",
@@ -274,7 +274,7 @@ L:SetWarningLocalization({
 
 L:SetOptionLocalization({
 	warnGroupOrder		= "Объявлять ротацию для $spell:118191<br/>(В настоящее время поддерживается только стратегия для 25 человек: 5,2,2,2, и т.д.)",
-	specWarnYourGroup	= "Спецпредупреждение, когда Ваша группа должна получить $spell:118191<br/>(Только для 25 человек)",
+	specWarnYourGroup	= "Показывать спецпредупреждение, когда Ваша группа должна получить $spell:118191<br/>(Только для 25 человек)",
 	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(8, 111850) .. "<br/>(Показывает всех, если на Вас дебафф, иначе только игроков с дебаффом)",
 	SetIconOnPrison		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(117436)
 })
@@ -302,7 +302,7 @@ L:SetTimerLocalization({
 })
 
 L:SetOptionLocalization({
-	warnHideOver	= "Предупреждение о появлении босса после $spell:123244",
+	warnHideOver	= "Показывать предупреждение о появлении босса после $spell:123244",
 	timerSpecialCD	= "Отсчет времени до следующей спецспособности",
 	RangeFrame		= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(3, 123121) .. "<br/>(Показывает всех во время $spell:123244, иначе только танков)"
 })
@@ -324,7 +324,7 @@ L:SetWarningLocalization({
 })
 
 L:SetTimerLocalization({
-	timerSpecialAbilityCD	= "Следующая спецспособность",
+	timerSpecialAbilityCD	= "След. Спецспособность",
 	timerSpoHudCD			= "Восст. Страх / Изводень",
 	timerSpoStrCD			= "Восст. Изводень / Клив",
 	timerHudStrCD			= "Восст. Страх / Клив"
@@ -332,10 +332,10 @@ L:SetTimerLocalization({
 
 L:SetOptionLocalization({
 	warnThrash					= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(131996),
-	warnBreathOnPlatform		= "Предупреждать о $spell:119414, когда Вы на платформе<br/>(Не рекомендуется, для лидера рейда)",
-	specWarnBreathOfFearSoon	= "Предупреждать заранее о $spell:119414, если на Вас нет баффа $spell:117964",
+	warnBreathOnPlatform		= "Показывать предупреждение о $spell:119414, когда Вы на платформе<br/>(Не рекомендуется, для лидера рейда)",
+	specWarnBreathOfFearSoon	= "Заранее предупреждать о $spell:119414, если на Вас нет баффа $spell:117964",
 	specWarnMovement			= "Показывать спецпредупреждение, указывающее, куда двигаться, когда произносится $spell:120047<br/>(На основе общей стратегии позиционирования)",
-	timerSpecialAbility			= "Показывать таймер, когда будет применена следующая спецспособность",
+	timerSpecialAbility			= "Отсчет времени до применения следующей спецспособности",
 	RangeFrame					= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(2, 119519),
 	SetIconOnHuddle				= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(120629)
 })
@@ -350,7 +350,7 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	specWarnWaterMove	= "Спецпредупреждение, если Вы стоите в $spell:138470<br/>(В случае, если скоро $spell:137313 или спадает дебафф $spell:138732)",
+	specWarnWaterMove	= "Показывать спецпредупреждение, если Вы стоите в $spell:138470<br/>(В случае, если скоро $spell:137313 или спадает дебафф $spell:138732)",
 	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format("8/4")
 })
 
@@ -371,9 +371,9 @@ L:SetTimerLocalization({
 })
 
 L:SetOptionLocalization({
-	warnAdds				= "Объявлять, когда спрыгивают новые адды",
-	warnOrbofControl		= "Предупреждение о появлении $journal:7092",
-	specWarnOrbofControl	= "Спецпредупреждение о появлении $journal:7092",
+	warnAdds				= "Показывать предупреждение, когда спрыгивают новые адды",
+	warnOrbofControl		= "Показывать предупреждение о появлении $journal:7092",
+	specWarnOrbofControl	= "Показывать спецпредупреждение о появлении $journal:7092",
 	timerDoor				= "Отсчёт времени до следующей фазы ворот племени",
 	timerAdds				= "Отсчёт времени до спрыгивания следующих аддов",
 	SetIconOnAdds			= "Устанавливать метки на аддов, спрыгивающих с балкона",
@@ -416,7 +416,7 @@ L:SetWarningLocalization({
 
 L:SetOptionLocalization({
 	warnKickShell			= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(134031),
-	specWarnCrystalShell	= "Спецпредупреждение, когда на Вас нет дебаффа $spell:137633 и более 90% здоровья",
+	specWarnCrystalShell	= "Показывать спецпредупреждение, когда на Вас нет дебаффа $spell:137633 и более 90% здоровья",
 	InfoFrame				= "Показывать информационное окно для игроков без $spell:137633",
 	ClearIconOnTurtles		= "Убирать метки с $journal:7129, когда активируется $spell:133971",
 	AnnounceCooldowns		= "Подсчитывать, какой $spell:134920 применяется для восстановления способностей рейда"
@@ -518,9 +518,9 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	warnBeam			= "Объявлять цели лучей",
-	warnAddsLeft		= "Объявлять сколько осталось туманов",
-	specWarnFogRevealed	= "Спецпредупреждение при обнаружении туманов",
+	warnBeam			= "Показывать предупреждение для целей луча",
+	warnAddsLeft		= "Показывать предупреждение о том, сколько осталось туманов",
+	specWarnFogRevealed	= "Показывать спецпредупреждение при обнаружении туманов",
 	specWarnBlueBeam			= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format(139202),
 	specWarnDisintegrationBeam	= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format("ej6882"),
 	ArrowOnBeam			= "Показывать стрелку DBM во время $journal:6882, чтобы указать, в каком направлении двигаться",
@@ -545,7 +545,7 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	warnDebuffCount		= "Показывать предупреждения о количестве дебаффов, когда Вы поглощаете лужи",
+	warnDebuffCount		= "Показывать предупреждение о количестве дебаффов, когда Вы поглощаете лужи",
 	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format("5/3"),
 	SetIconOnBigOoze	= "Ставить метку на $journal:6969"
 })
@@ -560,7 +560,7 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	warnMatterSwapped	= "Объявлять цели, которые поменялись местами с помощью $spell:138618",
+	warnMatterSwapped	= "Показывать предупреждение для целей, которые поменялись местами с помощью $spell:138618",
 	SetIconOnFont		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(138707)
 })
 
@@ -628,8 +628,8 @@ L:SetTimerLocalization({
 })
 
 L:SetOptionLocalization({
-	specWarnIntermissionSoon	= "Спецпредупреждение перед началом промежуточной фазы",
-	warnDiffusionChainSpread	= "Объявлять цели распространения $spell:135991",
+	specWarnIntermissionSoon	= "Показывать спецпредупреждение перед началом промежуточной фазы",
+	warnDiffusionChainSpread	= "Показывать предупреждение для целей, на которых действует $spell:135991",
 	timerConduitCD				= "Отсчет времени до восстановления способности первого проводника",
 	RangeFrame					= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format("8/6"),--Для двух разных заклинаний
 	StaticShockArrow			= "Показывать стрелку DBM, когда на ком-то $spell:135695",
@@ -652,7 +652,7 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	specWarnUnstablVitaJump	= "Спецпредупреждение, когда $spell:138297 перепрыгивает на Вас"
+	specWarnUnstablVitaJump	= "Показывать спецпредупреждение, когда $spell:138297 перепрыгивает на Вас"
 })
 
 L:SetMiscLocalization({
@@ -724,13 +724,13 @@ L:SetWarningLocalization({
 })
 
 L:SetTimerLocalization({
-	timerTowerCD		= "След. башня",
+	timerTowerCD		= "След. Башня",
 	timerTowerGruntCD	= "След. Рубака у башни"
 })
 
 L:SetOptionLocalization({
-	warnTowerOpen		= "Объявлять, когда башня открывается",
-	warnTowerGrunt		= "Объявлять, когда появляется новый Рубака у башни",
+	warnTowerOpen		= "Показывать предупреждение, когда башня открывается",
+	warnTowerGrunt		= "Показывать предупреждение, когда появляется новый Рубака у башни",
 	timerTowerCD		= "Отсчет времени до следующего нападения на башню",
 	timerTowerGruntCD	= "Отсчет времени до следующего Рубаки у башни"
 })
@@ -837,8 +837,8 @@ L:SetWarningLocalization({
 
 L:SetOptionLocalization({
 	warnToxicCatalyst			= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format("ej8036"),
-	specWarnActivatedVulnerable	= "Спецпредупреждение, когда Вы уязвимы к активирующимся идеалам",
-	specWarnMoreParasites		= "Спецпредупреждение, когда Вам нужно больше паразитов",
+	specWarnActivatedVulnerable	= "Показывать спецпредупреждение, когда Вы уязвимы к активирующимся идеалам",
+	specWarnMoreParasites		= "Показывать спецпредупреждение, когда Вам нужно больше паразитов",
 	yellToxicCatalyst			= DBM_CORE_L.AUTO_YELL_OPTION_TEXT.yell:format("ej8036")
 })
 
@@ -872,7 +872,7 @@ L:SetTimerLocalization({
 })
 
 L:SetOptionLocalization({
-	timerRoleplay		= "Показывать таймер для Гарроша/Тралла (ролевая игра)",
+	timerRoleplay		= "Отсчет времени до Гарроша/Тралла (ролевая игра)",
 	RangeFrame			= "Показывать динамическое окно проверки дистанции (8 м.)<br/>(Это умное окно проверки дистанции, которое появляется, когда Вы достигаете порога $spell:147126)",
 	InfoFrame			= "Показывать информационное окно для игроков без снижения урона на переходной фазе"
 })
