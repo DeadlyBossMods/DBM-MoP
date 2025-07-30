@@ -519,7 +519,7 @@ L:SetWarningLocalization({
 
 L:SetOptionLocalization({
 	warnBeam			= "Показывать предупреждение для целей луча",
-	warnAddsLeft		= "Показывать предупреждение о том, сколько осталось туманов",
+	warnAddsLeft		= "Показывать предупреждение для оставшихся туманов",
 	specWarnFogRevealed	= "Показывать спецпредупреждение при обнаружении туманов",
 	specWarnBlueBeam			= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format(139202),
 	specWarnDisintegrationBeam	= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format("ej6882"),
@@ -872,7 +872,7 @@ L:SetTimerLocalization({
 })
 
 L:SetOptionLocalization({
-	timerRoleplay		= "Отсчет времени до Гарроша/Тралла (ролевая игра)",
+	timerRoleplay		= "Отсчет времени до ролевой игры (Гаррош/Тралл)",
 	RangeFrame			= "Показывать динамическое окно проверки дистанции (8 м.)<br/>(Это умное окно проверки дистанции, которое появляется, когда Вы достигаете порога $spell:147126)",
 	InfoFrame			= "Показывать информационное окно для игроков без снижения урона на переходной фазе"
 })
