@@ -619,7 +619,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(832)
 
 L:SetWarningLocalization({
-	specWarnIntermissionSoon	= "Скоро смена фаз",
+	specWarnIntermissionSoon	= "Скоро смена фазы",
 	warnDiffusionChainSpread	= "%s распространилось на >%s<"
 })
 
