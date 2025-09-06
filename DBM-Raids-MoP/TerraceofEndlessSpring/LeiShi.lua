@@ -104,7 +104,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		end)
 	elseif spellId == 123505 then
 		if self.Options.SetIconOnProtector then
-			self:ScanForMobs(args.destGUID, 2, self.vb.addsIcon, 1, nil, 8, "SetIconOnProtector")
+			self:ScanForMobs(args.destGUID, 2, self.vb.addsIcon, 1, nil, 8, "SetIconOnProtector", nil, nil, true)
 		end
 		self.vb.addsIcon = self.vb.addsIcon - 1
 	elseif spellId == 123461 then
