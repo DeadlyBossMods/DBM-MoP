@@ -35,7 +35,7 @@ L:SetWarningLocalization({
 
 L:SetOptionLocalization({
 	WarnPhase			= "Показывать предупреждение о смене фаз",
-	specWarnBarrierNow	= "Показывать спецпредупреждение, когда Вам необходимо использовать $spell:115817 (только для Поиска Рейдов)",
+	specWarnBarrierNow	= "Показывать спецпредупреждение, когда Вам необходимо использовать $spell:115817 (только в режиме ЛФР)",
 	RangeFrame	= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format("6") .. " во время аркан-фазы",
 	SetIconOnWS			= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(116784),
 	SetIconOnAR			= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(116417)
@@ -138,7 +138,7 @@ L:SetOptionLocalization({
 	warnEchoDown		= "Показывать предупреждение, когда Эхо будет побеждено",
 	specwarnAttenuation	= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format(127834),
 	specwarnPlatform	= "Показывать спецпредупреждение, когда босс меняет платформу",
-	ArrowOnAttenuation	= "Показывать стрелку DBM во время $spell:127834, чтобы<br/>указать в каком направлении двигаться",
+	ArrowOnAttenuation	= "Показывать стрелку DBM во время $spell:127834, чтобы указать в каком направлении двигаться",
 	MindControlIcon		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(122740)
 })
 
@@ -194,7 +194,7 @@ L = DBM:GetModLocalization(737)
 
 L:SetWarningLocalization({
 	warnReshapeLife				= "%s на >%s< (%d)",
-	warnReshapeLifeTutor		= "1: Сбить каст/продебаффать цель (используйте это на боссе, чтобы настакать дебафф), 2: Сбить себе каст, когда кастуется Янтарный взрыв, 3: Восстановить силу воли, когда ее мало (используейте в основном на 3 фазе), 4: Выйти (только на 1 и 2 фазе)",
+	warnReshapeLifeTutor		= "1: Сбить каст/продебаффать цель (используйте это на боссе, чтобы настакать дебафф), 2: Сбить себе каст, когда кастуется Янтарный взрыв, 3: Восстановить силу воли, когда ее мало (используйте в основном на 3-й фазе), 4: Выйти (только на 1-й и 2-й фазе)",
 	warnAmberExplosion			= ">%s< кастует %s",
 	warnAmberExplosionAM		= "Янтарное чудовище кастует Янтарный взрыв - Сбейте!",--personal warning.
 	warnInterruptsAvailable		= "Сбить %s могут: >%s<",
@@ -217,7 +217,7 @@ L:SetOptionLocalization({
 	warnAmberExplosionAM		= "Персональное предупреждение о начале применения $spell:122398 (для прерывания)",
 	warnInterruptsAvailable		= "Показывать, кто может сбить $spell:122402",
 	warnWillPower				= "Предупреждать об уровне силы воли на 80, 50, 30, 10 и 4.",
-	specwarnWillPower			= "Показывать спецпредупреждение, когда уровень силы воли слишком низок",
+	specwarnWillPower			= "Показывать спецпредупреждение, когда уровень силы воли слишком низкий",
 	specwarnAmberExplosionYou	= "Показывать спецпредупреждение для прерывания своего $spell:122398",
 	specwarnAmberExplosionAM	= "Показывать спецпредупреждение для прерывания $spell:122402 у Янтарного чудовища",
 	specwarnAmberExplosionOther	= "Показывать спецпредупреждение для прерывания $spell:122398 у Мутировавшего организма",
@@ -237,11 +237,11 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(743)
 
 L:SetWarningLocalization({
-	warnAmberTrap	= "Прогресс создания ловушки: (%d/5)"
+	warnAmberTrap	= "Прогресс создания Янтарной ловушки: (%d/5)"
 })
 
 L:SetOptionLocalization({
-	warnAmberTrap	= "Отображать прогресс создания $spell:125826 (с прогрессом)",
+	warnAmberTrap	= "Показывать предупреждение (с прогрессом) при создании $spell:125826",
 	InfoFrame		= "Показывать информационное окно для игроков с $spell:125390",
 	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(5, 123735),
 	StickyResinIcons	= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(124097),
@@ -350,7 +350,7 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	specWarnWaterMove	= "Показывать спецпредупреждение, если Вы стоите в $spell:138470<br/>(В случае, если скоро $spell:137313 или спадает дебафф $spell:138732)",
+	specWarnWaterMove	= "Показывать спецпредупреждение, если Вы стоите в $spell:138470<br/>(В том случае, если скоро $spell:137313 или спадает дебафф $spell:138732)",
 	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format("8/4")
 })
 
@@ -656,7 +656,7 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	Defeat	= "Остановитесь! Я… не враг вам."
+	Defeat	= "Остановитесь! Я... не враг вам. Вы сильны. Даже сильнее его… Может, вы и правы. Может, есть еще надежда."
 })
 
 -------------
@@ -665,7 +665,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization("ToTTrash")
 
 L:SetGeneralLocalization({
-	name	= "Трэш мобы Престола Гроз"
+	name	= "Трэш мобы Престол Гроз"
 })
 
 L:SetOptionLocalization({
