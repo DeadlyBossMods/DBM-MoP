@@ -36,7 +36,6 @@ local timerScaryFogCD					= mod:NewNextTimer(10, 123705, nil, nil, nil, 2)
 
 local berserkTimer						= mod:NewBerserkTimer(600)
 
-mod:AddRangeFrameOption(3, nil, true)
 mod:AddSetIconOption("SetIconOnProtector", -6224, true, 5, {3, 4, 5, 6, 7, 8})
 
 mod.vb.specialCast = 0
@@ -48,13 +47,6 @@ local prevlostHealth = 0
 local lastProtect = 0--No sense making syncable varaible, it's GetTime which differs PC to PC
 local hideName = DBM:GetSpellName(123244)
 
-local bossTank
-do
-	bossTank = function(uId)
-		return mod:IsTanking(uId, "boss1")
-	end
-end
-
 function mod:ScaryFogRepeat()
 	timerScaryFogCD:Cancel()
 	self:UnscheduleMethod("ScaryFogRepeat")
@@ -64,9 +56,6 @@ function mod:ScaryFogRepeat()
 end
 
 function mod:OnCombatStart(delay)
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Show(3, bossTank)
-	end
 	self.vb.specialCast = 0
 	self.vb.hideActive = false
 	self.vb.specialRemaining = 0
@@ -208,7 +197,4 @@ function mod:INSTANCE_ENCOUNTER_ENGAGE_UNIT(event)
 	self:SetWipeTime(3)
 	self:UnregisterShortTermEvents()--Once boss appears, unregister event, so we ignore the next two that will happen, which will be 2nd time after reappear, and right before next Hide.
 	warnHideOver:Show(hideName)
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Show(3, bossTank)--Go back to showing only tanks
-	end
 end
