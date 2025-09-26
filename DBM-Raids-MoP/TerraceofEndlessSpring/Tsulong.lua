@@ -20,7 +20,7 @@ mod:RegisterEventsInCombat(
 )
 
 local warnNight							= mod:NewSpellAnnounce(-6310, 2, 108558)
-local warnSunbeam						= mod:NewSpellAnnounce(122789, 3)
+--local warnSunbeam						= mod:NewSpellAnnounce(122789, 3)
 local warnDay							= mod:NewSpellAnnounce(-6315, 2, 122789)
 local warnSummonUnstableSha				= mod:NewSpellAnnounce(-6320, 3, "627685")
 local warnSummonEmbodiedTerror			= mod:NewCountAnnounce(-6316, 4, "627685")
@@ -49,7 +49,6 @@ local timerLightOfDay					= mod:NewTargetTimer(6, 123716, nil, "Healer", nil, 5)
 
 local berserkTimer						= mod:NewBerserkTimer(490)--a little over 8 min, basically 3rd dark phase is auto berserk.
 
-local terrorName = DBM:EJ_GetSectionInfo(6316)
 mod.vb.terrorCount = 0
 mod.vb.darkOfNightCount = 0
 mod.vb.lightOfDayCount = 0
@@ -127,17 +126,22 @@ function mod:SPELL_CAST_SUCCESS(args)
 	end
 end
 
-function mod:RAID_BOSS_EMOTE(msg)
-	if msg:find("spell:122789") then
-		if timerDayCD:GetTime() < 60 then
-			timerSunbeamCD:Start()
-		end
-	elseif msg:find(terrorName) then
-		self.vb.terrorCount = self.vb.terrorCount + 1
-		timerTerrorizeCD:Start()--always cast 14-15 seconds after one spawns (Unless stunned, if you stun the mob you can delay the cast, using this timer)
-		warnSummonEmbodiedTerror:Show(self.vb.terrorCount)
-		if self.vb.terrorCount < 3 then
-			timerSummonEmbodiedTerrorCD:Start(nil, self.vb.terrorCount+1)
+do
+	local terrorName = DBM:EJ_GetSectionInfo(6316)
+	terrorName = string.lower(terrorName or "")
+	function mod:RAID_BOSS_EMOTE(msg)
+		msg = string.lower(msg or "")
+		if msg:find("spell:122789") then
+			if timerDayCD:GetTime() < 60 then
+				timerSunbeamCD:Start()
+			end
+		elseif msg:find(terrorName) then
+			self.vb.terrorCount = self.vb.terrorCount + 1
+			timerTerrorizeCD:Start()--always cast 14-15 seconds after one spawns (Unless stunned, if you stun the mob you can delay the cast, using this timer)
+			warnSummonEmbodiedTerror:Show(self.vb.terrorCount)
+			if self.vb.terrorCount < 3 then
+				timerSummonEmbodiedTerrorCD:Start(nil, self.vb.terrorCount+1)
+			end
 		end
 	end
 end
