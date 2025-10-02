@@ -788,7 +788,7 @@ function mod:UNIT_DIED(args)
 		timerMesmerizeCD:Cancel()
 	end
 
-	if not DBM:IsRetail() and FlavorTable[cid] then--Disabled on retail due to restrictions in Midnight and beyond
+	if not self:IsPostMidnight() and FlavorTable[cid] then--Disabled on retail due to restrictions in Midnight and beyond
 		local x = math.random(1, mathNumber)
 		if x == 50 then--1% chance yay
 			SendChatMessage(FlavorTable[cid], "SAY")
