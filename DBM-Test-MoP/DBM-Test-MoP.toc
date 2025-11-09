@@ -1,0 +1,47 @@
+## Interface: 50501, 50502
+## Category: DBM
+## Group: DBM-Test
+## Title:|cffffe00a<|r|cffff7d0aDBM Tests|r|cffffe00a>|r |cff69ccf0Tests for Mists of Pandaria mods|r
+## Dependencies: DBM-Test
+## DefaultState: enabled
+## LoadOnDemand: 1
+## X-DBM-Test: true
+
+# Heart of Fear
+HeartofFear/Garalon.lua
+HeartofFear/Meljarak.lua
+HeartofFear/Shekzeer.lua
+HeartofFear/Tayak.lua
+HeartofFear/Unsok.lua
+HeartofFear/Zorlok.lua
+
+# Mogushan Vaults
+#MogushanVaults/Elegon.lua
+#MogushanVaults/Feng.lua
+#MogushanVaults/GarajalTheSpiritBinder.lua
+#MogushanVaults/SpiritKings.lua
+#MogushanVaults/StoneGuard.lua
+#MogushanVaults/WillofEmperor.lua
+
+# Terrace of Endless Spring
+TerraceofEndlessSpring/LeiShi.lua
+TerraceofEndlessSpring/ProtectorsofEndless.lua
+TerraceofEndlessSpring/ShaofFear.lua
+TerraceofEndlessSpring/Tsulong.lua
+
+# Throne of Thunder
+#ThroneofThunder/CouncilofElders.lua
+#ThroneofThunder/DarkAnimus.lua
+#ThroneofThunder/Durumu.lua
+#ThroneofThunder/Horridon.lua
+#ThroneofThunder/IronQon.lua
+#ThroneofThunder/JiKun.lua
+#ThroneofThunder/Jinrokh.lua
+#ThroneofThunder/LeiShen.lua
+#ThroneofThunder/Megaera.lua
+#ThroneofThunder/Primordius.lua
+#ThroneofThunder/Raden.lua
+#ThroneofThunder/Tortos.lua
+#ThroneofThunder/TwinEmpyreans.lua
+
+# Siege of Orgrimmar
