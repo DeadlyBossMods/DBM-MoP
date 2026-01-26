@@ -34,7 +34,7 @@ local warnLifeDrain					= mod:NewTargetNoFilterAnnounce(133795, 3)--Some times n
 local warnDarkParasite				= mod:NewTargetNoFilterAnnounce(133597, 3, nil, "Healer")--Heroic
 local warnIceWall					= mod:NewSpellAnnounce(134587, 3, 111231)
 
-local specWarnSeriousWound			= mod:NewSpecialWarningStack(133767, nil, 5, nil, nil, 1, 2)--This we will use debuff on though.
+local specWarnSeriousWound			= mod:NewSpecialWarningStack(133767, nil, 5, nil, nil, 1, 6)--This we will use debuff on though.
 local specWarnSeriousWoundOther		= mod:NewSpecialWarningTaunt(133767, nil, nil, nil, 1, 2)
 local specWarnForceOfWill			= mod:NewSpecialWarningDodge(136413, nil, nil, nil, 3, 2)
 local yellForceOfWill				= mod:NewYell(136413)
