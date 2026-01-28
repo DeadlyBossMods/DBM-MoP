@@ -29,7 +29,7 @@ local Kazrajin = DBM:EJ_GetSectionInfo(7048)
 --All
 local warnPossessed					= mod:NewStackAnnounce(136442, 2, nil, nil, "warnPossessed")
 
-local specWarnPossessed				= mod:NewSpecialWarning("specWarnPossessed", nil, nil, 1, 2)
+local specWarnPossessed				= mod:NewSpecialWarning("specWarnPossessed", nil, nil, nil, 1, 2)
 local specWarnDarkPower				= mod:NewSpecialWarningCount(136507, nil, nil, nil, 2, 2)
 local specWarnSoulFragment			= mod:NewSpecialWarningYou(137641, nil, nil, nil, 1, 17)
 
