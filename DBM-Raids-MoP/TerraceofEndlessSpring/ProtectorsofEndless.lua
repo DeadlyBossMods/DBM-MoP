@@ -2,6 +2,7 @@ local mod	= DBM:NewMod(683, "DBM-Raids-MoP", 3, 320)
 local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision("@file-date-integer@")
+mod:DisableHardcodedOptions()
 mod:SetCreatureID(60585, 60586, 60583)--60583 Protector Kaolan, 60585 Elder Regail, 60586 Elder Asani
 mod:SetEncounterID(1409)
 mod:SetUsedIcons(5, 4, 3, 2, 1)

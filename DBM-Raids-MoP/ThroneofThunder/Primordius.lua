@@ -2,6 +2,7 @@ local mod	= DBM:NewMod(820, "DBM-Raids-MoP", 2, 362)
 local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision("@file-date-integer@")
+mod:DisableHardcodedOptions()
 mod:SetCreatureID(69017)--69070 Viscous Horror, 69069 good ooze, 70579 bad ooze (patched out of game, :\)
 mod:SetEncounterID(1574)
 mod:SetUsedIcons(8, 7, 6, 5)--Although if you have 4 viscous horrors up, you are probably doing fight wrong.

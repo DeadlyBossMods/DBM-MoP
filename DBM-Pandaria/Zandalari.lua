@@ -2,6 +2,7 @@ local mod	= DBM:NewMod("Zandalari", "DBM-Pandaria")
 local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision("@file-date-integer@")
+mod:DisableHardcodedOptions()
 mod:SetCreatureID(69768, 69769, 69841, 69842)
 mod:SetHotfixNoticeRev(20240516000000)
 mod:SetMinSyncRevision(20240516000000)

@@ -4,6 +4,7 @@ local L		= mod:GetLocalizedStrings()
 mod.statTypes = "normal,heroic,mythic,lfr"
 
 mod:SetRevision("@file-date-integer@")
+mod:DisableHardcodedOptions()
 mod:SetCreatureID(71504)--71591 Automated Shredder
 mod:SetEncounterID(1601)
 mod:SetUsedIcons(8, 7, 6, 5, 4, 3, 2, 1)--More mines than ew can give icons to on 25 man. it uses all 8 and then runs out on heroic :\

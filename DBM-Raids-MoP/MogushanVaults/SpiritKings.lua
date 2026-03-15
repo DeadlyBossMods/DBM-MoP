@@ -2,6 +2,7 @@ local mod	= DBM:NewMod(687, "DBM-Raids-MoP", 5, 317)
 local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision("@file-date-integer@")
+mod:DisableHardcodedOptions()
 mod:SetCreatureID(60701, 60708, 60709, 60710)--Adds: 60731 Undying Shadow, 60958 Pinning Arrow
 mod:SetEncounterID(1436)
 mod:SetBossHPInfoToHighest()

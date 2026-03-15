@@ -2,6 +2,7 @@ local mod	= DBM:NewMod(725, "DBM-Pandaria", nil, 322, 1) -- 322 = Pandaria/Outdo
 local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision("@file-date-integer@")
+mod:DisableHardcodedOptions()
 mod:SetCreatureID(62346)
 mod:SetEncounterID(1563)
 mod:SetReCombatTime(20, 10)
