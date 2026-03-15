@@ -73,9 +73,6 @@ end
 
 function mod:OnCombatEnd()
 	self:UnregisterShortTermEvents()
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Hide()
-	end
 end
 
 function mod:SPELL_AURA_APPLIED(args)
@@ -165,9 +162,6 @@ function mod:SPELL_CAST_START(args)
 		self:RegisterShortTermEvents(
 			"INSTANCE_ENCOUNTER_ENGAGE_UNIT"--We register on hide, because it also fires just before hide, every time and don't want to trigger "hide over" at same time as hide.
 		)
-		if self.Options.RangeFrame then
-			DBM.RangeCheck:Show(3)--Show everyone during hide
-		end
 	elseif spellId == 123705 then
 		self:ScaryFogRepeat()
 	end

@@ -65,7 +65,6 @@ local timerMortarBarrageCD		= mod:NewNextTimer(30, 144555, nil, nil, nil, 3, nil
 
 local berserkTimer				= mod:NewBerserkTimer(600)
 
-mod:AddRangeFrameOption(6, 144154, "Ranged")
 
 --Important, needs recover
 mod.vb.shockCount = 0
@@ -86,15 +85,9 @@ function mod:OnCombatStart(delay)
 	else
 		berserkTimer:Start(-delay)
 	end
-	if self.Options.RangeFrame and not self:IsDifficulty("lfr25") then
-		DBM.RangeCheck:Show(6)
-	end
 end
 
 function mod:OnCombatEnd()
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Hide()
-	end
 end
 
 function mod:SPELL_CAST_START(args)

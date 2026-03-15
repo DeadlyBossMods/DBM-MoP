@@ -99,7 +99,6 @@ local timerNullBarrierCD			= mod:NewCDTimer(55, 115817, nil, nil, nil, 5)
 
 mod:AddSetIconOption("SetIconOnWS", 116784, false, 0, {7})
 mod:AddSetIconOption("SetIconOnAR", 116417, false, 0, {1, 2, 3, 4})--Not sure number of targets so incorrect icon usage count for now
-mod:AddRangeFrameOption(8, nil, "Ranged")
 
 mod.vb.arIcon = 1
 mod.vb.wildfireCount = 0
@@ -129,9 +128,6 @@ function mod:OnCombatStart(delay)
 end
 
 function mod:OnCombatEnd()
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Hide()
-	end
 end
 
 function mod:SPELL_AURA_APPLIED(args)
@@ -361,17 +357,11 @@ function mod:OnSync(msg)
 		timerEpicenterCD:Start(3.3, 1)--Seems much shorter now
 		timerLightningFistsCD:Start(5)
 		timerLightningLashCD:Start(7)
-		if self.Options.RangeFrame then
-			DBM.RangeCheck:Hide()
-		end
 	elseif msg == "Flame" then
 		self:SetStage(0)
 		warnPhase:Show(self.vb.phase)
 		timerFlamingSpearCD:Start(5.5)
 		timerDrawFlameCD:Start(9.3, 1)--No variation, or not enough logs of fire phase. (was 35 prior to 10.2.7, so remember this if they make classic MoP)
-		if self.Options.RangeFrame then
-			DBM.RangeCheck:Hide()
-		end
 	elseif msg == "Purple" then
 		self:SetStage(0)
 		warnPhase:Show(self.vb.phase)
@@ -380,18 +370,12 @@ function mod:OnSync(msg)
 		-- 10/13 01:11:36.671  SPELL_CAST_SUCCESS,0xF150EA690000478E,"",0x10a48,0x0,0x0000000000000000,nil,0x80000000,0x80000000,116417,"",0x40
 		timerArcaneResonanceCD:Start(12)
 		timerArcaneVelocityCD:Start(8.8, 1)--It's either this, or this +10. Not yet sure what causes the +10 (14.5 old timer)
-		if self.Options.RangeFrame then
-			DBM.RangeCheck:Show(6)
-		end
 	elseif msg == "Dark" then
 		self:SetStage(0)
 		warnPhase:Show(self.vb.phase)
 		timerSiphoningShieldCD:Start(4, 1)--either this, or this +5. Not yet sure what causes the +5
 		timerChainsOfShadowCD:Start(6)
 		timerShadowBurnCD:Start(9)--9-11 variation
-		if self.Options.RangeFrame then
-			DBM.RangeCheck:Hide()
-		end
 	end
 end
 

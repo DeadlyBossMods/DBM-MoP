@@ -31,7 +31,6 @@ local timerBurningSoul			= mod:NewBuffFadesTimer(10, 144689, nil, nil, nil, 5)
 local berserkTimer				= mod:NewBerserkTimer(300)
 
 mod:AddSetIconOption("SetIconOnBurningSoul", 144689, true, 0, {8, 7, 6})
-mod:AddRangeFrameOption(8, 144689)
 mod:AddReadyCheckOption(33118, false, 90)
 
 function mod:OnCombatStart(delay, yellTriggered)
@@ -44,9 +43,6 @@ function mod:OnCombatStart(delay, yellTriggered)
 end
 
 function mod:OnCombatEnd()
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Hide()
-	end
 end
 
 function mod:SPELL_CAST_START(args)
@@ -71,9 +67,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		if args:IsPlayer() then
 			specWarnBurningSoul:Show()
 			specWarnBurningSoul:Play("runout")
-			if self.Options.RangeFrame then
-				DBM.RangeCheck:Show(8)
-			end
 		end
 		if self.Options.SetIconOnBurningSoul then--Set icons on first debuff to get an earlier spread out.
 			self:SetSortedIcon("roster", 1.2, args.destName, 8, 3, true)
@@ -89,9 +82,6 @@ function mod:SPELL_AURA_REMOVED(args)
 	if spellId == 144689 then
 		if self.Options.SetIconOnBurningSoul then
 			self:SetIcon(args.destName, 0)
-		end
-		if args:IsPlayer() and self.Options.RangeFrame then
-			DBM.RangeCheck:Hide()
 		end
 	end
 end

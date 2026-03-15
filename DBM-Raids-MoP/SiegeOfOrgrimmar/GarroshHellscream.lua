@@ -200,18 +200,12 @@ function mod:OnCombatStart(delay)
 end
 
 function mod:OnCombatEnd()
---[[	if self.Options.RangeFrame then
-		DBM.RangeCheck:Hide()
-	end--]]
 	hideInfoFrame(self)
 	self:UnregisterShortTermEvents()
 end
 
 --[[
 local function hideRangeDelay()
-	if mod.Options.RangeFrame then
-		DBM.RangeCheck:Hide()
-	end
 end--]]
 
 function mod:SPELL_CAST_START(args)

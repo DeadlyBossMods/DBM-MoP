@@ -87,7 +87,6 @@ local timerCalamityCD				= mod:NewCDTimer(37.5, 143491, nil, "Healer", nil, 5, n
 local berserkTimer					= mod:NewBerserkTimer(600)
 
 mod:AddSetIconOption("SetIconOnStrike", 143962, false, 0, {7})
-mod:AddRangeFrameOption(5, 143423, false)--For heroic. Need to chage smart range frame?
 
 --Upvales, don't need variables
 local UnitExists = UnitExists
@@ -150,9 +149,6 @@ function mod:OnCombatStart(delay)
 	else
 		berserkTimer:Start(900-delay)--15min confirmed in LFR, flex, normal
 	end
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Show(5)
-	end
 	if not self:IsTrivial() then
 		self:RegisterShortTermEvents(
 			"SPELL_DAMAGE 144357 144367 143009",
@@ -164,9 +160,6 @@ end
 
 function mod:OnCombatEnd()
 	self:UnregisterShortTermEvents()
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Hide()
-	end
 	self:UnregisterShortTermEvents()
 end
 

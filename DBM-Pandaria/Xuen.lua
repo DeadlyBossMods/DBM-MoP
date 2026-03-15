@@ -32,7 +32,6 @@ local timerCracklingLightning		= mod:NewBuffActiveTimer(13, 144635, nil, nil, ni
 local timerCracklingLightningCD		= mod:NewCDTimer(47, 144635, nil, nil, nil, 3)
 local timerChiBarrageCD				= mod:NewCDTimer(20, 144642, nil, nil, nil, 3)
 
-mod:AddRangeFrameOption(3, 144642)
 mod:AddReadyCheckOption(33117, false, 90)
 
 function mod:OnCombatStart(delay, yellTriggered)
@@ -40,15 +39,9 @@ function mod:OnCombatStart(delay, yellTriggered)
 		timerChiBarrageCD:Start(20-delay)
 		timerCracklingLightningCD:Start(38-delay)
 	end
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Show(3)
-	end
 end
 
 function mod:OnCombatEnd()
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Hide()
-	end
 end
 
 function mod:SPELL_CAST_START(args)

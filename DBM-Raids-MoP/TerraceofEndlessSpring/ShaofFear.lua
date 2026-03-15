@@ -77,7 +77,6 @@ local timerSpoStrCD						= mod:NewTimer(10, "timerSpoStrCD", 1953, nil, false, 3
 
 local berserkTimer						= mod:NewBerserkTimer(900)
 
-mod:AddBoolOption("RangeFrame")--For Eerie Skull (2 yards) and Unstable Bolt (3 yards)
 mod:AddBoolOption("SetIconOnHuddle")
 
 mod.vb.phase = 1
@@ -171,9 +170,6 @@ function mod:LeavePlatform()
 				end
 			end
 		end
-		if self.Options.RangeFrame then
-			DBM.RangeCheck:Show(3)
-		end
 	end
 end
 
@@ -199,9 +195,6 @@ function mod:OnCombatStart(delay)
 	table.wipe(huddleInTerrorTargets)
 	table.wipe(huddleInTerrorIcons)
 	berserkTimer:Start(-delay)
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Show(3)
-	end
 end
 
 local function ClearHuddleTargets()
@@ -227,9 +220,6 @@ do
 end
 
 function mod:OnCombatEnd()
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Hide()
-	end
 end
 
 function mod:SPELL_AURA_APPLIED(args)
@@ -250,9 +240,6 @@ function mod:SPELL_AURA_APPLIED(args)
 				timerBreathOfFearCD:Cancel()
 				self:UnscheduleMethod("CheckPlatformLeaved")
 				self:UnscheduleMethod("CheckWall")
-			end
-			if self.Options.RangeFrame then
-				DBM.RangeCheck:Hide()
 			end
 		end
 		self:Unschedule(warnOminousCackleTargets)
@@ -460,8 +447,5 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 		warnPhase2:Show()
 		--timerSubmergeCD:Start(nil, 1) -- not known
 		berserkTimer:Start() -- currently, seems phase 2 berserk also 15 min.
-		if self.Options.RangeFrame then
-			DBM.RangeCheck:Hide()
-		end
 	end
 end

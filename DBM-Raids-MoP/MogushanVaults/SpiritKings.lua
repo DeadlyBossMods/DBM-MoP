@@ -89,7 +89,6 @@ local timerSleightOfHandCD		= mod:NewCDTimer(42, 118162, nil, nil, nil, 5, nil, 
 
 local berserkTimer				= mod:NewBerserkTimer(600)
 
-mod:AddRangeFrameOption(8, nil, "Ranged")--For multiple abilities. the abiliies don't seem to target melee (unless a ranged is too close or a melee is too far.)
 
 mod.vb.ZianActive = false
 mod.vb.MengActive = false
@@ -124,9 +123,6 @@ function mod:OnCombatStart(delay)
 end
 
 function mod:OnCombatEnd()
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Hide()
-	end
 end
 
 function mod:SPELL_CAST_START(args)
@@ -280,9 +276,6 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 			timerShieldOfDarknessCD:Cancel()
 			warnShieldOfDarknessSoon:Cancel()
 			timerUndyingShadowsCD:Cancel()--Used to restart, but in 10.2.7 now fires instantly on becoming ghost
-			if self.Options.RangeFrame and not self.vb.SubetaiActive then--Close range frame, but only if zian is also not active, otherwise we still need it
-				DBM.RangeCheck:Hide()
-			end
 		elseif cid == 60708 then
 			self.vb.MengActive = false
 			timerDeliriousCD:Cancel()
@@ -301,9 +294,6 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 			timerRainOfArrowsCD:Cancel()
 			timerSleightOfHandCD:Cancel()
 			timerPillageCD:Cancel()--Used to restart to 30 remaining, but in 10.2.7 now fires instantly on becoming ghost
-			if self.Options.RangeFrame and not self.vb.ZianActive then--Close range frame, but only if subetai is also not active, otherwise we still need it
-				DBM.RangeCheck:Hide()
-			end
 		end
 	end
 end
@@ -345,9 +335,6 @@ function mod:CHAT_MSG_MONSTER_YELL(msg, boss)
 			warnShieldOfDarknessSoon:Schedule(39, 1)
 			timerShieldOfDarknessCD:Start(40)
 		end
-		if self.Options.RangeFrame then
-			DBM.RangeCheck:Show(8)
-		end
 	elseif boss == Meng then
 		warnActivated:Show(boss)
 		self.vb.MengActive = true
@@ -369,9 +356,6 @@ function mod:CHAT_MSG_MONSTER_YELL(msg, boss)
 			timerRainOfArrowsCD:Start(40)
 		else
 			timerRainOfArrowsCD:Start(15)
-		end
-		if self.Options.RangeFrame then
-			DBM.RangeCheck:Show(8)
 		end
 	end
 end
