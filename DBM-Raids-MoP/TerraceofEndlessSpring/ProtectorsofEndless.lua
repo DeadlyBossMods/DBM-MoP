@@ -76,13 +76,6 @@ local prisonTargets = {}
 local myGroup = nil
 local notARaid = false
 
-local DebuffFilter
-do
-	DebuffFilter = function(uId)
-		return DBM:UnitDebuff(uId, prisonDebuff)
-	end
-end
-
 local function resetPrisonStatus(self)
 	self.vb.prisonCount = 0
 end
@@ -129,8 +122,6 @@ function mod:OnCombatStart(delay)
 	findGroupNumber()
 end
 
-function mod:OnCombatEnd()
-end
 
 function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId

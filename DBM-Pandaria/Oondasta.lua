@@ -40,8 +40,6 @@ function mod:OnCombatStart(delay, yellTriggered)
 	end
 end
 
-function mod:OnCombatEnd()
-end
 
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
