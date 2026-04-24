@@ -29,8 +29,6 @@ mod:RegisterEvents(
 	"GOSSIP_SHOW"
 )
 
-local boss = DBM:EJ_GetSectionInfo(8216)
-
 --Amalgam of Corruption
 local warnSelfDoubt						= mod:NewStackAnnounce(146124, 2, nil, "Tank")
 local warnResidualCorruption			= mod:NewSpellAnnounce(145073, 2, nil, false, 2)

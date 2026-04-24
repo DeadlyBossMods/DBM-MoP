@@ -86,7 +86,7 @@ local specWarnFlamesofGalakrondStack= mod:NewSpecialWarningStack(147029, nil, 6,
 local specWarnFlamesofGalakrondOther= mod:NewSpecialWarningTarget(147029, "Tank", nil, nil, 1, 2)
 
 local timerFlamesofGalakrondCD		= mod:NewCDTimer(5.7, 147068, nil, nil, nil, 3)
-local timerFlamesofGalakrond		= mod:NewTargetTimer(15, 147029, nil, "Tank", nil, 5)
+local timerFlamesofGalakrond		= mod:NewTargetTimer(15, 147029, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerPulsingFlamesCD			= mod:NewNextCountTimer(25, 147042, nil, nil, nil, 2, nil, DBM_COMMON_L.HEALER_ICON)
 local timerPulsingFlames			= mod:NewBuffActiveTimer(7, 147042)
 
