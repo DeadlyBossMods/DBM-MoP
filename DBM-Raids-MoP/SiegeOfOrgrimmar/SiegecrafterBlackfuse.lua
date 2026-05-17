@@ -51,7 +51,7 @@ local specWarnOvercharge				= mod:NewSpecialWarningTarget(145774)
 local specWarnAutomatedShredder			= mod:NewSpecialWarningCount(-8199, "Tank")--No sense in dps switching when spawn, has damage reduction. This for tank pickup
 local specWarnDeathFromAbove			= mod:NewSpecialWarningYou(144208)
 local specWarnDeathFromAboveNear		= mod:NewSpecialWarningClose(144208)
-local specWarnAutomatedShredderSwitch	= mod:NewSpecialWarningSwitch(-8199, false)--Strat dependant, you may just ignore them and have tank kill them with laser pools
+local specWarnAutomatedShredderSwitch	= mod:NewSpecialWarningSwitch(-8199, false)--Strat dependent, you may just ignore them and have tank kill them with laser pools
 --The Assembly Line
 local specWarnCrawlerMine				= mod:NewSpecialWarningSwitch(-8212, "-Healer")
 local specWarnAssemblyLine				= mod:NewSpecialWarningCount(-8202, false)--Not all in raid need, just those assigned

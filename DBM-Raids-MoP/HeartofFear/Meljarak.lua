@@ -56,7 +56,7 @@ local yellKorthikStrike					= mod:NewYell(123963)
 local specWarnWindBomb					= mod:NewSpecialWarningMove(131830, nil, nil, nil, 3)
 local specWarnWhirlingBladeMove			= mod:NewSpecialWarningMove(121898)
 local yellWindBomb						= mod:NewYell(131830)
-local specWarnReinforcements			= mod:NewSpecialWarningTarget(-6554, "-Healer", "specWarnReinforcements")--Also important to dps. (Espcially CC classes)
+local specWarnReinforcements			= mod:NewSpecialWarningTarget(-6554, "-Healer", "specWarnReinforcements")--Also important to dps. (Especially CC classes)
 
 local timerRainOfBladesCD				= mod:NewCDTimer(48, 122406, nil, nil, nil, 2)--48-64 sec variation now. so much for it being a precise timer.
 local timerRainOfBlades					= mod:NewBuffActiveTimer(7.5, 122406)
