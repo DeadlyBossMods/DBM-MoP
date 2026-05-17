@@ -34,8 +34,8 @@ local warnAmberExplosion		= mod:NewAnnounce("warnAmberExplosion", 3, 122398, fal
 local warnStruggleForControl	= mod:NewTargetAnnounce(122395, 2, nil, false)--Disabled in phase 3 as at that point it's just a burn.
 local warnDestabalize			= mod:NewStackAnnounce(123059, 1, nil, false)--This can be super spammy so off by default.
 --Living Amber
-local warnLivingAmber			= mod:NewSpellAnnounce("ej6261", 2, nil, false)--122348 is what you check spawns with. ALso spamming and off by default
-local warnBurningAmber			= mod:NewCountAnnounce("ej6567", 2, nil, false)--Keep track of Burning Amber Puddles. Spammy, but nessesary for heroic for someone managing them.
+local warnLivingAmber			= mod:NewSpellAnnounce(-6261, 2, nil, false)--122348 is what you check spawns with. ALso spamming and off by default
+local warnBurningAmber			= mod:NewCountAnnounce(-6567, 2, nil, false)--Keep track of Burning Amber Puddles. Spammy, but nessesary for heroic for someone managing them.
 --Amber Monstrosity
 local warnAmberCarapace			= mod:NewTargetAnnounce(122540, 4)--Monstrosity Shielding Boss (phase 2 start)
 local warnAmberExplosionSoon	= mod:NewSoonAnnounce(122402, 3)
@@ -58,7 +58,7 @@ local specwarnWillPower				= mod:NewSpecialWarning("specwarnWillPower")--Special
 --Living Amber
 local specwarnBurningAmber		= mod:NewSpecialWarningMove(122504)--Standing in a puddle
 --Amber Monstrosity
-local specwarnAmberMonstrosity	= mod:NewSpecialWarningSwitch("ej6254", "-Healer")
+local specwarnAmberMonstrosity	= mod:NewSpecialWarningSwitch(-6254, "-Healer")
 local specwarnFling				= mod:NewSpecialWarningSpell(122413, "Tank")
 local specwarnMassiveStomp		= mod:NewSpecialWarningSpell(122408, "Melee", nil, nil, 2)
 

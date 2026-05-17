@@ -184,7 +184,7 @@ L = DBM:GetModLocalization(741)
 
 L:SetOptionLocalization({
 	AmberPrisonIcons		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(121885),
-	specWarnReinforcements	= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format("ej6554")
+	specWarnReinforcements	= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format(-6554)
 })
 
 ------------------------------
@@ -472,11 +472,11 @@ L:SetTimerLocalization({
 })
 
 L:SetOptionLocalization({
-	warnFlock			= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.count:format("ej7348"),
-	specWarnFlock		= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.switch:format("ej7348"),
-	specWarnBigBird		= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.switch:format("ej7827"),
-	specWarnBigBirdSoon	= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.soon:format("ej7827"),
-	timerFlockCD		= DBM_CORE_L.AUTO_TIMER_OPTIONS.nextcount:format("ej7348"),
+	warnFlock			= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.count:format(-7348),
+	specWarnFlock		= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.switch:format(-7348),
+	specWarnBigBird		= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.switch:format(-7827),
+	specWarnBigBirdSoon	= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.soon:format(-7827),
+	timerFlockCD		= DBM_CORE_L.AUTO_TIMER_OPTIONS.nextcount:format(-7348),
 	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(10, 138923),
 	ShowNestArrows		= "Mostrar flecha para nidos activos",
 	Never				= "Nunca",
@@ -525,9 +525,9 @@ L:SetOptionLocalization({
 	warnAddsLeft				= "Anunciar el número de nieblas restantes",
 	specWarnFogRevealed			= "Mostrar aviso especial cuando se revele una niebla",
 	specWarnBlueBeam			= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format(139202),
-	specWarnDisintegrationBeam	= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format("ej6882"),
+	specWarnDisintegrationBeam	= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format(-6882),
 	ArrowOnBeam					= "Mostrar flecha durante $journal:6882 para indicar la dirección en que moverse",
-	SetIconRays					= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format("ej6891"),
+	SetIconRays					= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(-6891),
 	SetIconLifeDrain			= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(133795),
 	SetIconOnParasite			= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(133597),
 	InfoFrame					= "Mostrar marco de información para las acumulaciones de $spell:133795",
@@ -604,11 +604,11 @@ L:SetTimerLocalization({
 })
 
 L:SetOptionLocalization({
-	warnNight	= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format("ej7641"),
-	warnDay		= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format("ej7645"),
-	warnDusk	= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format("ej7633"),
-	timerDayCD	= DBM_CORE_L.AUTO_TIMER_OPTIONS.next:format("ej7645"),
-	timerDuskCD	= DBM_CORE_L.AUTO_TIMER_OPTIONS.next:format("ej7633"),
+	warnNight	= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(-7641),
+	warnDay		= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(-7645),
+	warnDusk	= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(-7633),
+	timerDayCD	= DBM_CORE_L.AUTO_TIMER_OPTIONS.next:format(-7645),
+	timerDuskCD	= DBM_CORE_L.AUTO_TIMER_OPTIONS.next:format(-7633),
 	RangeFrame	= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format(5)
 })
 
@@ -819,10 +819,10 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	warnToxicCatalyst			= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format("ej8036"),
+	warnToxicCatalyst			= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(-8036),
 	specWarnActivatedVulnerable	= "Mostrar aviso especial cuando seas vulnerable a un dechado",
 	specWarnMoreParasites		= "Mostrar aviso especial cuando necesites más parásitos",
-	yellToxicCatalyst			= DBM_CORE_L.AUTO_YELL_OPTION_TEXT.yell:format("ej8036")
+	yellToxicCatalyst			= DBM_CORE_L.AUTO_YELL_OPTION_TEXT.yell:format(-8036)
 })
 
 L:SetMiscLocalization({

@@ -56,12 +56,12 @@ local yellKorthikStrike					= mod:NewYell(123963)
 local specWarnWindBomb					= mod:NewSpecialWarningMove(131830, nil, nil, nil, 3)
 local specWarnWhirlingBladeMove			= mod:NewSpecialWarningMove(121898)
 local yellWindBomb						= mod:NewYell(131830)
-local specWarnReinforcements			= mod:NewSpecialWarningTarget("ej6554", "-Healer", "specWarnReinforcements")--Also important to dps. (Espcially CC classes)
+local specWarnReinforcements			= mod:NewSpecialWarningTarget(-6554, "-Healer", "specWarnReinforcements")--Also important to dps. (Espcially CC classes)
 
 local timerRainOfBladesCD				= mod:NewCDTimer(48, 122406, nil, nil, nil, 2)--48-64 sec variation now. so much for it being a precise timer.
 local timerRainOfBlades					= mod:NewBuffActiveTimer(7.5, 122406)
 local timerRecklessness					= mod:NewBuffActiveTimer(30, 125873, nil, nil, nil, 6)--Heroic recklessness
-local timerReinforcementsCD				= mod:NewNextCountTimer(50, "ej6554", nil, nil, nil, 1)--EJ says it's 45 seconds after adds die but it's actually 50 in logs. EJ is not updated for current tuning.
+local timerReinforcementsCD				= mod:NewNextCountTimer(50, -6554, nil, nil, nil, 1)--EJ says it's 45 seconds after adds die but it's actually 50 in logs. EJ is not updated for current tuning.
 local timerImpalingSpear				= mod:NewTargetTimer(50, 122224, nil, nil, nil, 5, nil, nil, nil, 1, 10)--Filtered to only show your own target, may change to a popup option later that lets you pick whether you show ALL of them or your own (all will be spammy)
 local timerAmberPrisonCD				= mod:NewCDTimer(36, 121876, nil, false, nil, 5)--Reduce bar spam like Zarthik / each add has their own CD. This is on by default since it concerns everyone.
 local timerCorrosiveResinCD				= mod:NewCDTimer(36, 122064, nil, false, nil, 5)--^^

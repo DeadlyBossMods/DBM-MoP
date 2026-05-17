@@ -54,11 +54,11 @@ local warnEncaseInAmber				= mod:NewTargetAnnounce(142564, 4)
 --Iyyokuk the Lucid
 local warnCalculated				= mod:NewTargetAnnounce(144095, 3)--Wild variation on timing noted, 34-130.8 variation (wtf)
 --Ka'roz the Locust
-local warnFlash						= mod:NewTargetCountAnnounce("ej8058", 3)
+local warnFlash						= mod:NewTargetCountAnnounce(-8058, 3)
 --Rik'kal the Dissector
 local warnInjection					= mod:NewStackAnnounce(143339, 3)
 local warnMutate					= mod:NewTargetCountAnnounce(143337, 3)
-local warnParasitesLeft				= mod:NewAddsLeftAnnounce("ej8065", 3, 143383, "Tank")
+local warnParasitesLeft				= mod:NewAddsLeftAnnounce(-8065, 3, 143383, "Tank")
 --Hisek the Swarmkeeper
 local warnAim						= mod:NewTargetCountAnnounce(142948, 4)
 local warnRapidFire					= mod:NewSpellAnnounce(143243, 3)
@@ -95,7 +95,7 @@ local yellCatalystGreen				= mod:NewYell(142730, nil, nil, false)
 local specWarnMesmerize				= mod:NewSpecialWarningYou(142671)
 local specWarnMesmerizeOther		= mod:NewSpecialWarningTarget(142671, false)--Person who grabs korven's amber wants this
 local yellMesmerize					= mod:NewYell(142671)
-local specWarnKunchongs				= mod:NewSpecialWarningSwitch("ej8043", "Dps")
+local specWarnKunchongs				= mod:NewSpecialWarningSwitch(-8043, "Dps")
 --Korven the Prime
 local specWarnShieldBash			= mod:NewSpecialWarningSpell(143974, "Tank")
 local specWarnShieldBashOther		= mod:NewSpecialWarningTarget(143974, "Tank|Healer")
@@ -106,9 +106,9 @@ local yellCalculated				= mod:NewYell(142416, nil, false)
 local specWarnInsaneCalculationFire	= mod:NewSpecialWarningSpell(142416, nil, nil, nil, 2)
 --Ka'roz the Locust
 local specWarnFlashCast				= mod:NewSpecialWarningSpell(143701, nil, nil, nil, 2)--I realize two abilities on same boss both using same sound is less than ideal, but user can change it now, and 1 or 3 feel appropriate for both of these
-local specWarnFlash					= mod:NewSpecialWarningYou("ej8058")--Flash is name of his charge ability
-local specWarnFlashNear				= mod:NewSpecialWarningClose("ej8058")
-local yellFlash						= mod:NewYell("ej8058")
+local specWarnFlash					= mod:NewSpecialWarningYou(-8058)--Flash is name of his charge ability
+local specWarnFlashNear				= mod:NewSpecialWarningClose(-8058)
+local yellFlash						= mod:NewYell(-8058)
 local yellWhirling					= mod:NewYell(143701, nil, false)
 local specWarnHurlAmber				= mod:NewSpecialWarningSpell(143759, nil, nil, nil, 2)--I realize two abilities on same boss both using same sound is less than ideal, but user can change it now, and 1 or 3 feel appropriate for both of these
 local specWarnCausticAmber			= mod:NewSpecialWarningMove(143735)--Stuff on the ground
@@ -131,7 +131,7 @@ local timerGouge					= mod:NewTargetTimer(10, 143939, nil, "Tank", nil, 5)
 local timerReaveCD					= mod:NewCDTimer(33, 148676, nil, nil, nil, 2, nil, DBM_COMMON_L.HEALER_ICON)
 local timerDFACD					= mod:NewCDTimer(34, 142232, nil, nil, nil, 3)--34-43 variation
 --Xaril the Poisoned-Mind
-local timerToxicCatalystCD			= mod:NewCDTimer(31.4, "ej8036", nil, nil, nil, 3)
+local timerToxicCatalystCD			= mod:NewCDTimer(31.4, -8036, nil, nil, nil, 3)
 --Kaz'tik the Manipulator
 local timerMesmerizeCD				= mod:NewCDTimer(34, 142671, nil, nil, nil, 3)
 --Korven the Prime
