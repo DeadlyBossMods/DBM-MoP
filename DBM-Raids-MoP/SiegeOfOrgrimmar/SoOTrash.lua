@@ -26,7 +26,7 @@ local specWarnFracture				= mod:NewSpecialWarningTarget(147200, false)
 local specWarnChainheal				= mod:NewSpecialWarningInterrupt(146728)
 local specWarnInfusion				= mod:NewSpecialWarningMove(147884, "Tank")
 local specWarnLockedOn				= mod:NewSpecialWarningRun(146680)
-local specWarnCrawlerMineFixate		= mod:NewSpecialWarningYou("ej8212")
+local specWarnCrawlerMineFixate		= mod:NewSpecialWarningYou(-8212)
 
 local galakrasMod = DBM:GetModByName("868")--Because for first 10-20 seconds of galakras, EncounterInProcess() return false, so mod.isTrashMod = true won't filter first set of adds
 

@@ -33,7 +33,7 @@ mod:RegisterEventsInCombat(
 local warnLaunchSawblade				= mod:NewTargetAnnounce(143265, 3)
 local warnElectroStaticCharge			= mod:NewStackAnnounce(143385, 2, nil, "Tank")
 --Automated Shredders
-local warnAutomatedShredder				= mod:NewCountAnnounce("ej8199", 3, 85914)
+local warnAutomatedShredder				= mod:NewCountAnnounce(-8199, 3, 85914)
 local warnOverload						= mod:NewStackAnnounce(145444, 3)
 local warnDeathFromAbove				= mod:NewTargetAnnounce(144208, 4)--Player target, not vulnerable shredder target. (should always be cast on highest threat target, but i like it still being a "target" warning)
 --The Assembly Line
@@ -48,12 +48,12 @@ local yellLaunchSawblade				= mod:NewYell(143265)
 local specWarnProtectiveFrenzy			= mod:NewSpecialWarningTarget(145365, "Tank")
 local specWarnOvercharge				= mod:NewSpecialWarningTarget(145774)
 --Automated Shredders
-local specWarnAutomatedShredder			= mod:NewSpecialWarningCount("ej8199", "Tank")--No sense in dps switching when spawn, has damage reduction. This for tank pickup
+local specWarnAutomatedShredder			= mod:NewSpecialWarningCount(-8199, "Tank")--No sense in dps switching when spawn, has damage reduction. This for tank pickup
 local specWarnDeathFromAbove			= mod:NewSpecialWarningYou(144208)
 local specWarnDeathFromAboveNear		= mod:NewSpecialWarningClose(144208)
-local specWarnAutomatedShredderSwitch	= mod:NewSpecialWarningSwitch("ej8199", false)--Strat dependant, you may just ignore them and have tank kill them with laser pools
+local specWarnAutomatedShredderSwitch	= mod:NewSpecialWarningSwitch(-8199, false)--Strat dependent, you may just ignore them and have tank kill them with laser pools
 --The Assembly Line
-local specWarnCrawlerMine				= mod:NewSpecialWarningSwitch("ej8212", "-Healer")
+local specWarnCrawlerMine				= mod:NewSpecialWarningSwitch(-8212, "-Healer")
 local specWarnAssemblyLine				= mod:NewSpecialWarningCount(-8202, false)--Not all in raid need, just those assigned
 local specWarnShockwaveMissile			= mod:NewSpecialWarningSpell(143641, nil, nil, nil, 2)
 local specWarnReadyToGo					= mod:NewSpecialWarningTarget(145580)
@@ -61,8 +61,8 @@ local specWarnLaserFixate				= mod:NewSpecialWarningRun(143828, nil, nil, 2, 4)
 local yellLaserFixate					= mod:NewYell(143828)
 local specWarnSuperheated				= mod:NewSpecialWarningMove(143856)--From lasers. Hard to see, this warning will help a ton
 local specWarnMagneticCrush				= mod:NewSpecialWarningSpell(144466, nil, nil, nil, 2)
-local specWarnCrawlerMineFixate			= mod:NewSpecialWarningRun("ej8212", "Melee", nil, 2, 4)
-local yellCrawlerMineFixate				= mod:NewYell("ej8212", nil, false)
+local specWarnCrawlerMineFixate			= mod:NewSpecialWarningRun(-8212, "Melee", nil, 2, 4)
+local yellCrawlerMineFixate				= mod:NewYell(-8212, nil, false)
 
 --Siegecrafter Blackfuse
 local timerProtectiveFrenzy				= mod:NewBuffActiveTimer(10, 145365, nil, false, nil, nil, nil, nil, nil, 2)
@@ -70,7 +70,7 @@ local timerElectroStaticCharge			= mod:NewTargetTimer(60, 143385, nil, "Tank")
 local timerElectroStaticChargeCD		= mod:NewCDTimer(17, 143385, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON, nil, 2, 4)--17-22 second variation
 local timerLaunchSawbladeCD				= mod:NewCDTimer(10, 143265, nil, nil, nil, 3)--10-15sec cd
 --Automated Shredders
-local timerAutomatedShredderCD			= mod:NewNextTimer(60, "ej8199", nil, "Tank", nil, 1, 85914, DBM_COMMON_L.TANK_ICON, nil, 2, 4)
+local timerAutomatedShredderCD			= mod:NewNextTimer(60, -8199, nil, "Tank", nil, 1, 85914, DBM_COMMON_L.TANK_ICON, nil, 2, 4)
 local timerOverloadCD					= mod:NewCDCountTimer(10, 145444, nil, nil, nil, 2, nil, DBM_COMMON_L.HEALER_ICON)
 local timerDeathFromAboveDebuff			= mod:NewTargetTimer(5, 144210, nil, "-Healer")
 local timerDeathFromAboveCD				= mod:NewNextTimer(40, 144208, nil, "-Healer")
@@ -82,7 +82,7 @@ local timerBreakinPeriod				= mod:NewTargetTimer(60, 145269, nil, false)--Many m
 local timerMagneticCrush				= mod:NewBuffActiveTimer(30, 144466)
 
 mod:AddInfoFrameOption(-8202)
-mod:AddSetIconOption("SetIconOnMines", "ej8212", false, 5)
+mod:AddSetIconOption("SetIconOnMines", -8212, false, 5)
 mod:AddSetIconOption("SetIconOnlaserFixate", 143828, false)
 mod:AddSetIconOption("SetIconOnSawBlade", 143265, false)
 

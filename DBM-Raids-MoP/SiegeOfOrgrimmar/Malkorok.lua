@@ -59,7 +59,7 @@ local timerFatalStrike					= mod:NewTargetTimer(30, 142990, nil, "Tank", nil, 5,
 local berserkTimer						= mod:NewBerserkTimer(360)
 
 mod:AddSetIconOption("SetIconOnDisplacedEnergy", 142913, false)
-mod:AddSetIconOption("SetIconOnAdds", "ej7952", false, 5)
+mod:AddSetIconOption("SetIconOnAdds", -7952, false, 5)
 
 --Upvales, don't need variables
 local displacedEnergyDebuff = DBM:GetSpellName(142913)
