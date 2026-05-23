@@ -21,7 +21,7 @@
 ## X-DBM-Mod-Name-ruRU: Рейды (Пандария)
 ## X-DBM-Mod-Sort: 701
 ## X-DBM-Mod-MapID: 1136, 1098, 996, 1009, 1008
-## X-DBM-Mod-MinCoreRevision: 20230617000000
+## X-DBM-Mod-MinCoreRevision: 20260522000000
 ## X-DBM-Mod-MinExpansion: 4
 ## X-Curse-Project-ID: 85688
 ## X-WoWI-ID: 23199
