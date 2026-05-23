@@ -33,9 +33,9 @@ local warnBanishment				= mod:NewTargetNoFilterAnnounce(116272, 3, nil, "Tank|He
 local warnSuicide					= mod:NewPreWarnAnnounce(116325, 5, 4)--Pre warn 5 seconds before you die so you take whatever action you need to, to prevent. (this is effect that happens after 30 seconds of Soul Sever
 local warnFrenzy					= mod:NewSpellAnnounce(117752, 4)
 
-local specWarnBanishment			= mod:NewSpecialWarningYou(116272, nil, nil, nil, 1, 5)
-local specWarnBanishmentOther		= mod:NewSpecialWarningTaunt(116272, nil, nil, nil, 1, 2)
-local specWarnVoodooDollsYou		= mod:NewSpecialWarningYou(122151, nil, nil, nil, 1, 2)
+local specWarnBanishment			= mod:NewSpecialWarningYou(116272, nil, nil, nil, 1, 5, nil, nil, "teleyou")
+local specWarnBanishmentOther		= mod:NewSpecialWarningTaunt(116272, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnVoodooDollsYou		= mod:NewSpecialWarningYou(122151, nil, nil, nil, 1, 2, nil, nil, "targetyou")
 
 local timerRP						= mod:NewRPTimer(24.7)
 local timerTotemCD					= mod:NewNextCountTimer(20, 116174, nil, nil, nil, 5)

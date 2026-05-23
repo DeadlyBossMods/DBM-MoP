@@ -17,10 +17,10 @@ mod:RegisterEventsInCombat(
 
 local warnFirestorm				= mod:NewSpellAnnounce(144461, 2, nil, false)
 
-local specWarnInspiringSong		= mod:NewSpecialWarningInterrupt(144468, nil, nil, nil, 1, 2)
-local specWarnBeaconOfHope		= mod:NewSpecialWarningMoveTo(144473, nil, nil, nil, 1, 2)
-local specWarnBlazingSong		= mod:NewSpecialWarningSpell(144471, nil, nil, nil, 3, 2)
-local specWarnCraneRush			= mod:NewSpecialWarningDodge(144470, nil, nil, nil, 2, 2)
+local specWarnInspiringSong		= mod:NewSpecialWarningInterrupt(144468, nil, nil, nil, 1, 2, nil, nil, "kickcast")
+local specWarnBeaconOfHope		= mod:NewSpecialWarningMoveTo(144473, nil, nil, nil, 1, 2, nil, nil, "findshelter")
+local specWarnBlazingSong		= mod:NewSpecialWarningSpell(144471, nil, nil, nil, 3, 2, nil, nil, "aesoon")
+local specWarnCraneRush			= mod:NewSpecialWarningDodge(144470, nil, nil, nil, 2, 2, nil, nil, "watchstep")
 
 local timerInspiringSongCD		= mod:NewCDTimer(30, 144468, nil, nil, nil, 4, nil, DBM_COMMON_L.INTERRUPT_ICON)--30-50sec variation?
 local timerBlazingSong			= mod:NewBuffActiveTimer(15, 144471, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)

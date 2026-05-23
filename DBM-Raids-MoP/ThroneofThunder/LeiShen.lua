@@ -44,29 +44,29 @@ local warnViolentGaleWinds				= mod:NewSpellAnnounce(136889, 3)
 local warnHelmOfCommand					= mod:NewTargetNoFilterAnnounce(139011, 3)
 
 --Conduits (All phases)
-local specWarnStaticShock				= mod:NewSpecialWarningMoveTo(135695, nil, nil, nil, 1, 2)
+local specWarnStaticShock				= mod:NewSpecialWarningMoveTo(135695, nil, nil, nil, 1, 2, nil, nil, "gathershare")
 local yellStaticShock					= mod:NewYell(135695, L.StaticYell, nil, nil, "YELL")
 local specWarnDiffusionChainSoon		= mod:NewSpecialWarningPreWarn(135991, nil, 4, nil, nil, 1, 2)
 local specWarnOvercharged				= mod:NewSpecialWarningYou(136295)
 local yellOvercharged					= mod:NewShortYell(136295)
 local specWarnBouncingBoltSoon			= mod:NewSpecialWarningPreWarn(136361, nil, 4, nil, nil, 1, 2)
-local specWarnBouncingBolt				= mod:NewSpecialWarningSpell(136361, nil, nil, nil, 2, 2)
+local specWarnBouncingBolt				= mod:NewSpecialWarningSpell(136361, nil, nil, nil, 2, 2, nil, nil, "helpsoak")
 --Phase 1
-local specWarnDecapitate				= mod:NewSpecialWarningRun(134912, nil, nil, 2, 4, 2)
-local specWarnDecapitateOther			= mod:NewSpecialWarningTaunt(134912, nil, nil, nil, 1, 2)
-local specWarnThunderstruck				= mod:NewSpecialWarningCount(135095, nil, nil, nil, 2, 2)
-local specWarnGTFO						= mod:NewSpecialWarningGTFO(135150, nil, nil, nil, 1, 8)
+local specWarnDecapitate				= mod:NewSpecialWarningRun(134912, nil, nil, 2, 4, 2, nil, nil, "runout")
+local specWarnDecapitateOther			= mod:NewSpecialWarningTaunt(134912, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnThunderstruck				= mod:NewSpecialWarningCount(135095, nil, nil, nil, 2, 2, nil, nil, "justrun")
+local specWarnGTFO						= mod:NewSpecialWarningGTFO(135150, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
 local specWarnIntermissionSoon			= mod:NewSpecialWarning("specWarnIntermissionSoon")
 --Phase 2
-local specWarnFusionSlash				= mod:NewSpecialWarningSpell(136478, "Tank", nil, nil, 3, 2)--Cast (394514 is debuff. We warn for cast though because it knocks you off platform if not careful)
-local specWarnLightningWhip				= mod:NewSpecialWarningCount(136850, nil, nil, nil, 2, 15)
-local specWarnSummonBallLightning		= mod:NewSpecialWarningCount(136543, nil, nil, nil, 2, 2)--Recored new audio one day
-local specWarnGorefiendsGrasp			= mod:NewSpecialWarningCount(108199, false, nil, nil, 1, 12)--For heroic, gorefiends+stun timing is paramount to success
+local specWarnFusionSlash				= mod:NewSpecialWarningSpell(136478, "Tank", nil, nil, 3, 2, nil, nil, "carefly")--Cast (394514 is debuff. We warn for cast though because it knocks you off platform if not careful, "carefly")
+local specWarnLightningWhip				= mod:NewSpecialWarningCount(136850, nil, nil, nil, 2, 15, nil, nil, "frontal")
+local specWarnSummonBallLightning		= mod:NewSpecialWarningCount(136543, nil, nil, nil, 2, 2, nil, nil, "watchorb")--Recored new audio one day
+local specWarnGorefiendsGrasp			= mod:NewSpecialWarningCount(108199, false, nil, nil, 1, 12, nil, nil, "pullin")--For heroic, gorefiends+stun timing is paramount to success
 --Phase 3
-local specWarnElectricalShock			= mod:NewSpecialWarningStack(136914, nil, 12, nil, nil, 1, 6)
-local specWarnElectricalShockOther		= mod:NewSpecialWarningTaunt(136914, nil, nil, nil, 1, 2)
+local specWarnElectricalShock			= mod:NewSpecialWarningStack(136914, nil, 12, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnElectricalShockOther		= mod:NewSpecialWarningTaunt(136914, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
 --Herioc
-local specWarnHelmOfCommand				= mod:NewSpecialWarningYou(139011, nil, nil, nil, 3, 13)
+local specWarnHelmOfCommand				= mod:NewSpecialWarningYou(139011, nil, nil, nil, 3, 13, nil, nil, "pushbackincoming")
 
 --Conduits (All phases)
 local timerConduitCD					= mod:NewTimer(40, "timerConduitCD", 135695, nil, nil, 6)

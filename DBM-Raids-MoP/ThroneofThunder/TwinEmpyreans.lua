@@ -42,18 +42,18 @@ local warnOx							= mod:NewSpellAnnounce(138300)
 local warnDusk							= mod:NewAnnounce("warnDusk", 2, "236760")--"achievement_zone_easternplaguelands" (best Dusk icon i could find)
 
 --Darkness
-local specWarnCosmicBarrage				= mod:NewSpecialWarningCount(136752, true, nil, nil, 2, 2)
-local specWarnTearsOfSun				= mod:NewSpecialWarningSpell(137404, nil, nil, nil, 2, 2)
-local specWarnBeastOfNightmares			= mod:NewSpecialWarningTarget(137375, "Tank|Healer", nil, nil, 1, 2)--Sound guess here too
-local specWarnCorruptedHealing			= mod:NewSpecialWarningStack(137360, "Healer", 1, nil, nil, 1, 6)
+local specWarnCosmicBarrage				= mod:NewSpecialWarningCount(136752, true, nil, nil, 2, 2, nil, nil, "aesoon")
+local specWarnTearsOfSun				= mod:NewSpecialWarningSpell(137404, nil, nil, nil, 2, 2, nil, nil, "aesoon")
+local specWarnBeastOfNightmares			= mod:NewSpecialWarningTarget(137375, "Tank|Healer", nil, nil, 1, 2, nil, nil, "changemt")--Sound guess here too
+local specWarnCorruptedHealing			= mod:NewSpecialWarningStack(137360, "Healer", 1, nil, nil, 1, 6, nil, nil, "stackhigh")
 --Light
-local specWarnFanOfFlames				= mod:NewSpecialWarningStack(137408, nil, 2, nil, nil, 1, 2)
-local specWarnFanOfFlamesOther			= mod:NewSpecialWarningTaunt(137408, nil, nil, nil, 1, 2)
-local specWarnGTFO						= mod:NewSpecialWarningGTFO(137417, nil, nil, nil, 1, 8)
+local specWarnFanOfFlames				= mod:NewSpecialWarningStack(137408, nil, 2, nil, nil, 1, 2, nil, nil, "stackhigh")
+local specWarnFanOfFlamesOther			= mod:NewSpecialWarningTaunt(137408, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnGTFO						= mod:NewSpecialWarningGTFO(137417, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
 local specWarnIceComet					= mod:NewSpecialWarningSpell(137419, false)--No idea what audio to give it so blank for now
-local specWarnNuclearInferno			= mod:NewSpecialWarningCount(137491, nil, nil, nil, 2, 2)--Heroic.
+local specWarnNuclearInferno			= mod:NewSpecialWarningCount(137491, nil, nil, nil, 2, 2, nil, nil, "targetchange")--Heroic.
 --Dusk
-local specWarnTidalForce				= mod:NewSpecialWarningSpell(137531, nil, nil, nil, 2, 2)
+local specWarnTidalForce				= mod:NewSpecialWarningSpell(137531, nil, nil, nil, 2, 2, nil, nil, "targetchange")
 
 --Darkness
 local timerDayCD						= mod:NewTimer(183, "timerDayCD", 122789, nil, nil, 6) -- timer is 183 or 190 (confirmed in 10 man. variable)

@@ -25,9 +25,9 @@ local warnWaterJets			= mod:NewCastAnnounce(133121, 2, 3)
 local warnFixate			= mod:NewSpellAnnounce(132984, 3)
 
 --Broodmaster Noshi
-local specWarnDeathNova		= mod:NewSpecialWarningSpell(133804, nil, nil, nil, 2, 2)
+local specWarnDeathNova		= mod:NewSpecialWarningSpell(133804, nil, nil, nil, 2, 2, nil, nil, "specialsoon")
 --Rak'gor Bloodrazor
-local specWarnGasBomb		= mod:NewSpecialWarningGTFO(133001, nil, nil, nil, 1, 8)
+local specWarnGasBomb		= mod:NewSpecialWarningGTFO(133001, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
 
 --Darkhatched Lizard-Lord
 local timerAddsCD			= mod:NewTimer(60, "timerAddsCD", 2457, nil, nil, 1)

@@ -32,11 +32,11 @@ local warnVentralSacs				= mod:NewTargetNoFilterAnnounce(136210, 2)--This one is
 --local warnAcidicSpines			= mod:NewTargetAnnounce(136218, 3)
 local warnBlackBlood				= mod:NewStackAnnounce(137000, 2, nil, "Tank|Healer")
 
-local specWarnFullyMutated			= mod:NewSpecialWarningYou(140546, nil, nil, nil, 1, 16)
-local specWarnFullyMutatedFaded		= mod:NewSpecialWarningFades(140546, nil, nil, nil, 1, 18)
-local specWarnCausticGas			= mod:NewSpecialWarningSpell(136216, nil, nil, nil, 2, 2)--All must be in front for this.
-local specWarnVolatilePathogen		= mod:NewSpecialWarningYou(136228, false, nil, 2, 1, 17)
-local specWarnViscousHorror			= mod:NewSpecialWarningCount(-6969, "Tank", nil, nil, 1, 2)
+local specWarnFullyMutated			= mod:NewSpecialWarningYou(140546, nil, nil, nil, 1, 16, nil, nil, "dpsmore")
+local specWarnFullyMutatedFaded		= mod:NewSpecialWarningFades(140546, nil, nil, nil, 1, 18, nil, nil, "screwup")
+local specWarnCausticGas			= mod:NewSpecialWarningSpell(136216, nil, nil, nil, 2, 2, nil, nil, "gathershare")--All must be in front for this.
+local specWarnVolatilePathogen		= mod:NewSpecialWarningYou(136228, false, nil, 2, 1, 17, nil, nil, "debuffyou")
+local specWarnViscousHorror			= mod:NewSpecialWarningCount(-6969, "Tank", nil, nil, 1, 2, nil, nil, "bigmob")
 
 local timerFullyMutated				= mod:NewBuffFadesTimer(120, 140546, nil, nil, nil, 5)
 local timerMalformedBlood			= mod:NewTargetTimer(60, 136050, nil, "Tank|Healer", nil, 5)

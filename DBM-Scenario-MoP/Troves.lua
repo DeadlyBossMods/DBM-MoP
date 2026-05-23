@@ -17,8 +17,8 @@ mod:RegisterEventsInCombat(
 
 local warnStoneSmash		= mod:NewCastAnnounce(139777, 3, nil, nil, false)
 
-local specWarnMightycrash	= mod:NewSpecialWarningDodge(136844, nil, nil, nil, 2, 2)
-local specWarnSaurok		= mod:NewSpecialWarningSwitch(140009, nil, nil, nil, 1, 2)
+local specWarnMightycrash	= mod:NewSpecialWarningDodge(136844, nil, nil, nil, 2, 2, nil, nil, "shockwave")
+local specWarnSaurok		= mod:NewSpecialWarningSwitch(140009, nil, nil, nil, 1, 2, nil, nil, "killbigmob")
 
 local timerEvent			= mod:NewBuffFadesTimer(299, 140000, nil, nil, nil, 6, nil, nil, nil, 1, 10)
 local timerStoneSmash		= mod:NewCastTimer(3, 139777, nil, false)

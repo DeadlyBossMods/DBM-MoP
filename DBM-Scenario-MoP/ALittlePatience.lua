@@ -19,7 +19,7 @@ mod:RegisterEventsInCombat(
 local warnBloodRage		= mod:NewTargetNoFilterAnnounce(134974, 3)--15 second target fixate
 
 --Commander Scargash
-local specWarnBloodrage	= mod:NewSpecialWarningRun(134974, nil, nil, nil, 4, 2)
+local specWarnBloodrage	= mod:NewSpecialWarningRun(134974, nil, nil, nil, 4, 2, nil, nil, "justrun")
 
 --Commander Scargash
 local timerBloodRage	= mod:NewTargetTimer(15, 134974, nil, nil, 5)

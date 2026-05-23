@@ -18,9 +18,9 @@ mod:RegisterEventsInCombat(
 	"UNIT_SPELLCAST_SUCCEEDED target focus"
 )
 
-local specWarnJadefireBreath	= mod:NewSpecialWarningSpell(144530, nil, nil, nil, 1, 2)
-local specWarnJadefireWall		= mod:NewSpecialWarningDodge(144533, nil, nil, nil, 2, 2)
-local specWarnGTFO				= mod:NewSpecialWarningGTFO(144538, nil, nil, nil, 1, 8)
+local specWarnJadefireBreath	= mod:NewSpecialWarningSpell(144530, nil, nil, nil, 1, 2, nil, nil, "breathsoon")
+local specWarnJadefireWall		= mod:NewSpecialWarningDodge(144533, nil, nil, nil, 2, 2, nil, nil, "watchstep")
+local specWarnGTFO				= mod:NewSpecialWarningGTFO(144538, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
 
 local timerJadefireBreathCD		= mod:NewCDTimer(17.3, 144530, nil, "Tank", nil, 5)
 local timerJadefireWallCD		= mod:NewNextTimer(60, 144533, nil, nil, nil, 3)

@@ -14,7 +14,7 @@ mod:RegisterEventsInCombat(
 --	"SPELL_AURA_REMOVED"
 )
 
-local specWarnFlameWall	= mod:NewSpecialWarningSwitch(123966, nil, nil, nil, 2, 2)
+local specWarnFlameWall	= mod:NewSpecialWarningSwitch(123966, nil, nil, nil, 2, 2, nil, nil, "targetchange")
 
 --[[
 --Needs more data, i'm not sure if it has a CD or is just health based atm so no CD timer just yet.

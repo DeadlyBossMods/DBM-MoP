@@ -35,17 +35,17 @@ local warnUnstableVita			= mod:NewTargetNoFilterAnnounce(138297, 4)
 local warnPhase2				= mod:NewPhaseAnnounce(2, 2)
 
 --Anima
-local specWarnMurderousStrike	= mod:NewSpecialWarningDefensive(138333, "Tank", nil, nil, 3, 2)
-local specWarnSanguineHorror	= mod:NewSpecialWarningSwitch(138338, "Ranged|Tank", nil, nil, 1, 2)
-local specWarnAninaSensitive	= mod:NewSpecialWarningYou(139318, nil, nil, nil, 1, 2)
-local specWarnUnstableAnima		= mod:NewSpecialWarningYou(138288, nil, nil, nil, 3, 2)
+local specWarnMurderousStrike	= mod:NewSpecialWarningDefensive(138333, "Tank", nil, nil, 3, 2, nil, nil, "defensive")
+local specWarnSanguineHorror	= mod:NewSpecialWarningSwitch(138338, "Ranged|Tank", nil, nil, 1, 2, nil, nil, "killbigmob")
+local specWarnAninaSensitive	= mod:NewSpecialWarningYou(139318, nil, nil, nil, 1, 2, nil, nil, "stilldanger")
+local specWarnUnstableAnima		= mod:NewSpecialWarningYou(138288, nil, nil, nil, 3, 2, nil, nil, "gathershare")
 local yellUnstableAnima			= mod:NewYell(138288, nil, false)
 --Vita
-local specWarnFatalStrike		= mod:NewSpecialWarningDefensive(138334, "Tank", nil, nil, 3, 2)
+local specWarnFatalStrike		= mod:NewSpecialWarningDefensive(138334, "Tank", nil, nil, 3, 2, nil, nil, "defensive")
 local specWarnCracklingStalker	= mod:NewSpecialWarningSwitchCount(138339, "-Healer")
-local specWarnVitaSensitive		= mod:NewSpecialWarningYou(138372, nil, nil, nil, 1, 2)
-local specWarnUnstablVita		= mod:NewSpecialWarningYou(138297, nil, nil, nil, 3, 17)
-local specWarnUnstablVitaJump	= mod:NewSpecialWarning("specWarnUnstablVitaJump", nil, nil, nil, 1, 17)
+local specWarnVitaSensitive		= mod:NewSpecialWarningYou(138372, nil, nil, nil, 1, 2, nil, nil, "stilldanger")
+local specWarnUnstablVita		= mod:NewSpecialWarningYou(138297, nil, nil, nil, 3, 17, nil, nil, "debuffyou")
+local specWarnUnstablVitaJump	= mod:NewSpecialWarning("specWarnUnstablVitaJump", nil, nil, nil, 1, 17, nil, nil, nil, nil, "debuffyou")
 local yellUnstableVita			= mod:NewYell(138297, nil, false)
 --General
 local specWarnCreation			= mod:NewSpecialWarningCount(138321, "-Healer")--No idea what to do with voice pack support so none added

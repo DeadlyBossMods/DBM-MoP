@@ -30,9 +30,9 @@ local Kazrajin = DBM:EJ_GetSectionInfo(7048)
 --All
 local warnPossessed					= mod:NewStackAnnounce(136442, 2, nil, nil, "warnPossessed")
 
-local specWarnPossessed				= mod:NewSpecialWarning("specWarnPossessed", nil, nil, nil, 1, 2)
-local specWarnDarkPower				= mod:NewSpecialWarningCount(136507, nil, nil, nil, 2, 2)
-local specWarnSoulFragment			= mod:NewSpecialWarningYou(137641, nil, nil, nil, 1, 17)
+local specWarnPossessed				= mod:NewSpecialWarning("specWarnPossessed", nil, nil, nil, 1, 2, nil, nil, nil, nil, "targetchange")
+local specWarnDarkPower				= mod:NewSpecialWarningCount(136507, nil, nil, nil, 2, 2, nil, nil, "aesoon")
+local specWarnSoulFragment			= mod:NewSpecialWarningYou(137641, nil, nil, nil, 1, 17, nil, nil, "debuffyou")
 
 local timerDarkPowerCD				= mod:NewCDTimer(68, 136507)
 local berserkTimer					= mod:NewBerserkTimer(720)
@@ -42,9 +42,9 @@ mod:AddBoolOption("AnnounceCooldowns", "RaidCooldown")
 mod:AddTimerLine(Sul)
 local warnQuicksand					= mod:NewSpellAnnounce(136521, 2)
 
-local specWarnSandBolt				= mod:NewSpecialWarningInterruptCount(136189, false, nil, nil, 1, 2)
-local specWarnSandStorm				= mod:NewSpecialWarningCount(136894, nil, nil, nil, 2, 2)
-local specWarnQuickSand				= mod:NewSpecialWarningGTFO(136860, nil, nil, nil, 1, 8)
+local specWarnSandBolt				= mod:NewSpecialWarningInterruptCount(136189, false, nil, nil, 1, 2, nil, nil, "kickcast")
+local specWarnSandStorm				= mod:NewSpecialWarningCount(136894, nil, nil, nil, 2, 2, nil, nil, "aesoon")
+local specWarnQuickSand				= mod:NewSpecialWarningGTFO(136860, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
 
 local timerQuickSandCD				= mod:NewCDTimer(32.7, 136521, nil, nil, nil, 3)
 local timerSandStormCD				= mod:NewCDTimer(35, 136894, nil, nil, nil, 2)
@@ -52,10 +52,10 @@ local timerSandStormCD				= mod:NewCDTimer(35, 136894, nil, nil, nil, 2)
 mod:AddTimerLine(Marli)
 local warnMarkedSoul				= mod:NewTargetNoFilterAnnounce(137359, 4)--Shadowed Loa Spirit fixate target, no need to warn for Shadowed Loa Spirit AND this, so we just warn for this
 
-local specWarnBlessedLoaSpirit		= mod:NewSpecialWarningSwitch(137203, "Dps", nil, nil, 1, 2)
-local specWarnShadowedLoaSpirit		= mod:NewSpecialWarningSwitch(137350, "Dps", nil, nil, 1, 2)
-local specWarnMarkedSoul			= mod:NewSpecialWarningRun(137359, nil, nil, nil, 4, 2)
-local specWarnTwistedFate			= mod:NewSpecialWarningSwitch(137891, nil, nil, nil, 1, 2)
+local specWarnBlessedLoaSpirit		= mod:NewSpecialWarningSwitch(137203, "Dps", nil, nil, 1, 2, nil, nil, "targetchange")
+local specWarnShadowedLoaSpirit		= mod:NewSpecialWarningSwitch(137350, "Dps", nil, nil, 1, 2, nil, nil, "targetchange")
+local specWarnMarkedSoul			= mod:NewSpecialWarningRun(137359, nil, nil, nil, 4, 2, nil, nil, "justrun")
+local specWarnTwistedFate			= mod:NewSpecialWarningSwitch(137891, nil, nil, nil, 1, 2, nil, nil, "lineapart")
 
 local timerBlessedLoaSpiritCD		= mod:NewCDTimer(32.7, 137203, nil, nil, nil, 1, nil, DBM_COMMON_L.DAMAGE_ICON)--Every 33-35 seconds.
 local timerShadowedLoaSpiritCD		= mod:NewCDTimer(32.7, 137350, nil, nil, nil, 1, nil, DBM_COMMON_L.DAMAGE_ICON)--Possessed version of above, shared CD
@@ -67,11 +67,11 @@ local warnBitingCold				= mod:NewTargetAnnounce(136992, 3)--136917 is cast ID ve
 local warnFrostBite					= mod:NewTargetAnnounce(136922, 4)--136990 is cast ID version, 136922 is player debuff
 local warnFrigidAssault				= mod:NewStackAnnounce(136903, 3, nil, "Tank|Healer")
 
-local specWarnBitingCold			= mod:NewSpecialWarningMoveAway(136992, nil, nil, nil, 1, 2)
+local specWarnBitingCold			= mod:NewSpecialWarningMoveAway(136992, nil, nil, nil, 1, 2, nil, nil, "range5")
 local yellBitingCold				= mod:NewShortYell(136992)--This one you just avoid so chat bubble is useful
-local specWarnFrostBite				= mod:NewSpecialWarningMoveTo(136922, nil, nil, nil, 1, 2)--This one you do not avoid you clear it hugging people so no chat bubble
-local specWarnFrigidAssault			= mod:NewSpecialWarningStack(136903, nil, 10, nil, nil, 1, 6)
-local specWarnFrigidAssaultOther	= mod:NewSpecialWarningTaunt(136903, nil, nil, nil, 1, 2)
+local specWarnFrostBite				= mod:NewSpecialWarningMoveTo(136922, nil, nil, nil, 1, 2, nil, nil, "gathershare")--This one you do not avoid you clear it hugging people so no chat bubble
+local specWarnFrigidAssault			= mod:NewSpecialWarningStack(136903, nil, 10, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnFrigidAssaultOther	= mod:NewSpecialWarningTaunt(136903, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
 
 local timerBitingCold				= mod:NewBuffFadesTimer(30, 136917)
 local timerBitingColdCD				= mod:NewCDTimer(45, 136917, nil, nil, nil, 3)--10 man Cds (and probably LFR), i have no doubt on 25 man this will either have a shorter cd or affect 3 targets with same CD. Watch for timer diffs though
@@ -86,7 +86,7 @@ mod:AddSetIconOption("SetIconOnFrostBite", 136990, true, 0, {6})
 mod:AddTimerLine(Kazrajin)
 local warnRecklessCharge			= mod:NewCastAnnounce(137122, 3, 2, nil, false)
 
-local specWarnDischarge				= mod:NewSpecialWarningCount(137166, nil, nil, nil, 2, 2)
+local specWarnDischarge				= mod:NewSpecialWarningCount(137166, nil, nil, nil, 2, 2, nil, nil, "aesoon")
 
 local timerRecklessChargeCD			= mod:NewCDTimer(6, 137122, nil, false, nil, 3)
 

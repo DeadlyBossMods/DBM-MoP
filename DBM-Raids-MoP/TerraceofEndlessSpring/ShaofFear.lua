@@ -34,23 +34,23 @@ local warnSubmerge						= mod:NewCountAnnounce(120455)
 local warnDreadSpawns					= mod:NewCountAnnounce(132018)
 
 -- Normal and heroic Phase 1
-local specWarnBreathOfFearSoon			= mod:NewSpecialWarning("specWarnBreathOfFearSoon", nil, nil, nil, 2, 2)
-local specWarnThrash					= mod:NewSpecialWarningDefensive(131996, nil, nil, nil, 1, 2)
-local specWarnOminousCackleYou			= mod:NewSpecialWarningYou(129147, nil, nil, nil, 1, 6)--You have debuff, just warns you.
-local specWarnDreadSpray				= mod:NewSpecialWarningSpell(120047, nil, nil, nil, 2, 2)--Platform ability, particularly nasty damage, and fear.
+local specWarnBreathOfFearSoon			= mod:NewSpecialWarning("specWarnBreathOfFearSoon", nil, nil, nil, 2, 2, nil, nil, nil, nil, "breathsoon")
+local specWarnThrash					= mod:NewSpecialWarningDefensive(131996, nil, nil, nil, 1, 2, nil, nil, "defensive")
+local specWarnOminousCackleYou			= mod:NewSpecialWarningYou(129147, nil, nil, nil, 1, 6, nil, nil, "teleyou")--You have debuff, just warns you.
+local specWarnDreadSpray				= mod:NewSpecialWarningSpell(120047, nil, nil, nil, 2, 2, nil, nil, "stilldanger")--Platform ability, particularly nasty damage, and fear.
 local specWarnDeathBlossom				= mod:NewSpecialWarningSpell(119888, nil, nil, nil, 2)--Cast, warns the entire raid.
 mod:AddBoolOption("specWarnMovement", false, "announce")--https://www.icy-veins.com/wow/sha-of-fear-strategy-guide-normal-heroic (doesn't match our built in strat but similar idea)
 local MoveWarningForward				= mod:NewSpecialWarning("MoveForward", nil, false)--Warning to switch sites on platform
 local MoveWarningRight					= mod:NewSpecialWarning("MoveRight", nil, false)--Warning to move one eighth to the right
 local MoveWarningBack					= mod:NewSpecialWarning("MoveBack", nil, false)--Move back to starting position
 -- Heroic Phase 2
-local specWarnDreadThrash				= mod:NewSpecialWarningDefensive(132007, nil, nil, nil, 3, 2)--Extra emphesis special warning.
-local specWarnNakedAndAfraidOther		= mod:NewSpecialWarningTaunt(120669, nil, nil, nil, 1, 2)
-local specWarnWaterspoutCast			= mod:NewSpecialWarningDodge(120519, nil, nil, nil, 2, 2)
-local specWarnWaterspout				= mod:NewSpecialWarningYou(120519, nil, nil, nil, 1, 2)
+local specWarnDreadThrash				= mod:NewSpecialWarningDefensive(132007, nil, nil, nil, 3, 2, nil, nil, "defensive")--Extra emphesis special warning.
+local specWarnNakedAndAfraidOther		= mod:NewSpecialWarningTaunt(120669, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnWaterspoutCast			= mod:NewSpecialWarningDodge(120519, nil, nil, nil, 2, 2, nil, nil, "watchstep")
+local specWarnWaterspout				= mod:NewSpecialWarningYou(120519, nil, nil, nil, 1, 2, nil, nil, "targetyou")
 local yellWaterspout					= mod:NewYell(120519)
-local specWarnImplacableStrike			= mod:NewSpecialWarningDodgeCount(120672, nil, nil, nil, 2, 2)
-local specWarnChampionOfTheLight		= mod:NewSpecialWarningYou(120268, nil, nil, nil, 1, 7)
+local specWarnImplacableStrike			= mod:NewSpecialWarningDodgeCount(120672, nil, nil, nil, 2, 2, nil, nil, "shockwave")
+local specWarnChampionOfTheLight		= mod:NewSpecialWarningYou(120268, nil, nil, nil, 1, 7, nil, nil, "lightinfusion")
 
 -- Normal and heroic Phase 1
 local timerThrashCD						= mod:NewCDTimer(9, 131996, nil, "Tank|Healer", nil, 5)--Every 9-12 seconds.

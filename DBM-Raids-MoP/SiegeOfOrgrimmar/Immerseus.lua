@@ -32,9 +32,9 @@ local warnSplit							= mod:NewSpellAnnounce(143020, 2)--Blizzard ones are loud 
 local warnReform						= mod:NewSpellAnnounce(143469, 2)--These are redundant, but some DO like them for the DBM sound vs blizz one so not completely removed
 local warnSwellingCorruptionCast		= mod:NewSpellAnnounce(143574, 2)--Heroic (this is the boss spellcast trigger spell NOT personal debuff warning)
 
-local specWarnBreath					= mod:NewSpecialWarningSpell(143436, "Tank|Healer", nil, nil, 1, 2)
-local specWarnShaSplash					= mod:NewSpecialWarningMove(143297, nil, nil, nil, 1, 2)
-local specWarnSwirl						= mod:NewSpecialWarningSpell(143309, nil, nil, nil, 2, 2)
+local specWarnBreath					= mod:NewSpecialWarningSpell(143436, "Tank|Healer", nil, nil, 1, 2, nil, nil, "breathsoon")
+local specWarnShaSplash					= mod:NewSpecialWarningMove(143297, nil, nil, nil, 1, 2, nil, nil, "runaway")
+local specWarnSwirl						= mod:NewSpecialWarningSpell(143309, nil, nil, nil, 2, 2, nil, nil, "watchstep")
 
 local timerBreathCD						= mod:NewCDTimer(35, 143436, nil, "Tank|Healer", nil, 5, nil, DBM_COMMON_L.TANK_ICON)--35-65 second variation wtf?
 local timerSwirl						= mod:NewBuffActiveTimer(13, 143309)

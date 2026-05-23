@@ -22,9 +22,9 @@ local warnSpectralSwipe				= mod:NewStackAnnounce(144638, 2, nil, "Tank|Healer")
 local warnCracklingLightning		= mod:NewSpellAnnounce(144635, 3)--According to data, spread range is 60 yards so spreading out for this seems pointless. it's just healed through
 local warnChiBarrage				= mod:NewSpellAnnounce(144642, 4)
 
-local specWarnSpectralSwipe			= mod:NewSpecialWarningStack(144638, nil, 5, nil, nil, 1, 6)
-local specWarnSpectralSwipeOther	= mod:NewSpecialWarningTaunt(144638, nil, nil, nil, 1, 2)
-local specWarnAgility				= mod:NewSpecialWarningDispel(144631, "MagicDispeller", nil, nil, 3, 2)
+local specWarnSpectralSwipe			= mod:NewSpecialWarningStack(144638, nil, 5, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnSpectralSwipeOther	= mod:NewSpecialWarningTaunt(144638, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnAgility				= mod:NewSpecialWarningDispel(144631, "MagicDispeller", nil, nil, 3, 2, nil, nil, "dispelboss")
 
 local timerSpectralSwipe			= mod:NewTargetTimer(60, 144638, nil, "Tank|Healer", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerSpectralSwipeCD			= mod:NewCDTimer(12, 144638, nil, "Tank|Healer", nil, 5, nil, DBM_COMMON_L.TANK_ICON)

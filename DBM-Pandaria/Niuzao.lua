@@ -19,10 +19,10 @@ mod:RegisterEventsInCombat(
 
 local warnOxenFortitude		= mod:NewStackAnnounce(144606, 2, nil, false)--144607 player version, but better to just track boss and announce stacks
 
-local specWarnHeadbutt		= mod:NewSpecialWarningDefensive(144610, nil, nil, nil, 1, 2)
-local specWarnHeadbuttTaunt	= mod:NewSpecialWarningTaunt(144610, nil, nil, nil, 1, 2)
-local specWarnMassiveQuake	= mod:NewSpecialWarningSpell(144611, nil, nil, nil, 2, 2)
-local specWarnCharge		= mod:NewSpecialWarningDodge(144609, "Melee", nil, nil, 2, 2)--66 and 33%. Maybe add pre warns
+local specWarnHeadbutt		= mod:NewSpecialWarningDefensive(144610, nil, nil, nil, 1, 2, nil, nil, "carefly")
+local specWarnHeadbuttTaunt	= mod:NewSpecialWarningTaunt(144610, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnMassiveQuake	= mod:NewSpecialWarningSpell(144611, nil, nil, nil, 2, 2, nil, nil, "aesoon")
+local specWarnCharge		= mod:NewSpecialWarningDodge(144609, "Melee", nil, nil, 2, 2, nil, nil, "chargemove")--66 and 33%. Maybe add pre warns
 
 local timerHeadbuttCD		= mod:NewCDTimer(47, 144610, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerMassiveQuake		= mod:NewBuffActiveTimer(13, 144611, nil, nil, nil, 5, nil, DBM_COMMON_L.HEALER_ICON)

@@ -25,13 +25,13 @@ local warnCallElemental			= mod:NewSpellAnnounce(141872, 4)
 local warnMalevolentForce		= mod:NewCastAnnounce(142840, 4, 2)
 
 --Trash (and somewhat Urtharges)
-local specWarnStoneRain			= mod:NewSpecialWarningInterrupt(142139, "HasInterrupt", nil, nil, 1, 2)
-local specWarnSpellShatter		= mod:NewSpecialWarningCast(141421, "SpellCaster", nil, 3, 1, 2)
-local specWarnSummonFieryAnger	= mod:NewSpecialWarningInterrupt(141488, "HasInterrupt", nil, nil, 1, 2)
+local specWarnStoneRain			= mod:NewSpecialWarningInterrupt(142139, "HasInterrupt", nil, nil, 1, 2, nil, nil, "kickcast")
+local specWarnSpellShatter		= mod:NewSpecialWarningCast(141421, "SpellCaster", nil, 3, 1, 2, nil, nil, "stopcast")
+local specWarnSummonFieryAnger	= mod:NewSpecialWarningInterrupt(141488, "HasInterrupt", nil, nil, 1, 2, nil, nil, "kickcast")
 --Urtharges the Destroyer
-local specWarnRuptureLine		= mod:NewSpecialWarningMoveAway(141418, nil, nil, nil, 1, 2)
+local specWarnRuptureLine		= mod:NewSpecialWarningMoveAway(141418, nil, nil, nil, 1, 2, nil, nil, "runout")
 --Echo of Y'Shaarj
-local specWarnMalevolentForce	= mod:NewSpecialWarningInterrupt(142840, "HasInterrupt", nil, nil, 1, 2)--Not only cast by last boss but trash near him as well, interrupt important for both. Although only bosses counts for achievement.
+local specWarnMalevolentForce	= mod:NewSpecialWarningInterrupt(142840, "HasInterrupt", nil, nil, 1, 2, nil, nil, "kickcast")--Not only cast by last boss but trash near him as well, interrupt important for both. Although only bosses counts for achievement.
 
 --Trash
 --local timerSpellShatter			= mod:NewCDTimer(2, 141421, nil, nil, nil, 2)--Refine and nameplate timer maybe?

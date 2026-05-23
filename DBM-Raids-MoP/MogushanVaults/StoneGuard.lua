@@ -47,7 +47,7 @@ mod:AddTimerLine(Amethyst)
 local warnAmethystOverload			= mod:NewSpellAnnounce(115844, 4)
 local warnAmethystPool				= mod:NewTargetAnnounce(130774, 3, nil, false)
 
-local specWarnAmethystPool			= mod:NewSpecialWarningGTFO(130774, nil, nil, nil, 1, 8)
+local specWarnAmethystPool			= mod:NewSpecialWarningGTFO(130774, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
 
 local timerAmethystPoolCD			= mod:NewCDTimer(6, 130774, nil, false, nil, 3)
 --Jasper
@@ -56,8 +56,8 @@ local warnJasperOverload			= mod:NewSpellAnnounce(115843, 4)
 
 local warnJasperChains				= mod:NewTargetNoFilterAnnounce(130395, 4)
 
-local specWarnJasperChains			= mod:NewSpecialWarningMoveTo(130395, nil, nil, nil, 1, 2)
-local specWarnBreakJasperChains		= mod:NewSpecialWarning("specWarnBreakJasperChains", nil, nil, nil, 1, 2, nil, nil, 130395)
+local specWarnJasperChains			= mod:NewSpecialWarningMoveTo(130395, nil, nil, nil, 1, 2, nil, nil, "gathershare")
+local specWarnBreakJasperChains		= mod:NewSpecialWarning("specWarnBreakJasperChains", nil, nil, nil, 1, 2, nil, nil, 130395, nil, "breakchain")
 local yellJasperChains				= mod:NewYell(130395, nil, false)
 
 local timerJasperChainsCD			= mod:NewCDTimer(12, 130395, nil, nil, nil, 3)--11-13

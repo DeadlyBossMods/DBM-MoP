@@ -20,11 +20,11 @@ local warnSpiritFire			= mod:NewTargetAnnounce(139895, 3)--This is morchok entry
 local warnStormCloud			= mod:NewTargetAnnounce(139900, 4)
 local warnFixated				= mod:NewSpellAnnounce(140306, 3)
 
-local specWarnStormEnergy		= mod:NewSpecialWarningMoveAway(139322, nil, nil, nil, 1, 2)
-local specWarnShadowNova		= mod:NewSpecialWarningRun(139899, nil, nil, 2, 4, 2)--This hurls you pretty damn far. If you aren't careful you're as good as gone.
-local specWarnStormCloud		= mod:NewSpecialWarningMoveAway(139900, nil, nil, nil, 1, 2)
-local specWarnSonicScreech		= mod:NewSpecialWarningInterrupt(136751, nil, nil, nil, 1, 2)
-local specWarnConductiveShield	= mod:NewSpecialWarningReflect(140296, nil, nil, nil, 1, 2)
+local specWarnStormEnergy		= mod:NewSpecialWarningMoveAway(139322, nil, nil, nil, 1, 2, nil, nil, "scatter")
+local specWarnShadowNova		= mod:NewSpecialWarningRun(139899, nil, nil, 2, 4, 2, nil, nil, "justrun")--This hurls you pretty damn far. If you aren't careful you're as good as gone.
+local specWarnStormCloud		= mod:NewSpecialWarningMoveAway(139900, nil, nil, nil, 1, 2, nil, nil, "scatter")
+local specWarnSonicScreech		= mod:NewSpecialWarningInterrupt(136751, nil, nil, nil, 1, 2, nil, nil, "kickcast")
+local specWarnConductiveShield	= mod:NewSpecialWarningReflect(140296, nil, nil, nil, 1, 2, nil, nil, "stopattack")
 
 local timerSpiritfireCD			= mod:NewCDTimer(12, 139895, nil, nil, nil, 3)
 local timerShadowNovaCD			= mod:NewCDTimer(12, 139899, nil, nil, nil, 3, nil, DBM_COMMON_L.DEADLY_ICON)

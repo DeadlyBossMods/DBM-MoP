@@ -21,9 +21,9 @@ local warnAncientFlame			= mod:NewSpellAnnounce(144695, 2)--probably add a move 
 local warnMagmaCrush			= mod:NewSpellAnnounce(144688, 3)
 local warnBurningSoul			= mod:NewTargetNoFilterAnnounce(144689, 4)
 
-local specWarnBurningSoul		= mod:NewSpecialWarningMoveAway(144689, nil, nil, nil, 1, 2)
-local specWarnGTFO				= mod:NewSpecialWarningGTFO(144693, nil, nil, nil, 1, 8)
-local specWarnEternalAgony		= mod:NewSpecialWarningSpell(144696, nil, nil, nil, 2, 2)--Fights over, this is 5 minute berserk spell.
+local specWarnBurningSoul		= mod:NewSpecialWarningMoveAway(144689, nil, nil, nil, 1, 2, nil, nil, "runout")
+local specWarnGTFO				= mod:NewSpecialWarningGTFO(144693, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
+local specWarnEternalAgony		= mod:NewSpecialWarningSpell(144696, nil, nil, nil, 2, 2, nil, nil, "aesoon")--Fights over, this is 5 minute berserk spell.
 
 --local timerAncientFlameCD		= mod:NewCDTimer(43, 144695)--Insufficent logs
 --local timerBurningSoulCD		= mod:NewCDTimer(22, 144689)--22-30 sec variation (maybe larger, small sample size)

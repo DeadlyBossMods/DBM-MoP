@@ -31,11 +31,11 @@ local warnConvert			= mod:NewTargetNoFilterAnnounce(122740, 4)
 local warnEcho				= mod:NewAnnounce("warnEcho", 4, 127834)--Maybe come up with better icon later then just using attenuation icon
 local warnEchoDown			= mod:NewAnnounce("warnEchoDown", 1, 127834)--Maybe come up with better icon later then just using attenuation icon
 
-local specwarnPlatform		= mod:NewSpecialWarning("specwarnPlatform", nil, nil, nil, 1, 2)
-local specwarnForce			= mod:NewSpecialWarningSpell(122713, nil, nil, nil, 1, 2)
+local specwarnPlatform		= mod:NewSpecialWarning("specwarnPlatform", nil, nil, nil, 1, 2, nil, nil, nil, nil, "phasechange")
+local specwarnForce			= mod:NewSpecialWarningSpell(122713, nil, nil, nil, 1, 2, nil, nil, "findshield")
 --local specwarnConvert		= mod:NewSpecialWarningSwitch(122740, "-Healer")
-local specwarnExhale		= mod:NewSpecialWarningTarget(122761, "Healer|Tank", nil, nil, 1, 2)
-local specwarnAttenuation	= mod:NewSpecialWarning("specwarnAttenuation", nil, nil, nil, 3, 2)
+local specwarnExhale		= mod:NewSpecialWarningTarget(122761, "Healer|Tank", nil, nil, 1, 2, nil, nil, "tankheal")
+local specwarnAttenuation	= mod:NewSpecialWarning("specwarnAttenuation", nil, nil, nil, 3, 2, nil, nil, nil, nil, "moveright")
 
 --Timers aren't worth a crap, at all, but added anyways. if people complain about how inaccurate they are tell them to go to below thread.
 --http://us.battle.net/wow/en/forum/topic/7004456927 for more info on lack of timers. (thread long deleted?)

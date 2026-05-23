@@ -23,11 +23,11 @@ local warnBite						= mod:NewSpellAnnounce(135251, 3, nil, "Tank")
 local warnKickShell					= mod:NewAnnounce("warnKickShell", 2, 134031)
 local warnShellConcussion			= mod:NewTargetNoFilterAnnounce(136431, 1)
 
-local specWarnCallofTortos			= mod:NewSpecialWarningSpell(136294, nil, nil, nil, 1, 2)
-local specWarnQuakeStomp			= mod:NewSpecialWarningCount(134920, nil, nil, nil, 2, 2)
-local specWarnStoneBreath			= mod:NewSpecialWarningInterrupt(133939, nil, nil, 2, 3, 2)
-local specWarnCrystalShell			= mod:NewSpecialWarning("specWarnCrystalShell", false, nil, nil, 1, 2)
-local specWarnSummonBats			= mod:NewSpecialWarningSwitch(-7140, "Tank", nil, nil, 1, 2)--Dps can turn it on too, but not on by default for dps cause quite frankly dps should NOT switch right away, tank needs to get aggro first and where they spawn is semi random.
+local specWarnCallofTortos			= mod:NewSpecialWarningSpell(136294, nil, nil, nil, 1, 2, nil, nil, "mobsoon")
+local specWarnQuakeStomp			= mod:NewSpecialWarningCount(134920, nil, nil, nil, 2, 2, nil, nil, "aesoon")
+local specWarnStoneBreath			= mod:NewSpecialWarningInterrupt(133939, nil, nil, 2, 3, 2, nil, nil, "interruptsoon")
+local specWarnCrystalShell			= mod:NewSpecialWarning("specWarnCrystalShell", false, nil, nil, 1, 2, nil, nil, nil, nil, "findshield")
+local specWarnSummonBats			= mod:NewSpecialWarningSwitch(-7140, "Tank", nil, nil, 1, 2, nil, nil, "mobsoon")--Dps can turn it on too, but not on by default for dps cause quite frankly dps should NOT switch right away, tank needs to get aggro first and where they spawn is semi random.
 
 local timerBiteCD					= mod:NewCDTimer(6.9, 135251, nil, "Tank", nil, 5)
 local timerCallTortosCD				= mod:NewNextTimer(60.5, 136294, nil, nil, nil, 1)

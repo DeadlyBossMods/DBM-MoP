@@ -43,28 +43,28 @@ local warnEmpoweredChainHeal		= mod:NewCastAnnounce(143473, 4)
 local warnHuntersMark				= mod:NewTargetAnnounce(143882, 3, nil, false)
 
 --Nazgrim Core Abilities
-local specWarnAdds					= mod:NewSpecialWarningSwitchCount(-7920, "-Healer", nil, nil, 1, 2)
-local specWarnSunder				= mod:NewSpecialWarningStack(143494, nil, 4, nil, nil, 1, 6)
-local specWarnSunderOther			= mod:NewSpecialWarningTaunt(143494, nil, nil, nil, 1, 2)
-local specWarnExecute				= mod:NewSpecialWarningDefensive(143502, nil, nil, nil, 1, 2)
+local specWarnAdds					= mod:NewSpecialWarningSwitchCount(-7920, "-Healer", nil, nil, 1, 2, nil, nil, "killmob")
+local specWarnSunder				= mod:NewSpecialWarningStack(143494, nil, 4, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnSunderOther			= mod:NewSpecialWarningTaunt(143494, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnExecute				= mod:NewSpecialWarningDefensive(143502, nil, nil, nil, 1, 2, nil, nil, "defensive")
 local specWarnBerserkerStance		= mod:NewSpecialWarningSpell(143594, "Dps")
-local specWarnDefensiveStance		= mod:NewSpecialWarningReflect(143593, nil, nil, nil, 3, 2)
+local specWarnDefensiveStance		= mod:NewSpecialWarningReflect(143593, nil, nil, nil, 3, 2, nil, nil, "stopattack")
 --Nazgrim Rage Abilities
-local specWarnHeroicShockwave		= mod:NewSpecialWarningYou(143500, nil, nil , nil, 2, 19)
+local specWarnHeroicShockwave		= mod:NewSpecialWarningYou(143500, nil, nil, nil, 2, 19, nil, nil, "leapyou")
 local yellHeroicShockwave			= mod:NewYell(143500)
-local specWarnHeroicShockwaveAll	= mod:NewSpecialWarningTarget(143500, nil, nil, nil, 2, 2)
-local specWarnKorkronBanner			= mod:NewSpecialWarningSwitch(143536, "Dps", nil, nil, 1, 2)
-local specWarnRavager				= mod:NewSpecialWarningDodge(143872, nil, nil, nil, 2, 2)
-local specWarnRavagerMove			= mod:NewSpecialWarningGTFO(143873, nil, nil, nil, 1, 8)
-local specWarnWarSong				= mod:NewSpecialWarningSpell(143503, nil, nil, nil, 2, 2)
+local specWarnHeroicShockwaveAll	= mod:NewSpecialWarningTarget(143500, nil, nil, nil, 2, 2, nil, nil, "watchstep")
+local specWarnKorkronBanner			= mod:NewSpecialWarningSwitch(143536, "Dps", nil, nil, 1, 2, nil, nil, "targetchange")
+local specWarnRavager				= mod:NewSpecialWarningDodge(143872, nil, nil, nil, 2, 2, nil, nil, "watchstep")
+local specWarnRavagerMove			= mod:NewSpecialWarningGTFO(143873, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
+local specWarnWarSong				= mod:NewSpecialWarningSpell(143503, nil, nil, nil, 2, 2, nil, nil, "aesoon")
 --Kor'kron Adds
-local specWarnIronstorm				= mod:NewSpecialWarningDodge(143420, nil, nil, nil, 2, 2)--Only needs to be interrupted if melee are near it
-local specWarnEmpoweredChainHeal	= mod:NewSpecialWarningInterrupt(143473, "HasInterrupt", nil, nil, 1, 2)--Concerns everyone, if not interrupted will heal boss for a TON
-local specWarnAssassinsMark			= mod:NewSpecialWarningYou(143480, nil, nil, nil, 1, 19)
+local specWarnIronstorm				= mod:NewSpecialWarningDodge(143420, nil, nil, nil, 2, 2, nil, nil, "watchstep")--Only needs to be interrupted if melee are near it
+local specWarnEmpoweredChainHeal	= mod:NewSpecialWarningInterrupt(143473, "HasInterrupt", nil, nil, 1, 2, nil, nil, "kickcast")--Concerns everyone, if not interrupted will heal boss for a TON
+local specWarnAssassinsMark			= mod:NewSpecialWarningYou(143480, nil, nil, nil, 1, 19, nil, nil, "fixateyou")
 local yellAssassinsMark				= mod:NewYell(143480, nil, false)
-local specWarnEarthShield			= mod:NewSpecialWarningDispel(143475, "MagicDispeller", nil, nil, 1, 2)
-local specWarnHealingTideTotem		= mod:NewSpecialWarningSwitch(143474, false)--Not everyone needs to switch, should be turned on by assigned totem mashing people.
-local specWarnHuntersMark			= mod:NewSpecialWarningYou(143882, nil, nil, nil, 1, 19)
+local specWarnEarthShield			= mod:NewSpecialWarningDispel(143475, "MagicDispeller", nil, nil, 1, 2, nil, nil, "dispelboss")
+local specWarnHealingTideTotem		= mod:NewSpecialWarningSwitch(143474, false, nil, nil, nil, nil, nil, nil, "attacktotem")--Not everyone needs to switch, should be turned on by assigned totem mashing people.
+local specWarnHuntersMark			= mod:NewSpecialWarningYou(143882, nil, nil, nil, 1, 19, nil, nil, "fixateyou")
 local yellHuntersMark				= mod:NewYell(143882, nil, false)
 
 --Nazgrim Core Abilities

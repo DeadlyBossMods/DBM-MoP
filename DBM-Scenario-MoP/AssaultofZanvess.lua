@@ -18,7 +18,7 @@ mod:RegisterEventsInCombat(
 --Zan'thik Swarmer spawns don't show in logs, so might need to do /chatlog and /yell when they spawn and schedule a loop to get add wave timers for final boss
 local warnImpale			= mod:NewSpellAnnounce(133942, 2)
 
-local specWarnGuidedMissle	= mod:NewSpecialWarningPreWarn(135546, nil, 5, nil, nil, 1, 2)--So you can use Force field and not get weapons disabled.
+local specWarnGuidedMissle	= mod:NewSpecialWarningPreWarn(135546, nil, 5, nil, nil, 1, 2, nil, nil, "specialsoon")--So you can use Force field and not get weapons disabled.
 
 local timerGuidedMissle		= mod:NewCastTimer(5, 135546, nil, nil, nil, 5)--Time until impact
 local timerImpaleCD			= mod:NewNextTimer(6, 133942, nil, nil, nil, 3)

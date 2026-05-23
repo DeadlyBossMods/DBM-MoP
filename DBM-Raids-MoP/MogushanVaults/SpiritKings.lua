@@ -37,12 +37,12 @@ local warnUndyingShadows		= mod:NewSpellAnnounce(117506, 3)--Target scanning?
 local warnFixate				= mod:NewTargetAnnounce(118303, 4)--Maybe spammy late fight, if zian is first boss you get? (adds are immortal, could be many up)
 local warnShieldOfDarknessSoon	= mod:NewAnnounce("DarknessSoon", 4, 117697, nil, nil, true, 117697)
 
-local specWarnFixate			= mod:NewSpecialWarningRun(118303, nil, nil, nil, 4, 2)
+local specWarnFixate			= mod:NewSpecialWarningRun(118303, nil, nil, nil, 4, 2, nil, nil, "justrun")
 local yellFixate				= mod:NewYell(118303)
-local specWarnCoalescingShadows	= mod:NewSpecialWarningGTFO(117558, nil, nil, nil, 1, 8)
-local specWarnShadowBlast		= mod:NewSpecialWarningInterrupt(117628, "HasInterrupt", nil, nil, 1, 2)--very spammy. better to optional use
-local specWarnShieldOfDarkness	= mod:NewSpecialWarningReflect(117697, nil, nil, nil, 3, 2, 3)--Heroic Ability
-local specWarnShieldOfDarknessD	= mod:NewSpecialWarningDispel(117697, "MagicDispeller", nil, nil, 1, 2, 3)--Heroic Ability
+local specWarnCoalescingShadows	= mod:NewSpecialWarningGTFO(117558, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
+local specWarnShadowBlast		= mod:NewSpecialWarningInterrupt(117628, "HasInterrupt", nil, nil, 1, 2, nil, nil, "kickcast")--very spammy. better to optional use
+local specWarnShieldOfDarkness	= mod:NewSpecialWarningReflect(117697, nil, nil, nil, 3, 2, 3, nil, "stopattack")--Heroic Ability
+local specWarnShieldOfDarknessD	= mod:NewSpecialWarningDispel(117697, "MagicDispeller", nil, nil, 1, 2, 3, nil, "dispelboss")--Heroic Ability
 
 local timerChargingShadowsCD	= mod:NewCDTimer(12, 117685, nil, nil, nil, 3)
 local timerUndyingShadowsCD		= mod:NewCDTimer(41.5, 117506, nil, nil, nil, 1)--For most part it's right, but i also think on normal he can only summon a limited amount cause he did seem to skip one? leaving a CD for now until know for sure.
@@ -54,9 +54,9 @@ mod:AddTimerLine(Meng)
 local warnCrazed				= mod:NewTargetNoFilterAnnounce(117737, 3)--Basically stance change
 local warnCowardice				= mod:NewTargetNoFilterAnnounce(117756, 3)--^^
 
-local specWarnMaddeningShout	= mod:NewSpecialWarningSpell(117708, nil, nil, nil, 2, 2)
-local specWarnCrazyThought		= mod:NewSpecialWarningInterrupt(117833, "HasInterrupt", nil, nil, 1, 2)--At discretion of whoever to enable. depending on strat, you may NOT want to interrupt these (or at least not all of them)
-local specWarnDelirious			= mod:NewSpecialWarningDispel(117837, "RemoveEnrage|Tank", nil, nil, 1, 2)--Heroic Ability
+local specWarnMaddeningShout	= mod:NewSpecialWarningSpell(117708, nil, nil, nil, 2, 2, nil, nil, "findmc")
+local specWarnCrazyThought		= mod:NewSpecialWarningInterrupt(117833, "HasInterrupt", nil, nil, 1, 2, nil, nil, "kickcast")--At discretion of whoever to enable. depending on strat, you may NOT want to interrupt these (or at least not all of them, "kickcast")
+local specWarnDelirious			= mod:NewSpecialWarningDispel(117837, "RemoveEnrage|Tank", nil, nil, 1, 2, nil, nil, "enrage")--Heroic Ability
 
 local timerMaddeningShoutCD		= mod:NewCDTimer(47, 117708, nil, nil, nil, 3)--47-50 sec variation. So a CD timer instead of next.
 local timerDeliriousCD			= mod:NewCDTimer(20.5, 117837, nil, "RemoveEnrage", nil, 5, nil, DBM_COMMON_L.HEROIC_ICON..DBM_COMMON_L.ENRAGE_ICON)
@@ -64,9 +64,9 @@ local timerDeliriousCD			= mod:NewCDTimer(20.5, 117837, nil, "RemoveEnrage", nil
 mod:AddTimerLine(Qiang)
 local warnImperviousShieldSoon	= mod:NewPreWarnAnnounce(117961, 5, 3)--Less dangerous than Shield of darkness, doesn't need as much spam
 
-local specWarnAnnihilate		= mod:NewSpecialWarningDodge(117948, nil, nil, nil, 2, 2)--Maybe tweak options later or add a bool for it, cause on heroic, it's not likely ranged will be in front of Qiang if Zian or Subetai are up.
-local specWarnFlankingOrders	= mod:NewSpecialWarningDodge(117910, nil, nil, nil, 2, 2)
-local specWarnImperviousShield	= mod:NewSpecialWarningDispel(117961, nil, nil, nil, 1, 2, 3)--Heroic Ability
+local specWarnAnnihilate		= mod:NewSpecialWarningDodge(117948, nil, nil, nil, 2, 2, nil, nil, "shockwave")--Maybe tweak options later or add a bool for it, cause on heroic, it's not likely ranged will be in front of Qiang if Zian or Subetai are up.
+local specWarnFlankingOrders	= mod:NewSpecialWarningDodge(117910, nil, nil, nil, 2, 2, nil, nil, "watchstep")
+local specWarnImperviousShield	= mod:NewSpecialWarningDispel(117961, nil, nil, nil, 1, 2, 3, nil, "dispelboss")--Heroic Ability
 
 local timerMassiveAttackCD		= mod:NewCDTimer(5, 117921, nil, nil, nil, 5)--This timer needed for all players to figure out Flanking Orders moves.
 local timerAnnihilateCD			= mod:NewNextTimer(39, 117948, nil, nil, nil, 3)
@@ -77,11 +77,11 @@ mod:AddTimerLine(Subetai)
 local warnPinnedDown			= mod:NewTargetAnnounce(118135, 4)--We warn for this one since it's more informative then warning for just Rain of Arrows
 local warnPillage				= mod:NewTargetNoFilterAnnounce(118047, 3)
 
-local specWarnVolley			= mod:NewSpecialWarningDodge(118094, nil, nil, nil, 2, 2)--118088 trigger ID, but we use the other ID cause it has a tooltip/icon
-local specWarnPinningArrow		= mod:NewSpecialWarningSwitch(-5861, "Dps", nil, nil, 1, 2)
-local specWarnPillage			= mod:NewSpecialWarningYou(118047, nil, nil, nil, 1, 2)--Works as both a You and near warning
+local specWarnVolley			= mod:NewSpecialWarningDodge(118094, nil, nil, nil, 2, 2, nil, nil, "shockwave")--118088 trigger ID, but we use the other ID cause it has a tooltip/icon
+local specWarnPinningArrow		= mod:NewSpecialWarningSwitch(-5861, "Dps", nil, nil, 1, 2, nil, nil, "targetchange")
+local specWarnPillage			= mod:NewSpecialWarningYou(118047, nil, nil, nil, 1, 2, nil, nil, "targetyou")--Works as both a You and near warning
 local yellPillage				= mod:NewYell(118047)
-local specWarnSleightOfHand		= mod:NewSpecialWarningTarget(118162, nil, nil, nil, 1, 3, 3)--Heroic Ability
+local specWarnSleightOfHand		= mod:NewSpecialWarningTarget(118162, nil, nil, nil, 1, 3, 3, nil, "crowdcontrol")--Heroic Ability
 
 local timerVolleyCD				= mod:NewNextTimer(39.9, 118094, nil, nil, nil, 3)
 local timerRainOfArrowsCD		= mod:NewCDTimer(50.5, 118122, nil, nil, nil, 3)--heroic 41s fixed cd. normal and lfr 50.5~60.5 variable cd.

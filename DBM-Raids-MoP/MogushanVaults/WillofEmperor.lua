@@ -39,17 +39,17 @@ local warnStomp					= mod:NewCountAnnounce(116969, 4)--This is NOT a pre warn, o
 local warnTitanGas				= mod:NewCountAnnounce(116779, 3)
 
 --Rage
-local specWarnFocusedAssault	= mod:NewSpecialWarningYou(116525, false, nil, nil, 1, 2)--off by default do to sheer number of these mobs
+local specWarnFocusedAssault	= mod:NewSpecialWarningYou(116525, false, nil, nil, 1, 2, nil, nil, "targetyou")--off by default do to sheer number of these mobs
 --Strength
-local specWarnStrengthActivated	= mod:NewSpecialWarningCount(-5677, "Tank", nil, nil, 1, 2)--These still need to be tanked. so give tanks special warning when these spawn, and dps can enable it too depending on dps strat.
+local specWarnStrengthActivated	= mod:NewSpecialWarningCount(-5677, "Tank", nil, nil, 1, 2, nil, nil, "targetchange")--These still need to be tanked. so give tanks special warning when these spawn, and dps can enable it too depending on dps strat.
 --Courage
-local specWarnCourageActivated	= mod:NewSpecialWarningSwitchCount(-5676, "Dps", nil, nil, 1, 2)--These really need to die asap. If they reach the tank, you will have a dead tank on hands very soon after.
-local specWarnFocusedDefense	= mod:NewSpecialWarningYou(116778, nil, nil, nil, 1, 2)--On by default since less of these and they are stronger
+local specWarnCourageActivated	= mod:NewSpecialWarningSwitchCount(-5676, "Dps", nil, nil, 1, 2, nil, nil, "killmob")--These really need to die asap. If they reach the tank, you will have a dead tank on hands very soon after.
+local specWarnFocusedDefense	= mod:NewSpecialWarningYou(116778, nil, nil, nil, 1, 2, nil, nil, "targetyou")--On by default since less of these and they are stronger
 --Sparks (Heroic Only)
-local specWarnFocusedEnergy		= mod:NewSpecialWarningYou(116829, nil, nil, nil, 1, 2, 3)
+local specWarnFocusedEnergy		= mod:NewSpecialWarningYou(116829, nil, nil, nil, 1, 2, 3, nil, "targetyou")
 --Jan-xi and Qin-xi
-local specWarnBossesActivated	= mod:NewSpecialWarningSwitch(-5726, "Tank", nil, nil, 1, 2)
-local specWarnCombo				= mod:NewSpecialWarningTarget(-5672, nil, nil, nil, 2, 2)
+local specWarnBossesActivated	= mod:NewSpecialWarningSwitch(-5726, "Tank", nil, nil, 1, 2, nil, nil, "targetchange")
+local specWarnCombo				= mod:NewSpecialWarningTarget(-5672, nil, nil, nil, 2, 2, nil, nil, "specialsoon")
 
 --Rage
 local timerRageActivates		= mod:NewNextCountTimer(30, -5678, nil, nil, nil, 1, 116525)

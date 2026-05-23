@@ -23,9 +23,9 @@ local warnShatteringStomp			= mod:NewSpellAnnounce(142771, 3)--The cds on these 
 local warnShatteringCharge			= mod:NewTargetNoFilterAnnounce(142773, 3)--So timers probably not useful, I localized pull just in case though
 
 --Dark Shaman Xorenth
-local specWarnRuinedEarthMove		= mod:NewSpecialWarningDodge(142311, nil, nil, nil, 2, 2)
+local specWarnRuinedEarthMove		= mod:NewSpecialWarningDodge(142311, nil, nil, nil, 2, 2, nil, nil, "watchstep")
 --Overseer Elaglo
-local specWarnGTFO					= mod:NewSpecialWarningGTFO(142768, nil, nil, nil, 1, 8)
+local specWarnGTFO					= mod:NewSpecialWarningGTFO(142768, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
 
 --Dark Shaman Xorenth
 local timerGlacialFreezeTotemCD		= mod:NewCDTimer(25, 142320, nil, nil, nil, 1)--Only got cast twice in my log, so cd may be variable, need more data.

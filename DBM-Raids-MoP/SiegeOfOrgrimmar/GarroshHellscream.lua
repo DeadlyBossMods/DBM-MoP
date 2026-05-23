@@ -40,15 +40,15 @@ local berserkTimer					= mod:NewBerserkTimer(1080)
 --Stage 1: The True Horde
 local warnSiegeEngineer				= mod:NewSpellAnnounce(-8298, 4, 144616)
 
-local specWarnDesecrate				= mod:NewSpecialWarningTargetCount(144748, nil, nil, nil, 2, 2)
-local specWarnDesecrateYou			= mod:NewSpecialWarningYou(144748, nil, nil, nil, 1, 2)
+local specWarnDesecrate				= mod:NewSpecialWarningTargetCount(144748, nil, nil, nil, 2, 2, nil, nil, "watchstep")
+local specWarnDesecrateYou			= mod:NewSpecialWarningYou(144748, nil, nil, nil, 1, 2, nil, nil, "targetyou")
 local yellDesecrate					= mod:NewYell(144748)
-local specWarnHellscreamsWarsong	= mod:NewSpecialWarningSpell(144821, "Tank|Healer", nil, nil, 2, 2)
+local specWarnHellscreamsWarsong	= mod:NewSpecialWarningSpell(144821, "Tank|Healer", nil, nil, 2, 2, nil, nil, "defensive")
 local specWarnExplodingIronStar		= mod:NewSpecialWarningSpell(144798, nil, nil, nil, 3, 2)
-local specWarnFarseerWolfRider		= mod:NewSpecialWarningSwitchCount(-8294, "-Healer", nil, nil, 1, 2)
+local specWarnFarseerWolfRider		= mod:NewSpecialWarningSwitchCount(-8294, "-Healer", nil, nil, 1, 2, nil, nil, "killmob")
 local specWarnSiegeEngineer			= mod:NewSpecialWarningPreWarn(-8298, false, 4, nil, nil, 1, 2)
-local specWarnChainHeal				= mod:NewSpecialWarningInterrupt(144583, "HasInterrupt", nil, nil, 1, 2)
-local specWarnChainLightning		= mod:NewSpecialWarningInterrupt(144584, false, nil, nil, 1, 2)
+local specWarnChainHeal				= mod:NewSpecialWarningInterrupt(144583, "HasInterrupt", nil, nil, 1, 2, nil, nil, "kickcast")
+local specWarnChainLightning		= mod:NewSpecialWarningInterrupt(144584, false, nil, nil, 1, 2, nil, nil, "kickcast")
 
 local timerDesecrateCD				= mod:NewCDCountTimer(33.8, 144748, nil, nil, nil, 3, nil, nil, nil, 2, 4)
 local timerHellscreamsWarsongCD		= mod:NewNextTimer(42.2, 144821, nil, "Tank|Healer", nil, 5, nil, DBM_COMMON_L.TANK_ICON)
@@ -61,7 +61,7 @@ mod:AddSetIconOption("SetIconOnShaman", -8294, false, 5, {8, 7, 6, 5, 4, 3, 2, 1
 local warnYShaarjsProtection		= mod:NewTargetNoFilterAnnounce(144945, 2)
 local warnYShaarjsProtectionFade	= mod:NewFadesAnnounce(144945, 1)
 
-local specWarnAnnihilate			= mod:NewSpecialWarningDodge(144969, nil, nil, nil, 2, 2)
+local specWarnAnnihilate			= mod:NewSpecialWarningDodge(144969, nil, nil, nil, 2, 2, nil, nil, "shockwave")
 
 local timerEnterRealm				= mod:NewNextTimer(145.5, 144866, nil, nil, nil, 6, 144945)
 local timerRealm					= mod:NewBuffActiveTimer(60.5, -8305, nil, nil, nil, 6, 144945, nil, nil, 1, 8)--May be too long, but intermission makes more sense than protection buff which actually fades before intermission ends if you do it right.
@@ -69,11 +69,11 @@ local timerRealm					= mod:NewBuffActiveTimer(60.5, -8305, nil, nil, nil, 6, 144
 local warnTouchOfYShaarj			= mod:NewTargetNoFilterAnnounce(145071, 3)
 local warnGrippingDespair			= mod:NewStackAnnounce(145183, 2, nil, "Tank")
 
-local specWarnWhirlingCorruption	= mod:NewSpecialWarningRunCount(144985, nil, nil, nil, 4, 2)--Two options important, for distinction and setting custom sounds for empowered one vs non empowered one, don't merge
-local specWarnGrippingDespair		= mod:NewSpecialWarningStack(145183, nil, 4, nil, nil, 1, 6)--Unlike whirling and desecrate, doesn't need two options, distinction isn't important for tank swaps.
-local specWarnGrippingDespairOther	= mod:NewSpecialWarningTaunt(145183, nil, nil, nil, 1, 2)
-local specWarnTouchOfYShaarj		= mod:NewSpecialWarningSwitchCount(145071, "-Healer", nil, nil, 1, 2)
-local specWarnTouchInterrupt		= mod:NewSpecialWarningInterrupt(145599, "HasInterrupt", nil, nil, 1, 2)
+local specWarnWhirlingCorruption	= mod:NewSpecialWarningRunCount(144985, nil, nil, nil, 4, 2, nil, nil, "justrun")--Two options important, for distinction and setting custom sounds for empowered one vs non empowered one, don't merge
+local specWarnGrippingDespair		= mod:NewSpecialWarningStack(145183, nil, 4, nil, nil, 1, 6, nil, nil, "stackhigh")--Unlike whirling and desecrate, doesn't need two options, distinction isn't important for tank swaps.
+local specWarnGrippingDespairOther	= mod:NewSpecialWarningTaunt(145183, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnTouchOfYShaarj		= mod:NewSpecialWarningSwitchCount(145071, "-Healer", nil, nil, 1, 2, nil, nil, "findmc")
+local specWarnTouchInterrupt		= mod:NewSpecialWarningInterrupt(145599, "HasInterrupt", nil, nil, 1, 2, nil, nil, "kickcast")
 
 local timerWhirlingCorruptionCD		= mod:NewCDCountTimer(49.5, 144985, nil, nil, nil, 2, nil, DBM_COMMON_L.HEALER_ICON, nil, 1, 4)--One bar for both, "empowered" makes timer too long
 local timerWhirlingCorruption		= mod:NewBuffActiveTimer(9, 144985, nil, false)
@@ -85,23 +85,23 @@ mod:AddSetIconOption("SetIconOnMC", 145071, false, 0, {1, 2, 3, 4, 5, 6, 7, 8})
 local warnEmpTouchOfYShaarj			= mod:NewTargetNoFilterAnnounce(145175, 3)
 local warnEmpGrippingDespair		= mod:NewStackAnnounce(145195, 3, nil, "Tank")--Distinction is not that important, may just remove for the tank warning.
 
-local specWarnEmpWhirlingCorruption	= mod:NewSpecialWarningRunCount(145037, nil, nil, nil, 4, 2)--Two options important, for distinction and setting custom sounds for empowered one vs non empowered one, don't merge
-local specWarnEmpDesecrate			= mod:NewSpecialWarningTargetCount(144749, nil, nil, nil, 2, 2)--^^
+local specWarnEmpWhirlingCorruption	= mod:NewSpecialWarningRunCount(145037, nil, nil, nil, 4, 2, nil, nil, "justrun")--Two options important, for distinction and setting custom sounds for empowered one vs non empowered one, don't merge
+local specWarnEmpDesecrate			= mod:NewSpecialWarningTargetCount(144749, nil, nil, nil, 2, 2, nil, nil, "watchstep")--^^
 --Starge Four: Heroic Hidden Phase
 local warnMalice					= mod:NewTargetNoFilterAnnounce(147209, 2)
 local warnManifestRage				= mod:NewSpellAnnounce(147011, 4)
 local warnIronStarFixate			= mod:NewTargetNoFilterAnnounce(147665, 2)
 local warnBombardmentOver			= mod:NewEndAnnounce(147120, 1)
 
-local specWarnMaliceYou				= mod:NewSpecialWarningMoveTo(147209, nil, nil, nil, 1, 2)
+local specWarnMaliceYou				= mod:NewSpecialWarningMoveTo(147209, nil, nil, nil, 1, 2, nil, nil, "gathershare")
 local yellMalice					= mod:NewYell(147209, nil, false)
 local yellMaliceFades				= mod:NewShortFadesYell(147209, nil, false, nil, "YELL")
-local specWarnBombardment			= mod:NewSpecialWarningCount(147120, nil, nil, nil, 2, nil)
-local specWarnISFixate				= mod:NewSpecialWarningYou(147665, nil, nil, nil, 1, 2)
-local specWarnIronStarSpawn			= mod:NewSpecialWarningSpell(147047, nil, nil, nil, 2, 2)
-local specWarnManifestRage			= mod:NewSpecialWarningMoveTo(147011, nil, nil, nil, 3, 2)
-local specWarnMaliciousBlast		= mod:NewSpecialWarningStack(147235, nil, 1, nil, nil, 1, 6)
-local specWarnNapalm				= mod:NewSpecialWarningGTFO(147136, nil, nil, nil, 1, 8)
+local specWarnBombardment			= mod:NewSpecialWarningCount(147120, nil, nil, nil, 2, nil, nil, nil, "specialsoon")
+local specWarnISFixate				= mod:NewSpecialWarningYou(147665, nil, nil, nil, 1, 2, nil, nil, "targetyou")
+local specWarnIronStarSpawn			= mod:NewSpecialWarningSpell(147047, nil, nil, nil, 2, 2, nil, nil, "watchorb")
+local specWarnManifestRage			= mod:NewSpecialWarningMoveTo(147011, nil, nil, nil, 3, 2, nil, nil, "movetoboss")
+local specWarnMaliciousBlast		= mod:NewSpecialWarningStack(147235, nil, 1, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnNapalm				= mod:NewSpecialWarningGTFO(147136, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
 
 local timerEnterGarroshRealm		= mod:NewNextTimer(20, 146984, nil, nil, nil, 6, 144945)
 local timerMaliceCD					= mod:NewNextTimer(29.5, 147209, nil, nil, nil, 3, nil, nil, nil, 3, 4)--29.5-33sec variation

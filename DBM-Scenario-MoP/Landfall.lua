@@ -18,7 +18,7 @@ local warnDivineStorm		= mod:NewSpellAnnounce(135404, 4, nil, "Melee")
 local warnDivineLight		= mod:NewSpellAnnounce(135403, 4)
 local warnAchFiveAlive		= mod:NewAnnounce("WarnAchFiveAlive", 3, nil, false)
 
-local specWarnDivineLight	= mod:NewSpecialWarningInterrupt(135403, "HasInterrupt", nil, nil, 1, 2)
+local specWarnDivineLight	= mod:NewSpecialWarningInterrupt(135403, "HasInterrupt", nil, nil, 1, 2, nil, nil, "kickcast")
 
 --[[ Alliance 'heroes'
 68581 Daggin Windbeard

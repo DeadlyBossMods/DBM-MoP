@@ -18,9 +18,9 @@ mod:RegisterEventsInCombat(
 local warnStormcloud			= mod:NewTargetAnnounce(136340, 3)
 local warnLightningTether		= mod:NewTargetAnnounce(136339, 3)
 
-local specWarnStormcloud		= mod:NewSpecialWarningMoveAway(136340, nil, nil, nil, 1, 2)
-local specWarnLightningTether	= mod:NewSpecialWarningMoveTo(136339, nil, nil, nil, 1, 14)
-local specWarnArcNova			= mod:NewSpecialWarningRun(136338, "Melee", nil, 2, 4, 2)
+local specWarnStormcloud		= mod:NewSpecialWarningMoveAway(136340, nil, nil, nil, 1, 2, nil, nil, "runout")
+local specWarnLightningTether	= mod:NewSpecialWarningMoveTo(136339, nil, nil, nil, 1, 14, nil, nil, "movetoboss")
+local specWarnArcNova			= mod:NewSpecialWarningRun(136338, "Melee", nil, 2, 4, 2, nil, nil, "justrun")
 
 local timerStormcloudCD			= mod:NewCDTimer(21.5, 136340, nil, nil, nil, 3)
 local timerLightningTetherCD	= mod:NewCDTimer(26.7, 136339, nil, nil, nil, 3)--Needs more data, they may have tweaked it some.

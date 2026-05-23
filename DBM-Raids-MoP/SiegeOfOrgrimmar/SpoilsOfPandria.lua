@@ -50,23 +50,23 @@ local warnWindStorm				= mod:NewSpellAnnounce(145286, 3)
 local warnBreathofFire			= mod:NewSpellAnnounce(146222, 3)--Do not have timer for this yet, add not alive long enough.
 
 --Massive Crate of Goods
-local specWarnSetToBlowYou		= mod:NewSpecialWarningYou(145987, nil, nil, nil, 1, 2)
+local specWarnSetToBlowYou		= mod:NewSpecialWarningYou(145987, nil, nil, nil, 1, 2, nil, nil, "bombyou")
 local specWarnSetToBlow			= mod:NewSpecialWarningPreWarn(145996, nil, 4, nil, 3, 2)
 --Stout Crate of Goods
 ----Mogu
-local specWarnForbiddenMagic	= mod:NewSpecialWarningInterrupt(145230, "HasInterrupt", nil, nil, 1, 2)
-local specWarnMatterScramble	= mod:NewSpecialWarningSoak(145288, nil, nil, nil, 2, 2)
-local specWarnCrimsonRecon		= mod:NewSpecialWarningMove(142947, "Tank", nil, nil, 3, 2)
+local specWarnForbiddenMagic	= mod:NewSpecialWarningInterrupt(145230, "HasInterrupt", nil, nil, 1, 2, nil, nil, "kickcast")
+local specWarnMatterScramble	= mod:NewSpecialWarningSoak(145288, nil, nil, nil, 2, 2, nil, nil, "helpsoak")
+local specWarnCrimsonRecon		= mod:NewSpecialWarningMove(142947, "Tank", nil, nil, 3, 2, nil, nil, "moveboss")
 ----Mantid
-local specWarnMantidSwarm		= mod:NewSpecialWarningSpell(142539, "Tank", nil, nil, 1, 2)
-local specWarnResidue			= mod:NewSpecialWarningSpell(145786, "MagicDispeller", nil, nil, 1, 2)
-local specWarnRageoftheEmpress	= mod:NewSpecialWarningSpell(145812, "MagicDispeller", nil, nil, 1, 2)
-local specWarnEnrage			= mod:NewSpecialWarningDispel(145692, "RemoveEnrage", nil, nil, 1, 2)--Question is, do we want to dispel it? might make this off by default since kiting it may be more desired than dispeling it
+local specWarnMantidSwarm		= mod:NewSpecialWarningSpell(142539, "Tank", nil, nil, 1, 2, nil, nil, "mobsoon")
+local specWarnResidue			= mod:NewSpecialWarningSpell(145786, "MagicDispeller", nil, nil, 1, 2, nil, nil, "dispelboss")
+local specWarnRageoftheEmpress	= mod:NewSpecialWarningSpell(145812, "MagicDispeller", nil, nil, 1, 2, nil, nil, "dispelboss")
+local specWarnEnrage			= mod:NewSpecialWarningDispel(145692, "RemoveEnrage", nil, nil, 1, 2, nil, nil, "enrage")--Question is, do we want to dispel it? might make this off by default since kiting it may be more desired than dispeling it
 --Lightweight Crate of Goods
 ----Mantid
-local specWarnGTFO				= mod:NewSpecialWarningGTFO(145716, nil, nil, nil, 1, 8)
+local specWarnGTFO				= mod:NewSpecialWarningGTFO(145716, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
 --Crate of Pandaren Relics
-local specWarnGustingCraneKick	= mod:NewSpecialWarningSpell(146180, "Melee", nil, nil, 2, 2)
+local specWarnGustingCraneKick	= mod:NewSpecialWarningSpell(146180, "Melee", nil, nil, 2, 2, nil, nil, "whirlwind")
 
 local timerCombatStarts			= mod:NewCombatTimer(18)
 --Massive Crate of Goods

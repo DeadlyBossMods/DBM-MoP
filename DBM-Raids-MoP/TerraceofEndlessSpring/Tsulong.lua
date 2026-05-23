@@ -28,12 +28,12 @@ local warnSummonEmbodiedTerror			= mod:NewCountAnnounce(-6316, 4, "627685")
 local warnSunBreath						= mod:NewCountAnnounce(122855, 3)
 local warnLightOfDay					= mod:NewTargetCountAnnounce(123716, 1, nil, "Healer", nil, nil, nil, nil, true)
 
-local specWarnShadowBreath				= mod:NewSpecialWarningSpell(122752, nil, nil, nil, 1, 2)
-local specWarnDreadShadows				= mod:NewSpecialWarningStack(122768, nil, 9, nil, nil, 1, 6)--For heroic, 10 is unhealable, and it stacks pretty fast so adaquate warning to get over there would be abou 5-6
-local specWarnNightmares				= mod:NewSpecialWarningDodge(122770, nil, nil, nil, 2, 2)
+local specWarnShadowBreath				= mod:NewSpecialWarningSpell(122752, nil, nil, nil, 1, 2, nil, nil, "breathsoon")
+local specWarnDreadShadows				= mod:NewSpecialWarningStack(122768, nil, 9, nil, nil, 1, 6, nil, nil, "stackhigh")--For heroic, 10 is unhealable, and it stacks pretty fast so adaquate warning to get over there would be abou 5-6
+local specWarnNightmares				= mod:NewSpecialWarningDodge(122770, nil, nil, nil, 2, 2, nil, nil, "watchstep")
 local yellNightmares					= mod:NewYell(122770)
-local specWarnDarkOfNight				= mod:NewSpecialWarningSwitchCount(-6550, "Dps", nil, nil, 1, 2)
-local specWarnTerrorize					= mod:NewSpecialWarningDispel(123012, "RemoveMagic", nil, nil, 1, 2)
+local specWarnDarkOfNight				= mod:NewSpecialWarningSwitchCount(-6550, "Dps", nil, nil, 1, 2, nil, nil, "targetchange")
+local specWarnTerrorize					= mod:NewSpecialWarningDispel(123012, "RemoveMagic", nil, nil, 1, 2, nil, nil, "helpdispel")
 
 local timerNightCD						= mod:NewNextTimer(121, -6310, nil, nil, nil, 6, 130013, DBM_COMMON_L.DAMAGE_ICON)
 local timerSunbeamCD					= mod:NewCDTimer(41, 122789, nil, nil, nil, 3)

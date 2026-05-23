@@ -24,11 +24,11 @@ local warnProtect						= mod:NewTargetNoFilterAnnounce(123250, 2)
 local warnHideOver						= mod:NewAnnounce("warnHideOver", 2, 123244, nil, nil, nil, 123244)--Because we can. with creativeness, the boss returning is detectable a full 1-2 seconds before even visible. A good signal to stop aoe and get ready to return norm DPS
 local warnSpray							= mod:NewStackAnnounce(123121, 3, nil, "Tank|Healer")
 
-local specWarnAnimatedProtector			= mod:NewSpecialWarningSwitch(-6224, "-Healer", nil, nil, 1, 2)
-local specWarnHide						= mod:NewSpecialWarningCount(123244, nil, nil, nil, 2, 2)
-local specWarnGetAway					= mod:NewSpecialWarningCount(123461, nil, nil, nil, 2, 2)
-local specWarnSpray						= mod:NewSpecialWarningStack(123121, "Tank", 6, nil, nil, 1, 6)
-local specWarnSprayOther				= mod:NewSpecialWarningTaunt(123121, nil, nil, nil, 1, 2)
+local specWarnAnimatedProtector			= mod:NewSpecialWarningSwitch(-6224, "-Healer", nil, nil, 1, 2, nil, nil, "killmob")
+local specWarnHide						= mod:NewSpecialWarningCount(123244, nil, nil, nil, 2, 2, nil, nil, "phasechange")
+local specWarnGetAway					= mod:NewSpecialWarningCount(123461, nil, nil, nil, 2, 2, nil, nil, "pushbackincoming")
+local specWarnSpray						= mod:NewSpecialWarningStack(123121, "Tank", 6, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnSprayOther				= mod:NewSpecialWarningTaunt(123121, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
 
 local timerSpecialCD					= mod:NewTimer(50, "timerSpecialCD", 123250, nil, nil, 6)--Variable, 49.5-55 seconds
 local timerSpray						= mod:NewTargetTimer(10, 123121, nil, "Tank|Healer", nil, 5)

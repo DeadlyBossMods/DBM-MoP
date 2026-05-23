@@ -39,18 +39,18 @@ local warnFreeze						= mod:NewTargetAnnounce(135145, 3, nil, false)--Spammy, mo
 local warnPhase4						= mod:NewPhaseAnnounce(4)
 local warnRisingAnger					= mod:NewStackAnnounce(136323, 2, nil, false)
 
-local specWarnImpale					= mod:NewSpecialWarningStack(134691, nil, 2, nil, nil, 1, 6)
-local specWarnImpaleOther				= mod:NewSpecialWarningTaunt(134691, nil, nil, nil, 1, 2)
-local specWarnThrowSpear				= mod:NewSpecialWarningSpell(134926, nil, nil, nil, 2, 2)
-local specWarnThrowSpearYou				= mod:NewSpecialWarningYou(134926, nil, nil, nil, 1, 2)
+local specWarnImpale					= mod:NewSpecialWarningStack(134691, nil, 2, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnImpaleOther				= mod:NewSpecialWarningTaunt(134691, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnThrowSpear				= mod:NewSpecialWarningSpell(134926, nil, nil, nil, 2, 2, nil, nil, "watchstep")
+local specWarnThrowSpearYou				= mod:NewSpecialWarningYou(134926, nil, nil, nil, 1, 2, nil, nil, "runout")
 local yellThrowSpear					= mod:NewShortYell(134926)
-local specWarnScorched					= mod:NewSpecialWarningStack(134647, false, 3, nil, nil, 1, 6)--We do a 4 and 2 strat (4 melee 2 ranged). 3 is not an everyone strat.
-local specWarnBurningGTFO				= mod:NewSpecialWarningGTFO(137668, nil, nil, nil, 1, 8)
+local specWarnScorched					= mod:NewSpecialWarningStack(134647, false, 3, nil, nil, 1, 6, nil, nil, "stackhigh")--We do a 4 and 2 strat (4 melee 2 ranged). 3 is not an everyone strat.
+local specWarnBurningGTFO				= mod:NewSpecialWarningGTFO(137668, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
 local specWarnMoltenOverload			= mod:NewSpecialWarningSpell(137221, nil, nil, nil, 2)
 local specWarnWindStorm					= mod:NewSpecialWarningSpell(136577, nil, nil, nil, 2)
-local specWarnLightningStorm			= mod:NewSpecialWarningMoveAway(136192, nil, nil, nil, 1, 2)
+local specWarnLightningStorm			= mod:NewSpecialWarningMoveAway(136192, nil, nil, nil, 1, 2, nil, nil, "scatter")
 local yellLightningStorm				= mod:NewShortYell(136192)
-local specWarnFistSmash					= mod:NewSpecialWarningCount(136147, nil, nil, nil, 2, 2)
+local specWarnFistSmash					= mod:NewSpecialWarningCount(136147, nil, nil, nil, 2, 2, nil, nil, "aesoon")
 
 local timerImpaleCD						= mod:NewCDTimer(17.7, 134691, nil, "Tank|Healer", nil, 5)
 local timerThrowSpearCD					= mod:NewCDTimer(30, 134926, nil, nil, nil, 3)--30-42 second variation observed

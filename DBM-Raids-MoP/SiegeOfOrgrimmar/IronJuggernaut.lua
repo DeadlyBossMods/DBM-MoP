@@ -41,16 +41,16 @@ local warnExplosiveTar			= mod:NewSpellAnnounce(144492, 3)
 local warnCutterLaser			= mod:NewTargetAnnounce(146325, 4)--Not holding my breath this shows in combat log.
 
 --Assault Mode
-local specWarnIgniteArmor		= mod:NewSpecialWarningStack(144467, nil, 3, nil, nil, 1, 6)
-local specWarnIgniteArmorOther	= mod:NewSpecialWarningTaunt(144467, nil, nil, nil, 1, 2)
+local specWarnIgniteArmor		= mod:NewSpecialWarningStack(144467, nil, 3, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnIgniteArmorOther	= mod:NewSpecialWarningTaunt(144467, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
 local specWarnBorerDrill		= mod:NewSpecialWarningDodge(144218, false, nil, nil, 2)
-local specWarnGTFO				= mod:NewSpecialWarningGTFO(144218, nil, nil, nil, 1, 8)
+local specWarnGTFO				= mod:NewSpecialWarningGTFO(144218, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
 --Siege Mode
-local specWarnSeismicActivity	= mod:NewSpecialWarningSpell(144483, nil, nil, nil, 2, 2)
-local specWarnShockPulse		= mod:NewSpecialWarningCount(144485, nil, nil, nil, 2, 2)
-local specWarnCutterLaser		= mod:NewSpecialWarningRun(146325, nil, nil, 2, 4, 2)
+local specWarnSeismicActivity	= mod:NewSpecialWarningSpell(144483, nil, nil, nil, 2, 2, nil, nil, "phasechange")
+local specWarnShockPulse		= mod:NewSpecialWarningCount(144485, nil, nil, nil, 2, 2, nil, nil, "carefly")
+local specWarnCutterLaser		= mod:NewSpecialWarningRun(146325, nil, nil, 2, 4, 2, nil, nil, "laserrun")
 local yellCutterLaser			= mod:NewYell(146325)
-local specWarnMortarBarrage		= mod:NewSpecialWarningSpell(144553, nil, nil, nil, 2, 2)
+local specWarnMortarBarrage		= mod:NewSpecialWarningSpell(144553, nil, nil, nil, 2, 2, nil, nil, "watchstep")
 
 local timerDemolisherCanonCD	= mod:NewCDTimer(6.1, 144154, nil, false)--Spammy. off by default
 --Assault Mode

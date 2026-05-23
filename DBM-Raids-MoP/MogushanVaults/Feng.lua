@@ -47,28 +47,28 @@ local warnChainsOfShadow			= mod:NewSpellAnnounce(118783, 2, nil, false)
 local warnReversalLightningFists	= mod:NewTargetNoFilterAnnounce(118302, 2)--this spell can interrupt Epicenter, so needs to warn.
 
 --Nature/Fist
-local specWarnLightningLash			= mod:NewSpecialWarningStack(131788, nil, 2, nil, nil, 1, 6)
-local specWarnLightningLashOther	= mod:NewSpecialWarningTaunt(131788, nil, nil, nil, 1, 2)
-local specWarnEpicenter				= mod:NewSpecialWarningCount(116018, nil, nil, nil, 2, 2)
+local specWarnLightningLash			= mod:NewSpecialWarningStack(131788, nil, 2, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnLightningLashOther	= mod:NewSpecialWarningTaunt(131788, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnEpicenter				= mod:NewSpecialWarningCount(116018, nil, nil, nil, 2, 2, nil, nil, "aesoon")
 --Fire/Spear
-local specWarnFlamingSpear			= mod:NewSpecialWarningStack(116942, nil, 2, nil, nil, 1, 6)
-local specWarnFlamingSpearOther		= mod:NewSpecialWarningTaunt(116942, nil, nil, nil, 1, 2)
-local specWarnWildSpark				= mod:NewSpecialWarningMoveAway(116784, nil, nil, nil, 1, 2)
-local specWarnWildfire				= mod:NewSpecialWarningGTFO(116793, nil, nil, nil, 1, 8)
-local specWarnDrawFlame				= mod:NewSpecialWarningCount(116711, nil, nil, nil, 2, 2)
+local specWarnFlamingSpear			= mod:NewSpecialWarningStack(116942, nil, 2, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnFlamingSpearOther		= mod:NewSpecialWarningTaunt(116942, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnWildSpark				= mod:NewSpecialWarningMoveAway(116784, nil, nil, nil, 1, 2, nil, nil, "runout")
+local specWarnWildfire				= mod:NewSpecialWarningGTFO(116793, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
+local specWarnDrawFlame				= mod:NewSpecialWarningCount(116711, nil, nil, nil, 2, 2, nil, nil, "specialsoon")
 --Arcane/Staff
-local specWarnArcaneShock			= mod:NewSpecialWarningStack(131790, nil, 2, nil, nil, 1, 6)
-local specWarnArcaneShockOther		= mod:NewSpecialWarningTaunt(131790, nil, nil, nil, 1, 2)
-local specWarnArcaneResonance		= mod:NewSpecialWarningMoveAway(116417, nil, nil, nil, 1, 2)
+local specWarnArcaneShock			= mod:NewSpecialWarningStack(131790, nil, 2, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnArcaneShockOther		= mod:NewSpecialWarningTaunt(131790, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnArcaneResonance		= mod:NewSpecialWarningMoveAway(116417, nil, nil, nil, 1, 2, nil, nil, "runout")
 local yellArcaneResonance			= mod:NewYell(116417)
-local specWarnArcaneVelocity		= mod:NewSpecialWarningCount(116364, nil, nil, nil, 2, 2)
+local specWarnArcaneVelocity		= mod:NewSpecialWarningCount(116364, nil, nil, nil, 2, 2, nil, nil, "runin")
 --Shadow/Shield (Heroic Only)
-local specWarnShadowBurn			= mod:NewSpecialWarningStack(131792, nil, 2, nil, nil, 1, 6)
-local specWarnShadowBurnOther		= mod:NewSpecialWarningTaunt(131792, nil, nil, nil, 1, 2)
-local specWarnSiphoningShield		= mod:NewSpecialWarningCount(117209, nil, nil, nil, 1, 2)
+local specWarnShadowBurn			= mod:NewSpecialWarningStack(131792, nil, 2, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnShadowBurnOther		= mod:NewSpecialWarningTaunt(131792, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnSiphoningShield		= mod:NewSpecialWarningCount(117209, nil, nil, nil, 1, 2, nil, nil, "targetchange")
 --Tank Abilities
-local specWarnBarrierNow			= mod:NewSpecialWarning("specWarnBarrierNow", nil, nil, nil, 1, 12)--Because i'm so damn tired of tanks not having a clue how/when to use this in LFR
-local specWarnNullBarrier			= mod:NewSpecialWarningSpell(115817, nil, nil, nil, 1, 2) -- Null Barrier is important all members, espcially Earth and Arcane Phase.
+local specWarnBarrierNow			= mod:NewSpecialWarning("specWarnBarrierNow", nil, nil, nil, 1, 12, nil, nil, nil, nil, "useextraaction")--Because i'm so damn tired of tanks not having a clue how/when to use this in LFR
+local specWarnNullBarrier			= mod:NewSpecialWarningSpell(115817, nil, nil, nil, 1, 2, nil, nil, "findshield") -- Null Barrier is important all members, espcially Earth and Arcane Phase.
 
 --Nature/Fist
 local timerLightningLash			= mod:NewTargetTimer(20, 131788, nil, false, 2, 5, nil, DBM_COMMON_L.TANK_ICON)

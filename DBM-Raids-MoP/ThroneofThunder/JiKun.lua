@@ -27,15 +27,15 @@ local warnFlock				= mod:NewAnnounce("warnFlock", 3, 15746)--Some random egg ico
 local warnTalonRake			= mod:NewStackAnnounce(134366, 3, nil, "Tank|Healer")
 local warnPrimalNutriment	= mod:NewCountAnnounce(140741, 1)
 
-local specWarnQuills		= mod:NewSpecialWarningCount(134380, nil, nil, nil, 2, 2)
-local specWarnFlock			= mod:NewSpecialWarning("specWarnFlock", false, nil, nil, 1, 2)--For those assigned in egg/bird killing group to enable on their own (and tank on heroic)
-local specWarnTalonRake		= mod:NewSpecialWarningStack(134366, nil, 2, nil, nil, 1, 8)--Might change to 2 if blizz fixes timing issues with it
-local specWarnTalonRakeOther= mod:NewSpecialWarningTaunt(134366, nil, nil, nil, 1, 2)
-local specWarnDowndraft		= mod:NewSpecialWarningSpell(134370, nil, nil, nil, 2, 13)
-local specWarnFeedYoung		= mod:NewSpecialWarningDodge(137528, nil, nil, nil, 2, 2)
-local specWarnBigBird		= mod:NewSpecialWarning("specWarnBigBird", "Tank", nil, nil, 1, 2)
+local specWarnQuills		= mod:NewSpecialWarningCount(134380, nil, nil, nil, 2, 2, nil, nil, "watchstep")
+local specWarnFlock			= mod:NewSpecialWarning("specWarnFlock", false, nil, nil, 1, 2, nil, nil, nil, nil, "movetoegg")--For those assigned in egg/bird killing group to enable on their own (and tank on heroic, "movetoegg")
+local specWarnTalonRake		= mod:NewSpecialWarningStack(134366, nil, 2, nil, nil, 1, 8, nil, nil, "stackhigh")--Might change to 2 if blizz fixes timing issues with it
+local specWarnTalonRakeOther= mod:NewSpecialWarningTaunt(134366, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnDowndraft		= mod:NewSpecialWarningSpell(134370, nil, nil, nil, 2, 13, nil, nil, "pushbackincoming")
+local specWarnFeedYoung		= mod:NewSpecialWarningDodge(137528, nil, nil, nil, 2, 2, nil, nil, "watchstep")
+local specWarnBigBird		= mod:NewSpecialWarning("specWarnBigBird", "Tank", nil, nil, 1, 2, nil, nil, nil, nil, "bigmob")
 local specWarnBigBirdSoon	= mod:NewSpecialWarning("specWarnBigBirdSoon", "Tank", nil, nil, 1, 2)
-local specWarnFeedPool		= mod:NewSpecialWarningGTFO(138319, false, nil, nil, 1, 8)
+local specWarnFeedPool		= mod:NewSpecialWarningGTFO(138319, false, nil, nil, 1, 8, nil, nil, "watchfeet")
 
 --local timerCawsCD			= mod:NewCDTimer(15, 138923)--Variable beyond usefulness. anywhere from 18 second cd and 50.
 local timerQuills			= mod:NewBuffActiveTimer(10, 134380, nil, nil, nil, 5, nil, DBM_COMMON_L.HEALER_ICON)

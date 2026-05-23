@@ -22,9 +22,9 @@ local warnJadeStatue			= mod:NewSpellAnnounce(119364, 4)
 local warnSummonSeedlings		= mod:NewSpellAnnounce(117664, 2)
 
 --Cursed Brew
-local specWarnBrewBubble		= mod:NewSpecialWarningSwitch(131143, "Dps", nil, nil, 1, 2)
+local specWarnBrewBubble		= mod:NewSpecialWarningSwitch(131143, "Dps", nil, nil, 1, 2, nil, nil, "targetchange")
 --Beast of Jade
-local specWarnJadeStatue		= mod:NewSpecialWarningInterrupt(119364, "HasInterrupt", nil, nil, 1, 2)
+local specWarnJadeStatue		= mod:NewSpecialWarningInterrupt(119364, "HasInterrupt", nil, nil, 1, 2, nil, nil, "kickcast")
 
 --Cursed Brew
 local timerBrewBubbleCD			= mod:NewCDTimer(15, 131143, nil, nil, nil, 3)

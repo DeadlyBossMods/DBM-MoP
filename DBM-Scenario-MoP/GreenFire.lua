@@ -30,14 +30,14 @@ local warnSummonDoomlord		= mod:NewCastAnnounce(138755, 3, 10)
 local warnSummonFelhunter		= mod:NewCastAnnounce(138751, 3, 10)
 
 --Essence of Order
-local specWarnSpellFlame		= mod:NewSpecialWarningDodge(134234, nil, nil, nil, 2, 2)
-local specWarnHellfire			= mod:NewSpecialWarningInterrupt(134225, nil, nil, nil, 1, 2)
-local specWarnLostSouls			= mod:NewSpecialWarning("specWarnLostSouls", nil, nil, nil, 1, 2)
+local specWarnSpellFlame		= mod:NewSpecialWarningDodge(134234, nil, nil, nil, 2, 2, nil, nil, "watchstep")
+local specWarnHellfire			= mod:NewSpecialWarningInterrupt(134225, nil, nil, nil, 1, 2, nil, nil, "kickcast")
+local specWarnLostSouls			= mod:NewSpecialWarning("specWarnLostSouls", nil, nil, nil, 1, 2, nil, nil, nil, nil, "killmob")
 --Kanrethad Ebonlocke
-local specWarnEnslavePitLord	= mod:NewSpecialWarning("specWarnEnslavePitLord", nil, nil, nil, 1, 2)
-local specWarnCataclysm			= mod:NewSpecialWarningInterrupt(138564, nil, nil, nil, 1, 2)
-local specWarnRainOfFire		= mod:NewSpecialWarningGTFO(138561, nil, nil, nil, 1, 8)
-local specWarnChaosBolt			= mod:NewSpecialWarningInterrupt(138559, nil, nil, nil, 3, 2)
+local specWarnEnslavePitLord	= mod:NewSpecialWarning("specWarnEnslavePitLord", nil, nil, nil, 1, 2, nil, nil, nil, nil, "bigmob")
+local specWarnCataclysm			= mod:NewSpecialWarningInterrupt(138564, nil, nil, nil, 1, 2, nil, nil, "kickcast")
+local specWarnRainOfFire		= mod:NewSpecialWarningGTFO(138561, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
+local specWarnChaosBolt			= mod:NewSpecialWarningInterrupt(138559, nil, nil, nil, 3, 2, nil, nil, "kickcast")
 
 --Essence of Order
 --Todo, maybe register zone combat scanner and cids for initial combat start timers

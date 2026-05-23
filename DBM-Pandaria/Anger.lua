@@ -22,8 +22,8 @@ local warnGrowingAnger			= mod:NewTargetNoFilterAnnounce(119622, 4)--Mind contro
 local warnAggressiveBehavior	= mod:NewTargetAnnounce(119626, 4)--Actual mind control targets
 local warnUnleashedWrath		= mod:NewSpellAnnounce(119488, 3)
 
-local specWarnGrowingAnger		= mod:NewSpecialWarningYou(119622, nil, nil, nil, 1, 2)
-local specWarnGTFO				= mod:NewSpecialWarningGTFO(119610, nil, nil, nil, 1, 8)
+local specWarnGrowingAnger		= mod:NewSpecialWarningYou(119622, nil, nil, nil, 1, 2, nil, nil, "findmc")
+local specWarnGTFO				= mod:NewSpecialWarningGTFO(119610, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
 
 local timerGrowingAngerCD		= mod:NewCDTimer(32, 119622, nil, nil, nil, 3)--Min 32.6~ Max 67.8
 local timerUnleashedWrathCD		= mod:NewCDTimer(53, 119488, nil, nil, nil, 2)--Based on rage, but timing is consistent enough to use a CD bar, might require some perfecting later, similar to xariona's special, if rage doesn't reset after wipes, etc.

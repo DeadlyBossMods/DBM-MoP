@@ -31,8 +31,8 @@ mod:AddTimerLine(Asani)
 local warnWaterBolt					= mod:NewCountAnnounce(118312, 3, nil, false)
 local warnCleansingWaters			= mod:NewTargetNoFilterAnnounce(117309, 3)--Phase 1+ ability.
 
-local specWarnCleansingWatersDispel	= mod:NewSpecialWarningDispel(117309, "MagicDispeller", nil, nil, 1, 2)--The boss wasn't moved in time, now he needs to be dispelled.
-local specWarnCorruptingWaters		= mod:NewSpecialWarningSwitch(117227, "Dps", nil, nil, 1, 2)
+local specWarnCleansingWatersDispel	= mod:NewSpecialWarningDispel(117309, "MagicDispeller", nil, nil, 1, 2, nil, nil, "dispelboss")--The boss wasn't moved in time, now he needs to be dispelled.
+local specWarnCorruptingWaters		= mod:NewSpecialWarningSwitch(117227, "Dps", nil, nil, 1, 2, nil, nil, "targetchange")
 
 local timerCleansingWatersCD		= mod:NewCDTimer(30.4, 117309, nil, nil, nil, 3, nil, DBM_COMMON_L.MAGIC_ICON)
 local timerCorruptingWatersCD		= mod:NewNextTimer(29.1, 117227, nil, nil, nil, 1, nil, DBM_COMMON_L.DAMAGE_ICON)--Was 42 prior to 10.2.7
@@ -40,9 +40,9 @@ local timerCorruptingWatersCD		= mod:NewNextTimer(29.1, 117227, nil, nil, nil, 1
 mod:AddTimerLine(Regail)
 local warnLightningPrison			= mod:NewTargetAnnounce(111850, 3)--Phase 1+ ability.
 
-local specWarnLightningPrison		= mod:NewSpecialWarningMoveAway(111850, nil, nil, nil, 1, 2)--Debuff you gain before you are hit with it.
+local specWarnLightningPrison		= mod:NewSpecialWarningMoveAway(111850, nil, nil, nil, 1, 2, nil, nil, "runout")--Debuff you gain before you are hit with it.
 local yellLightningPrison			= mod:NewYell(111850)
-local specWarnLightningStorm		= mod:NewSpecialWarningSpell(118077, nil, nil, nil, 2, 2)--Since it's multiple targets, will just use spell instead of dispel warning.
+local specWarnLightningStorm		= mod:NewSpecialWarningSpell(118077, nil, nil, nil, 2, 2, nil, nil, "aesoon")--Since it's multiple targets, will just use spell instead of dispel warning.
 
 local timerLightningPrisonCD		= mod:NewCDTimer(22.3, 111850, nil, nil, nil, 3)
 local timerLightningStormCD			= mod:NewCDTimer(42, 118077, nil, nil, nil, 2)--Shorter Cd in phase 3 32 seconds.
@@ -54,8 +54,8 @@ mod:AddTimerLine(Kaolan)
 local warnTouchofSha				= mod:NewTargetAnnounce(117519, 3, nil, "Healer")--Phase 1+ ability. He stops casting it when everyone in raid has it. If someone dies and is brezed, he casts it on them again.
 local warnDefiledGround				= mod:NewSpellAnnounce(117986, 3, nil, "Melee")--Phase 2+ ability.
 
-local specWarnDefiledGround			= mod:NewSpecialWarningMove(117986, nil, nil, nil, 1, 2)
-local specWarnExpelCorruption		= mod:NewSpecialWarningRun(117975, nil, nil, nil, 4, 2)--Entire raid needs to move.
+local specWarnDefiledGround			= mod:NewSpecialWarningMove(117986, nil, nil, nil, 1, 2, nil, nil, "moveboss")
+local specWarnExpelCorruption		= mod:NewSpecialWarningRun(117975, nil, nil, nil, 4, 2, nil, nil, "justrun")--Entire raid needs to move.
 
 local timerTouchOfShaCD				= mod:NewCDTimer(29, 117519, nil, nil, nil, 3)--Need new heroic data, timers confirmed for 10 man and 25 man normal as 29 and 12
 local timerDefiledGroundCD			= mod:NewNextTimer(15.5, 117986, nil, "Melee", nil, 3)
@@ -64,8 +64,8 @@ local timerExpelCorruptionCD		= mod:NewNextTimer(38.5, 117975, nil, nil, nil, 2,
 mod:AddTimerLine(Kaolan)
 local warnGroupOrder				= mod:NewAnnounce("warnGroupOrder", 1, 118191, false, nil, nil, 118191)--25 man for now, unless someone codes a 10 man version of it into code then it can be both.
 
-local specWarnYourGroup				= mod:NewSpecialWarning("specWarnYourGroup", false, nil, nil, 1, 2, 3, nil, 118191)
-local specWarnCorruptedEssence		= mod:NewSpecialWarningStack(118191, true, 9, nil, nil, 1, 6)--You cannot get more than 9, if you get 9 you need to GTFO or you do big damage to raid
+local specWarnYourGroup				= mod:NewSpecialWarning("specWarnYourGroup", false, nil, nil, 1, 2, 3, nil, 118191, nil, "group3")
+local specWarnCorruptedEssence		= mod:NewSpecialWarningStack(118191, true, 9, nil, nil, 1, 6, nil, nil, "stackhigh")--You cannot get more than 9, if you get 9 you need to GTFO or you do big damage to raid
 
 mod.vb.totalTouchOfSha = 0
 mod.vb.prisonIcon = 1--Will try to start from 1 and work up, to avoid using icons you are probalby putting on bosses (unless you really fail at spreading).

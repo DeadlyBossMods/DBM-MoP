@@ -18,11 +18,11 @@ mod:RegisterEventsInCombat(
 local warnHekimasWisdom		= mod:NewCastAnnounce(141423, 4, 4)
 
 --Farastu
-local specWarnIceSpikes		= mod:NewSpecialWarningDodge(132980, nil, nil, nil, 2, 2)
-local specWarnFrozenSolid	= mod:NewSpecialWarningTarget(141407, nil, nil, nil, 1, 2)
+local specWarnIceSpikes		= mod:NewSpecialWarningDodge(132980, nil, nil, nil, 2, 2, nil, nil, "watchstep")
+local specWarnFrozenSolid	= mod:NewSpecialWarningTarget(141407, nil, nil, nil, 1, 2, nil, nil, "targetchange")
 --Hekima the Wise
-local specWarnHekimasWisdom	= mod:NewSpecialWarningInterrupt(141423, "HasInterrupt", nil, nil, 1, 2)--Not only cast by last boss but trash near him as well, interrupt important for both. Although only bosses counts for achievement.
-local specWarnZandalarBanner= mod:NewSpecialWarningSwitch(142669, nil, nil, nil, 1, 2)
+local specWarnHekimasWisdom	= mod:NewSpecialWarningInterrupt(141423, "HasInterrupt", nil, nil, 1, 2, nil, nil, "kickcast")--Not only cast by last boss but trash near him as well, interrupt important for both. Although only bosses counts for achievement.
+local specWarnZandalarBanner= mod:NewSpecialWarningSwitch(142669, nil, nil, nil, 1, 2, nil, nil, "targetchange")
 
 --Farastu
 local timerIceSpikesCD		= mod:NewCDTimer(10, 132980, nil, nil, nil, 3)

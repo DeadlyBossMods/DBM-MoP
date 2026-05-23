@@ -21,10 +21,10 @@ mod:RegisterEventsInCombat(
 local warnCrush					= mod:NewStackAnnounce(137504, 2, nil, "Tank|Healer")--Cast every 30 seconds roughly, lasts 1 minute. you need 3 tanks to be able to tank the boss without debuff. 2 tanks CAN do but they will always have 1 stack and take 25% more damage
 local warnSpiritfireBeam		= mod:NewTargetNoFilterAnnounce(137511, 3, nil, "Healer")
 
-local specWarnCrush				= mod:NewSpecialWarningStack(137504, nil, 2, nil, nil, 1, 6)
-local specWarnCrushOther		= mod:NewSpecialWarningTarget(137504, nil, nil, nil, 1, 2)--Taunt immune, so not a taunt warning, just a warning that tank may die soon and to be ready
-local specWarnPiercingRoar		= mod:NewSpecialWarningCast(137457, "SpellCaster", nil, nil, 1, 2)
-local specWarnFrillBlast		= mod:NewSpecialWarningSpell(137505, nil, nil, nil, 2, 2)
+local specWarnCrush				= mod:NewSpecialWarningStack(137504, nil, 2, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnCrushOther		= mod:NewSpecialWarningTarget(137504, nil, nil, nil, 1, 2, nil, nil, "readyrescue")--Taunt immune, so not a taunt warning, just a warning that tank may die soon and to be ready
+local specWarnPiercingRoar		= mod:NewSpecialWarningCast(137457, "SpellCaster", nil, nil, 1, 2, nil, nil, "stopcast")
+local specWarnFrillBlast		= mod:NewSpecialWarningSpell(137505, nil, nil, nil, 2, 2, nil, nil, "shockwave")
 
 local timerCrush				= mod:NewTargetTimer(60, 137504, nil, false, nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerCrushCD				= mod:NewCDTimer(26, 137504, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON)

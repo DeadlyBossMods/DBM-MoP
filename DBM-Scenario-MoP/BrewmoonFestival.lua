@@ -20,7 +20,7 @@ local warnWaterShell	= mod:NewSpellAnnounce(124653, 2)
 local warnBurrow		= mod:NewSpellAnnounce(124359, 2)
 
 --Warbringer Qobi
-local specWarnFireLine	= mod:NewSpecialWarningDodge(125392, nil, nil, nil, 2, 2)
+local specWarnFireLine	= mod:NewSpecialWarningDodge(125392, nil, nil, nil, 2, 2, nil, nil, "farfromline")
 
 function mod:SPELL_AURA_APPLIED(args)
 	if args.spellId == 124428 then

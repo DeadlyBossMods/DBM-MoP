@@ -18,10 +18,10 @@ mod:RegisterEventsInCombat(
 local warnMeteorShower			= mod:NewSpellAnnounce(138042, 3)
 local warnScarabSwarm			= mod:NewSpellAnnounce(138036, 2)
 
-local specwarnHorrificVisage	= mod:NewSpecialWarningSpell(138040, nil, nil, nil, 2, 2)
-local specwarnHorrificVisageInt	= mod:NewSpecialWarningInterrupt(138040, nil, nil, nil, 1, 2)
-local specwarnThunderCrush		= mod:NewSpecialWarningDodge(138044, nil, nil, nil, 2, 2)
-local specwarnVengefulSpirit	= mod:NewSpecialWarningRun(138043, "-Tank", nil, nil, 1, 2)--Assume a tank is just going to tank it
+local specwarnHorrificVisage	= mod:NewSpecialWarningSpell(138040, nil, nil, nil, 2, 2, nil, nil, "fearsoon")
+local specwarnHorrificVisageInt	= mod:NewSpecialWarningInterrupt(138040, nil, nil, nil, 1, 2, nil, nil, "kickcast")
+local specwarnThunderCrush		= mod:NewSpecialWarningDodge(138044, nil, nil, nil, 2, 2, nil, nil, "shockwave")
+local specwarnVengefulSpirit	= mod:NewSpecialWarningRun(138043, "-Tank", nil, nil, 1, 2, nil, nil, "runaway")--Assume a tank is just going to tank it
 
 local timerThunderCrushCD		= mod:NewCDTimer(7, 138044, nil, nil, nil, 3)
 --local timerHorrificVisageCD	= mod:NewCDTimer(7, 138040, nil, nil, nil, 4)

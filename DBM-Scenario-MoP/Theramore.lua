@@ -16,8 +16,8 @@ mod:RegisterEventsInCombat(
 
 local warnWarEnginesSights		= mod:NewTargetNoFilterAnnounce(114570, 4)
 
-local specWarnStormTotem		= mod:NewSpecialWarningSwitch(127010, nil, nil, nil, 1, 2)
-local specWarnWarEnginesSights	= mod:NewSpecialWarningYou(114570, nil, nil, nil, 1, 2)--Actually used by his trash, but in a speed run, you tend to pull it all together
+local specWarnStormTotem		= mod:NewSpecialWarningSwitch(127010, nil, nil, nil, 1, 2, nil, nil, "attacktotem")
+local specWarnWarEnginesSights	= mod:NewSpecialWarningYou(114570, nil, nil, nil, 1, 2, nil, nil, "targetyou")--Actually used by his trash, but in a speed run, you tend to pull it all together
 local yellWarEnginesSights		= mod:NewYell(114570)
 
 function mod:SPELL_AURA_APPLIED(args)

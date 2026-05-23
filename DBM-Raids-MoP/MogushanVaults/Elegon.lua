@@ -26,12 +26,12 @@ local warnClosedCircuit				= mod:NewTargetNoFilterAnnounce(117949, 3, nil, "Remo
 local warnStunned					= mod:NewTargetNoFilterAnnounce(132222, 3, nil, "Healer")--Heroic / 132222 is stun debuff, 132226 is 2 min debuff.
 local warnDrawPower					= mod:NewCountAnnounce(117960, 3)
 
-local specWarnOvercharged			= mod:NewSpecialWarningStack(117878, nil, 6, nil, nil, 1, 6)
-local specWarnTotalAnnihilation		= mod:NewSpecialWarningSpell(129711, nil, nil, nil, 2, 2)
-local specWarnProtector				= mod:NewSpecialWarningSwitchCount(117954, "-Healer", nil, nil, 1, 2)
-local specWarnDrawPower				= mod:NewSpecialWarningCount(119387, nil, nil, nil, 1, 2)
-local specWarnDespawnFloor			= mod:NewSpecialWarning("specWarnDespawnFloor", nil, nil, nil, 3, 7)
-local specWarnRadiatingEnergies		= mod:NewSpecialWarningSpell(118310, nil, nil, nil, 2, 2)
+local specWarnOvercharged			= mod:NewSpecialWarningStack(117878, nil, 6, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnTotalAnnihilation		= mod:NewSpecialWarningSpell(129711, nil, nil, nil, 2, 2, nil, nil, "aesoon")
+local specWarnProtector				= mod:NewSpecialWarningSwitchCount(117954, "-Healer", nil, nil, 1, 2, nil, nil, "bigmob")
+local specWarnDrawPower				= mod:NewSpecialWarningCount(119387, nil, nil, nil, 1, 2, nil, nil, "phasechange")
+local specWarnDespawnFloor			= mod:NewSpecialWarning("specWarnDespawnFloor", nil, nil, nil, 3, 7, nil, nil, nil, nil, "runtoedge")
+local specWarnRadiatingEnergies		= mod:NewSpecialWarningSpell(118310, nil, nil, nil, 2, 2, nil, nil, "movecenter")
 
 local timerBreathCD					= mod:NewCDTimer(18, 117960, nil, "Tank", 2, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerProtectorCD				= mod:NewCDCountTimer(41, 117954, nil, nil, nil, 1, nil, DBM_COMMON_L.DAMAGE_ICON)

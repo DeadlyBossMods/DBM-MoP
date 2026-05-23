@@ -34,17 +34,17 @@ local warnCinders				= mod:NewTargetAnnounce(139822, 4)
 local warnTorrentofIce			= mod:NewTargetAnnounce(139889, 4)
 local warnRampageEnded			= mod:NewEndAnnounce(139458, 1)
 
-local specWarnRampage			= mod:NewSpecialWarningCount(139458, nil, nil, nil, 2, 2)
-local specWarnArcticFreeze		= mod:NewSpecialWarningStack(139843, nil, 2, nil, nil, 1, 6)
-local specWarnIgniteFlesh		= mod:NewSpecialWarningStack(137731, nil, 2, nil, nil, 1, 6)
-local specWarnRotArmor			= mod:NewSpecialWarningStack(139840, nil, 2, nil, nil, 1, 6)
-local specWarnArcaneDiffusion	= mod:NewSpecialWarningStack(139993, nil, 2, nil, nil, 1, 6)
-local specWarnCinders			= mod:NewSpecialWarningYou(139822, nil, nil, 2, 4, 15)
+local specWarnRampage			= mod:NewSpecialWarningCount(139458, nil, nil, nil, 2, 2, nil, nil, "aesoon")
+local specWarnArcticFreeze		= mod:NewSpecialWarningStack(139843, nil, 2, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnIgniteFlesh		= mod:NewSpecialWarningStack(137731, nil, 2, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnRotArmor			= mod:NewSpecialWarningStack(139840, nil, 2, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnArcaneDiffusion	= mod:NewSpecialWarningStack(139993, nil, 2, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnCinders			= mod:NewSpecialWarningYou(139822, nil, nil, 2, 4, 15, nil, nil, "flameyou")
 local yellCinders				= mod:NewShortYell(139822)
-local specWarnTorrentofIceYou	= mod:NewSpecialWarningRun(139866, nil, nil, 2, 4)
+local specWarnTorrentofIceYou	= mod:NewSpecialWarningRun(139866, nil, nil, 2, 4, nil, nil, nil, "runout")
 local yellTorrentofIce			= mod:NewShortYell(139866)
-local specWarnNetherTear		= mod:NewSpecialWarningSwitch(-7816, "Dps", nil, nil, 1, 2)
-local specWarnGTFO				= mod:NewSpecialWarningGTFO(139836, nil, nil, nil, 1, 8)--Fire left on ground after the fact
+local specWarnNetherTear		= mod:NewSpecialWarningSwitch(-7816, "Dps", nil, nil, 1, 2, nil, nil, "targetchange")
+local specWarnGTFO				= mod:NewSpecialWarningGTFO(139836, nil, nil, nil, 1, 8, nil, nil, "watchfeet")--Fire left on ground after the fact
 
 local timerRampage				= mod:NewBuffActiveTimer(21, 139458, nil, nil, nil, 6, nil, DBM_COMMON_L.HEALER_ICON)
 mod:AddBoolOption("timerBreaths", "Tank|Healer", "timer")--Better to have one option for breaths than 4
