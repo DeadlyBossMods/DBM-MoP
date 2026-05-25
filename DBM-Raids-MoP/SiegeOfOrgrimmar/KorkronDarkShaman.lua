@@ -55,8 +55,8 @@ local specWarnToxicStorm			= mod:NewSpecialWarningYou(144017, nil, nil, nil, 1, 
 local yellToxicStorm				= mod:NewYell(144005)
 local specWarnFoulGeyser			= mod:NewSpecialWarningSpell(143990, nil, nil, nil, 2, 2, nil, nil, "watchstep")
 local yellFoulGeyser				= mod:NewYell(143990)
-local specWarnFallingAsh			= mod:NewSpecialWarningPreWarn(143973, nil, 3, nil, 2, 1, 2)
-local specWarnIronPrison			= mod:NewSpecialWarningPreWarn(144330, nil, 4, nil, nil, 1, 2)--If this generic isn't too clear i'll localize it. this is warning that it's about to expire not that it's just been applied
+local specWarnFallingAsh			= mod:NewSpecialWarningPreWarn(143973, nil, 3, nil, 2, 1, 2, nil, nil, "watchstep")
+local specWarnIronPrison			= mod:NewSpecialWarningPreWarn(144330, nil, 4, nil, nil, 1, 2, nil, nil, "defensive")--If this generic isn't too clear i'll localize it. this is warning that it's about to expire not that it's just been applied
 local yellIronPrisonFades			= mod:NewYell(144330, L.PrisonYell, false)--Off by default since it's an atypical yell (it's not used for avoiding person it's used to get healer attention to person)
 
 --Earthbreaker Haromm

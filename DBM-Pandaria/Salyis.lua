@@ -17,7 +17,7 @@ mod:RegisterEventsInCombat(
 local warnCannonBarrage		= mod:NewSpellAnnounce(121600, 3)
 
 local specWarnStomp			= mod:NewSpecialWarningSpell(121787, nil, nil, nil, 2, 2, nil, nil, "stunsoon")
-local specWarnWarmonger		= mod:NewSpecialWarningSwitch(-6200, "-Healer", nil, nil, 1, 2)
+local specWarnWarmonger		= mod:NewSpecialWarningSwitch(-6200, "-Healer", nil, nil, 1, 2, nil, nil, "killmob")
 
 local timerCannonBarrageCD	= mod:NewNextTimer(60, 121600, nil, "Tank", 2, 5)
 local timerStompCD			= mod:NewNextTimer(60, 121787, nil, nil, nil, 2)

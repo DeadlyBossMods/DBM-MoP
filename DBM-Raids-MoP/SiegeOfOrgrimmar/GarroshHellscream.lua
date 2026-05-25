@@ -44,9 +44,9 @@ local specWarnDesecrate				= mod:NewSpecialWarningTargetCount(144748, nil, nil, 
 local specWarnDesecrateYou			= mod:NewSpecialWarningYou(144748, nil, nil, nil, 1, 2, nil, nil, "targetyou")
 local yellDesecrate					= mod:NewYell(144748)
 local specWarnHellscreamsWarsong	= mod:NewSpecialWarningSpell(144821, "Tank|Healer", nil, nil, 2, 2, nil, nil, "defensive")
-local specWarnExplodingIronStar		= mod:NewSpecialWarningSpell(144798, nil, nil, nil, 3, 2)
+local specWarnExplodingIronStar		= mod:NewSpecialWarningSpell(144798, nil, nil, nil, 3, 2, nil, nil, "aesoon")
 local specWarnFarseerWolfRider		= mod:NewSpecialWarningSwitchCount(-8294, "-Healer", nil, nil, 1, 2, nil, nil, "killmob")
-local specWarnSiegeEngineer			= mod:NewSpecialWarningPreWarn(-8298, false, 4, nil, nil, 1, 2)
+local specWarnSiegeEngineer			= mod:NewSpecialWarningPreWarn(-8298, false, 4, nil, nil, 1, 2, nil, nil, "mobsoon")
 local specWarnChainHeal				= mod:NewSpecialWarningInterrupt(144583, "HasInterrupt", nil, nil, 1, 2, nil, nil, "kickcast")
 local specWarnChainLightning		= mod:NewSpecialWarningInterrupt(144584, false, nil, nil, 1, 2, nil, nil, "kickcast")
 

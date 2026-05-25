@@ -51,7 +51,7 @@ local warnBreathofFire			= mod:NewSpellAnnounce(146222, 3)--Do not have timer fo
 
 --Massive Crate of Goods
 local specWarnSetToBlowYou		= mod:NewSpecialWarningYou(145987, nil, nil, nil, 1, 2, nil, nil, "bombyou")
-local specWarnSetToBlow			= mod:NewSpecialWarningPreWarn(145996, nil, 4, nil, 3, 2)
+local specWarnSetToBlow			= mod:NewSpecialWarningPreWarn(145996, nil, 4, nil, 3, 2, nil, nil, nil, "runout")
 --Stout Crate of Goods
 ----Mogu
 local specWarnForbiddenMagic	= mod:NewSpecialWarningInterrupt(145230, "HasInterrupt", nil, nil, 1, 2, nil, nil, "kickcast")
