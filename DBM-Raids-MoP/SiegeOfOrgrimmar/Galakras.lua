@@ -214,7 +214,7 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 				specWarnFlamesofGalakrondStack:Play("stackhigh")
 			end
 		else
-			local uId = DBM:GetRaidUnitId(args.destName)
+			local uId = DBM:GetRaidUnitId(args.destName, true)
 			if self:IsTanking(uId, nil, nil, false, args.sourceGUID) then
 				timerFlamesofGalakrond:Start(args.destName)
 				if amount >= 6 and not DBM:UnitDebuff("player", spellId) then

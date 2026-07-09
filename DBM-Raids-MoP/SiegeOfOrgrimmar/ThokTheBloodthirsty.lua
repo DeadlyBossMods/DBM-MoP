@@ -169,7 +169,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		if self:AntiSpam(3, 1) then
 			timerFearsomeRoarCD:Start()
 		end
-		local uId = DBM:GetRaidUnitId(args.destName)
+		local uId = DBM:GetRaidUnitId(args.destName, true)
 		if self:IsTanking(uId, "boss1") then
 			local amount = args.amount or 1
 			warnFearsomeRoar:Show(args.destName, amount)
@@ -185,7 +185,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif spellId == 143780 then
 		timerAcidBreathCD:Start()
 		local amount = args.amount or 1
-		local uId = DBM:GetRaidUnitId(args.destName)
+		local uId = DBM:GetRaidUnitId(args.destName, true)
 		if self:IsTanking(uId, "boss1") then
 			warnAcidBreath:Show(args.destName, amount)
 			timerAcidBreath:Start(args.destName)
@@ -201,7 +201,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif spellId == 143773 then
 		timerFrostBreathCD:Start()
 		local amount = args.amount or 1
-		local uId = DBM:GetRaidUnitId(args.destName)
+		local uId = DBM:GetRaidUnitId(args.destName, true)
 		if self:IsTanking(uId, "boss1") then
 			warnFrostBreath:Show(args.destName, amount)
 			timerFrostBreath:Start(args.destName)
@@ -216,7 +216,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif spellId == 143767 then
 		timerScorchingBreathCD:Start()
 		local amount = args.amount or 1
-		local uId = DBM:GetRaidUnitId(args.destName)
+		local uId = DBM:GetRaidUnitId(args.destName, true)
 		if self:IsTanking(uId, "boss1") then
 			warnScorchingBreath:Show(args.destName, amount)
 			timerScorchingBreath:Start(args.destName)

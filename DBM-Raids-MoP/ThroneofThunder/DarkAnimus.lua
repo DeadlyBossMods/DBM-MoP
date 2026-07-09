@@ -130,7 +130,7 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
 	if spellId == 138569 then
-		local uId = DBM:GetRaidUnitId(args.destName)
+		local uId = DBM:GetRaidUnitId(args.destName, true)
 		if self:IsTanking(uId, "boss1") then--Only want sprays that are on tanks, not bads standing on tanks.
 			local amount = args.amount or 1
 			warnExplosiveSlam:Show(args.destName, amount)

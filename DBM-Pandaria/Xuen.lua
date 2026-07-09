@@ -58,7 +58,7 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
 	if spellId == 144638 then
-		local uId = DBM:GetRaidUnitId(args.destName)
+		local uId = DBM:GetRaidUnitId(args.destName, true)
 		if self:IsTanking(uId) then
 			local amount = args.amount or 1
 			warnSpectralSwipe:Show(args.destName, amount)

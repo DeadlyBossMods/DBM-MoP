@@ -105,7 +105,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			timerGetAway:Start()
 		end
 	elseif spellId == 123121 then
-		local uId = DBM:GetRaidUnitId(args.destName)
+		local uId = DBM:GetRaidUnitId(args.destName, true)
 		if self:IsTanking(uId, "boss1") then--Only want sprays that are on tanks, not bads standing on tanks.
 			local amount = args.amount or 1
 			timerSpray:Start(args.destName)

@@ -212,7 +212,7 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
 	if spellId == 139843 then
-		local uId = DBM:GetRaidUnitId(args.destName)
+		local uId = DBM:GetRaidUnitId(args.destName, true)
 		if self:IsTanking(uId) then
 			local amount = args.amount or 1
 			warnArcticFreeze:Show(args.destName, amount)
@@ -228,7 +228,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			end
 		end
 	elseif spellId == 137731 then
-		local uId = DBM:GetRaidUnitId(args.destName)
+		local uId = DBM:GetRaidUnitId(args.destName, true)
 		if self:IsTanking(uId) then
 			local amount = args.amount or 1
 			warnIgniteFlesh:Show(args.destName, amount)
@@ -240,7 +240,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			timerBreathsCD:DelayedStart(0.3)
 		end
 	elseif spellId == 139840 then
-		local uId = DBM:GetRaidUnitId(args.destName)
+		local uId = DBM:GetRaidUnitId(args.destName, true)
 		if self:IsTanking(uId) then
 			local amount = args.amount or 1
 			warnRotArmor:Show(args.destName, amount)
@@ -256,7 +256,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			end
 		end
 	elseif spellId == 139993 then
-		local uId = DBM:GetRaidUnitId(args.destName)
+		local uId = DBM:GetRaidUnitId(args.destName, true)
 		if self:IsTanking(uId) then
 			local amount = args.amount or 1
 			warnArcaneDiffusion:Show(args.destName, amount)

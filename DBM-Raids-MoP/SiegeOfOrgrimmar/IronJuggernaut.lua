@@ -131,7 +131,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		if self:AntiSpam(3, 1) then
 			timerIgniteArmorCD:Start()
 		end
-		local uId = DBM:GetRaidUnitId(args.destName)
+		local uId = DBM:GetRaidUnitId(args.destName, true)
 		if self:IsTanking(uId, "boss1") then
 			local amount = args.amount or 1
 			warnIgniteArmor:Show(args.destName, amount)
