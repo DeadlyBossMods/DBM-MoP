@@ -259,7 +259,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization("HoFTrash")
 
 L:SetGeneralLocalization({
-	name	= "Трэш мобы Сердца Страха"
+	name	= "Трэш: Сердца Страха"
 })
 
 ------------
@@ -665,7 +665,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization("ToTTrash")
 
 L:SetGeneralLocalization({
-	name	= "Трэш мобы Престол Гроз"
+	name	= "Трэш: Престол Гроз"
 })
 
 L:SetOptionLocalization({
@@ -889,5 +889,5 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization("SoOTrash")
 
 L:SetGeneralLocalization({
-	name	= "Трэш мобы Осады Оргриммара"
+	name	= "Трэш: Осада Оргриммара"
 })
