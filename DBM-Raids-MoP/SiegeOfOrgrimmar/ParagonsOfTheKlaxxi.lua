@@ -38,6 +38,7 @@ mod:RegisterEventsInCombat(
 local warnActivated					= mod:NewTargetAnnounce(118212, 3, 143542)
 --Kil'ruk the Wind-Reaver
 local warnDeathFromAbove			= mod:NewTargetAnnounce(142232, 3)
+local warnGouge						= mod:NewTargetNoFilterAnnounce(143939, 3, nil, "Healer")
 --Xaril the Poisoned-Mind
 local warnToxicInjection			= mod:NewSpellAnnounce(142528, 3)
 mod:AddBoolOption("warnToxicCatalyst", true, "announce")
@@ -64,11 +65,10 @@ local warnAim						= mod:NewTargetCountAnnounce(142948, 4)
 local warnRapidFire					= mod:NewSpellAnnounce(143243, 3)
 
 --All
-local specWarnActivated				= mod:NewSpecialWarningTarget(118212)
-local specWarnActivatedVulnerable	= mod:NewSpecialWarning("specWarnActivatedVulnerable", "Tank")--Alternate activate warning to warn a tank not to pick up a specific boss
+local specWarnActivated				= mod:NewSpecialWarningTarget(118212, nil, nil, nil, 1, 2, nil, nil, "targetchange")
+local specWarnActivatedVulnerable	= mod:NewSpecialWarning("specWarnActivatedVulnerable", "Tank", nil, nil, 1, 2, nil, nil, 118212, nil, "dontmove")--Alternate activate warning to warn a tank not to pick up a specific boss
 --Kil'ruk the Wind-Reaver
-local specWarnGouge					= mod:NewSpecialWarningYou(143939)
-local specWarnGougeOther			= mod:NewSpecialWarningTarget(143939, "Tank|Healer")
+local specWarnGouge					= mod:NewSpecialWarningYou(143939, nil, nil, nil, 1, 19, nil, nil, "stunyou")
 local specWarnDeathFromAbove		= mod:NewSpecialWarningYou(142232)
 local specWarnDeathFromAboveNear	= mod:NewSpecialWarningClose(142232)
 local yellDeathFromAbove			= mod:NewYell(142232)
@@ -159,8 +159,8 @@ local timerRapidFireCD				= mod:NewCDTimer(47, 143243, nil, nil, nil, 2, nil, DB
 
 local berserkTimer					= mod:NewBerserkTimer(720)
 
-mod:AddSetIconOption("SetIconOnAim", 142948, false)
-mod:AddSetIconOption("SetIconOnMesmerize", 142671, false)
+mod:AddSetIconOption("SetIconOnAim", 142948, false, 0, {3})
+mod:AddSetIconOption("SetIconOnMesmerize", 142671, false, 0, {1})
 
 local calculatingDude, readyToFight = DBM:EJ_GetSectionInfo(8012), DBM:GetSpellName(143542)
 local vulnerable1, vulnerable2, vulnerable3, vulnerable4 = DBM:GetSpellName(143279), DBM:GetSpellName(143275), DBM:GetSpellName(142929), DBM:GetSpellName(142931)
@@ -222,12 +222,15 @@ local function warnActivatedTargets(self, vulnerable)
 	if #activatedTargets > 1 then
 		warnActivated:Show(table.concat(activatedTargets, "<, >"))
 		specWarnActivated:Show(table.concat(activatedTargets, ", "))
+		specWarnActivated:Play("targetchange")
 	else
 		warnActivated:Show(activatedTargets[1])
 		if vulnerable and self:IsTank() then
 			specWarnActivatedVulnerable:Show(activatedTargets[1])
+			specWarnActivatedVulnerable:Play("dontmove")
 		else
 			specWarnActivated:Show(activatedTargets[1])
+			specWarnActivated:Play("targetchange")
 		end
 	end
 	table.wipe(activatedTargets)
@@ -625,17 +628,15 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerGouge:Start(args.destName)
 		if args:IsPlayer() then
 			specWarnGouge:Show()
+			specWarnGouge:Play("stunyou")
 		else
-			specWarnGougeOther:Show(args.destName)
+			warnGouge:Show(args.destName)
 		end
 	elseif spellId == 143974 then
 		timerShieldBash:Start(args.destName)
-		for i = 1, 5 do
-			local bossUnitID = "boss"..i
-			if UnitExists(bossUnitID) and UnitGUID(bossUnitID) == args.sourceGUID and not UnitDetailedThreatSituation("player", bossUnitID) then--We are not highest threat target
-				specWarnShieldBashOther:Show(args.destName)--So warn AGAIN
-				break
-			end
+		--We are not highest threat target
+		if not self:IsTanking("player", nil, nil, true, args.sourceGUID) then
+			specWarnShieldBashOther:Show(args.destName)--So warn AGAIN
 		end
 	elseif spellId == 143701 then
 		if args:IsPlayer() then

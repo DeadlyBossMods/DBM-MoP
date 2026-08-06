@@ -47,27 +47,27 @@ local warnScorchingBreath			= mod:NewStackAnnounce(143767, 2, nil, "Tank")
 local warnBurningBlood				= mod:NewTargetAnnounce(143783, 3, nil, false)
 
 --Stage 1: A Cry in the Darkness
-local specWarnFearsomeRoar			= mod:NewSpecialWarningStack(143766, nil, 2)
-local specWarnFearsomeRoarOther		= mod:NewSpecialWarningTaunt(143766)
-local specWarnDeafeningScreech		= mod:NewSpecialWarningCast(143343, "SpellCaster", nil, nil, 2)
+local specWarnFearsomeRoar			= mod:NewSpecialWarningStack(143766, nil, 2, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnFearsomeRoarOther		= mod:NewSpecialWarningTaunt(143766, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnDeafeningScreech		= mod:NewSpecialWarningCast(143343, "SpellCaster", nil, nil, 2, 2, nil, nil, "stopcast")
 --Stage 2: Frenzy for Blood!
-local specWarnBloodFrenzy			= mod:NewSpecialWarningSpell(143440, nil, nil, 2, 4)
-local specWarnFixate				= mod:NewSpecialWarningRun(143445, nil, nil, 2, 4)
+local specWarnBloodFrenzy			= mod:NewSpecialWarningSpell(143440, nil, nil, 2, 4, 2, nil, nil, "scatter")
+local specWarnFixate				= mod:NewSpecialWarningRun(143445, nil, nil, 2, 4, 2, nil, nil, "justrun")
 local yellFixate					= mod:NewYell(143445)
-local specWarnEnrage				= mod:NewSpecialWarningTarget(145974, "Tank|RemoveEnrage")
-local specWarnBloodFrenzyOver		= mod:NewSpecialWarningEnd(143440)
+local specWarnEnrage				= mod:NewSpecialWarningTarget(145974, "Tank|RemoveEnrage", nil, nil, 1, 2, nil, nil, "enrage")
+local specWarnBloodFrenzyOver		= mod:NewSpecialWarningEnd(143440, nil, nil, nil, 1, 2, nil, nil, "phasechange")
 --Infusion of Acid
-local specWarnAcidBreath			= mod:NewSpecialWarningStack(143780, nil, 3)
-local specWarnAcidBreathOther		= mod:NewSpecialWarningTaunt(143780)
+local specWarnAcidBreath			= mod:NewSpecialWarningStack(143780, nil, 3, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnAcidBreathOther		= mod:NewSpecialWarningTaunt(143780, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
 --Infusion of Frost
-local specWarnFrostBreath			= mod:NewSpecialWarningStack(143773, nil, 3)
-local specWarnFrostBreathOther		= mod:NewSpecialWarningTaunt(143773)
-local specWarnIcyBlood				= mod:NewSpecialWarningStack(143800, nil, 3)
-local specWarnFrozenSolid			= mod:NewSpecialWarningTarget(143777, "Dps")
+local specWarnFrostBreath			= mod:NewSpecialWarningStack(143773, nil, 3, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnFrostBreathOther		= mod:NewSpecialWarningTaunt(143773, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnIcyBlood				= mod:NewSpecialWarningStack(143800, nil, 3, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnFrozenSolid			= mod:NewSpecialWarningTarget(143777, "Dps", nil, nil, 1, 2, nil, nil, "targetchange")
 --Infusion of Fire
-local specWarnScorchingBreath		= mod:NewSpecialWarningStack(143767, nil, 3)
-local specWarnScorchingBreathOther	= mod:NewSpecialWarningTaunt(143767)
-local specWarnBurningBloodMove		= mod:NewSpecialWarningMove(143784)
+local specWarnScorchingBreath		= mod:NewSpecialWarningStack(143767, nil, 3, nil, nil, 1, 6, nil, nil, "stackhigh")
+local specWarnScorchingBreathOther	= mod:NewSpecialWarningTaunt(143767, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
+local specWarnBurningBloodMove		= mod:NewSpecialWarningGTFO(143784, nil, nil, nil, 1, 8, nil, nil, "watchfeet")
 local yellBurningBlood				= mod:NewYell(143783, nil, false)
 
 --Stage 1: A Cry in the Darkness
@@ -94,7 +94,7 @@ local timerBurningBloodCD			= mod:NewCDTimer(3.5, 143783, nil, false, nil, 3)--c
 local berserkTimer					= mod:NewBerserkTimer(600)
 
 --mod:AddBoolOption("RangeFrame")
-mod:AddSetIconOption("FixateIcon", 143445)
+mod:AddSetIconOption("FixateIcon", 143445, nil, 0, {8})
 
 --Upvales, don't need variables
 local UnitGUID = UnitGUID
@@ -126,9 +126,11 @@ function mod:OnCombatStart(delay)
 	if self:IsDifficulty("lfr25") then
 		timerDeafeningScreechCD:Start(19-delay, 1)
 		specWarnDeafeningScreech:Schedule(17.5)
+		specWarnDeafeningScreech:ScheduleVoice(17.5, "stopcast")
 	else
 		timerDeafeningScreechCD:Start(-delay, 1)
 		specWarnDeafeningScreech:Schedule(12)
+		specWarnDeafeningScreech:ScheduleVoice(12, "stopcast")
 	end
 	berserkTimer:Start(-delay)
 	DBM:AddMsg(DBM_CORE_L.DYNAMIC_DIFFICULTY_CLUMP)
@@ -151,10 +153,12 @@ function mod:SPELL_CAST_SUCCESS(args)
 		if self:IsDifficulty("lfr25") then
 			timerDeafeningScreechCD:Start(18, self.vb.screechCount+1)
 			specWarnDeafeningScreech:Schedule(16.5)
+			specWarnDeafeningScreech:ScheduleVoice(16.5, "stopcast")
 		else
 			if self.vb.screechCount < 7 then--Don't spam special warning once cd is lower than 4.8 seconds.
 				timerDeafeningScreechCD:Start(screechTimers[self.vb.screechCount], self.vb.screechCount+1)
 				specWarnDeafeningScreech:Schedule(screechTimers[self.vb.screechCount]-1.5)
+				specWarnDeafeningScreech:ScheduleVoice(screechTimers[self.vb.screechCount]-1.5, "stopcast")
 			end
 		end
 	end
@@ -177,8 +181,10 @@ function mod:SPELL_AURA_APPLIED(args)
 			if amount >= 2 then
 				if args:IsPlayer() then
 					specWarnFearsomeRoar:Show(args.amount)
+					specWarnFearsomeRoar:Play("stackhigh")
 				else
 					specWarnFearsomeRoarOther:Show(args.destName)
+					specWarnFearsomeRoarOther:Play("tauntboss")
 				end
 			end
 		end
@@ -193,8 +199,10 @@ function mod:SPELL_AURA_APPLIED(args)
 			if amount >= 3 then
 				if args:IsPlayer() then
 					specWarnAcidBreath:Show(args.amount)
+					specWarnAcidBreath:Play("stackhigh")
 				else
 					specWarnAcidBreathOther:Show(args.destName)
+					specWarnAcidBreathOther:Play("tauntboss")
 				end
 			end
 		end
@@ -208,8 +216,10 @@ function mod:SPELL_AURA_APPLIED(args)
 			if amount >= 3 then
 				if args:IsPlayer() then
 					specWarnFrostBreath:Show(args.amount)
+					specWarnFrostBreath:Play("stackhigh")
 				else
 					specWarnFrostBreathOther:Show(args.destName)
+					specWarnFrostBreathOther:Play("tauntboss")
 				end
 			end
 		end
@@ -223,8 +233,10 @@ function mod:SPELL_AURA_APPLIED(args)
 			if amount >= 3 then
 				if args:IsPlayer() then
 					specWarnScorchingBreath:Show(args.amount)
+					specWarnScorchingBreath:Play("stackhigh")
 				else
 					specWarnScorchingBreathOther:Show(args.destName)
+					specWarnScorchingBreathOther:Play("tauntboss")
 				end
 			end
 		end
@@ -241,6 +253,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerFixate:Start(args.destName)
 		if args:IsPlayer() then
 			specWarnFixate:Show()
+			specWarnFixate:Play("justrun")
 			yellFixate:Yell()
 		end
 		if self.Options.FixateIcon then
@@ -250,14 +263,17 @@ function mod:SPELL_AURA_APPLIED(args)
 		local amount = args.amount or 1
 		if amount >= 3 then
 			specWarnIcyBlood:Show(amount)
+			specWarnIcyBlood:Play("stackhigh")
 		end
 	elseif spellId == 143777 then
 		warnFrozenSolid:CombinedShow(1, args.destName)--On 25 man, many targets get frozen and often at/near the same time. try to batch em up a bit
 		if self:AntiSpam(3, 2) then
 			specWarnFrozenSolid:Show(args.destName)
+			specWarnFrozenSolid:Play("targetchange")
 		end
 	elseif spellId == 145974 then
 		specWarnEnrage:Show(args.destName)
+		specWarnEnrage:Play("enrage")
 	elseif spellId == 146589 then
 		warnKey:Show(args.destName)
 		timerKey:Start(args.destName)
@@ -285,9 +301,11 @@ function mod:SPELL_AURA_REMOVED(args)
 		if self:IsDifficulty("lfr25") then
 			timerDeafeningScreechCD:Start(19, 1)
 			specWarnDeafeningScreech:Schedule(17.5)
+			specWarnDeafeningScreech:ScheduleVoice(17.5, "stopcast")
 		else
 			timerDeafeningScreechCD:Start(nil, 1)
 			specWarnDeafeningScreech:Schedule(11.5)
+			specWarnDeafeningScreech:ScheduleVoice(11.5, "stopcast")
 		end
 	elseif spellId == 143445 then
 		timerFixate:Cancel(args.destName)
@@ -312,9 +330,10 @@ function mod:SPELL_DAMAGE(_, _, _, _, destGUID, destName, _, _, spellId)
 end
 mod.SPELL_MISSED = mod.SPELL_DAMAGE
 
-function mod:SPELL_PERIODIC_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
+function mod:SPELL_PERIODIC_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId, spellName)
 	if spellId == 143784 and destGUID == UnitGUID("player") and self:AntiSpam(1.5, 3) then--Different from abobe ID, this is ID that fires for standing in fire on ground (even if you weren't target the fire spawned under)
-		specWarnBurningBloodMove:Show()
+		specWarnBurningBloodMove:Show(spellName)
+		specWarnBurningBloodMove:Play("watchfeet")
 	end
 end
 mod.SPELL_PERIODIC_MISSED = mod.SPELL_PERIODIC_DAMAGE
@@ -331,7 +350,9 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 		timerScorchingBreathCD:Cancel()
 		timerDeafeningScreechCD:Cancel()
 		specWarnDeafeningScreech:Cancel()
+		specWarnDeafeningScreech:CancelVoice()
 		specWarnBloodFrenzy:Show()
+		specWarnBloodFrenzy:Play("scatter")
 	--He retains/casts "blood" abilities through Blood frenzy, and only stops them when he changes to different Pustles
 	--This is why we cancel Blood cds above
 	elseif spellId == 143971 then
@@ -340,17 +361,20 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 		timerCorrosiveBloodCD:Start(6)
 		timerAcidBreathCD:Start()
 		specWarnBloodFrenzyOver:Show()
+		specWarnBloodFrenzyOver:Play("phasechange")
 	elseif spellId == 143968 then
 		timerBurningBloodCD:Cancel()
 		timerCorrosiveBloodCD:Cancel()
 		warnFrostPustules:Show()
 		timerFrostBreathCD:Start(6)
 		specWarnBloodFrenzyOver:Show()
+		specWarnBloodFrenzyOver:Play("phasechange")
 	elseif spellId == 143970 then
 		timerCorrosiveBloodCD:Cancel()
 		warnFirePustules:Show()
 		timerBurningBloodCD:Start(8)
 		timerScorchingBreathCD:Start()
 		specWarnBloodFrenzyOver:Show()
+		specWarnBloodFrenzyOver:Play("phasechange")
 	end
 end

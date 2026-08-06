@@ -36,16 +36,16 @@ local warnSeismicSlam					= mod:NewCountAnnounce(142851, 3)
 local warnFatalStrike					= mod:NewStackAnnounce(142990, 2, nil, "Tank")
 
 --Endless Rage
-local specWarnBloodRage					= mod:NewSpecialWarningSpell(142879, nil, nil, nil, 2)
-local specWarnBloodRageEnded			= mod:NewSpecialWarningFades(142879)
-local specWarnDisplacedEnergy			= mod:NewSpecialWarningRun(142913)
+local specWarnBloodRage					= mod:NewSpecialWarningSpell(142879, nil, nil, nil, 2, 2, nil, nil, "gathershare")
+local specWarnBloodRageEnded			= mod:NewSpecialWarningFades(142879, nil, nil, nil, 2, 2, nil, nil, "scatter")
+local specWarnDisplacedEnergy			= mod:NewSpecialWarningMoveAway(142913, nil, nil, nil, 1, 2, nil, nil, "runout")
 local yellDisplacedEnergy				= mod:NewYell(142913, nil, false)--Only matters on normal/heroic and most of those raiders know how to dispel it with roars and other things so yells are pointless to most except bad comp 10 mans (and 10 mans going away soon so ultimately false is better default)
 --Might of the Kor'kron
-local specWarnArcingSmash				= mod:NewSpecialWarningCount(142815, nil, nil, nil, 2)
-local specWarnImplodingEnergySoon		= mod:NewSpecialWarningPreWarn(142986, nil, 4)
-local specWarnBreathofYShaarj			= mod:NewSpecialWarningCount(142842, nil, nil, nil, 3)
-local specWarnFatalStrike				= mod:NewSpecialWarningStack(142990, nil, 12)--stack guessed, based on CD
-local specWarnFatalStrikeOther			= mod:NewSpecialWarningTaunt(142990)
+local specWarnArcingSmash				= mod:NewSpecialWarningCount(142815, nil, nil, nil, 2, 15, nil, nil, "frontal")
+local specWarnImplodingEnergySoon		= mod:NewSpecialWarningPreWarn(142986, nil, 4, nil, nil, 2, 19, nil, nil, "soakincoming")
+local specWarnBreathofYShaarj			= mod:NewSpecialWarningCount(142842, nil, nil, nil, 3, 2, nil, nil, "breathsoon")
+local specWarnFatalStrike				= mod:NewSpecialWarningStack(142990, nil, 12, nil, nil, 1, 6, nil, nil, "stackhigh")--stack guessed, based on CD
+local specWarnFatalStrikeOther			= mod:NewSpecialWarningTaunt(142990, nil, nil, nil, 1, 2, nil, nil, "tauntboss")
 
 local timerBloodRage					= mod:NewBuffActiveTimer(22.5, 142879, nil, nil, nil, 6)--2.5sec cast plus 20 second duration
 local timerDisplacedEnergyCD			= mod:NewNextTimer(11, 142913, nil, nil, nil, 3)
@@ -58,8 +58,8 @@ local timerFatalStrike					= mod:NewTargetTimer(30, 142990, nil, "Tank", nil, 5,
 
 local berserkTimer						= mod:NewBerserkTimer(360)
 
-mod:AddSetIconOption("SetIconOnDisplacedEnergy", 142913, false)
-mod:AddSetIconOption("SetIconOnAdds", -7952, false, 5)
+mod:AddSetIconOption("SetIconOnDisplacedEnergy", 142913, false, 7, {1, 2, 3, 4, 5})
+mod:AddSetIconOption("SetIconOnAdds", -7952, false, 5, {8, 7, 6})
 
 --Upvales, don't need variables
 local displacedEnergyDebuff = DBM:GetSpellName(142913)
@@ -97,11 +97,13 @@ function mod:SPELL_CAST_START(args)
 		self.vb.displacedCast = false
 		self.vb.rageActive = true
 		specWarnBloodRage:Show()
+		specWarnBloodRage:Play("gathershare")
 		timerBloodRage:Start()
 --		timerDisplacedEnergyCD:Start(3.5)--No longer spell queued/restarted here?
 	elseif spellId == 142842 then
 		self.vb.breathCast = self.vb.breathCast + 1
 		specWarnBreathofYShaarj:Show(self.vb.breathCast)
+		specWarnBreathofYShaarj:Play("breathsoon")
 		if self.vb.breathCast == 1 then
 			self.vb.arcingSmashCount = 0
 			self.vb.seismicSlamCount = 0
@@ -116,6 +118,7 @@ function mod:SPELL_CAST_START(args)
 		self.vb.seismicSlamCount = 0
 		self.vb.rageActive = false
 		specWarnBloodRageEnded:Show()
+		specWarnBloodRageEnded:Play("scatter")
 		timerSeismicSlamCD:Start(7.5, 1)
 		timerArcingSmashCD:Start(14, 1)
 		timerBreathofYShaarjCD:Start(70, 1)
@@ -143,6 +146,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		playerDebuffs = playerDebuffs + 1
 		if args:IsPlayer() then
 			specWarnDisplacedEnergy:Show()
+			specWarnDisplacedEnergy:Play("runout")
 			yellDisplacedEnergy:Yell()
 		end
 		if not self.vb.displacedCast then--Only cast twice, so we only start cd bar once here
@@ -162,9 +166,11 @@ function mod:SPELL_AURA_APPLIED(args)
 		if amount % 3 == 0 and amount >= 12 then
 			if args:IsPlayer() then--At this point the other tank SHOULD be clear.
 				specWarnFatalStrike:Show(amount)
+				specWarnFatalStrike:Play("stackhigh")
 			else--Taunt as soon as stacks are clear, regardless of stack count.
 				if not DBM:UnitDebuff("player", args.spellName) and not UnitIsDeadOrGhost("player") then
 					specWarnFatalStrikeOther:Show(args.destName)
+					specWarnFatalStrikeOther:Play("tauntboss")
 				end
 			end
 		end
@@ -186,8 +192,10 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 	if spellId == 142898 then--Faster than combat log
 		self.vb.arcingSmashCount = self.vb.arcingSmashCount + 1
 		specWarnArcingSmash:Show(self.vb.arcingSmashCount)
+		specWarnArcingSmash:Play("frontal")
 		timerImplodingEnergy:Start()
 		specWarnImplodingEnergySoon:Schedule(6)
+		specWarnImplodingEnergySoon:ScheduleVoice(6, "soakincoming")
 		if self.vb.arcingSmashCount < 3 then
 			timerArcingSmashCD:Start(nil, self.vb.arcingSmashCount+1)
 		end
