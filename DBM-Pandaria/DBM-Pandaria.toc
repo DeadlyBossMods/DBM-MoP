@@ -21,6 +21,7 @@
 ## X-DBM-Mod-Category: MOP
 ## X-DBM-StatTypes: normal
 ## X-DBM-Mod-Name: World Bosses (Pandaria)
+## X-DBM-Mod-Name-zhCN: 世界首领 (熊猫人之谜)
 ## X-DBM-Mod-Name-koKR: 필드 보스 (판다리아)
 ## X-DBM-Mod-Name-ruRU: Мировые боссы (Пандария)
 ## X-DBM-Mod-World-Boss: 1
@@ -32,7 +33,7 @@
 ## X-Curse-Project-ID: 85688
 ## X-WoWI-ID: 23199
 ## X-Wago-ID: 0mNwz4Go
-## Version: @project-version@
+## Version: r192
 
 localization.en.lua
 localization.de.lua
