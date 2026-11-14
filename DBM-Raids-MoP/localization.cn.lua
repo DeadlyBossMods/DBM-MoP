@@ -1,4 +1,4 @@
--- Mini Dragon(projecteurs[at]gmail.nospam.com) <流浪者酒馆-Brilla@金色平原> 20240414
+-- 泰坦重铸时光服-时光2-法师-旺仔芒果/椰奶冻-2026.11.13--
 
 if GetLocale() ~= "zhCN" then
 	return
@@ -12,12 +12,12 @@ local L
 L = DBM:GetModLocalization(679)
 
 L:SetWarningLocalization({
-	SpecWarnOverloadSoon		= "%s: 即将施放", -- prepare survival ablility or move boss. need more specific message.
+	SpecWarnOverloadSoon		= "%s: 即将施放",
 	specWarnBreakJasperChains	= "扯断红玉锁链！"
 })
 
 L:SetOptionLocalization({
-	SpecWarnOverloadSoon		= "特殊警报：过载预警", -- need to change this, i can not translate this with good grammer. please help.
+	SpecWarnOverloadSoon		= "特殊警报：过载预警",
 	specWarnBreakJasperChains	= "特殊警报：可扯断$spell:130395",
 	InfoFrame					= "信息框：石像能量及激活情况"
 })
@@ -39,7 +39,9 @@ L:SetWarningLocalization({
 L:SetOptionLocalization({
 	WarnPhase			= "警报：阶段转换",
 	specWarnBarrierNow	= "特殊警报：当你需要使用$spell:115817 时(限随机团)",
-	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format("6") .. " 应对奥术阶段"
+	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format("6") .. " 应对奥术阶段",
+	SetIconOnWS			= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(116784),
+	SetIconOnAR			= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(116417)
 })
 
 L:SetMiscLocalization({
@@ -54,8 +56,13 @@ L:SetMiscLocalization({
 -------------------------------
 L = DBM:GetModLocalization(682)
 
+L:SetOptionLocalization({
+	SetIconOnVoodoo	= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(122151)
+})
+
 L:SetMiscLocalization({
-	Pull	= "死亡时间到！"
+	Pull	= "死亡时间到！",
+	RolePlay	= "现在你惹火我了！"
 })
 
 ----------------------
@@ -74,9 +81,13 @@ L:SetTimerLocalization({
 
 L:SetOptionLocalization({
 	DarknessSoon	= "预警：$spell:117697（提前5秒倒计时）",
-	timerUSRevive	= "计时条：$spell:117506复活"
+	timerUSRevive	= "计时条：$spell:117506复活",
+	timerRainOfArrowsCD = DBM_CORE_L.AUTO_TIMER_OPTIONS.cd:format(118122),
+	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format("8")
 })
 
+------------
+-- Elegon --
 ------------
 L = DBM:GetModLocalization(726)
 
@@ -90,7 +101,8 @@ L:SetTimerLocalization({
 
 L:SetOptionLocalization({
 	specWarnDespawnFloor	= "特殊警报：地板消失预警",
-	timerDespawnFloor		= "计时条：地板消失"
+	timerDespawnFloor		= "计时条：地板消失",
+	SetIconOnDestabilized	= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(132222)
 })
 
 ------------
@@ -101,15 +113,15 @@ L = DBM:GetModLocalization(677)
 L:SetOptionLocalization({
 	InfoFrame		= "信息框：受$spell:116525效果影响的玩家",
 	CountOutCombo	= "统计$journal:5673次数<br/>注：当前仅有女性声音设置",
-	ArrowOnCombo	= "DBM箭头：$journal:5673阶段<br/>注：该功能正常工作的前提是坦克在Boss面前而其他人在Boss身后"
+	ArrowOnCombo	= "DBM箭头：$journal:5673阶段<br/>注：该功能正常工作的前提是坦克在首领面前而其他人在首领身后"
 })
 
 L:SetMiscLocalization({
-	Pull		= "机器开始嗡嗡作响了！到下层去！",--Emote
-	Rage		= "皇帝之怒响彻群山。",--Yell
-	Strength	= "皇帝的力量出现在壁龛中！",--Emote
-	Courage		= "皇帝的勇气出现在壁龛中！",--Emote
-	Boss		= "两个巨型构造体出现在大型的壁龛中！"--Emote
+	Pull		= "机器开始嗡嗡作响了！到下层去！",
+	Rage		= "皇帝之怒响彻群山。",
+	Strength	= "皇帝的力量出现在壁龛中！",
+	Courage		= "皇帝的勇气出现在壁龛中！",
+	Boss		= "两个巨型构造体出现在大型的壁龛中！"
 })
 
 --恐惧之心--
@@ -128,8 +140,10 @@ L:SetWarningLocalization({
 L:SetOptionLocalization({
 	warnEcho			= "警报：回响出现",
 	warnEchoDown		= "警报：回响被击败",
+	specwarnAttenuation	= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format(127834),
 	specwarnPlatform	= "特殊警报：改变平台",
-	ArrowOnAttenuation	= "DBM箭头：在$spell:127834阶段指示移动方向"
+	ArrowOnAttenuation	= "DBM箭头：在$spell:127834阶段指示移动方向",
+	MindControlIcon		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(122740)
 })
 
 L:SetMiscLocalization({
@@ -142,6 +156,10 @@ L:SetMiscLocalization({
 ------------
 L = DBM:GetModLocalization(744)
 
+L:SetOptionLocalization({
+	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(10, 123175)
+})
+
 -------------------------------
 -- Garalon --
 -------------------------------
@@ -153,7 +171,9 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	specwarnUnder	= "特殊警报：当你在首领身体下方时"
+	warnCrush		= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(122774),
+	specwarnUnder	= "特殊警报：当你在首领身体下方时",
+	PheromonesIcon	= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(122835)
 })
 
 L:SetMiscLocalization({
@@ -166,9 +186,10 @@ L:SetMiscLocalization({
 ----------------------
 L = DBM:GetModLocalization(741)
 
---L:SetMiscLocalization({
---	Reinforcements	= "风领主梅尔加拉克调遣援兵了！"
---})
+L:SetOptionLocalization({
+	AmberPrisonIcons		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(121885),
+	specWarnReinforcements	= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format(-6554)
+})
 
 ------------
 -- Amber-Shaper Un'sok --
@@ -176,16 +197,16 @@ L = DBM:GetModLocalization(741)
 L = DBM:GetModLocalization(737)
 
 L:SetWarningLocalization({
-	warnReshapeLife				= "%s：>%s< (%d)",--Localized because i like class colors on warning and shoving a number into targetname broke it using the generic.
+	warnReshapeLife				= "%s：>%s< (%d)",
 	warnReshapeLifeTutor		= "1：打断/减益目标，2：打断自己，3：回复生命/意志，4：离开构造体",
 	warnAmberExplosion			= "%s 正在施放 %s",
-	warnAmberExplosionAM		= "琥珀畸怪正在施放琥珀爆炸 - 快打断！",--personal warning.
+	warnAmberExplosionAM		= "琥珀畸怪正在施放琥珀爆炸 - 快打断！",
 	warnInterruptsAvailable		= "可打断 %s: >%s<",
 	warnWillPower				= "当前意志：%s",
 	specwarnWillPower			= "意志低下！- 还剩5秒",
-	specwarnAmberExplosionYou	= "打断%s！",--Struggle for Control interrupt.
-	specwarnAmberExplosionAM	= "%s：打断 %s!",--Amber Montrosity
-	specwarnAmberExplosionOther	= "%s：打断 %s!"--Mutated Construct
+	specwarnAmberExplosionYou	= "打断%s！",
+	specwarnAmberExplosionAM	= "%s：打断 %s!",
+	specwarnAmberExplosionOther	= "%s：打断 %s!"
 })
 
 L:SetTimerLocalization({
@@ -194,6 +215,7 @@ L:SetTimerLocalization({
 })
 
 L:SetOptionLocalization({
+	warnReshapeLife				= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.target:format(122784),
 	warnReshapeLifeTutor		= "当变为变异构造体时显示技能及其作用",
 	warnAmberExplosion			= "警报：$spell:122398正在施放，并警报来源",
 	warnAmberExplosionAM		= "个人警报：打断琥珀畸怪的$spell:122398",
@@ -203,6 +225,7 @@ L:SetOptionLocalization({
 	specwarnAmberExplosionYou	= "特殊警报：打断自己的$spell:122398",
 	specwarnAmberExplosionAM	= "特殊警报：打断琥珀畸怪的$spell:122402",
 	specwarnAmberExplosionOther	= "特殊警报：打断变异构造体的$spell:122398",
+	timerDestabalize			= DBM_CORE_L.AUTO_TIMER_OPTIONS.target:format(123059),
 	timerAmberExplosionAMCD		= "计时条：琥珀畸怪的下一次$spell:122402",
 	InfoFrame					= "信息框：意志值",
 	FixNameplates				= "在变为构造体时自动关闭烦人的姓名版<br/>(离开战斗时恢复)"
@@ -222,8 +245,11 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	warnAmberTrap	= "警报：$spell:125826的生成，并提示进度", -- maybe bad translation.
-	InfoFrame		= "信息框：受$spell:125390效果影响的玩家"
+	warnAmberTrap	= "警报：$spell:125826的生成，并提示进度",
+	InfoFrame		= "信息框：受$spell:125390效果影响的玩家",
+	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(5, 123735),
+	StickyResinIcons	= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(124097),
+	HeartOfFearIcon		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(123845)
 })
 
 L:SetMiscLocalization({
@@ -254,7 +280,8 @@ L:SetWarningLocalization({
 L:SetOptionLocalization({
 	warnGroupOrder		= "警报：针对$spell:118191的小队循环<br/>（当前仅支持25人模式的5/2/2/2战术）",
 	specWarnYourGroup	= "特殊警报：当轮到你的小队需要应对$spell:118191时<br/>（仅25人模式）",
-	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(8, 111850) .. "（当你受到效果影响时会显示其他所有没有受到效果影响的队友）"
+	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(8, 111850) .. "（当你受到效果影响时会显示其他所有没有受到效果影响的队友）",
+	SetIconOnPrison		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(117436)
 })
 
 ------------
@@ -282,12 +309,11 @@ L:SetTimerLocalization({
 L:SetOptionLocalization({
 	warnHideOver		= "特殊警报：$spell:123244效果结束时",
 	timerSpecialCD		= "计时条：特殊技能冷却",
---	SetIconOnProtector	= "为$journal:6224的目标添加团队标记<br/>（当有多名团队助理时该功能不可靠）",
 	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(3, 123121) .."（隐藏阶段时显示所有人，其余时仅显示坦克位置）"
 })
 
 L:SetMiscLocalization{
-	Victory				= "我……啊……噢！我……？眼睛……好……模糊。"--wtb alternate and less crappy victory event.
+	Victory				= "我……啊……噢！我……？眼睛……好……模糊。"
 }
 
 ----------------------
@@ -310,12 +336,14 @@ L:SetTimerLocalization({
 })
 
 L:SetOptionLocalization({
+	warnThrash					= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(131996),
 	warnBreathOnPlatform		= "警报：当你在平台时的$spell:119414（不推荐，为团长准备）",
 	specWarnBreathOfFearSoon	= "特殊警报：当没有$spell:117964效果需要躲避$spell:119414时",
 	specWarnMovement			= "特殊警报：$spell:120047时的移动",
-	timerSpecialAbility			= "计时条：下一次特殊能力"
+	timerSpecialAbility			= "计时条：下一次特殊能力",
+	RangeFrame					= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(2, 119519),
+	SetIconOnHuddle				= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(120629)
 })
-
 
 --雷电王座--
 --------------------------
@@ -328,7 +356,8 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	specWarnWaterMove		= "特殊警报：当你站在 $spell:138470 时<br/>($spell:137313 即将施放时或者 $spell:138732 debuff刚消失时)"
+	specWarnWaterMove		= "特殊警报：当你站在 $spell:138470 时<br/>($spell:137313 即将施放时或者 $spell:138732 减益刚消失时)",
+	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format("8/4")
 })
 
 --------------
@@ -353,12 +382,14 @@ L:SetOptionLocalization({
 	specWarnOrbofControl	= "特殊警报：$journal:7092 掉落",
 	timerDoor				= "计时条：下一个部族大门阶段",
 	timerAdds				= "计时条：下一次小怪",
-	SetIconOnAdds			= "为跳下来的小怪设置标记"
+	SetIconOnAdds			= "为跳下来的小怪设置标记",
+	RangeFrame				= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(5, 136480),
+	SetIconOnCharge			= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(136769)
 })
 
 L:SetMiscLocalization({
-	newForces				= "法拉基大军从法拉基部族之门中涌出！",--Farraki forces pour from the Farraki Tribal Door!
-	chargeTarget			= "并开始拍打他的尾巴！"--Horridon sets his eyes on Eraeshio and stamps his tail!
+	newForces				= "法拉基大军从法拉基部族之门中涌出！",
+	chargeTarget			= "并开始拍打他的尾巴！"
 })
 
 ---------------------------
@@ -371,7 +402,12 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	AnnounceCooldowns		= "为 $spell:137166 的释放提供团队计数 (最多3个)"
+	warnPossessed		= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.target:format(136442),
+	specWarnPossessed	= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.switch:format(136442),
+	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format(5),
+	AnnounceCooldowns		= "为 $spell:137166 的释放提供团队计数 (最多3个)",
+	SetIconOnBitingCold	= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(136992),
+	SetIconOnFrostBite	= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(136922)
 })
 
 ------------
@@ -385,6 +421,7 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
+	warnKickShell			= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(134031),
 	specWarnCrystalShell	= "特殊警报：当没有$spell:137633并且你的生命值低于90%时",
 	InfoFrame				= "信息框：没有$spell:137633效果的团员",
 	ClearIconOnTurtles		= "当受到 $spell:133971 的影响时清除 $journal:7129 的团队标记",
@@ -406,6 +443,8 @@ L:SetTimerLocalization({
 
 L:SetOptionLocalization({
 	timerBreaths			= "计时条：下一次吐息",
+	SetIconOnCinders		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(139822),
+	SetIconOnTorrentofIce	= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(139889),
 	AnnounceCooldowns		= "为狂暴提供团队计数的方式",
 	Never					= "从不",
 	Every					= "每次 (连续)",
@@ -425,7 +464,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(828)
 
 L:SetWarningLocalization({
-	warnFlock				= "%s %s (%d)",
+	warnFlock				= "%s %s (%s)",
 	specWarnFlock			= "%s %s (%d)",
 	specWarnBigBird			= "巢穴守卫: %s",
 	specWarnBigBirdSoon		= "即将到来的巢穴守卫: %s"
@@ -436,6 +475,12 @@ L:SetTimerLocalization({
 })
 
 L:SetOptionLocalization({
+	warnFlock			= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.count:format(-7348),
+	specWarnFlock		= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.switch:format(-7348),
+	specWarnBigBird		= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.switch:format(-7827),
+	specWarnBigBirdSoon	= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.soon:format(-7827),
+	timerFlockCD		= DBM_CORE_L.AUTO_TIMER_OPTIONS.nextcount:format(-7348),
+	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT:format(10, 138923),
 	ShowNestArrows			= "为下一个激活的鸟窝显示DBM箭头",
 	Never					= "从不",
 	Northeast				= "蓝-上下层东北",
@@ -452,7 +497,16 @@ L:SetMiscLocalization({
 	Lower					= "下层",
 	UpperAndLower			= "上下都有",
 	TrippleD				= "三次 (2x下)",
-	TrippleU				= "三次 (2x上)"
+	TrippleU				= "三次 (2x上)",
+	NorthEast		= "|cff0000ffNE|r",
+	SouthEast		= "|cFF088A08SE|r",
+	SouthWest		= "|cFF9932CDSW|r",
+	West			= "|cffff0000W|r",
+	NorthWest		= "|cffffff00NW|r",
+	Middle10		= "|cFF9932CDMiddle|r",
+	Middle25		= "|cffff0000Middle|r",
+	ArrowUpper		= " |TInterface\\Icons\\misc_arrowlup:12:12|t ",
+	ArrowLower		= " |TInterface\\Icons\\misc_arrowdown:12:12|t "
 })
 
 --------------------------
@@ -473,7 +527,12 @@ L:SetOptionLocalization({
 	warnBeam					= "警报：光线照射的目标",
 	warnAddsLeft				= "警报：剩余的迷雾",
 	specWarnFogRevealed			= "特殊警报：当迷雾被发现时",
+	specWarnBlueBeam			= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format(139202),
+	specWarnDisintegrationBeam	= DBM_CORE_L.AUTO_SPEC_WARN_OPTIONS.spell:format(-6882),
 	ArrowOnBeam					= "DBM箭头： 为 $journal:6882 提示逃跑方向",
+	SetIconRays					= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(-6891),
+	SetIconLifeDrain			= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(133795),
+	SetIconOnParasite			= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(133597),
 	InfoFrame					= "信息框： $spell:133795 层数",
 	SetParticle					= "开战后自动设置粒子效果为低<br/>(战斗结束后还原)"
 })
@@ -492,7 +551,8 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	warnDebuffCount			= "当你吸收了池子后显示debuff计数",
+	warnDebuffCount			= "当你吸收了池子后显示减益计数",
+	RangeFrame			= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format("5/3"),
 	SetIconOnBigOoze		= "为 $journal:6969 设置标记"
 })
 
@@ -506,7 +566,8 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	warnMatterSwapped		= "警报：$spell:138618交换的目标"
+	warnMatterSwapped		= "警报：$spell:138618交换的目标",
+	SetIconOnFont		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(138707)
 })
 
 L:SetMiscLocalization({
@@ -523,6 +584,8 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
+	warnDeadZone			= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(137229),
+	SetIconOnLightningStorm	= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(136192),
 	RangeFrame				= "距离监视（动态，当存在多名团员过近时显示）",
 	InfoFrame				= "信息框：中了 $spell:136193 的玩家"
 })
@@ -543,8 +606,17 @@ L:SetTimerLocalization({
 	timerDuskCD				= "下一个黄昏阶段"
 })
 
+L:SetOptionLocalization({
+	warnNight	= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(-7641),
+	warnDay		= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(-7645),
+	warnDusk	= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(-7633),
+	timerDayCD	= DBM_CORE_L.AUTO_TIMER_OPTIONS.next:format(-7645),
+	timerDuskCD	= DBM_CORE_L.AUTO_TIMER_OPTIONS.next:format(-7633),
+	RangeFrame	= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format(5)
+})
+
 L:SetMiscLocalization({
-	DuskPhase				= "露琳！将你的力量借给我！"--Not in use, but a backup just in case, so translate in case it's switched to on moments notice on live or next PTR test
+	DuskPhase				= "露琳！将你的力量借给我！"
 })
 
 --------------
@@ -565,8 +637,11 @@ L:SetOptionLocalization({
 	specWarnIntermissionSoon	= "特殊警报：中场阶段",
 	warnDiffusionChainSpread	= "警报： $spell:135991 传导的目标",
 	timerConduitCD				= "计时条：第一个导管技能CD",
+	RangeFrame					= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format("8/6"),
 	StaticShockArrow			= "DBM箭头：受 $spell:135695 影响的玩家",
-	OverchargeArrow				= "DBM箭头：受 $spell:136295 影响的玩家"
+	OverchargeArrow				= "DBM箭头：受 $spell:136295 影响的玩家",
+	SetIconOnOvercharge			= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(136295),
+	SetIconOnStaticShock		= DBM_CORE_L.AUTO_ICONS_OPTION_TARGETS:format(135695)
 })
 
 L:SetMiscLocalization({
@@ -599,6 +674,9 @@ L:SetGeneralLocalization({
 	name						= "雷电王座小怪"
 })
 
+L:SetOptionLocalization({
+	RangeFrame	= DBM_CORE_L.AUTO_RANGE_OPTION_TEXT_SHORT:format(10)
+})
 
 --围攻奥格瑞玛--
 ---------------
@@ -616,6 +694,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(849)
 
 L:SetWarningLocalization({
+	specWarnCalamity	= "%s",
 	specWarnMeasures		= "绝处求生即将到来(%s)!"
 })
 
@@ -635,6 +714,10 @@ L = DBM:GetModLocalization(867)
 
 L:SetOptionLocalization({
 	SetIconOnFragment		= "为腐化的碎片设置图示"
+})
+
+L:SetMiscLocalization({
+	PortalRP	= "看来地狱咆哮的傲慢释放了最后一只煞。我一点也不意外。"
 })
 
 --------------
@@ -662,7 +745,7 @@ L:SetOptionLocalization({
 L:SetMiscLocalization({
 	wasteOfTime		= "做得好!登陆小，集合!步兵打前锋!",
 	wasteOfTime2	= "很好，第一梯队已经登陆。",
-	Pull			= "龙喉氏族，夺回码头，把他们推进海里去!以地狱咆哮及正統部落之名!",
+	Pull			= "龙喉氏族，夺回码头，把他们推进海里去!以地狱咆哮及正统部落之名!",
 	newForces1		= "他们来了!",
 	newForces1H		= "赶快把她弄下来，让我用手掐死她。",
 	newForces2		= "龙喉氏族，前进!",
@@ -675,6 +758,11 @@ L:SetMiscLocalization({
 --Iron Juggernaut --
 --------------------
 L = DBM:GetModLocalization(864)
+
+L:SetOptionLocalization({
+	timerAssaultModeCD	= DBM_CORE_L.AUTO_TIMER_OPTIONS.next:format(-8177),
+	timerSiegeModeCD	= DBM_CORE_L.AUTO_TIMER_OPTIONS.next:format(-8178)
+})
 
 --------------------------
 -- Kor'kron Dark Shaman --
@@ -694,6 +782,10 @@ L:SetWarningLocalization({
 	warnDefensiveStanceSoon	= "%d秒后防御姿态"
 })
 
+L:SetOptionLocalization({
+	warnDefensiveStanceSoon	= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.prewarn:format(143593)
+})
+
 L:SetMiscLocalization({
 	newForces1	= "战士们，快点过来!",
 	newForces2	= "守住大门!",
@@ -701,7 +793,12 @@ L:SetMiscLocalization({
 	newForces4	= "库卡隆，来我身边!",
 	newForces5	= "下一队，来前线!",
 	allForces	= "所有库卡隆...听我号令...杀死他们!",
-	nextAdds	= "下一次小兵: "
+	nextAdds	= "下一次小兵: ",
+	mage		= "|c"..RAID_CLASS_COLORS["MAGE"].colorStr..LOCALIZED_CLASS_NAMES_MALE["MAGE"].."|r",
+	shaman		= "|c"..RAID_CLASS_COLORS["SHAMAN"].colorStr..LOCALIZED_CLASS_NAMES_MALE["SHAMAN"].."|r",
+	rogue		= "|c"..RAID_CLASS_COLORS["ROGUE"].colorStr..LOCALIZED_CLASS_NAMES_MALE["ROGUE"].."|r",
+	hunter		= "|c"..RAID_CLASS_COLORS["HUNTER"].colorStr..LOCALIZED_CLASS_NAMES_MALE["HUNTER"].."|r",
+	warrior		= "|c"..RAID_CLASS_COLORS["WARRIOR"].colorStr..LOCALIZED_CLASS_NAMES_MALE["WARRIOR"].."|r"
 })
 
 ------------------------
@@ -711,8 +808,8 @@ L = DBM:GetModLocalization(870)
 
 L:SetMiscLocalization({
 	wasteOfTime	= "我们在录音吗?有吗?好。哥布林-泰坦控制模组开始运作，请后退。",
-	Module1 	= "模组一号已准备好系統重置。",
-	Victory		= "模组二号已准备好系統重置。"
+	Module1 	= "模组一号已准备好系统重置。",
+	Victory		= "模组二号已准备好系统重置。"
 })
 
 ---------------------------
@@ -740,13 +837,15 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization(853)
 
 L:SetWarningLocalization({
-	specWarnActivatedVulnerable	= "你虛弱于%s - 换坦!",
+	specWarnActivatedVulnerable	= "你虚弱于%s - 换坦!",
 	specWarnMoreParasites		= "你需要更多的寄生虫 - 不要开招!"
 })
 
 L:SetOptionLocalization({
-	specWarnActivatedVulnerable	= "当你虛弱于活动的议会成员时显示特別警告",
-	specWarnMoreParasites		= "当你需要更多寄生虫时显示特別警告"
+	warnToxicCatalyst			= DBM_CORE_L.AUTO_ANNOUNCE_OPTIONS.spell:format(-8036),
+	specWarnActivatedVulnerable	= "当你虚弱于活动的议会成员时显示特别警告",
+	specWarnMoreParasites		= "当你需要更多寄生虫时显示特别警告",
+	yellToxicCatalyst			= DBM_CORE_L.AUTO_YELL_OPTION_TEXT.yell:format(-8036)
 })
 
 L:SetMiscLocalization({
@@ -773,6 +872,10 @@ L:SetMiscLocalization({
 ------------------------
 L = DBM:GetModLocalization(869)
 
+L:SetTimerLocalization({
+	timerRoleplay	= GUILD_INTEREST_RP
+})
+
 L:SetOptionLocalization({
 	timerRoleplay		= "计时条：NPC剧情",
 	RangeFrame			= "显示动态距离框架(10码)<br/>(这是智慧距离框架，当到达$spell:147126阈值时自动切换)",
@@ -791,5 +894,5 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization("SoOTrash")
 
 L:SetGeneralLocalization({
-	name	= "围攻奥格瑞玛小兵"
+	name	= "决战奥格瑞玛小怪"
 })
