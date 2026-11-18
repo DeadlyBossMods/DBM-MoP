@@ -37,12 +37,12 @@
 ## Version: @project-version@
 
 localization.en.lua
-localization.kr.lua
-localization.de.lua
-localization.es.lua
-localization.tw.lua
-localization.cn.lua
-localization.ru.lua
+localization.kr.lua [AllowLoadTextLocale koKR]
+localization.de.lua [AllowLoadTextLocale deDE]
+localization.es.lua [AllowLoadTextLocale esES, esMX]
+localization.tw.lua [AllowLoadTextLocale zhTW]
+localization.cn.lua [AllowLoadTextLocale zhCN]
+localization.ru.lua [AllowLoadTextLocale ruRU]
 BrewingStorm.lua
 BattleHighSeas.lua
 BloodInSnow.lua
