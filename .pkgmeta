@@ -1,6 +1,9 @@
 package-as: DBM-Raids-MoP
 enable-nolib-creation: no
 
+required-dependencies:
+  - deadly-boss-mods
+
 move-folders:
     DBM-Raids-MoP/DBM-Scenario-MoP: DBM-Scenario-MoP
     DBM-Raids-MoP/DBM-Pandaria: DBM-Pandaria
